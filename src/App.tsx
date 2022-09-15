@@ -50,6 +50,9 @@ function App() {
             React Redux
           </a>
         </span>
+        <p>
+          TRIC Project
+        </p>
       </header>
     </div>
   );
