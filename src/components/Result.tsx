@@ -19,7 +19,7 @@ const Result = () => {
 
     useEffect(() => {
         getResult(questionId);
-    }, []);
+    }, [questionId]);
 
     const getResult = (id: string) => {
         AdminApi.showResult(id)

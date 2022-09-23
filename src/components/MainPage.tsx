@@ -1,5 +1,4 @@
 import { useState } from "react";
-import IQuestionData from '../models/Question';
 import WebSocketComponent from "./WebSocketComponent";
 import Question from "./Question";
 import Result from "./Result";

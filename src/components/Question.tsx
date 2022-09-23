@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react'
-import AdminApi from '../api/AdminApi';
+import { useState } from 'react'
 import UserApi from '../api/UserApi';
 import IQuestionData from '../models/Question';
 import WaitingPage from './WaitingPage';
