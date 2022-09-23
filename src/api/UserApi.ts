@@ -1,6 +1,6 @@
 import http from "../util/Http-common";
-import IUserData from "../types/User";
-import IVoteData from "../types/Vote";
+import IUserData from "../models/User";
+import IVoteData from "../models/Vote";
 
 const getAllUsers = () => {
     return http.get<Array<IUserData>>("userApi/users");

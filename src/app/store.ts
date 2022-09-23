@@ -1,18 +1,24 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import userReducer from '../reducers/userSlice';
+import questionReducer from '../reducers/questionSlice';
+import answerReducer from '../reducers/answerSlice';
 
 const persistConfig = {
   key: "root",
   storage
 };
 
-const persistedReducer = persistReducer(persistConfig, counterReducer);
+const persistedUserReducer = persistReducer(persistConfig, userReducer);
+const persistedQuestionReducer = persistReducer(persistConfig, questionReducer);
+const persistedAnswerReducer = persistReducer(persistConfig, answerReducer);
 
 export const store = configureStore({
   reducer: {
-    counter: persistedReducer,
+    user: persistedUserReducer,
+    question: persistedQuestionReducer,
+    answer: persistedAnswerReducer,
   },
 });
 

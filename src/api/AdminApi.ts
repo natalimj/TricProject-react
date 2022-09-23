@@ -1,10 +1,6 @@
 import http from "../util/Http-common";
-import IQuestionData from "../types/Question";
-import IResultData from "../types/Result";
-
-const startSession = () => {
-  return getQuestionByNumber(1);
-};
+import IQuestionData from "../models/Question";
+import IResultData from "../models/Result";
 
 const endSession = () => {
   return http.post("adminApi/endSession");
@@ -26,10 +22,14 @@ const getQuestionByNumber = (questionNumber: number) => {
   })
 };
 
+const showNextQuestion = (id :number) => {
+  return http.get<IQuestionData>(`questionApi/next/${id}`);
+};
+
 const AdminApi = {
-  startSession,
   endSession,
   showResult,
-  getQuestionByNumber
+  getQuestionByNumber,
+  showNextQuestion
 };
 export default AdminApi;
