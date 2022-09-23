@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import IResultData from '../models/Result';
 import AdminApi from '../api/AdminApi';
+import { useAppSelector } from '../app/hooks';
+import { RootState } from '../app/store';
 
-type ResultProps = { questionId: any };
-const Result = ({ questionId }: ResultProps) => {
+const Result = () => {
     const initialResultState = {
         questionNumber: 1,
         firstAnswerRate: 0.0,
         secondAnswerRate: 0.0,
-        firstAnswerText :"",
-        secondAnswerText:""
+        firstAnswerText: "",
+        secondAnswerText: ""
     };
 
-    const answerId = sessionStorage.getItem("answerId");
-    
+    const questionId = useAppSelector((state: RootState) => state.question.questionId);
+    const answerId = useAppSelector((state: RootState) => state.answer.answerId);
     const [result, setResult] = useState<IResultData>(initialResultState);
 
     useEffect(() => {
@@ -39,8 +40,6 @@ const Result = ({ questionId }: ResultProps) => {
             <p>Answer 1: %{result.firstAnswerRate}</p>
             <p>Answer2: %{result.secondAnswerRate}</p>
         </div>
-
-
     )
 }
 

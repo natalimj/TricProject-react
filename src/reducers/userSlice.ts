@@ -13,7 +13,7 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         addUser: (state: IUserData, action: PayloadAction<IUserData>) => {
-            //if username is unique
+            //if username is different than existing state add new user, otherwise it's a re-login and no state changes needed
             if (state.username !== action.payload.username){
                 state.userId = action.payload.userId;
                 state.username = action.payload.username;

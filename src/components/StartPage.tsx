@@ -10,6 +10,9 @@ import { RootState } from '../app/store';
 import {
   addUser
 } from '../reducers/userSlice';
+import {
+  addQuestion
+} from '../reducers/questionSlice';
 
 
 const StartPage = () => {
@@ -20,15 +23,13 @@ const StartPage = () => {
   }
   const [user, setUser] = useState<IUserData>(currentUser);
   const [submitted, setSubmitted] = useState<boolean>(false);
-  const dispatch = useAppDispatch();
   const [sessionStarted, setSessionStarted] = useState<boolean>(false);
-  const [questionNumber, setQuestionNumber] = useState(0);
 
+  const dispatch = useAppDispatch();
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setUser({ ...user, [name]: value });
   };
-
   const saveUser = () => {
     if (user.username !== '') {
       UserApi.createUser(user)
@@ -44,7 +45,7 @@ const StartPage = () => {
 
   let onQuestionMessageReceived = (msg: IQuestionData) => {
     console.log("Not waiting")
-    setQuestionNumber(msg.questionNumber);
+    dispatch(addQuestion(msg))
     setSessionStarted(true);
   }
 
@@ -53,7 +54,7 @@ const StartPage = () => {
       <WebSocketComponent topics={['/topic/question']} onMessage={(msg: IQuestionData) => onQuestionMessageReceived(msg)} />
       <div className="submit-form">
         {submitted ? (
-          <div> {sessionStarted ? (<MainPage questionNumber={questionNumber}/>) : (<WaitingPage />)}</div>
+          <div> {sessionStarted ? (<MainPage />) : (<WaitingPage />)}</div>
         ) : (
           <div>
             <div className="form-group">
