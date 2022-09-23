@@ -3,7 +3,7 @@ import Constants from "./Constants";
 
 export default axios.create({
   //baseURL: "http://localhost:8080/",
-  baseURL: Constants.SOCKET_URL,
+  baseURL: Constants.BASE_URL,
   headers: {
     "Content-type": "application/json"
   }

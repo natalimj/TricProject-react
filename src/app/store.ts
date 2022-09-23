@@ -1,18 +1,18 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import userReducer from '../reducers/userSlice';
 
 const persistConfig = {
   key: "root",
   storage
 };
 
-const persistedReducer = persistReducer(persistConfig, counterReducer);
+const persistedUserReducer = persistReducer(persistConfig, userReducer);
 
 export const store = configureStore({
   reducer: {
-    counter: persistedReducer,
+    user: persistedUserReducer,
   },
 });
 
