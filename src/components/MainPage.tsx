@@ -1,4 +1,5 @@
 import WebSocketComponent from "./WebSocketComponent";
+import './MainPage.css';
 import Question from "./Question";
 import Result from "./Result";
 import { useAppSelector, useAppDispatch } from '../app/hooks';
@@ -17,13 +18,12 @@ const MainPage = () => {
   }
 
   return (
-    <div>
-      <h1>Main Page</h1>
+    <div className="main-page">
       <WebSocketComponent topics={['/topic/result']} onMessage={() => onMessageReceived()} />
       {showQuestion ? (
-        <div><Question /></div>
+        <div className="main-page-question"><Question /></div>
       ) : (
-        <div><Result /></div>
+        <div className="main-page-result"><Result /></div>
       )
       }
     </div>
