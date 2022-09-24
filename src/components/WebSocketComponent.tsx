@@ -1,4 +1,3 @@
-import React from 'react'
 import SockJsClient from 'react-stomp';
 import Constants from "../util/Constants";
 

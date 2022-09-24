@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import './Question.css';
+import Constants from '../util/Constants';
 import UserApi from '../api/UserApi';
 import IQuestionData from '../models/Question';
 import WaitingPage from './WaitingPage';
@@ -41,21 +43,28 @@ const Question = () => {
 
 
   return (
-    <div>
-      <p><b>QuestionPage {currentQuestion.questionId}</b></p>
+    <div className='question-container'>
       {submitted ? (
         (<WaitingPage />)
       ) : (
-        <div>
-          <div>
-            <p>Question : {currentQuestion.questionText}</p>
+        <div className='question'>
+          <div className='question__header'>
+            {Constants.QUESTION_FIELD} {currentQuestion.questionId}
+          </div>
+          <div className='question__header question__header--text'>
+            {currentQuestion.questionText}
+          </div>
+          <div className='question__answer-group'>
             {currentQuestion.answers && currentQuestion.answers.map((answer) => (
-              <button onClick={() => vote(answer)} className="btn btn-success">
-                <p>{answer.answerText.toString()}</p>
+              <button onClick={() => vote(answer)} className="question__answer-button">
+                <div className="question__answer-text">
+                  {answer.answerText.toString()}
+                </div>
               </button>
             ))}
           </div>
-        </div>)}
+        </div>
+      )}
     </div>
   )
 }

@@ -1,7 +1,9 @@
 import React, { useState, ChangeEvent } from "react";
+import './StartPage.css';
 import UserApi from "../api/UserApi";
 import IUserData from '../models/User';
 import IQuestionData from '../models/Question';
+import Constants from "../util/Constants";
 import WaitingPage from "./WaitingPage";
 import WebSocketComponent from "./WebSocketComponent";
 import MainPage from "./MainPage";
@@ -26,10 +28,11 @@ const StartPage = () => {
     imagePath: useAppSelector((state: RootState) => state.user.imagePath)
   }
   const [user, setUser] = useState<IUserData>(currentUser);
-  const [submitted, setSubmitted] = useState<boolean>(false);
   const [sessionStarted, setSessionStarted] = useState<boolean>(false);
-
+  const [userSubmitted, setUserSubmitted] = useState<boolean>(false);
+  const [playStarted, setPlayStarted] = useState<boolean>(false);
   const dispatch = useAppDispatch();
+
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setUser({ ...user, [name]: value });
@@ -38,7 +41,7 @@ const StartPage = () => {
     if (user.username !== '') {
       UserApi.createUser(user)
         .then((response: any) => {
-          setSubmitted(true);  // hide input field and button - show spinner
+          setUserSubmitted(true);  // hide input field and button - show spinner
           dispatch(addUser(response.data));
         })
         .catch((e: Error) => {
@@ -46,41 +49,60 @@ const StartPage = () => {
         });
     }
   };
-
-  let onQuestionMessageReceived = (msg: IQuestionData) => {
+  const onQuestionMessageReceived = (msg: IQuestionData) => {
     dispatch(addQuestion(msg));
     dispatch(setComponent(true));
-    setSessionStarted(true);
+    setPlayStarted(true);
   }
 
   return (
-    <div>
-      <h1>TRIC</h1>
+    <div className="start-page">
       <WebSocketComponent topics={['/topic/question']} onMessage={(msg: IQuestionData) => onQuestionMessageReceived(msg)} />
-      <div className="submit-form">
-        {submitted ? (
-          <div> {sessionStarted ? (<MainPage />) : (<WaitingPage />)}</div>
-        ) : (
-          <div>
-            <div className="form-group">
-              <label htmlFor="username">Username</label>
-              <input
-                type="text"
-                className="form-control"
-                id="username"
-                required
-                value={user.username}
-                onChange={handleInputChange}
-                name="username"
-              />
-            </div>
-            <button onClick={saveUser} className="btn btn-success">
-              Submit
-            </button>
-          </div>
-        )}
-      </div>
 
+      {sessionStarted ? (
+        <div className="start-page-user">
+          {userSubmitted ? (
+            <div className="start-page-question"> {playStarted ? (<MainPage />) : (<WaitingPage />)}</div>
+          ) : (
+            <div className="start-page-user__user-form">
+              <div className="start-page-user__header">
+                {currentUser.username === '' ? Constants.CREATE_USER_FIELD : Constants.LOGIN_USER_FIELD}
+              </div>
+              <div className="start-page-user__form-group">
+                <div className="start-page-user__header start-page-user--username">
+                  {Constants.USERNAME_FIELD}
+                  <input
+                    type="text"
+                    className="start-page-user__form-control"
+                    id="username"
+                    required
+                    value={user.username}
+                    onChange={handleInputChange}
+                    name="username"
+                  />
+                </div>
+              </div>
+              <div className="start-page-user__avatar-container">
+                <div>
+                  {Constants.AVATAR_FIELD}
+                </div>
+              </div>
+              <button onClick={saveUser} className="start-page-user__submit-button">
+                {Constants.SUBMIT_BUTTON}
+              </button>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="start-page-landing">
+          <div className="start-page-landing__title">
+            {Constants.APP_TITLE}
+          </div>
+          <button onClick={() => setSessionStarted(true)} className="start-page-landing__submit-button">
+            {Constants.JOIN_BUTTON}
+          </button>
+        </div>
+      )}
     </div>
   );
 }
