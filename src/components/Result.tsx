@@ -43,28 +43,27 @@ const Result = () => {
     };
 
     return (
-        <div className='result_container'>
-            <div className="result_inner">
-                <div className="image_box">
+        <div className='result__container'>
+            <div className="result__inner-container">
+                <div className="result__avatar-container">
                     image here
                 </div>
-                <div className="username">{userName}</div>
-                <div className="username">vote result</div>
+                <div className="result__text">{userName}</div>
+                <div className="result__text">vote result</div>
                 
-                <div className="question">{result?.question.questionText}</div>
-                <div className="result">
-                    <div className="result_title">
-                    <span className="answer">{result?.firstAnswer.answerText}</span>
-                    <span className="answer">{result?.secondAnswer.answerText}</span>
+                <div className="result__question-text">{result?.question.questionText}</div>
+                <div className="result__box">
+                    <div className="result__title">
+                    <span className="result__answer-text">{result?.firstAnswer.answerText}</span>
+                    <span className="result__answer-text">{result?.secondAnswer.answerText}</span>
                     </div>
-                        <div className="result_slider">
-                            <div className="first_answer" 
+                        <div className="result__slider">
+                            <div className="result__first-answer" 
                             style={{"width" : `${result?.firstAnswerRate}%`}}>{result?.firstAnswerRate}%</div>
-                            <div className="second_answer"
+                            <div className="result__second-answer"
                             style={{"width" : `${result?.secondAnswerRate}%`}}>{result?.secondAnswerRate}%</div>      
                         </div>
-                    
-                    <div className="user_answer answer"><BsCircleFill/> Your response</div>
+                    <div className="result__user-answer result__answer-text"><BsCircleFill/> Your response</div>
                 </div>
                 
             </div>

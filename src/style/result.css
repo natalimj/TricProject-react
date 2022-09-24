@@ -1,21 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&family=Neucha&display=swap');
 
-.result_container {
+.result__container{
     display: flex;
-    background-color: antiquewhite;
     justify-content: center;
     height: 100vh;
     font-family: 'Chakra Petch', sans-serif;
 }
 
-.result_inner {
+.result__inner-container{
     background-color: #1E1E1E;
     width: 50%;
     flex-direction: column;
     padding-top: 30px;
 }
 
-.result_container .image_box {
+.result__avatar-container{
     background-color: #E1E1DA;
     height: 200px;
     width: 200px;
@@ -23,7 +22,7 @@
     border: #FFADCB solid 4px;
 }
 
-.result_container .username {
+.result__text {
     height: 50px;
     padding: 10px;
     font-size: 30px;
@@ -31,7 +30,7 @@
     font-weight: bold;
 }
 
-.result_container .question {
+.result__question-text {
     background-color: #E1E1DA;
     height: 130px;
     width: 70%;
@@ -41,17 +40,17 @@
     border: #FFADCB solid 2px;
 }
 
-.result_container .answer {
+.result__answer-text {
     color: #FFADCB;
     font-size: 25px;
     margin-bottom: 10px;
 }
 
-.result_container .user_answer {
+.result__user-answer {
     margin-top: 25px;
 }
 
-.result_container .result {
+.result__box {
     height: 180px;
     width: 90%;
     margin: auto;
@@ -60,39 +59,36 @@
 }
 
 
-.result_container .result_title {
+.result__title {
     display: flex;
     justify-content: space-between;
     padding: 5px;
 }
 
-.result_container .result_slider {
+.result__slider {
     height: 40px;
     margin: auto;
     display: flex;
     flex-direction: row;
 }
 
-.result_container .first_answer {
+.result__first-answer {
     background-color: #FFADCB;
     height: 40px;
     font-size: 20px;
     font-weight: bold;
 }
 
-.result_container .second_answer {
+.result__second-answer {
     background-color: #E1E1DA;
     height: 40px;
     font-size: 20px;
     font-weight: bold;
 }
 
-.result_container .result_user {
-    background-color: beige;
-}
 
 @media (max-width: 800px) {
-    .result_inner {
+    .result__inner-container {
         width: 90%;
     }
 
