@@ -3,7 +3,7 @@ import IAnswerData from '../models/Answer';
 
 const initialState: IAnswerData = {
     answerId: '',
-    answerText: ''
+    answerText: '',
 };
 
 

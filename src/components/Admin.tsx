@@ -69,13 +69,13 @@ const Admin = () => {
     setShowResultNo(false);
   };
 
-  let onMessageReceived = (msg: IQuestionData) => {
+  let onQuestionReceived = (msg: IQuestionData) => {
     setQuestionNo(msg.questionId);
     setShowQuestionNo(true);
     setQuestion(msg);
   }
 
-  let onMessageReceived2 = (msg: number) => {
+  let onMessageReceived = (msg: number) => {
     setNumberOfUsers(msg);
   }
 
@@ -87,8 +87,8 @@ const Admin = () => {
       </button>
 
       <div>
-        <WebSocketComponent topics={['/topic/question']} onMessage={(msg: IQuestionData) => onMessageReceived(msg)} />
-        <WebSocketComponent topics={['/topic/message']} onMessage={(msg2: number) => onMessageReceived2(msg2)} />
+        <WebSocketComponent topics={['/topic/question']} onMessage={(msg: IQuestionData) => onQuestionReceived(msg)} />
+        <WebSocketComponent topics={['/topic/message']} onMessage={(msg2: number) => onMessageReceived(msg2)} />
         <p>online users: {numberOfUsers}</p>
 
         {showQuestionNo && <div><p>Question {questionNo} is on screen....</p><button onClick={() => showResult(question.questionId)} className="btn btn-success">
