@@ -43,7 +43,7 @@ const Result = () => {
     };
 
     return (
-        <div className='result__container'>
+        <div className='result'>
             <div className="result__inner-container">
                 <div className="result__avatar-container">
                     image here
