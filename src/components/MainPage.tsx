@@ -1,4 +1,3 @@
-import { useState } from "react";
 import WebSocketComponent from "./WebSocketComponent";
 import Question from "./Question";
 import Result from "./Result";
