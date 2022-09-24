@@ -18,7 +18,6 @@ const MainPage = () => {
 
   return (
     <div>
-      <h1>Main Page</h1>
       <WebSocketComponent topics={['/topic/result']} onMessage={() => onMessageReceived()} />
       {showQuestion ? (
         <div><Question /></div>

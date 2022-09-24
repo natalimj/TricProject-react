@@ -1,15 +1,10 @@
+import IAnswerData from "./Answer"
 import IQuestionData from "./Question"
 
 export default interface IResultData {
   question: IQuestionData,
-  firstAnswerRate: number,
-  secondAnswerRate: number
-}
-
-export default interface IResultData {
-  question: IQuestionData,
-  firstAnswerText: string,
-  secondAnswerText: string,
+  firstAnswer: IAnswerData,
+  secondAnswer: IAnswerData,
   firstAnswerRate: number,
   secondAnswerRate: number
 }
