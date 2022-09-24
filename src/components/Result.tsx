@@ -6,7 +6,11 @@ import { RootState } from '../app/store';
 
 const Result = () => {
     const initialResultState = {
-        questionNumber: 1,
+        question: {
+            questionNumber: 0,
+            questionText: '',
+            answers: [],
+        },
         firstAnswerRate: 0.0,
         secondAnswerRate: 0.0,
         firstAnswerText: "",
@@ -30,12 +34,11 @@ const Result = () => {
             .catch((e: Error) => {
                 console.log(e);
             });
-
     };
 
     return (
         <div>
-            <p>Question : {result.questionNumber}</p>
+            <p>Question : {result.question.questionNumber}</p>
             <p>Your answer : {answerId}</p>
             <p>Answer 1: %{result.firstAnswerRate}</p>
             <p>Answer2: %{result.secondAnswerRate}</p>

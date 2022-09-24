@@ -13,6 +13,10 @@ import {
 import {
   addQuestion
 } from '../reducers/questionSlice';
+import {
+  setComponent
+} from '../reducers/componentSlice';
+
 
 
 const StartPage = () => {
@@ -44,13 +48,14 @@ const StartPage = () => {
   };
 
   let onQuestionMessageReceived = (msg: IQuestionData) => {
-    console.log("Not waiting")
-    dispatch(addQuestion(msg))
+    dispatch(addQuestion(msg));
+    dispatch(setComponent(true));
     setSessionStarted(true);
   }
 
   return (
     <div>
+      <h1>TRIC</h1>
       <WebSocketComponent topics={['/topic/question']} onMessage={(msg: IQuestionData) => onQuestionMessageReceived(msg)} />
       <div className="submit-form">
         {submitted ? (
