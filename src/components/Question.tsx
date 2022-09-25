@@ -22,10 +22,7 @@ const Question = () => {
     questionText: useAppSelector((state: RootState) => state.question.questionText),
     answers: useAppSelector((state: RootState) => [...state.question.answers])
   }
-  const selectedAnswer: IAnswerData = {
-    answerId: useAppSelector((state: RootState) => state.answer.answerId),
-    answerText: useAppSelector((state: RootState) => state.answer.answerText)
-  }
+  const [selectedAnswer, setSelectedAnswer] = useState<IAnswerData>({ answerText: '' });
   const [firstAnswer, setFirstAnswer] = useState<boolean>(false);
   const [secondAnswer, setSecondAnswer] = useState<boolean>(false);
 
@@ -39,6 +36,7 @@ const Question = () => {
     UserApi.saveVote(voteData)
       .then((response: any) => {
         console.log(response.data);
+        dispatch(addAnswer(answer));
       })
       .catch((e: Error) => {
         console.log(e);
@@ -46,8 +44,8 @@ const Question = () => {
     setSubmitted(true);
   };
 
-  const setSelectedAnswer = (answer: IAnswerData, index: number) => {
-    dispatch(addAnswer(answer));
+  const chooseAnswer = (answer: IAnswerData, index: number) => {
+    setSelectedAnswer(answer);
     if (index === 0) {
       setFirstAnswer(true);
       setSecondAnswer(false);
@@ -72,14 +70,14 @@ const Question = () => {
           </div>
           <div className='question__answer-group'>
             {currentQuestion.answers && currentQuestion.answers.map((answer, index) => (
-              <button onClick={() => setSelectedAnswer(answer, index)} className={(firstAnswer&&index===0) || (secondAnswer&&index===1) ? 'question__answer-button question__active-button' : 'question__answer-button'}>
+              <button onClick={() => chooseAnswer(answer, index)} className={(firstAnswer && index === 0) || (secondAnswer && index === 1) ? 'question__answer-button question__active-button' : 'question__answer-button'}>
                 <div className="question__answer-text">
                   {answer.answerText.toString()}
                 </div>
               </button>
             ))}
           </div>
-          <button onClick={() => { vote(selectedAnswer) }} className={firstAnswer || secondAnswer ? 'question__submit-button question__active-button' : 'question__submit-button'} disabled={!firstAnswer && !secondAnswer }>
+          <button onClick={() => { vote(selectedAnswer) }} className={firstAnswer || secondAnswer ? 'question__submit-button question__active-button' : 'question__submit-button'} disabled={!firstAnswer && !secondAnswer}>
             {Constants.CONFIRM_BUTTON}
           </button>
         </div>
