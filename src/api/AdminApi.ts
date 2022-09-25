@@ -26,10 +26,38 @@ const showNextQuestion = (id :number) => {
   return http.get<IQuestionData>(`questionApi/next/${id}`);
 };
 
+const getAllQuestions = () => {
+  return http.get<Array<IQuestionData>>("adminApi/questions");
+};
+
+//delete, add and edit question
+
+const addQuestion = (question: string, firstAnswer: string, secondAnswer:string) => {
+  return http.post<IQuestionData>("adminApi/addQuestion", {},{
+    params: {
+      question:question,
+      firstAnswer: firstAnswer,
+      secondAnswer:secondAnswer
+    }
+  }
+  )
+};
+
+const deleteQuestion =( questionId: number) =>{
+  return http.delete<number>("adminApi/deleteQuestion",{
+    params: {
+      questionId: questionId
+    }
+  }) 
+}
+
 const AdminApi = {
   endSession,
   showResult,
   getQuestionByNumber,
-  showNextQuestion
+  showNextQuestion,
+  getAllQuestions,
+  addQuestion,
+  deleteQuestion
 };
 export default AdminApi;
