@@ -15,8 +15,8 @@
     font-size: var(--font-size-header);
     background-color: var(--color-grey);
     border: 3px solid var(--color-black);
-    padding: 5px 0;
     margin: 23px 0;
+    padding: 15px 20px;
 }
 
 .question__header--text {
@@ -25,6 +25,7 @@
     justify-content: center;
     height: 20%;
     word-wrap: break-word;
+    margin-top: 0;
 }
 
 .question__answer-group {
@@ -35,6 +36,7 @@
 
 .question__answer-button {
     width: 42.5vw;
+    height: 20vh;
     background: none;
     background-color: var(--color-off-white);
     color: var(--color-black);
@@ -46,6 +48,22 @@
     outline: inherit;
 }
 
-.question__answer-button:active {
+.question__submit-button {
+    max-width: 200px;
+    background: none;
+    background-color: var(--color-grey);
+    color: var(--color-off-white);
+    border: 3px solid var(--color-black);
+    padding: 15px 20px;
+    font: inherit;
+    font-size: var(--font-size-header);
+    outline: inherit;
+    margin-top: 23px;
+    
+}
+
+.question__active-button {
     background-color: var(--color-pink);
+    color: var(--color-black);
+    cursor: pointer;
 }

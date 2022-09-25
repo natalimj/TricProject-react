@@ -19,6 +19,7 @@ const Result = () => {
 
     const questionId = useAppSelector((state: RootState) => state.question.questionId);
     const answerId = useAppSelector((state: RootState) => state.answer.answerId);
+    const answerText = useAppSelector((state: RootState) => state.answer.answerText);
     const [result, setResult] = useState<IResultData>(initialResultState);
 
     useEffect(() => {
@@ -39,7 +40,7 @@ const Result = () => {
     return (
         <div>
             <p>Question : {result.question.questionNumber}</p>
-            <p>Your answer : {answerId}</p>
+            <p>Your answer : {answerId} - {answerText}</p>
             <p>Answer 1: %{result.firstAnswerRate}</p>
             <p>Answer2: %{result.secondAnswerRate}</p>
         </div>
