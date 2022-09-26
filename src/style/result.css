@@ -1,47 +1,45 @@
-@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&family=Neucha&display=swap');
-
-.result{
+.result {
     display: flex;
     justify-content: center;
     height: 100vh;
-    font-family: 'Chakra Petch', sans-serif;
 }
 
-.result__inner-container{
-    background-color: #1E1E1E;
+.result__inner-container {
     width: 50%;
     flex-direction: column;
     padding-top: 30px;
 }
 
-.result__avatar-container{
-    background-color: #E1E1DA;
+.result__avatar-container {
+    background-color: var(--color-off-white);
     height: 200px;
     width: 200px;
     margin: auto;
-    border: #FFADCB solid 4px;
+    border: var(--color-pink) solid 4px;
 }
 
 .result__text {
     height: 50px;
     padding: 10px;
     font-size: 30px;
-    color: #E1E1DA;
+    color: var(--color-off-white);
     font-weight: bold;
 }
 
 .result__question-text {
-    background-color: #E1E1DA;
+    background-color: var(--color-off-white);
+    color: var(--color-dark-grey);
+    font-weight: bold;
     height: 130px;
     width: 70%;
     padding: 10px;
     font-size: 25px;
     margin: auto;
-    border: #FFADCB solid 2px;
+    border: var(--color-pink) solid 2px;
 }
 
 .result__answer-text {
-    color: #FFADCB;
+    color: var(--color-pink);
     font-size: 25px;
     margin-bottom: 10px;
 }
@@ -70,17 +68,18 @@
     margin: auto;
     display: flex;
     flex-direction: row;
+    color: var(--color-dark-grey);
 }
 
 .result__first-answer {
-    background-color: #FFADCB;
+    background-color: var(--color-pink);
     height: 40px;
     font-size: 20px;
     font-weight: bold;
 }
 
 .result__second-answer {
-    background-color: #E1E1DA;
+    background-color: var(--color-off-white);
     height: 40px;
     font-size: 20px;
     font-weight: bold;

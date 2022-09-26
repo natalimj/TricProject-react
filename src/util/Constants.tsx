@@ -13,6 +13,7 @@ const Constants = {
 	AVATAR_FIELD: "Select an avatar",
 	SUBMIT_BUTTON: "Submit",
 	QUESTION_FIELD:	"Question",
+	RESULT_FIELD: "Vote Result"
 };
 
 export default Constants;

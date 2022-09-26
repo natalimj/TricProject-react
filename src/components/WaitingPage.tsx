@@ -1,10 +1,10 @@
-import { ClipLoader } from "react-spinners";
+import { BeatLoader} from "react-spinners";
 
 const WaitingPage = () => {
   return (
-    <div>
-      <h4>Submitted successfully! Please wait ....</h4>
-      <ClipLoader color="#c73f3f" />
+    <div style={{marginTop:"300px"}}>
+      <BeatLoader color="#FFADCB" size={100} speedMultiplier={1}/>
+      <h5> Please wait ...</h5>
     </div>
   )
 }
