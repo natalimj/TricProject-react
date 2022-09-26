@@ -6,6 +6,7 @@ import { RootState } from '../app/store';
 import '../style/result.css';
 import { BsCircleFill } from "react-icons/bs";
 import Constants from "../util/Constants";
+import React from 'react';
 
 const Result = () => {
     const initialResultState = {
@@ -67,8 +68,7 @@ const Result = () => {
                             style={{"width" : `${result?.secondAnswerRate}%`}}>{result.secondAnswer.answerText ===userAnswer.answerText && `${result?.secondAnswerRate}%`}</div>      
                         </div>
                     <div style={response ? {color:"#FFADCB"} :{color:"#E1E1DA"}}className="result__user-answer"><BsCircleFill/>Your response</div>
-                </div>
-                
+                </div>           
             </div>
         </div>
     )

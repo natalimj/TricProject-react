@@ -45,14 +45,13 @@
     font-size: var(--font-size-header-large);
 }
 
-.start-page-landing__submit-button,
-.start-page-user__submit-button {
+.submit-button {
     max-width: 200px;
     background: none;
     background-color: var(--color-pink);
     color: var(--color-black);
     border: 3px solid var(--color-black);
-    padding: 15px 20px;
+    padding: 15px 15px;
     font: inherit;
     font-size: var(--font-size-header);
     cursor: pointer;
@@ -63,5 +62,5 @@
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
