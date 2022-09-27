@@ -87,7 +87,7 @@ const StartPage = () => {
                   {Constants.AVATAR_FIELD}
                 </div>
               </div>
-              <button onClick={saveUser} className="start-page-user__submit-button">
+              <button onClick={saveUser} className="submit-button">
                 {Constants.SUBMIT_BUTTON}
               </button>
             </div>
@@ -98,7 +98,7 @@ const StartPage = () => {
           <div className="start-page-landing__title">
             {Constants.APP_TITLE}
           </div>
-          <button onClick={() => setSessionStarted(true)} className="start-page-landing__submit-button">
+          <button onClick={() => setSessionStarted(true)} className="submit-button">
             {Constants.JOIN_BUTTON}
           </button>
         </div>
