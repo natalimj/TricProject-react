@@ -7,9 +7,8 @@ import WaitingPage from './WaitingPage';
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { RootState } from '../app/store';
 import IAnswerData from '../models/Answer';
-import {
-  addAnswer
-} from '../reducers/answerSlice';
+import {addAnswer} from '../reducers/answerSlice';
+import React from 'react';
 
 const Question = () => {
 

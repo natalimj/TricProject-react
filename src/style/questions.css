@@ -9,19 +9,16 @@
 }
 
 .questions__header{
-
     background-color:  var(--color-grey);
     color: var(--color-off-white);
-    height: 85px;
     width: 80%;
     margin: auto;
-    padding: 5px;
     border: var(--color-black) solid 4px;
     font-size: var(--font-size-header);
-    margin-bottom: 40px;
-
 }
-
+.questions__header span {
+    margin-left: 20px;
+}
 
 .questions_box{
     background-color:var(--color-off-white);
@@ -30,8 +27,7 @@
     width: 80%;
     margin: auto;
     margin-bottom: 30px;
-    word-wrap: break-word;
-   
+    word-wrap: break-word; 
 }
 
 .questions_line{
@@ -44,6 +40,10 @@
     height: 70px;
     text-align: start;
     padding-left: 50px;
+}
+
+.borderPink{
+    border: var(--color-pink)  1px solid;
 }
 
 .questions_input input{
@@ -63,7 +63,6 @@
     width: 10%;
     padding-top: 15px;
 }
-
 
 .questions_icon:hover{
     opacity: 0.5;

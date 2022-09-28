@@ -30,12 +30,11 @@ const getAllQuestions = () => {
   return http.get<Array<IQuestionData>>("adminApi/questions");
 };
 
-//delete, add and edit question
 
-const addQuestion = (question: string, firstAnswer: string, secondAnswer:string) => {
+const addQuestion = (questionText: string, firstAnswer: string, secondAnswer:string) => {
   return http.post<IQuestionData>("adminApi/addQuestion", {},{
     params: {
-      question:question,
+      questionText:questionText,
       firstAnswer: firstAnswer,
       secondAnswer:secondAnswer
     }
@@ -51,6 +50,20 @@ const deleteQuestion =( questionId: number) =>{
   }) 
 }
 
+const editQuestion=(questionText:string, firstAnswer: string, secondAnswer:string, questionId:number) =>{
+  return http.patch<IQuestionData>("adminApi/editQuestion",{},{
+    params:{
+      questionText: questionText,
+      firstAnswer:firstAnswer,
+      secondAnswer: secondAnswer,
+      questionId: questionId
+    }
+  }
+  )
+}
+
+
+
 const AdminApi = {
   endSession,
   showResult,
@@ -58,6 +71,7 @@ const AdminApi = {
   showNextQuestion,
   getAllQuestions,
   addQuestion,
-  deleteQuestion
+  deleteQuestion,
+  editQuestion
 };
 export default AdminApi;
