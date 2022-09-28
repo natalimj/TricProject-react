@@ -21,7 +21,7 @@ import {
 
 
 
-const StartPage = () => {
+const StartPage: React.FC = () => {
   const currentUser: IUserData = {
     userId: useAppSelector((state: RootState) => state.user.userId),
     username: useAppSelector((state: RootState) => state.user.username),

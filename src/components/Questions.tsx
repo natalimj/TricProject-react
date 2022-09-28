@@ -3,8 +3,8 @@ import IQuestionData from '../models/Question';
 import { useEffect, useState } from 'react';
 import AdminApi from '../api/AdminApi';
 import {BiDownArrow,BiUpArrow} from "react-icons/bi";
-import React from 'react';
 import EditQuestion from './EditQuestion';
+import React from 'react';
 
 const Questions = () => {
 
