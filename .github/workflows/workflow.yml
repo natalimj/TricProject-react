@@ -36,14 +36,20 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v3
 
-      - name: Upload failed tests
-        if: ${{ failure() }}
-        uses: edunad/actions-image@v1.0.1
+      - name: Upload Screenshots
+        uses: actions/upload-artifact@v3
+        if: failure()
         with:
-         path: 'cypress/screenshots/**/*.png'
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-         title: 'Failed E2E tests 🙀'
-  close_pull_request_job:
+         name: cypress-screenshots
+         path: cypress/screenshots
+
+      - name: Upload Videos
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+         name: cypress-videos
+         path: cypress/videos
+
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
     name: Close Pull Request Job
