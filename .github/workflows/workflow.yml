@@ -20,10 +20,10 @@ jobs:
         uses: cypress-io/github-action@v3
       - name: Upload screenshots
         uses: actions/upload-artifact@latest
-       if: failure()
-       with:
-           name: cypress-snapshots
-           path: cypress/snapshots
+        if: failure()
+        with:
+         name: cypress-snapshots
+         path: cypress/snapshots
   build_and_deploy_job:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
