@@ -22,10 +22,6 @@ const getQuestionByNumber = (questionNumber: number) => {
   })
 };
 
-const showNextQuestion = (id :number) => {
-  return http.get<IQuestionData>(`questionApi/next/${id}`);
-};
-
 const getAllQuestions = () => {
   return http.get<Array<IQuestionData>>("adminApi/questions");
 };
@@ -68,7 +64,6 @@ const AdminApi = {
   endSession,
   showResult,
   getQuestionByNumber,
-  showNextQuestion,
   getAllQuestions,
   addQuestion,
   deleteQuestion,
