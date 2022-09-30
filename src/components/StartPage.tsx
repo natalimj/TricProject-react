@@ -75,6 +75,7 @@ const StartPage: React.FC = () => {
                     type="text"
                     className="start-page-user__form-control"
                     id="username"
+                    data-cy="username"
                     required
                     value={user.username}
                     onChange={handleInputChange}
@@ -87,7 +88,7 @@ const StartPage: React.FC = () => {
                   {Constants.AVATAR_FIELD}
                 </div>
               </div>
-              <button onClick={saveUser} className="submit-button">
+              <button onClick={saveUser} className="submit-button" data-cy="create">
                 {Constants.SUBMIT_BUTTON}
               </button>
             </div>
@@ -98,7 +99,7 @@ const StartPage: React.FC = () => {
           <div className="start-page-landing__title">
             {Constants.APP_TITLE}
           </div>
-          <button onClick={() => setSessionStarted(true)} className="submit-button">
+          <button onClick={() => setSessionStarted(true)} className="submit-button" data-cy="join">
             {Constants.JOIN_BUTTON}
           </button>
         </div>
