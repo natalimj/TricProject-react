@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react'
 import AdminApi from '../api/AdminApi';
 import IQuestionData from '../models/Question';
@@ -56,17 +57,25 @@ const Admin = () => {
   const endSession = () => {
     //delete all users and user answers
 
-    AdminApi.endSession();
-    /* .then((response: any) => {
- 
+    AdminApi.endSession()
+    .then((response: any) => {
          console.log(response.data);
        })
        .catch((e: Error) => {
          console.log(e);
        });
- 
- */
     setShowResultNo(false);
+  };
+
+
+  const showFinalResult = () => {
+    AdminApi.showFinalResult()
+      .then((response: any) => {
+         console.log(response.data);
+       })
+       .catch((e: Error) => {
+         console.log(e);
+       });
   };
 
   let onQuestionReceived = (msg: IQuestionData) => {
@@ -99,6 +108,9 @@ const Admin = () => {
           Next
         </button> </div>}
 
+        <button onClick={showFinalResult} className="btn btn-success">
+          Show Final Result
+        </button>
         <button onClick={endSession} className="btn btn-success">
           End Session
         </button>

@@ -6,6 +6,10 @@ const endSession = () => {
   return http.post("adminApi/endSession");
 };
 
+const showFinalResult = () => {
+  return http.post("adminApi/showFinalResult");
+};
+
 const showResult = (questionId: any) => {
   return http.get<IResultData>("adminApi/result", {
     params: {
@@ -58,8 +62,6 @@ const editQuestion=(questionText:string, firstAnswer: string, secondAnswer:strin
   )
 }
 
-
-
 const AdminApi = {
   endSession,
   showResult,
@@ -67,6 +69,7 @@ const AdminApi = {
   getAllQuestions,
   addQuestion,
   deleteQuestion,
-  editQuestion
+  editQuestion,
+  showFinalResult
 };
 export default AdminApi;
