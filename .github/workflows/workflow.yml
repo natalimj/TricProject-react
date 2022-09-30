@@ -22,7 +22,7 @@ jobs:
         if: ${{ failure() }}
         uses: edunad/actions-image@v1.0.1
         with:
-         path: './cypress/screenshots/**/*.png'
+         path: 'cypress/screenshots/**/*.png'
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
          title: 'Failed E2E tests 🙀'
   build_and_deploy_job:
