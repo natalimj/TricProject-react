@@ -30,20 +30,20 @@ const Result = () => {
     const userName = useAppSelector((state: RootState) => state.user.username);
     const userAnswer = useAppSelector((state: RootState) => state.answer);
     const [response,setResponse] =useState<boolean>(false);
-    
+
     useEffect(() => {
         AdminApi.showResult(questionId)
-        .then((response: any) => {
-            setResult(response.data);
+            .then((response: any) => {
+                setResult(response.data);
             if (userAnswer.answerText === response.data.firstAnswer.answerText) {
                 setResponse(true);
             } else if (userAnswer.answerText === response.data.secondAnswer.answerText) {
                 setResponse(false);
             }
-        })
-        .catch((e: Error) => {
-            console.log(e);
-        });
+            })
+            .catch((e: Error) => {
+                console.log(e);
+            });
     }, [questionId, userAnswer.answerText]);
 
     return (
