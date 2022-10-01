@@ -5,6 +5,7 @@ import userReducer from '../reducers/userSlice';
 import questionReducer from '../reducers/questionSlice';
 import answerReducer from '../reducers/answerSlice';
 import componentReducer from '../reducers/componentSlice';
+import statusReducer from '../reducers/statusSlice';
 
 const persistConfig = {
   key: "root",
@@ -15,6 +16,7 @@ const persistedUserReducer = persistReducer(persistConfig, userReducer);
 const persistedQuestionReducer = persistReducer(persistConfig, questionReducer);
 const persistedAnswerReducer = persistReducer(persistConfig, answerReducer);
 const persistedComponentReducer = persistReducer(persistConfig, componentReducer);
+const persistedStatusReducer = persistReducer(persistConfig, statusReducer);
 
 export const store = configureStore({
   reducer: {
@@ -22,6 +24,7 @@ export const store = configureStore({
     question: persistedQuestionReducer,
     answer: persistedAnswerReducer,
     component: persistedComponentReducer,
+    status: persistedStatusReducer
   },
 });
 

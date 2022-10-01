@@ -1,10 +1,11 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, useEffect } from "react";
 import './StartPage.css';
 import UserApi from "../api/UserApi";
 import IUserData from '../models/User';
 import IQuestionData from '../models/Question';
 import Constants from "../util/Constants";
 import WaitingPage from "./WaitingPage";
+import InactiveHomepage from "./InactiveHomepage";
 import WebSocketComponent from "./WebSocketComponent";
 import MainPage from "./MainPage";
 import { useAppSelector, useAppDispatch } from '../app/hooks';
@@ -18,6 +19,7 @@ import {
 import {
   setComponent
 } from '../reducers/componentSlice';
+import { setStatus } from "../reducers/statusSlice";
 
 
 
@@ -27,6 +29,7 @@ const StartPage = () => {
     username: useAppSelector((state: RootState) => state.user.username),
     imagePath: useAppSelector((state: RootState) => state.user.imagePath)
   }
+  const isActive =useAppSelector((state: RootState) => state.status.isActive);
   const [user, setUser] = useState<IUserData>(currentUser);
   const [sessionStarted, setSessionStarted] = useState<boolean>(false);
   const [userSubmitted, setUserSubmitted] = useState<boolean>(false);
@@ -55,13 +58,19 @@ const StartPage = () => {
     setPlayStarted(true);
   }
 
-  return (
-    <div className="start-page">
-      <WebSocketComponent topics={['/topic/question']} onMessage={(msg: IQuestionData) => onQuestionMessageReceived(msg)} />
+  const onStatusMessageReceived = (msg: boolean) => {
+    dispatch(setStatus({isActive:msg}))
+  }
 
-      {sessionStarted ? (
+  return (<>
+  
+  {!isActive ? ( <><InactiveHomepage/> <WebSocketComponent topics={['/topic/status']} onMessage={(msg: boolean) => onStatusMessageReceived(msg)} /></>) : (
+    <div className="start-page">
+      <WebSocketComponent topics={['/topic/status']} onMessage={(msg: boolean) => onStatusMessageReceived(msg)} />
+      <WebSocketComponent topics={['/topic/question']} onMessage={(msg: IQuestionData) => onQuestionMessageReceived(msg)} />
+      {isActive && sessionStarted ? (
         <div className="start-page-user">
-          {userSubmitted ? (
+          {isActive && userSubmitted ? (
             <div className="start-page-question"> {playStarted ? (<MainPage />) : (<WaitingPage />)}</div>
           ) : (
             <div className="start-page-user__user-form">
@@ -103,7 +112,8 @@ const StartPage = () => {
           </button>
         </div>
       )}
-    </div>
+    </div>)}
+    </>
   );
 }
 export default StartPage

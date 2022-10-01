@@ -1,7 +1,10 @@
+import React from 'react';
 import { useState } from 'react'
 import AdminApi from '../api/AdminApi';
 import IQuestionData from '../models/Question';
 import WebSocketComponent from './WebSocketComponent';
+import { useAppDispatch } from '../app/hooks';
+import { setStatus } from '../reducers/statusSlice';
 
 const Admin = () => {
 
@@ -17,6 +20,8 @@ const Admin = () => {
   const [questionNo, setQuestionNo] = useState<number>(0);
   const [numberOfUsers, setNumberOfUsers] = useState<number>(0);
   const [question, setQuestion] = useState<IQuestionData>(initialQuestionState);
+
+  const dispatch = useAppDispatch();
 
   const startSession = () => {
     AdminApi.getQuestionByNumber(1).then((response: any) => {
@@ -54,18 +59,17 @@ const Admin = () => {
 
 
   const endSession = () => {
-    //delete all users and user answers
+    //delete all users and user answers + deactivate the app status
 
-    AdminApi.endSession();
-    /* .then((response: any) => {
- 
-         console.log(response.data);
+    AdminApi.endSession()
+      .then((response: any) => {
+        console.log(response.data);
+        dispatch(setStatus({isActive:false}))
        })
        .catch((e: Error) => {
          console.log(e);
        });
- 
- */
+
     setShowResultNo(false);
   };
 
@@ -79,9 +83,24 @@ const Admin = () => {
     setNumberOfUsers(msg);
   }
 
+  const activateApp = () => {
+    AdminApi.activateApp()
+      .then((response: any) => {
+        console.log(response.data);
+        dispatch(setStatus({isActive:true}))
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+  };
+
   return (
     <div>Admin
-
+      <br/>
+      <button onClick={activateApp} className="btn btn-success">
+        Activate
+      </button>
+      <br/>
       <button onClick={startSession} className="btn btn-success">
         Start
       </button>

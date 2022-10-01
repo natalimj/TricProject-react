@@ -12,9 +12,14 @@ const createUser = (data: IUserData) => {
 const saveVote = (data: IVoteData) => {
     return http.post<IVoteData>("userApi/vote", data);
 };
+
+const getAppStatus =() =>{
+    return http.get<boolean>("userApi/getAppStatus");
+}
 const UserApi = {
     getAllUsers,
     createUser,
-    saveVote
+    saveVote,
+    getAppStatus
 };
 export default UserApi;

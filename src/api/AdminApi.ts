@@ -1,6 +1,7 @@
 import http from "../util/Http-common";
 import IQuestionData from "../models/Question";
 import IResultData from "../models/Result";
+import IStatusData from "../models/Status";
 
 const endSession = () => {
   return http.post("adminApi/endSession");
@@ -22,8 +23,8 @@ const getQuestionByNumber = (questionNumber: number) => {
   })
 };
 
-const showNextQuestion = (id :number) => {
-  return http.get<IQuestionData>(`questionApi/next/${id}`);
+const activateApp = () => {
+  return http.post<IStatusData>("adminApi/activate");
 };
 
 const getAllQuestions = () => {
@@ -62,13 +63,11 @@ const editQuestion=(questionText:string, firstAnswer: string, secondAnswer:strin
   )
 }
 
-
-
 const AdminApi = {
   endSession,
   showResult,
   getQuestionByNumber,
-  showNextQuestion,
+  activateApp ,
   getAllQuestions,
   addQuestion,
   deleteQuestion,
