@@ -3,8 +3,9 @@ import { useState } from 'react'
 import AdminApi from '../api/AdminApi';
 import IQuestionData from '../models/Question';
 import WebSocketComponent from './WebSocketComponent';
-import { useAppDispatch } from '../app/hooks';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { setStatus } from '../reducers/statusSlice';
+import { RootState } from '../app/store';
 
 const Admin = () => {
 
@@ -20,6 +21,7 @@ const Admin = () => {
   const [questionNo, setQuestionNo] = useState<number>(0);
   const [numberOfUsers, setNumberOfUsers] = useState<number>(0);
   const [question, setQuestion] = useState<IQuestionData>(initialQuestionState);
+  const isActive = useAppSelector((state: RootState) => state.status.isActive);
 
   const dispatch = useAppDispatch();
 
@@ -64,11 +66,11 @@ const Admin = () => {
     AdminApi.endSession()
       .then((response: any) => {
         console.log(response.data);
-        dispatch(setStatus({isActive:false}))
-       })
-       .catch((e: Error) => {
-         console.log(e);
-       });
+        dispatch(setStatus({ isActive: false }))
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
 
     setShowResultNo(false);
   };
@@ -87,7 +89,7 @@ const Admin = () => {
     AdminApi.activateApp()
       .then((response: any) => {
         console.log(response.data);
-        dispatch(setStatus({isActive:true}))
+        dispatch(setStatus({ isActive: true }))
       })
       .catch((e: Error) => {
         console.log(e);
@@ -96,32 +98,35 @@ const Admin = () => {
 
   return (
     <div>Admin
-      <br/>
+      <br />
       <button onClick={activateApp} className="btn btn-success">
         Activate
       </button>
-      <br/>
-      <button onClick={startSession} className="btn btn-success">
-        Start
-      </button>
+      <br />
+      {isActive &&
+        <div>
+          <button onClick={startSession} className="btn btn-success">
+            Start
+          </button>
 
-      <div>
-        <WebSocketComponent topics={['/topic/question']} onMessage={(msg: IQuestionData) => onQuestionReceived(msg)} />
-        <WebSocketComponent topics={['/topic/message']} onMessage={(msg2: number) => onMessageReceived(msg2)} />
-        <p>online users: {numberOfUsers}</p>
+          <div>
+            <WebSocketComponent topics={['/topic/question']} onMessage={(msg: IQuestionData) => onQuestionReceived(msg)} />
+            <WebSocketComponent topics={['/topic/message']} onMessage={(msg2: number) => onMessageReceived(msg2)} />
+            <p>online users: {numberOfUsers}</p>
 
-        {showQuestionNo && <div><p>Question {questionNo} is on screen....</p><button onClick={() => showResult(question.questionId)} className="btn btn-success">
-          Show Result
-        </button></div>}
-        
-        {showResultNo && <div><p>Result {questionNo} is on screen....</p><button onClick={() => showNextQuestion(questionNo)} className="btn btn-success">
-          Next
-        </button> </div>}
+            {showQuestionNo && <div><p>Question {questionNo} is on screen....</p><button onClick={() => showResult(question.questionId)} className="btn btn-success">
+              Show Result
+            </button></div>}
 
-        <button onClick={endSession} className="btn btn-success">
-          End Session
-        </button>
-      </div>
+            {showResultNo && <div><p>Result {questionNo} is on screen....</p><button onClick={() => showNextQuestion(questionNo)} className="btn btn-success">
+              Next
+            </button> </div>}
+
+            <button onClick={endSession} className="btn btn-success">
+              End Session
+            </button>
+          </div>
+        </div>}
     </div>
   )
 }
