@@ -3,6 +3,7 @@ import { useState } from 'react'
 import AdminApi from '../api/AdminApi';
 import IQuestionData from '../models/Question';
 import WebSocketComponent from './WebSocketComponent';
+import Constants from '../util/Constants';
 
 const Admin = () => {
 
@@ -92,7 +93,7 @@ const Admin = () => {
     <div>Admin
 
       <button onClick={startSession} className="btn btn-success">
-        Start
+      {Constants.START_BUTTON}
       </button>
 
       <div>
@@ -101,18 +102,18 @@ const Admin = () => {
         <p>online users: {numberOfUsers}</p>
 
         {showQuestionNo && <div><p>Question {questionNo} is on screen....</p><button onClick={() => showResult(question.questionId)} className="btn btn-success">
-          Show Result
+          {Constants.RESULT_BUTTON}
         </button></div>}
         
         {showResultNo && <div><p>Result {questionNo} is on screen....</p><button onClick={() => showNextQuestion(questionNo)} className="btn btn-success">
-          Next
+        {Constants.NEXT_BUTTON}
         </button> </div>}
 
         <button onClick={showFinalResult} className="btn btn-success">
-          Show Final Result
+          {Constants.FINAL_RESULT_BUTTON}
         </button>
         <button onClick={endSession} className="btn btn-success">
-          End Session
+        {Constants.END_BUTTON}
         </button>
       </div>
     </div>

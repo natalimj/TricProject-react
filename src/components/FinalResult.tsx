@@ -23,12 +23,11 @@ const FinalResult = () => {
         .then((response: any) => {
             console.log(response.data);
             setFinalResults(response.data)
-            console.log(finalResults)
           })
           .catch((e: Error) => {
             console.log(e);
           });
-    }, [])
+    }, [currentUser.userId])
     
     const exportRef = useRef<HTMLHeadingElement>(null);
 
@@ -45,7 +44,7 @@ const FinalResult = () => {
                   <span>{today}</span>
                   <span>Location??</span>
                 </div></div>
-    <div className="finalresult__result-box"><div>{Constants.FINAL_RESULT_TEXT}</div>
+    <div className="finalresult__result-box"><div>{Constants.FINAL_RESULT_FIELD}</div>
 
     { finalResults && finalResults.map((finalResult) => (
       <div key={finalResult.category.categoryId}>
@@ -63,7 +62,6 @@ const FinalResult = () => {
     </div>
     ))}           
     </div>
-
     </div>
     <div className="finalresult__download" onClick={() => ExportAsImage(exportRef.current, `TRIC-${today}`)}>{Constants.DOWNLOAD}</div>
        </div>

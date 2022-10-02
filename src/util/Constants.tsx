@@ -16,8 +16,14 @@ const Constants = {
 	RESULT_FIELD: "Vote Result",
 	CONFIRM_BUTTON: "Confirm",
 	DOWNLOAD :"DOWNLOAD",
-	FINAL_RESULT_TEXT: "YOUR DIGITAL PROFILE" ,
-	USER_RESPONSE : "Your response"
+	FINAL_RESULT_FIELD: "YOUR DIGITAL PROFILE" ,
+	USER_RESPONSE : "Your response",
+	FINAL_RESULT_BUTTON:" Show Final Result",
+	RESULT_BUTTON : "Show Result",
+	NEXT_BUTTON: "Show Next Question",
+	START_BUTTON: "Start",
+	END_BUTTON: "End Session"
+
 };
 
 export default Constants;

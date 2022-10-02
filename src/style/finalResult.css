@@ -94,13 +94,14 @@
 
 .pink-background{
     background-color: var(--color-pink);
+    padding-top: 2%;
+    padding-bottom: 2%;
 }
 
 .finalresult__download{
     background-color: var(--color-pink);
     color: var(--color-off-white);
     font-size: 2rem;
-    padding-top: 1vh;
 }
 
 .finalresult__title {
