@@ -6,6 +6,10 @@ const endSession = () => {
   return http.post("adminApi/endSession");
 };
 
+const showFinalResult = () => {
+  return http.post("adminApi/showFinalResult");
+};
+
 const showResult = (questionId: any) => {
   return http.get<IResultData>("adminApi/result", {
     params: {
@@ -20,10 +24,6 @@ const getQuestionByNumber = (questionNumber: number) => {
       questionNumber: questionNumber
     }
   })
-};
-
-const showNextQuestion = (id :number) => {
-  return http.get<IQuestionData>(`questionApi/next/${id}`);
 };
 
 const getAllQuestions = () => {
@@ -62,16 +62,14 @@ const editQuestion=(questionText:string, firstAnswer: string, secondAnswer:strin
   )
 }
 
-
-
 const AdminApi = {
   endSession,
   showResult,
   getQuestionByNumber,
-  showNextQuestion,
   getAllQuestions,
   addQuestion,
   deleteQuestion,
-  editQuestion
+  editQuestion,
+  showFinalResult
 };
 export default AdminApi;
