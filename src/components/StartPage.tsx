@@ -1,8 +1,9 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, useEffect } from "react";
 import './StartPage.css';
 import IQuestionData from '../models/Question';
 import Constants from "../util/Constants";
 import WaitingPage from "./WaitingPage";
+import InactiveHomepage from "./InactiveHomepage";
 import WebSocketComponent from "./WebSocketComponent";
 import MainPage from "./MainPage";
 import { useAppSelector, useAppDispatch } from '../app/hooks';
@@ -14,10 +15,13 @@ import {
 } from '../reducers/componentSlice';
 import UserLoginPage from "./UserLoginPage";
 import { RootState } from "../app/store";
+import { setStatus } from "../reducers/statusSlice";
+import UserApi from "../api/UserApi";
 
 const StartPage = () => {
+  const isActive = useAppSelector((state: RootState) => state.status.isActive);
   const [sessionStarted, setSessionStarted] = useState<boolean>(false);
-  const userSubmitted = useAppSelector((state: RootState)=> state.component.userSubmittedValue);
+  const userSubmitted = useAppSelector((state: RootState) => state.component.userSubmittedValue);
   const [playStarted, setPlayStarted] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
@@ -27,29 +31,46 @@ const StartPage = () => {
     setPlayStarted(true);
   }
 
-  return (
-    <div className="start-page">
-      <WebSocketComponent topics={['/topic/question']} onMessage={(msg: IQuestionData) => onQuestionMessageReceived(msg)} />
+  const onStatusMessageReceived = (msg: boolean) => {
+    dispatch(setStatus({ isActive: msg }))
+  }
 
-      {sessionStarted ? (
-        <div className="start-page-user">
-          {userSubmitted ? (
-            <div className="start-page-question"> {playStarted ? (<MainPage />) : (<WaitingPage />)}</div>
-          ) : (
-            <UserLoginPage />
-          )}
-        </div>
-      ) : (
-        <div className="start-page-landing">
-          <div className="start-page-landing__title">
-            {Constants.APP_TITLE}
+  useEffect(() => {
+    UserApi.getAppStatus()
+      .then((response: any) => {
+        dispatch(setStatus({ isActive: response.data }))
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+  }, [dispatch])
+
+
+  return (<>
+    {!isActive ? (<><InactiveHomepage /> <WebSocketComponent topics={['/topic/status']} onMessage={(msg: boolean) => onStatusMessageReceived(msg)} /></>) : (
+      <div className="start-page">
+        <WebSocketComponent topics={['/topic/status']} onMessage={(msg: boolean) => onStatusMessageReceived(msg)} />
+        <WebSocketComponent topics={['/topic/question']} onMessage={(msg: IQuestionData) => onQuestionMessageReceived(msg)} />
+        {isActive && sessionStarted ? (
+          <div className="start-page-user">
+            {isActive && userSubmitted ? (
+              <div className="start-page-question"> {playStarted ? (<MainPage />) : (<WaitingPage />)}</div>
+            ) : (
+              <UserLoginPage />
+            )}
           </div>
-          <button onClick={() => setSessionStarted(true)} className="submit-button">
-            {Constants.JOIN_BUTTON}
-          </button>
-        </div>
-      )}
-    </div>
+        ) : (
+          <div className="start-page-landing">
+            <div className="start-page-landing__title">
+              {Constants.APP_TITLE}
+            </div>
+            <button onClick={() => setSessionStarted(true)} className="submit-button">
+              {Constants.JOIN_BUTTON}
+            </button>
+          </div>
+        )}
+      </div>)}
+  </>
   );
 }
 export default StartPage

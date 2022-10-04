@@ -23,8 +23,8 @@ const Constants = {
 	RESULT_BUTTON : "Show Result",
 	NEXT_BUTTON: "Show Next Question",
 	START_BUTTON: "Start",
-	END_BUTTON: "End Session"
-
+	END_BUTTON: "End Session",
+	ACTIVATE_BUTTON : "Activate"
 };
 
 export default Constants;

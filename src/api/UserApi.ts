@@ -14,6 +14,12 @@ const saveVote = (data: IVoteData) => {
     return http.post<IVoteData>("userApi/vote", data);
 };
 
+
+
+const getAppStatus =() =>{
+    return http.get<boolean>("userApi/getAppStatus");
+}
+
 const getFinalResult= (userId:any) => {
     return http.get<Array<FinalResult>>("userApi/finalResult" ,{
         params: {
@@ -27,6 +33,7 @@ const UserApi = {
     getAllUsers,
     createUser,
     saveVote,
+    getAppStatus,
     getFinalResult
 };
 export default UserApi;
