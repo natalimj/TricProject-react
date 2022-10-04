@@ -18,6 +18,11 @@
     border: var(--color-pink) solid 4px;
 }
 
+.result__avatar-container img {
+    width: 100%;
+    height: 100%;
+}
+
 .result__text {
     height: 50px;
     padding: 10px;

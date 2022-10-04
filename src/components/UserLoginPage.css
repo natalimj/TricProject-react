@@ -1,0 +1,66 @@
+@import url("../styles.css");
+
+.user-form__header,
+.user-form__avatar-container {
+    font-size: var(--font-size-header);
+    background-color: var(--color-grey);
+    border: 3px solid var(--color-black);
+    padding: 5px 0;
+    margin: 23px 0;
+}
+
+.user-form--username {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-form__avatar-container {
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-form__form-control {
+    font-size: var(--font-size-header);
+    border: none;
+    outline: none;
+    background-color: var(--color-off-white);
+    color: var(--color-dark-grey);
+    margin: 10px 25px;
+    text-align: center;
+}
+
+.user-form__form-control:focus,
+.user-form__form-control:active {
+    border: none;
+    outline: solid 2px var(--color-pink);
+}
+
+.user-form__avatar-selector {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 85%;
+}
+
+.user-form__avatar-selector-item {
+    width: 10%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-form--avatar-image {
+    width: 40%;
+    display: flex;
+}
+
+.user-form--avatar-image img {
+    width: 100%;
+    height: 100%;
+}
+
+.user-form--user-arrow {
+    display: flex;
+}

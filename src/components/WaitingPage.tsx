@@ -1,12 +1,14 @@
-import { BeatLoader} from "react-spinners";
+import React from 'react';
+import { BeatLoader } from "react-spinners";
+import Constants from '../util/Constants';
 
-const WaitingPage = () => {
+function WaitingPage() {
   return (
-    <div style={{marginTop:"300px"}}>
-      <BeatLoader color="#FFADCB" size={100} speedMultiplier={1}/>
-      <h5> Please wait ...</h5>
+    <div data-testid="waiting-spinner" style={{ marginTop: "300px" }}>
+      <BeatLoader color="#FFADCB" size={100} speedMultiplier={1} />
+      <h5>{Constants.WAITING_PROMPT}</h5>
     </div>
   )
 }
 
-export default WaitingPage
+export default WaitingPage;

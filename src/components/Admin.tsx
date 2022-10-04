@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react'
 import AdminApi from '../api/AdminApi';
 import IQuestionData from '../models/Question';
@@ -94,7 +95,7 @@ const Admin = () => {
         {showQuestionNo && <div><p>Question {questionNo} is on screen....</p><button onClick={() => showResult(question.questionId)} className="btn btn-success">
           Show Result
         </button></div>}
-        
+
         {showResultNo && <div><p>Result {questionNo} is on screen....</p><button onClick={() => showNextQuestion(questionNo)} className="btn btn-success">
           Next
         </button> </div>}
