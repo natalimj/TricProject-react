@@ -47,29 +47,28 @@ const Result = () => {
             });
     }, [questionId, userAnswer.answerText]);
 
+
     return (
         <div className='result'>
             <div className="result__inner-container">
-                <div className="result__avatar-container">
-                    <img src={require('../util/icons/' + userIcon + '.jpg')} alt="user icon" />
-                </div>
+                <div className="result__avatar-container">image here </div>
                 <div className="result__text">{userName}</div>
                 <div className="result__text">{Constants.RESULT_FIELD}</div>
-
                 <div className="result__question-text">{result?.question.questionText}</div>
                 <div className="result__box">
                     <div className="result__title">
-                        <span className="result__answer-text">{result?.firstAnswer.answerText}</span>
-                        <span className="result__answer-text">{result?.secondAnswer.answerText}</span>
+                        <span className="result__answer-text">{result.firstAnswer.answerText}</span>
+                        <span className="result__answer-text">{result.secondAnswer.answerText}</span>
                     </div>
                     <div className="result__slider">
                         <div className="result__first-answer"
-                            style={{ "width": `${result?.firstAnswerRate}%` }}>{result.firstAnswer.answerText === userAnswer.answerText && `${result?.firstAnswerRate}%`}</div>
+                            style={{ "width": `${result.firstAnswerRate}%` }}>{result.firstAnswer.answerText === userAnswer.answerText && `${result.firstAnswerRate}%`}</div>
                         <div className="result__second-answer"
-                            style={{ "width": `${result?.secondAnswerRate}%` }}>{result.secondAnswer.answerText === userAnswer.answerText && `${result?.secondAnswerRate}%`}</div>
+                            style={{ "width": `${result.secondAnswerRate}%` }}>{result.secondAnswer.answerText === userAnswer.answerText && `${result.secondAnswerRate}%`}</div>
                     </div>
-                    <div style={response ? { color: "#FFADCB" } : { color: "#E1E1DA" }} className="result__user-answer"><BsCircleFill />Your response</div>
+                    <div style={response ? { color: "#FFADCB" } : { color: "#E1E1DA" }} className="result__user-answer"><BsCircleFill />{Constants.USER_RESPONSE}</div>
                 </div>
+
             </div>
         </div>
     )
