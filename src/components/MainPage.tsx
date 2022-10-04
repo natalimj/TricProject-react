@@ -7,6 +7,7 @@ import { RootState } from '../app/store';
 import {
   setComponent
 } from '../reducers/componentSlice';
+import React from "react";
 
 const MainPage = () => {
 
