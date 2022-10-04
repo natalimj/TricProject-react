@@ -14,6 +14,7 @@ const saveVote = (data: IVoteData) => {
     return http.post<IVoteData>("userApi/vote", data);
 };
 
+
 const getAppStatus =() =>{
     return http.get<boolean>("userApi/getAppStatus");
 }
@@ -25,6 +26,7 @@ const getFinalResult= (userId:any) => {
         }
       })
 };
+
 
 const UserApi = {
     getAllUsers,

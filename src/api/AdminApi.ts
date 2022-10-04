@@ -27,6 +27,7 @@ const getQuestionByNumber = (questionNumber: number) => {
   })
 };
 
+
 const activateApp = () => {
   return http.post<IStatusData>("adminApi/activate");
 };
@@ -34,7 +35,6 @@ const activateApp = () => {
 const getAllQuestions = () => {
   return http.get<Array<IQuestionData>>("adminApi/questions");
 };
-
 
 const addQuestion = (questionText: string, firstAnswer: string, secondAnswer:string) => {
   return http.post<IQuestionData>("adminApi/addQuestion", {},{

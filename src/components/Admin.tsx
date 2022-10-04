@@ -85,6 +85,7 @@ const Admin = () => {
       .catch((e: Error) => {
         console.log(e);
       });
+
   };
 
   let onQuestionReceived = (msg: IQuestionData) => {
@@ -107,7 +108,6 @@ const Admin = () => {
         console.log(e);
       });
   };
-
   return (
     <div>Admin
       <br />
