@@ -15,6 +15,7 @@ const saveVote = (data: IVoteData) => {
 };
 
 
+
 const getAppStatus =() =>{
     return http.get<boolean>("userApi/getAppStatus");
 }

@@ -27,7 +27,6 @@ const getQuestionByNumber = (questionNumber: number) => {
   })
 };
 
-
 const activateApp = () => {
   return http.post<IStatusData>("adminApi/activate");
 };
