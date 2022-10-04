@@ -62,6 +62,17 @@ const StartPage = () => {
     dispatch(setStatus({isActive:msg}))
   }
 
+  useEffect(() => {
+    UserApi.getAppStatus()
+        .then((response: any) => {
+          dispatch(setStatus({isActive:response.data}))
+        })
+        .catch((e: Error) => {
+          console.log(e);
+        });
+  }, [dispatch])
+  
+
   return (<>
   
   {!isActive ? ( <><InactiveHomepage/> <WebSocketComponent topics={['/topic/status']} onMessage={(msg: boolean) => onStatusMessageReceived(msg)} /></>) : (

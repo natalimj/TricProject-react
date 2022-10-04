@@ -6,6 +6,7 @@ import WebSocketComponent from './WebSocketComponent';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { setStatus } from '../reducers/statusSlice';
 import { RootState } from '../app/store';
+import Constants from '../util/Constants';
 
 const Admin = () => {
 
@@ -75,6 +76,17 @@ const Admin = () => {
     setShowResultNo(false);
   };
 
+
+  const showFinalResult = () => {
+    AdminApi.showFinalResult()
+      .then((response: any) => {
+        console.log(response.data);
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+  };
+
   let onQuestionReceived = (msg: IQuestionData) => {
     setQuestionNo(msg.questionId);
     setShowQuestionNo(true);
@@ -100,13 +112,13 @@ const Admin = () => {
     <div>Admin
       <br />
       <button onClick={activateApp} className="btn btn-success">
-        Activate
+        {Constants.ACTIVATE_BUTTON}
       </button>
       <br />
       {isActive &&
         <div>
           <button onClick={startSession} className="btn btn-success">
-            Start
+            {Constants.START_BUTTON}
           </button>
 
           <div>
@@ -115,16 +127,24 @@ const Admin = () => {
             <p>online users: {numberOfUsers}</p>
 
             {showQuestionNo && <div><p>Question {questionNo} is on screen....</p><button onClick={() => showResult(question.questionId)} className="btn btn-success">
-              Show Result
-            </button></div>}
+              {Constants.RESULT_BUTTON}
+            </button>
+          </div>}
 
-            {showResultNo && <div><p>Result {questionNo} is on screen....</p><button onClick={() => showNextQuestion(questionNo)} className="btn btn-success">
-              Next
+            {showResultNo && <div>
+            <p>Result {questionNo} is on screen....</p>
+            <button onClick={() => showNextQuestion(questionNo)} className="btn btn-success">
+            {Constants.NEXT_BUTTON}
             </button> </div>}
 
-            <button onClick={endSession} className="btn btn-success">
-              End Session
+            <button onClick={showFinalResult} className="btn btn-success">
+              {Constants.FINAL_RESULT_BUTTON}
             </button>
+
+            <button onClick={endSession} className="btn btn-success">
+              {Constants.END_BUTTON}
+            </button>
+
           </div>
         </div>}
     </div>
