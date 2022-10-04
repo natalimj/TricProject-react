@@ -5,7 +5,6 @@ import Admin from './components/Admin';
 import Page404 from './components/Page404';
 import StartPage from './components/StartPage';
 import Questions from "./components/Questions";
-import React from "react";
 
 function App() {
   return (

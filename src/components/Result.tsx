@@ -51,7 +51,9 @@ const Result = () => {
     return (
         <div className='result'>
             <div className="result__inner-container">
-                <div className="result__avatar-container">image here </div>
+                <div className="result__avatar-container">
+                    <img src={require('../util/icons/' + userIcon + '.jpg')} alt="user icon" />
+                </div>
                 <div className="result__text">{userName}</div>
                 <div className="result__text">{Constants.RESULT_FIELD}</div>
                 <div className="result__question-text">{result?.question.questionText}</div>
