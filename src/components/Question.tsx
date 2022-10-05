@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import '../style/Question.css';
 import Constants from '../util/Constants';
 import UserApi from '../api/UserApi';
@@ -21,12 +21,14 @@ const Question = () => {
     questionId: useAppSelector((state: RootState) => state.question.questionId),
     questionNumber: useAppSelector((state: RootState) => state.question.questionNumber),
     questionText: useAppSelector((state: RootState) => state.question.questionText),
-    answers: useAppSelector((state: RootState) => [...state.question.answers])
+    answers: useAppSelector((state: RootState) => [...state.question.answers]),
+    time: useAppSelector((state: RootState) => state.question.time),
   }
   const [selectedAnswer, setSelectedAnswer] = useState<IAnswerData>({ answerText: '' });
   const [firstAnswer, setFirstAnswer] = useState<boolean>(false);
   const [secondAnswer, setSecondAnswer] = useState<boolean>(false);
   const [showFinalResult, setshowFinalResult] = useState<boolean>(false);
+  const [timer, setTimer] = useState<number>(currentQuestion.time);
 
   const vote = (answer: IAnswerData) => {
     const voteData = {
@@ -61,14 +63,26 @@ const Question = () => {
     setshowFinalResult(true);
   }
 
+  useEffect(() => {
+    if(timer > 0){
+      setTimeout(() => {
+        setTimer(timer =>timer-1)
+      }, 1000);
+    }  
+  }, [timer]);
+
+  
   return (
     <div className='question-container'>
       <WebSocketComponent topics={['/topic/finalResult']} onMessage={() => onFinalResultMessageReceived()} />
       {submitted ? ((<WaitingPage />))
         : (showFinalResult ? (<FinalResult />)
-          : (<div className='question'>
+          : (<>
+          <div className='question'>
+            <div className='question__timer-text'> {timer} seconds remaining</div>
+            <div className='question__timer'><div className='question__inner-timer' style={{"width" : `${(100*timer)/(currentQuestion.time)}%`}}></div></div>
             <div className='question__header'>
-              {Constants.QUESTION_FIELD} {currentQuestion.questionId}
+              {Constants.QUESTION_FIELD} {currentQuestion.questionNumber}
             </div>
             <div className='question__header question__header--text'>
               {currentQuestion.questionText}
@@ -84,8 +98,8 @@ const Question = () => {
             </div>
             <button onClick={() => { vote(selectedAnswer) }} className={firstAnswer || secondAnswer ? 'question__submit-button question__active-button' : 'question__submit-button'} disabled={!firstAnswer && !secondAnswer}>
               {Constants.CONFIRM_BUTTON}
-            </button>
-          </div>)
+            </button>  
+          </div></>)
         )}
     </div>
   )

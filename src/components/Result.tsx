@@ -14,6 +14,7 @@ const Result = () => {
             questionNumber: 0,
             questionText: '',
             answers: [],
+            time:0
         },
         firstAnswerRate: 0.0,
         secondAnswerRate: 0.0,
