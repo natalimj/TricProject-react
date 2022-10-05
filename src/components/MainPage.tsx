@@ -1,21 +1,21 @@
+import React from 'react';
 import WebSocketComponent from "./WebSocketComponent";
-import './MainPage.css';
+import '../style/MainPage.css';
 import Question from "./Question";
 import Result from "./Result";
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { RootState } from '../app/store';
 import {
-  setComponent
+  setQuestionComponent
 } from '../reducers/componentSlice';
-import React from "react";
 
 const MainPage = () => {
 
   const dispatch = useAppDispatch();
-  const showQuestion: boolean = useAppSelector((state: RootState) => state.component.value);
+  const showQuestion: boolean = useAppSelector((state: RootState) => state.component.questionComponentValue);
 
   const onMessageReceived = () => {
-    dispatch(setComponent(false))
+    dispatch(setQuestionComponent(false))
   }
 
   return (

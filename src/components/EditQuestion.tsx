@@ -20,10 +20,10 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-        if(value === ""){
-            event.target.style.border= "4px solid var(--color-pink)";
+        if (value === "") {
+            event.target.style.border = "4px solid var(--color-pink)";
         } else {
-            event.target.style.border ="none"
+            event.target.style.border = "none"
         }
         setFormValue((prevState) => {
             return {
@@ -56,7 +56,6 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                 });
         } else {
             console.log("empty field alert")
-            
         }
     }
 
@@ -83,18 +82,18 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                     </div>
                     <div className="questions_icon" onClick={() => editQuestion(question.questionId)} ><AiOutlineSave size={30} /></div>
                 </div>
-                    <div className="questions_line"><div className="questions_input">
+                <div className="questions_line"><div className="questions_input">
                     <input type="text"
                         className="questions_text"
                         onChange={handleChange}
                         defaultValue={question.answers[1].answerText}
                         name="secondAnswer" />
-                    </div>
+                </div>
                     <div className="questions_icon" onClick={() => deleteQuestion(question.questionId)}><AiOutlineDelete size={30} /></div>
                 </div>
             </div>
         </div>
-        
+
     )
 }
 

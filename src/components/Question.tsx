@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './Question.css';
+import '../style/Question.css';
 import Constants from '../util/Constants';
 import UserApi from '../api/UserApi';
 import IQuestionData from '../models/Question';

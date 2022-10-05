@@ -15,6 +15,7 @@ const Constants = {
 	QUESTION_FIELD:	"Question",
 	RESULT_FIELD: "Vote Result",
 	CONFIRM_BUTTON: "Confirm",
+	WAITING_PROMPT: "Please wait...",
 	DOWNLOAD :"DOWNLOAD",
 	FINAL_RESULT_FIELD: "YOUR DIGITAL PROFILE" ,
 	USER_RESPONSE : "Your response",
@@ -23,7 +24,9 @@ const Constants = {
 	NEXT_BUTTON: "Show Next Question",
 	START_BUTTON: "Start",
 	END_BUTTON: "End Session",
-	ACTIVATE_BUTTON : "Activate"
+	ACTIVATE_BUTTON : "Activate",
+	PAGE_404_MESSAGE: "There's nothing here: 404!",
+	ADMIN_TITLE: "Admin",
 };
 
 export default Constants;

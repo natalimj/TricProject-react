@@ -1,7 +1,5 @@
-import React, { useState, ChangeEvent, useEffect } from "react";
-import './StartPage.css';
-import UserApi from "../api/UserApi";
-import IUserData from '../models/User';
+import React, { useState, useEffect } from "react";
+import '../style/StartPage.css';
 import IQuestionData from '../models/Question';
 import Constants from "../util/Constants";
 import WaitingPage from "./WaitingPage";
@@ -9,121 +7,71 @@ import InactiveHomepage from "./InactiveHomepage";
 import WebSocketComponent from "./WebSocketComponent";
 import MainPage from "./MainPage";
 import { useAppSelector, useAppDispatch } from '../app/hooks';
-import { RootState } from '../app/store';
-import {
-  addUser
-} from '../reducers/userSlice';
 import {
   addQuestion
 } from '../reducers/questionSlice';
 import {
-  setComponent
+  setQuestionComponent
 } from '../reducers/componentSlice';
+import UserLoginPage from "./UserLogin";
+import { RootState } from "../app/store";
 import { setStatus } from "../reducers/statusSlice";
-
-
+import UserApi from "../api/UserApi";
 
 const StartPage = () => {
-  const currentUser: IUserData = {
-    userId: useAppSelector((state: RootState) => state.user.userId),
-    username: useAppSelector((state: RootState) => state.user.username),
-    imagePath: useAppSelector((state: RootState) => state.user.imagePath)
-  }
-  const isActive =useAppSelector((state: RootState) => state.status.isActive);
-  const [user, setUser] = useState<IUserData>(currentUser);
+  const isActive = useAppSelector((state: RootState) => state.status.isActive);
   const [sessionStarted, setSessionStarted] = useState<boolean>(false);
-  const [userSubmitted, setUserSubmitted] = useState<boolean>(false);
+  const userSubmitted = useAppSelector((state: RootState) => state.component.userSubmittedValue);
   const [playStarted, setPlayStarted] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setUser({ ...user, [name]: value });
-  };
-  const saveUser = () => {
-    if (user.username !== '') {
-      UserApi.createUser(user)
-        .then((response: any) => {
-          setUserSubmitted(true);  // hide input field and button - show spinner
-          dispatch(addUser(response.data));
-        })
-        .catch((e: Error) => {
-          console.log(e);
-        });
-    }
-  };
   const onQuestionMessageReceived = (msg: IQuestionData) => {
     dispatch(addQuestion(msg));
-    dispatch(setComponent(true));
+    dispatch(setQuestionComponent(true));
     setPlayStarted(true);
   }
 
   const onStatusMessageReceived = (msg: boolean) => {
-    dispatch(setStatus({isActive:msg}))
+    dispatch(setStatus({ isActive: msg }))
   }
 
   useEffect(() => {
     UserApi.getAppStatus()
-        .then((response: any) => {
-          dispatch(setStatus({isActive:response.data}))
-        })
-        .catch((e: Error) => {
-          console.log(e);
-        });
+      .then((response: any) => {
+        dispatch(setStatus({ isActive: response.data }))
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
   }, [dispatch])
-  
 
-  return (<>
-  
-  {!isActive ? ( <><InactiveHomepage/> <WebSocketComponent topics={['/topic/status']} onMessage={(msg: boolean) => onStatusMessageReceived(msg)} /></>) : (
-    <div className="start-page">
-      <WebSocketComponent topics={['/topic/status']} onMessage={(msg: boolean) => onStatusMessageReceived(msg)} />
-      <WebSocketComponent topics={['/topic/question']} onMessage={(msg: IQuestionData) => onQuestionMessageReceived(msg)} />
-      {isActive && sessionStarted ? (
-        <div className="start-page-user">
-          {isActive && userSubmitted ? (
-            <div className="start-page-question"> {playStarted ? (<MainPage />) : (<WaitingPage />)}</div>
+
+  return (
+    <>
+      {!isActive ? (<><InactiveHomepage /> <WebSocketComponent topics={['/topic/status']} onMessage={(msg: boolean) => onStatusMessageReceived(msg)} /></>) : (
+        <div className="start-page">
+          <WebSocketComponent topics={['/topic/status']} onMessage={(msg: boolean) => onStatusMessageReceived(msg)} />
+          <WebSocketComponent topics={['/topic/question']} onMessage={(msg: IQuestionData) => onQuestionMessageReceived(msg)} />
+          {sessionStarted ? (
+            <div className="start-page-user">
+              {userSubmitted ? (
+                <div className="start-page-question"> {playStarted ? (<MainPage />) : (<WaitingPage />)}</div>
+              ) : (
+                <UserLoginPage />
+              )}
+            </div>
           ) : (
-            <div className="start-page-user__user-form">
-              <div className="start-page-user__header">
-                {currentUser.username === '' ? Constants.CREATE_USER_FIELD : Constants.LOGIN_USER_FIELD}
+            <div className="start-page-landing">
+              <div className="start-page-landing__title">
+                {Constants.APP_TITLE}
               </div>
-              <div className="start-page-user__form-group">
-                <div className="start-page-user__header start-page-user--username">
-                  {Constants.USERNAME_FIELD}
-                  <input
-                    type="text"
-                    className="start-page-user__form-control"
-                    id="username"
-                    required
-                    value={user.username}
-                    onChange={handleInputChange}
-                    name="username"
-                  />
-                </div>
-              </div>
-              <div className="start-page-user__avatar-container">
-                <div>
-                  {Constants.AVATAR_FIELD}
-                </div>
-              </div>
-              <button onClick={saveUser} className="submit-button">
-                {Constants.SUBMIT_BUTTON}
+              <button onClick={() => setSessionStarted(true)} className="submit-button">
+                {Constants.JOIN_BUTTON}
               </button>
             </div>
           )}
         </div>
-      ) : (
-        <div className="start-page-landing">
-          <div className="start-page-landing__title">
-            {Constants.APP_TITLE}
-          </div>
-          <button onClick={() => setSessionStarted(true)} className="submit-button">
-            {Constants.JOIN_BUTTON}
-          </button>
-        </div>
       )}
-    </div>)}
     </>
   );
 }

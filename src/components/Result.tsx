@@ -1,12 +1,12 @@
+import React from 'react';
 import { useEffect, useState } from 'react'
+import '../style/Result.css';
 import IResultData from '../models/Result';
 import AdminApi from '../api/AdminApi';
 import { useAppSelector } from '../app/hooks';
 import { RootState } from '../app/store';
-import '../style/result.css';
 import { BsCircleFill } from "react-icons/bs";
 import Constants from "../util/Constants";
-import React from 'react';
 
 const Result = () => {
     const initialResultState = {
@@ -28,6 +28,7 @@ const Result = () => {
     const questionId = useAppSelector((state: RootState) => state.question.questionId);
     const [result, setResult] = useState<IResultData>(initialResultState);
     const userName = useAppSelector((state: RootState) => state.user.username);
+    const userIcon = useAppSelector((state: RootState) => state.user.imagePath);
     const userAnswer = useAppSelector((state: RootState) => state.answer);
     const [response, setResponse] = useState<boolean>(false);
 
@@ -50,7 +51,10 @@ const Result = () => {
     return (
         <div className='result'>
             <div className="result__inner-container">
-                <div className="result__avatar-container">image here </div>
+                <div className="result__avatar-container">
+                    {userIcon !== '' ? (<img src={require('../util/icons/' + userIcon + '.jpg')} alt="user icon" />)
+                        : (<img src={require('../util/icons/imageMale1.jpg')} alt="user icon" />)}
+                </div>
                 <div className="result__text">{userName}</div>
                 <div className="result__text">{Constants.RESULT_FIELD}</div>
                 <div className="result__question-text">{result?.question.questionText}</div>

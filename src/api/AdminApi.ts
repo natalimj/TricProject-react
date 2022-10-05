@@ -35,30 +35,30 @@ const getAllQuestions = () => {
   return http.get<Array<IQuestionData>>("adminApi/questions");
 };
 
-const addQuestion = (questionText: string, firstAnswer: string, secondAnswer:string) => {
-  return http.post<IQuestionData>("adminApi/addQuestion", {},{
+const addQuestion = (questionText: string, firstAnswer: string, secondAnswer: string) => {
+  return http.post<IQuestionData>("adminApi/addQuestion", {}, {
     params: {
-      questionText:questionText,
+      questionText: questionText,
       firstAnswer: firstAnswer,
-      secondAnswer:secondAnswer
+      secondAnswer: secondAnswer
     }
   }
   )
 };
 
-const deleteQuestion =( questionId: number) =>{
-  return http.delete<number>("adminApi/deleteQuestion",{
+const deleteQuestion = (questionId: number) => {
+  return http.delete<number>("adminApi/deleteQuestion", {
     params: {
       questionId: questionId
     }
-  }) 
+  })
 }
 
-const editQuestion=(questionText:string, firstAnswer: string, secondAnswer:string, questionId:number) =>{
-  return http.patch<IQuestionData>("adminApi/editQuestion",{},{
-    params:{
+const editQuestion = (questionText: string, firstAnswer: string, secondAnswer: string, questionId: number) => {
+  return http.patch<IQuestionData>("adminApi/editQuestion", {}, {
+    params: {
       questionText: questionText,
-      firstAnswer:firstAnswer,
+      firstAnswer: firstAnswer,
       secondAnswer: secondAnswer,
       questionId: questionId
     }
@@ -70,7 +70,7 @@ const AdminApi = {
   endSession,
   showResult,
   getQuestionByNumber,
-  activateApp ,
+  activateApp,
   getAllQuestions,
   addQuestion,
   deleteQuestion,

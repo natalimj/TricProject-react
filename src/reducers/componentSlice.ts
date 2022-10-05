@@ -2,11 +2,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 
 export interface ComponentState {
-    value: boolean;
+    questionComponentValue: boolean;
+    userSubmittedValue: boolean;
 }
 
 const initialState: ComponentState = {
-    value: false
+    questionComponentValue: false,
+    userSubmittedValue: false,
 };
 
 
@@ -14,12 +16,15 @@ export const componentSlice = createSlice({
     name: 'component',
     initialState,
     reducers: {
-        setComponent: (state: ComponentState, action: PayloadAction<boolean>) => {
-            state.value = action.payload.valueOf();
+        setQuestionComponent: (state: ComponentState, action: PayloadAction<boolean>) => {
+            state.questionComponentValue = action.payload;
+        },
+        setUserSubmitted: (state: ComponentState, action: PayloadAction<boolean>) => {
+            state.userSubmittedValue = action.payload;
         },
     },
 });
 
-export const { setComponent } = componentSlice.actions;
+export const { setQuestionComponent, setUserSubmitted } = componentSlice.actions;
 
 export default componentSlice.reducer;
