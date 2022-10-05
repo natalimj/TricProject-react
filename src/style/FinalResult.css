@@ -1,13 +1,13 @@
 @import url("../styles.css");
 
-.finalresult {
+.final-result {
     display: flex;
     justify-content: center;
     height: 100vh;
     width: 100%;
 }
 
-.finalresult__inner-container {
+.final-result__inner-container {
     background-color: var(--color-pink);
     width: 50%;
     flex-direction: column;
@@ -16,7 +16,7 @@
 
 }
 
-.finalresult__user-box {
+.final-result__user-box {
     background-color: var(--color-dark-grey);
     height: 25vh;
     width: 95%;
@@ -25,7 +25,7 @@
     margin-bottom: 3vh;
 }
 
-.finalresult__result-box {
+.final-result__result-box {
     background-color: var(--color-dark-grey);
     height: 57vh;
     width: 95%;
@@ -35,7 +35,7 @@
     color: var(--color-off-white);
 }
 
-.finalresult__avatar-container {
+.final-result__avatar-container {
     background-color: var(--color-off-white);
     width: 30%;
     color: var(--color-dark-grey);
@@ -43,11 +43,11 @@
     height: 100%;
 }
 
-.finalresult__avatar-container img {
+.final-result__avatar-container img {
     width: 100%;
 }
 
-.finalresult__text-container {
+.final-result__text-container {
     color: var(--color-off-white);
     width: 70%;
     display: flex;
@@ -56,12 +56,12 @@
     overflow: hidden;
 }
 
-.finalresult__result-box>div:nth-of-type(1) {
+.final-result__result-box>div:nth-of-type(1) {
     margin-top: 2vh;
     margin-bottom: 2vh;
 }
 
-.finalresult__slider {
+.final-result__slider {
     height: 40px;
     color: var(--color-dark-grey);
     display: flex;
@@ -71,32 +71,32 @@
     margin-bottom: 2vh;
 }
 
-.finalresult__first-answer {
+.final-result__first-answer {
     background-color: var(--color-pink);
     height: 4vh;
     font-weight: bold;
 }
 
-.finalresult__second-answer {
+.final-result__second-answer {
     background-color: var(--color-off-white);
     height: 4vh;
     font-weight: bold;
 }
 
-.pink-background {
+.final-result__pink-background {
     background-color: var(--color-pink);
     padding-top: 2%;
     padding-bottom: 2%;
 }
 
-.finalresult__download {
+.final-result__download {
     background-color: var(--color-pink);
     color: var(--color-dark-grey);
     font-size: var(--font-size-larger);
     margin-top: 2%;
 }
 
-.finalresult__title {
+.final-result__title {
     display: flex;
     justify-content: space-between;
     padding: 5px;
@@ -104,34 +104,34 @@
     margin: auto;
 }
 
-.finalresult__answer-text {
+.final-result__answer-text {
     margin-bottom: 10px;
 }
 
 @media (max-width: 800px) {
-    .finalresult__inner-container {
+    .final-result__inner-container {
         width: 90%;
     }
 
-    .finalresult__avatar-container {
+    .final-result__avatar-container {
         width: 40%;
     }
 
-    .finalresult__text-container {
+    .final-result__text-container {
         width: 60%;
     }
 }
 
 @media (max-width: 1400px) and (min-width: 801px) {
-    .finalresult__inner-container {
+    .final-result__inner-container {
         width: 70%;
     }
 
-    .finalresult__avatar-container {
+    .final-result__avatar-container {
         width: 35%;
     }
 
-    .finalresult__text-container {
+    .final-result__text-container {
         width: 65%;
     }
 }

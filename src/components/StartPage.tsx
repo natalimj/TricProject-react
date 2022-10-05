@@ -1,22 +1,18 @@
 import React, { useState, useEffect } from "react";
 import '../style/StartPage.css';
+import UserApi from "../api/UserApi";
 import IQuestionData from '../models/Question';
 import Constants from "../util/Constants";
 import WaitingPage from "./WaitingPage";
 import InactiveHomepage from "./InactiveHomepage";
 import WebSocketComponent from "./WebSocketComponent";
 import MainPage from "./MainPage";
-import { useAppSelector, useAppDispatch } from '../app/hooks';
-import {
-  addQuestion
-} from '../reducers/questionSlice';
-import {
-  setQuestionComponent
-} from '../reducers/componentSlice';
 import UserLoginPage from "./UserLogin";
+import { useAppSelector, useAppDispatch } from '../app/hooks';
+import { addQuestion } from '../reducers/questionSlice';
+import { setQuestionComponent } from '../reducers/componentSlice';
 import { RootState } from "../app/store";
 import { setStatus } from "../reducers/statusSlice";
-import UserApi from "../api/UserApi";
 
 const StartPage = () => {
   const isActive = useAppSelector((state: RootState) => state.status.isActive);
@@ -44,7 +40,6 @@ const StartPage = () => {
         console.log(e);
       });
   }, [dispatch])
-
 
   return (
     <>

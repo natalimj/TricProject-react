@@ -13,7 +13,6 @@ import WebSocketComponent from './WebSocketComponent';
 import FinalResult from './FinalResult';
 
 const Question = () => {
-
   const dispatch = useAppDispatch();
   const [submitted, setSubmitted] = useState<boolean>(false);
   const userId = useAppSelector((state: RootState) => state.user.userId);

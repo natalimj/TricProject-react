@@ -24,7 +24,6 @@ const Result = () => {
             answerText: ""
         }
     };
-
     const questionId = useAppSelector((state: RootState) => state.question.questionId);
     const [result, setResult] = useState<IResultData>(initialResultState);
     const userName = useAppSelector((state: RootState) => state.user.username);
@@ -46,7 +45,6 @@ const Result = () => {
                 console.log(e);
             });
     }, [questionId, userAnswer.answerText]);
-
 
     return (
         <div className='result'>
@@ -71,7 +69,6 @@ const Result = () => {
                     </div>
                     <div style={response ? { color: "#FFADCB" } : { color: "#E1E1DA" }} className="result__user-answer"><BsCircleFill />{Constants.USER_RESPONSE}</div>
                 </div>
-
             </div>
         </div>
     )

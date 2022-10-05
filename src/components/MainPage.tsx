@@ -5,9 +5,7 @@ import Question from "./Question";
 import Result from "./Result";
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { RootState } from '../app/store';
-import {
-  setQuestionComponent
-} from '../reducers/componentSlice';
+import { setQuestionComponent } from '../reducers/componentSlice';
 
 const MainPage = () => {
 
@@ -25,8 +23,7 @@ const MainPage = () => {
         <div className="main-page-question"><Question /></div>
       ) : (
         <div className="main-page-result"><Result /></div>
-      )
-      }
+      )}
     </div>
   );
 }
