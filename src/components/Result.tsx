@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react'
-import './Result.css';
+import '../style/Result.css';
 import IResultData from '../models/Result';
 import AdminApi from '../api/AdminApi';
 import { useAppSelector } from '../app/hooks';
