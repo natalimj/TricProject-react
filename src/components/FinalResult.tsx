@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import '../style/finalResult.css';
+import '../style/FinalResult.css';
 import Constants from '../util/Constants';
 import UserApi from '../api/UserApi';
 import { useAppSelector } from '../app/hooks';

@@ -6,6 +6,7 @@ import FinalResult from "../models/FinalResult";
 const getAllUsers = () => {
     return http.get<Array<IUserData>>("userApi/users");
 };
+
 const createUser = (data: IUserData) => {
     return http.post<IUserData>("userApi/user", data);
 };
@@ -14,20 +15,17 @@ const saveVote = (data: IVoteData) => {
     return http.post<IVoteData>("userApi/vote", data);
 };
 
-
-
-const getAppStatus =() =>{
+const getAppStatus = () => {
     return http.get<boolean>("userApi/getAppStatus");
 }
 
-const getFinalResult= (userId:any) => {
-    return http.get<Array<FinalResult>>("userApi/finalResult" ,{
+const getFinalResult = (userId: any) => {
+    return http.get<Array<FinalResult>>("userApi/finalResult", {
         params: {
             userId: userId
         }
-      })
+    })
 };
-
 
 const UserApi = {
     getAllUsers,

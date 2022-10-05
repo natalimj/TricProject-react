@@ -1,5 +1,5 @@
-import React, { useState, ChangeEvent, useEffect } from "react";
-import './StartPage.css';
+import React, { useState, useEffect } from "react";
+import '../style/StartPage.css';
 import IQuestionData from '../models/Question';
 import Constants from "../util/Constants";
 import WaitingPage from "./WaitingPage";
@@ -13,7 +13,7 @@ import {
 import {
   setQuestionComponent
 } from '../reducers/componentSlice';
-import UserLoginPage from "./UserLoginPage";
+import UserLoginPage from "./UserLogin";
 import { RootState } from "../app/store";
 import { setStatus } from "../reducers/statusSlice";
 import UserApi from "../api/UserApi";
@@ -46,31 +46,33 @@ const StartPage = () => {
   }, [dispatch])
 
 
-  return (<>
-    {!isActive ? (<><InactiveHomepage /> <WebSocketComponent topics={['/topic/status']} onMessage={(msg: boolean) => onStatusMessageReceived(msg)} /></>) : (
-      <div className="start-page">
-        <WebSocketComponent topics={['/topic/status']} onMessage={(msg: boolean) => onStatusMessageReceived(msg)} />
-        <WebSocketComponent topics={['/topic/question']} onMessage={(msg: IQuestionData) => onQuestionMessageReceived(msg)} />
-        {isActive && sessionStarted ? (
-          <div className="start-page-user">
-            {isActive && userSubmitted ? (
-              <div className="start-page-question"> {playStarted ? (<MainPage />) : (<WaitingPage />)}</div>
-            ) : (
-              <UserLoginPage />
-            )}
-          </div>
-        ) : (
-          <div className="start-page-landing">
-            <div className="start-page-landing__title">
-              {Constants.APP_TITLE}
+  return (
+    <>
+      {!isActive ? (<><InactiveHomepage /> <WebSocketComponent topics={['/topic/status']} onMessage={(msg: boolean) => onStatusMessageReceived(msg)} /></>) : (
+        <div className="start-page">
+          <WebSocketComponent topics={['/topic/status']} onMessage={(msg: boolean) => onStatusMessageReceived(msg)} />
+          <WebSocketComponent topics={['/topic/question']} onMessage={(msg: IQuestionData) => onQuestionMessageReceived(msg)} />
+          {sessionStarted ? (
+            <div className="start-page-user">
+              {userSubmitted ? (
+                <div className="start-page-question"> {playStarted ? (<MainPage />) : (<WaitingPage />)}</div>
+              ) : (
+                <UserLoginPage />
+              )}
             </div>
-            <button onClick={() => setSessionStarted(true)} className="submit-button">
-              {Constants.JOIN_BUTTON}
-            </button>
-          </div>
-        )}
-      </div>)}
-  </>
+          ) : (
+            <div className="start-page-landing">
+              <div className="start-page-landing__title">
+                {Constants.APP_TITLE}
+              </div>
+              <button onClick={() => setSessionStarted(true)} className="submit-button">
+                {Constants.JOIN_BUTTON}
+              </button>
+            </div>
+          )}
+        </div>
+      )}
+    </>
   );
 }
 export default StartPage

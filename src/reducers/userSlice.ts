@@ -17,9 +17,14 @@ export const userSlice = createSlice({
             state.username = action.payload.username;
             state.imagePath = action.payload.imagePath;
         },
+        removeUser: (state: IUserData) => {
+            state.userId = '';
+            state.username = '';
+            state.imagePath = '';
+        },
     },
 });
 
-export const { addUser } = userSlice.actions;
+export const { addUser, removeUser } = userSlice.actions;
 
 export default userSlice.reducer;

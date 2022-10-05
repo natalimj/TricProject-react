@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent } from 'react';
-import './UserLoginPage.css'
+import '../style/UserLogin.css'
 import UserApi from '../api/UserApi';
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { RootState } from '../app/store';
@@ -89,7 +89,7 @@ const UserLoginPage = () => {
 
                     {(currentListIndex < (imageList.length - 1)) ?
                         (<div className='user-form__avatar-selector-item'>
-                            <div className='user-form--user-arrow'  onClick={goRight}><FaArrowRight size={30} /></div></div>)
+                            <div className='user-form--user-arrow' onClick={goRight}><FaArrowRight size={30} /></div></div>)
                         : <div className='user-form__avatar-selector-item'></div>}
                 </div>
             </div>

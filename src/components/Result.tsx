@@ -3,7 +3,7 @@ import IResultData from '../models/Result';
 import AdminApi from '../api/AdminApi';
 import { useAppSelector } from '../app/hooks';
 import { RootState } from '../app/store';
-import '../style/result.css';
+import '../style/Result.css';
 import { BsCircleFill } from "react-icons/bs";
 import Constants from "../util/Constants";
 import React from 'react';
@@ -52,7 +52,8 @@ const Result = () => {
         <div className='result'>
             <div className="result__inner-container">
                 <div className="result__avatar-container">
-                    <img src={require('../util/icons/' + userIcon + '.jpg')} alt="user icon" />
+                    {userIcon !== '' ? (<img src={require('../util/icons/' + userIcon + '.jpg')} alt="user icon" />)
+                        : (<img src={require('../util/icons/imageMale1.jpg')} alt="user icon" />)}
                 </div>
                 <div className="result__text">{userName}</div>
                 <div className="result__text">{Constants.RESULT_FIELD}</div>

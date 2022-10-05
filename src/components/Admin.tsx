@@ -1,15 +1,16 @@
 import React from 'react';
 import { useState } from 'react'
+import WebSocketComponent from './WebSocketComponent';
 import AdminApi from '../api/AdminApi';
 import IQuestionData from '../models/Question';
-import WebSocketComponent from './WebSocketComponent';
+import Constants from '../util/Constants';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { setStatus } from '../reducers/statusSlice';
 import { RootState } from '../app/store';
-import Constants from '../util/Constants';
+import { setUserSubmitted, setQuestionComponent } from '../reducers/componentSlice';
+import { removeUser } from '../reducers/userSlice';
 
 const Admin = () => {
-
   const initialQuestionState = {
     id: null,
     questionNumber: 0,
@@ -23,7 +24,6 @@ const Admin = () => {
   const [numberOfUsers, setNumberOfUsers] = useState<number>(0);
   const [question, setQuestion] = useState<IQuestionData>(initialQuestionState);
   const isActive = useAppSelector((state: RootState) => state.status.isActive);
-
   const dispatch = useAppDispatch();
 
   const startSession = () => {
@@ -60,22 +60,21 @@ const Admin = () => {
     setShowResultNo(true);
   };
 
-
   const endSession = () => {
     //delete all users and user answers + deactivate the app status
-
+    dispatch(setStatus({ isActive: false }));
+    dispatch(setUserSubmitted(false));
+    dispatch(setQuestionComponent(false));
+    dispatch(removeUser());
+    setShowResultNo(false);
     AdminApi.endSession()
       .then((response: any) => {
         console.log(response.data);
-        dispatch(setStatus({ isActive: false }))
       })
       .catch((e: Error) => {
         console.log(e);
       });
-
-    setShowResultNo(false);
   };
-
 
   const showFinalResult = () => {
     AdminApi.showFinalResult()
@@ -85,7 +84,6 @@ const Admin = () => {
       .catch((e: Error) => {
         console.log(e);
       });
-
   };
 
   let onQuestionReceived = (msg: IQuestionData) => {
@@ -108,45 +106,49 @@ const Admin = () => {
         console.log(e);
       });
   };
+
   return (
-    <div>Admin
-      <br />
-      <button onClick={activateApp} className="btn btn-success">
-        {Constants.ACTIVATE_BUTTON}
-      </button>
-      <br />
-      {isActive &&
-        <div>
-          <button onClick={startSession} className="btn btn-success">
-            {Constants.START_BUTTON}
+    <div>
+      {Constants.ADMIN_TITLE}
+      {!isActive ?
+        (
+          <button onClick={activateApp} className="btn btn-success">
+            {Constants.ACTIVATE_BUTTON}
           </button>
-
+        )
+        : (
           <div>
-            <WebSocketComponent topics={['/topic/question']} onMessage={(msg: IQuestionData) => onQuestionReceived(msg)} />
-            <WebSocketComponent topics={['/topic/message']} onMessage={(msg2: number) => onMessageReceived(msg2)} />
-            <p>online users: {numberOfUsers}</p>
-
-            {showQuestionNo && <div><p>Question {questionNo} is on screen....</p><button onClick={() => showResult(question.questionId)} className="btn btn-success">
-              {Constants.RESULT_BUTTON}
-            </button>
-          </div>}
-
-            {showResultNo && <div>
-            <p>Result {questionNo} is on screen....</p>
-            <button onClick={() => showNextQuestion(questionNo)} className="btn btn-success">
-            {Constants.NEXT_BUTTON}
-            </button> </div>}
-
-            <button onClick={showFinalResult} className="btn btn-success">
-              {Constants.FINAL_RESULT_BUTTON}
+            <button onClick={startSession} className="btn btn-success">
+              {Constants.START_BUTTON}
             </button>
 
-            <button onClick={endSession} className="btn btn-success">
-              {Constants.END_BUTTON}
-            </button>
+            <div>
+              <WebSocketComponent topics={['/topic/question']} onMessage={(msg: IQuestionData) => onQuestionReceived(msg)} />
+              <WebSocketComponent topics={['/topic/message']} onMessage={(msg2: number) => onMessageReceived(msg2)} />
+              <p>online users: {numberOfUsers}</p>
 
+              {showQuestionNo && <div><p>Question {questionNo} is on screen....</p><button onClick={() => showResult(question.questionId)} className="btn btn-success">
+                {Constants.RESULT_BUTTON}
+              </button>
+              </div>}
+
+              {showResultNo && <div>
+                <p>Result {questionNo} is on screen....</p>
+                <button onClick={() => showNextQuestion(questionNo)} className="btn btn-success">
+                  {Constants.NEXT_BUTTON}
+                </button> </div>}
+
+              <button onClick={showFinalResult} className="btn btn-success">
+                {Constants.FINAL_RESULT_BUTTON}
+              </button>
+
+              <button onClick={endSession} className="btn btn-success">
+                {Constants.END_BUTTON}
+              </button>
+
+            </div>
           </div>
-        </div>}
+        )}
     </div>
   )
 }

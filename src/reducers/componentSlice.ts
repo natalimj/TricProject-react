@@ -17,7 +17,7 @@ export const componentSlice = createSlice({
     initialState,
     reducers: {
         setQuestionComponent: (state: ComponentState, action: PayloadAction<boolean>) => {
-            state.questionComponentValue = action.payload.valueOf();
+            state.questionComponentValue = action.payload;
         },
         setUserSubmitted: (state: ComponentState, action: PayloadAction<boolean>) => {
             state.userSubmittedValue = action.payload;

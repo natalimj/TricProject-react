@@ -13,7 +13,7 @@
 }
 
 .submit-button {
-    max-width: 200px;
+    max-width: 150px;
     background: none;
     background-color: var(--color-pink);
     color: var(--color-black);
@@ -29,5 +29,11 @@
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+}
+
+@media screen and (max-height: 650px) {
+    .submit-button{
+        padding: 5px 5px;
+    }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import WebSocketComponent from "./WebSocketComponent";
-import './MainPage.css';
+import '../style/MainPage.css';
 import Question from "./Question";
 import Result from "./Result";
 import { useAppSelector, useAppDispatch } from '../app/hooks';
@@ -8,7 +8,6 @@ import { RootState } from '../app/store';
 import {
   setQuestionComponent
 } from '../reducers/componentSlice';
-import React from "react";
 
 const MainPage = () => {
 
