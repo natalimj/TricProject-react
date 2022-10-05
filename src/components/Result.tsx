@@ -1,12 +1,12 @@
+import React from 'react';
 import { useEffect, useState } from 'react'
+import './Result.css';
 import IResultData from '../models/Result';
 import AdminApi from '../api/AdminApi';
 import { useAppSelector } from '../app/hooks';
 import { RootState } from '../app/store';
-import '../style/Result.css';
 import { BsCircleFill } from "react-icons/bs";
 import Constants from "../util/Constants";
-import React from 'react';
 
 const Result = () => {
     const initialResultState = {
