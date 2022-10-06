@@ -136,7 +136,7 @@ const Admin = () => {
         showFinalResult()
       }
     }
-  }, [timer]);
+  }, [numberOfQuestions, question.questionId, question.questionNumber, showResult, timer]);
 
 
   useEffect(() => {
