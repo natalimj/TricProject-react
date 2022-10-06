@@ -84,6 +84,7 @@ const Admin = () => {
       .then((response: any) => {
         console.log(response.data);
         dispatch(setStatus({ isActive: true }))
+        getQuestion(1)
       })
       .catch((e: Error) => {
         console.log(e);
@@ -98,6 +99,7 @@ const Admin = () => {
         if (numberOfQuestions === question.questionNumber) {
           setShowFinalButtons(true)
         }
+
       })
       .catch((e: Error) => {
         console.log(e);
@@ -116,17 +118,17 @@ const Admin = () => {
   }
 
   useEffect(() => {
-    if(timer > 0){
+    if (timer > 0) {
       setTimeout(() => {
-        setTimer(timer =>timer-1)
+        setTimer(timer => timer - 1)
       }, 1000);
-    } else if(timer === 0){
-      if(question.questionNumber !== numberOfQuestions){
+    } else if (timer === 0) {
+      if (question.questionNumber !== numberOfQuestions) {
         showResult(question.questionId)
       } else {
         showFinalResult()
       }
-    } 
+    }
   }, [timer]);
 
 
@@ -155,13 +157,11 @@ const Admin = () => {
           <div>
             <WebSocketComponent topics={['/topic/message']} onMessage={(msg: number) => onMessageReceived(msg)} />
             <p>online users: {numberOfUsers}</p>
-
             {!showQuestionButton && <div><p>Question {question.questionNumber} is on screen....</p> <p> {timer} seconds remaining</p>
               {!showFinalButtons && <button onClick={() => showResult(question.questionId)} className="btn btn-success">
                 Show Result {question.questionNumber}
               </button>}
             </div>}
-
             {showQuestionButton && question.questionNumber !== 1 && <p>Result {question.questionNumber - 1} is on screen....</p>}
             {showQuestionButton && <div>
               <label>Time for {question.questionNumber}: </label><input type="text"
@@ -171,16 +171,14 @@ const Admin = () => {
               <button onClick={() => showQuestion()} className="btn btn-success">
                 Show Question {question.questionNumber}
               </button> </div>}
-
-            {showFinalButtons && <div>
+            {showFinalButtons &&
+              <div> 
               <button onClick={showFinalResult} className="btn btn-success">
                 {Constants.FINAL_RESULT_BUTTON}
               </button>
               <button onClick={endSession} className="btn btn-success">
                 {Constants.END_BUTTON}
-              </button>
-            </div>}
-
+              </button> </div>}
           </div>
         </div>}
     </div>

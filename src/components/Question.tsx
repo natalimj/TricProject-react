@@ -68,7 +68,7 @@ const Question = () => {
       setTimeout(() => {
         setTimer(timer =>timer-1)
       }, 1000);
-    }  
+    } 
   }, [timer]);
 
   
