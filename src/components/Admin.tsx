@@ -29,8 +29,9 @@ const Admin = () => {
 
   const dispatch = useAppDispatch();
 
-  const showResult = (questionId: any) => {
-    AdminApi.showResult(questionId)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const showResult = () => {
+    AdminApi.showResult(question.questionId)
       .then((response: any) => {
         getQuestion(response.data.question.questionNumber + 1)
       })
@@ -124,6 +125,8 @@ const Admin = () => {
     }
   }
 
+
+ 
   useEffect(() => {
     if (timer > 0) {
       setTimeout(() => {
@@ -131,12 +134,14 @@ const Admin = () => {
       }, 1000);
     } else if (timer === 0) {
       if (question.questionNumber !== numberOfQuestions) {
-        showResult(question.questionId)
+        showResult();
       } else {
         showFinalResult()
       }
     }
-  }, [numberOfQuestions, question.questionId, question.questionNumber, showResult, timer]);
+  }, [numberOfQuestions, question.questionNumber, showResult, timer]);
+
+
 
 
   useEffect(() => {
@@ -165,7 +170,7 @@ const Admin = () => {
             <WebSocketComponent topics={['/topic/message']} onMessage={(msg: number) => onMessageReceived(msg)} />
             <p>online users: {numberOfUsers}</p>
             {!showQuestionButton && <div><p>Question {question.questionNumber} is on screen....</p> <p> {timer} seconds remaining</p>
-              {!showFinalButtons && <button onClick={() => showResult(question.questionId)} className="btn btn-success">
+              {!showFinalButtons && <button onClick={() => showResult()} className="btn btn-success">
                 Show Result {question.questionNumber}
               </button>}
             </div>}
