@@ -107,14 +107,21 @@ const Admin = () => {
   }
 
   function handleTimeChange(e: React.FormEvent<HTMLInputElement>) {
-    let time = parseInt(e.currentTarget.value)
-    AdminApi.addQuestionTime(question.questionId, time)
+    e.preventDefault()
+    let time :number ;
+    if(e.currentTarget.value !== ""){
+      time = parseInt(e.currentTarget.value)
+
+      AdminApi.addQuestionTime(question.questionId, time)
       .then((response: any) => {
         setQuestion(response.data)
       })
       .catch((e: Error) => {
         console.log(e);
       });
+    }   else {
+      setQuestion({...question,time : NaN})
+    }
   }
 
   useEffect(() => {
@@ -166,8 +173,8 @@ const Admin = () => {
             {showQuestionButton && <div>
               <label>Time for {question.questionNumber}: </label><input type="text"
                 name="time"
-                value={question.time}
-                onChange={handleTimeChange} />
+                value={question.time || ''}
+                onChange={(e)=>handleTimeChange(e)} />
               <button onClick={() => showQuestion()} className="btn btn-success">
                 Show Question {question.questionNumber}
               </button> </div>}
