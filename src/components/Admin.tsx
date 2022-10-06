@@ -29,7 +29,6 @@ const Admin = () => {
 
   const dispatch = useAppDispatch();
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const showResult = () => {
     AdminApi.showResult(question.questionId)
       .then((response: any) => {
@@ -139,7 +138,8 @@ const Admin = () => {
         showFinalResult()
       }
     }
-  }, [numberOfQuestions, question.questionNumber, showResult, timer]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ timer]);
 
 
 
