@@ -27,6 +27,14 @@ const getQuestionByNumber = (questionNumber: number) => {
   })
 };
 
+const showQuestion = (questionNumber: number) => {
+  return http.get<IQuestionData>("adminApi/showQuestion", {
+    params: {
+      questionNumber: questionNumber
+    }
+  })
+};
+
 const activateApp = () => {
   return http.post<IStatusData>("adminApi/activate");
 };
@@ -46,8 +54,18 @@ const addQuestion = (questionText: string, firstAnswer: string, secondAnswer: st
   )
 };
 
-const deleteQuestion = (questionId: number) => {
-  return http.delete<number>("adminApi/deleteQuestion", {
+const addQuestionTime = (questionId :any, time: number) => {
+  return http.post<IQuestionData>("adminApi/addQuestionTime", {},{
+    params: {
+      questionId: questionId,
+      time: time,
+    }
+  }
+  )
+};
+
+const deleteQuestion =( questionId: number) =>{
+  return http.delete<number>("adminApi/deleteQuestion",{
     params: {
       questionId: questionId
     }
@@ -66,6 +84,11 @@ const editQuestion = (questionText: string, firstAnswer: string, secondAnswer: s
   )
 }
 
+const getNumberOfQuestions = () => {
+  return http.get<number>("adminApi/numberOfQuestions");
+};
+
+
 const AdminApi = {
   endSession,
   showResult,
@@ -75,6 +98,9 @@ const AdminApi = {
   addQuestion,
   deleteQuestion,
   editQuestion,
-  showFinalResult
+  showFinalResult,
+  addQuestionTime,
+  showQuestion,
+  getNumberOfQuestions
 };
 export default AdminApi;

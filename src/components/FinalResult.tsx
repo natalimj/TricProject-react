@@ -41,7 +41,7 @@ const FinalResult = () => {
             <div className="final-result__text-container">
               <span>{currentUser.username}</span>
               <span>{today}</span>
-              <span>Location??</span>
+              <span>HumanLab</span>
             </div>
           </div>
           <div className="final-result__result-box"><div>{Constants.FINAL_RESULT_FIELD}</div>
