@@ -14,6 +14,7 @@ const Result = () => {
             questionNumber: 0,
             questionText: '',
             answers: [],
+            time:0
         },
         firstAnswerRate: 0.0,
         secondAnswerRate: 0.0,
@@ -26,6 +27,7 @@ const Result = () => {
     };
 
     const questionId = useAppSelector((state: RootState) => state.question.questionId);
+    const questionNumber = useAppSelector((state: RootState) => state.question.questionNumber);
     const [result, setResult] = useState<IResultData>(initialResultState);
     const userName = useAppSelector((state: RootState) => state.user.username);
     const userIcon = useAppSelector((state: RootState) => state.user.imagePath);
@@ -56,7 +58,7 @@ const Result = () => {
                         : (<img src={require('../util/icons/imageMale1.jpg')} alt="user icon" />)}
                 </div>
                 <div className="result__text">{userName}</div>
-                <div className="result__text">{Constants.RESULT_FIELD}</div>
+                <div className="result__text"> {Constants.QUESTION_FIELD} {questionNumber} - {Constants.RESULT_FIELD}</div>
                 <div className="result__question-text">{result?.question.questionText}</div>
                 <div className="result__box">
                     <div className="result__title">

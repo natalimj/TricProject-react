@@ -5,4 +5,5 @@ export default interface IQuestionData {
     questionNumber : number;
     questionText: string;
     answers : IAnswerData[];
+    time : number;
   }

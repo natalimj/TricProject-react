@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react'
 import WebSocketComponent from './WebSocketComponent';
 import AdminApi from '../api/AdminApi';
@@ -15,58 +15,46 @@ const Admin = () => {
     id: null,
     questionNumber: 0,
     questionText: "",
-    answers: []
+    answers: [],
+    time: 30
   };
 
-  const [showQuestionNo, setShowQuestionNo] = useState<boolean>(false);
-  const [showResultNo, setShowResultNo] = useState<boolean>(false);
-  const [questionNo, setQuestionNo] = useState<number>(0);
-  const [numberOfUsers, setNumberOfUsers] = useState<number>(0);
-  const [question, setQuestion] = useState<IQuestionData>(initialQuestionState);
   const isActive = useAppSelector((state: RootState) => state.status.isActive);
+  const [numberOfUsers, setNumberOfUsers] = useState<number>(0);
+  const [numberOfQuestions, setNumberOfQuestions] = useState<number>(0);
+  const [question, setQuestion] = useState<IQuestionData>(initialQuestionState);
+  const [showQuestionButton, setShowQuestionButton] = useState<boolean>(false);
+  const [showFinalButtons, setShowFinalButtons] = useState<boolean>(false);
+  const [timer, setTimer] = useState<number>(0);
+
   const dispatch = useAppDispatch();
 
-  const startSession = () => {
-    AdminApi.getQuestionByNumber(1).then((response: any) => {
-      console.log(response.data);
-    })
-      .catch((e: Error) => {
-        console.log(e);
-      });
-  };
-
-  const showNextQuestion = (questionNumber: number) => {
-    setQuestionNo(questionNumber + 1);
-    AdminApi.getQuestionByNumber(questionNo + 1)
+  const showResult = () => {
+    AdminApi.showResult(question.questionId)
       .then((response: any) => {
-        console.log(response.data);
+        getQuestion(response.data.question.questionNumber + 1)
       })
       .catch((e: Error) => {
         console.log(e);
       });
-    setShowResultNo(false);
   };
 
-  const showResult = (questionId: any) => {
-    AdminApi.showResult(questionId)
+  const getQuestion = (questionNo: number) => {
+    AdminApi.getQuestionByNumber(questionNo)
       .then((response: any) => {
-        console.log(response.data);
+        setQuestion(response.data)
+        setShowQuestionButton(true)
       })
       .catch((e: Error) => {
         console.log(e);
       });
 
-    setShowQuestionNo(false);
-    setShowResultNo(true);
   };
-
   const endSession = () => {
-    //delete all users and user answers + deactivate the app status
     dispatch(setStatus({ isActive: false }));
     dispatch(setUserSubmitted(false));
     dispatch(setQuestionComponent(false));
     dispatch(removeUser());
-    setShowResultNo(false);
     AdminApi.endSession()
       .then((response: any) => {
         console.log(response.data);
@@ -86,11 +74,6 @@ const Admin = () => {
       });
   };
 
-  let onQuestionReceived = (msg: IQuestionData) => {
-    setQuestionNo(msg.questionId);
-    setShowQuestionNo(true);
-    setQuestion(msg);
-  }
 
   let onMessageReceived = (msg: number) => {
     setNumberOfUsers(msg);
@@ -101,54 +84,115 @@ const Admin = () => {
       .then((response: any) => {
         console.log(response.data);
         dispatch(setStatus({ isActive: true }))
+        getQuestion(1)
       })
       .catch((e: Error) => {
         console.log(e);
       });
   };
 
+  const showQuestion = () => {
+    AdminApi.showQuestion(question.questionNumber)
+      .then((response: any) => {
+        setTimer(question.time)
+        setShowQuestionButton(false)
+        if (numberOfQuestions === question.questionNumber) {
+          setShowFinalButtons(true)
+        }
+
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+  }
+
+  function handleTimeChange(e: React.FormEvent<HTMLInputElement>) {
+    e.preventDefault()
+    let time :number ;
+    if(e.currentTarget.value !== ""){
+      time = parseInt(e.currentTarget.value)
+
+      AdminApi.addQuestionTime(question.questionId, time)
+      .then((response: any) => {
+        setQuestion(response.data)
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+    }   else {
+      setQuestion({...question,time : NaN})
+    }
+  }
+
+
+ 
+  useEffect(() => {
+    if (timer > 0) {
+      setTimeout(() => {
+        setTimer(timer => timer - 1)
+      }, 1000);
+    } else if (timer === 0) {
+      if (question.questionNumber !== numberOfQuestions) {
+        showResult();
+      } else {
+        showFinalResult()
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ timer]);
+
+
+
+
+  useEffect(() => {
+    AdminApi.getNumberOfQuestions()
+      .then((response: any) => {
+        setNumberOfQuestions(response.data)
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+
+    getQuestion(1)
+  }, [numberOfQuestions])
+
+
   return (
-    <div>
-      {Constants.ADMIN_TITLE}
-      {!isActive ?
-        (
-          <button onClick={activateApp} className="btn btn-success">
-            {Constants.ACTIVATE_BUTTON}
-          </button>
-        )
-        : (
+    <div>Admin
+      <br />
+      {!isActive && <button onClick={activateApp} className="btn btn-success">
+        {Constants.ACTIVATE_BUTTON}
+      </button>}
+      <br />
+      {isActive &&
+        <div>
           <div>
-            <button onClick={startSession} className="btn btn-success">
-              {Constants.START_BUTTON}
-            </button>
-
-            <div>
-              <WebSocketComponent topics={['/topic/question']} onMessage={(msg: IQuestionData) => onQuestionReceived(msg)} />
-              <WebSocketComponent topics={['/topic/message']} onMessage={(msg2: number) => onMessageReceived(msg2)} />
-              <p>online users: {numberOfUsers}</p>
-
-              {showQuestionNo && <div><p>Question {questionNo} is on screen....</p><button onClick={() => showResult(question.questionId)} className="btn btn-success">
-                {Constants.RESULT_BUTTON}
-              </button>
-              </div>}
-
-              {showResultNo && <div>
-                <p>Result {questionNo} is on screen....</p>
-                <button onClick={() => showNextQuestion(questionNo)} className="btn btn-success">
-                  {Constants.NEXT_BUTTON}
-                </button> </div>}
-
+            <WebSocketComponent topics={['/topic/message']} onMessage={(msg: number) => onMessageReceived(msg)} />
+            <p>online users: {numberOfUsers}</p>
+            {!showQuestionButton && <div><p>Question {question.questionNumber} is on screen....</p> <p> {timer} seconds remaining</p>
+              {!showFinalButtons && <button onClick={() => showResult()} className="btn btn-success">
+                Show Result {question.questionNumber}
+              </button>}
+            </div>}
+            {showQuestionButton && question.questionNumber !== 1 && <p>Result {question.questionNumber - 1} is on screen....</p>}
+            {showQuestionButton && <div>
+              <label>Time for {question.questionNumber}: </label><input type="text"
+                name="time"
+                value={question.time || ''}
+                onChange={(e)=>handleTimeChange(e)} />
+              <button onClick={() => showQuestion()} className="btn btn-success">
+                Show Question {question.questionNumber}
+              </button> </div>}
+            {showFinalButtons &&
+              <div> 
               <button onClick={showFinalResult} className="btn btn-success">
                 {Constants.FINAL_RESULT_BUTTON}
               </button>
-
               <button onClick={endSession} className="btn btn-success">
                 {Constants.END_BUTTON}
-              </button>
-
-            </div>
+              </button> </div>}
           </div>
-        )}
+        </div>}
     </div>
   )
 }

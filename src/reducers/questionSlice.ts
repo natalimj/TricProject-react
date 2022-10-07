@@ -5,7 +5,8 @@ const initialState: IQuestionData = {
     questionId: '',
     questionNumber: -1,
     questionText: '',
-    answers: []
+    answers: [],
+    time:0
 };
 
 
@@ -18,6 +19,7 @@ export const questionSlice = createSlice({
             state.questionNumber = action.payload.questionNumber;
             state.questionText = action.payload.questionText;
             state.answers = [...action.payload.answers];
+            state.time = action.payload.time;
         },
     },
 });
