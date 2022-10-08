@@ -70,7 +70,9 @@ const Question = () => {
           <>
             <div className='question'>
               <div className='question__timer-text'> {timer} seconds remaining</div>
-              <div className='question__timer'><div className='question__inner-timer' style={{ "width": `${(100 * timer) / (currentQuestion.time)}%` }}></div></div>
+              <div className='question__timer'>
+                <div className='question__inner-timer' style={{ "width": `${(100 * timer) / (currentQuestion.time)}%` }}></div>
+              </div>
               <div className='question__header'>
                 {Constants.QUESTION_FIELD} {currentQuestion.questionNumber}
               </div>

@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import '../style/InactiveHomepage.css';
 import Constants from '../util/Constants';
 import { useAppDispatch } from '../app/hooks';
 import { setQuestionComponent, setUserSubmitted } from '../reducers/componentSlice';
@@ -15,14 +16,14 @@ const InactiveHomepage = () => {
 
 return (
   <div className='innactive-container'>
-    <div>
+    <div className='innactive-container__text'>
       {Constants.NO_ACTIVE_PLAY}
     </div>
-    <div>
+    <div className='innactive-container__text'>
       {Constants.MORE_INFO_TEXT}
     </div>
-    <div>
-      <a href={Constants.MORE_INFO_LINK}>About HumanLab</a>
+    <div className='innactive-container__link'>
+      <a href={Constants.MORE_INFO_LINK} target="_blank">{Constants.HUMANLAB}</a>
     </div>
   </div>
 )
