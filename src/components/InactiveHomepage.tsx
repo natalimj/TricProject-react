@@ -23,7 +23,7 @@ return (
       {Constants.MORE_INFO_TEXT}
     </div>
     <div className='innactive-container__link'>
-      <a href={Constants.MORE_INFO_LINK} target="_blank">{Constants.HUMANLAB}</a>
+      <a href={Constants.MORE_INFO_LINK} target="_blank" rel="noreferrer" >{Constants.HUMANLAB}</a>
     </div>
   </div>
 )

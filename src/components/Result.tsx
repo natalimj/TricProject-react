@@ -26,7 +26,6 @@ const Result = () => {
         }
     };
     const questionId = useAppSelector((state: RootState) => state.question.questionId);
-    const questionNumber = useAppSelector((state: RootState) => state.question.questionNumber);
     const [result, setResult] = useState<IResultData>(initialResultState);
     const userName = useAppSelector((state: RootState) => state.user.username);
     const userIcon = useAppSelector((state: RootState) => state.user.imagePath);
