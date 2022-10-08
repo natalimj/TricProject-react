@@ -9,9 +9,9 @@ import WebSocketComponent from "./WebSocketComponent";
 import MainPage from "./MainPage";
 import UserLoginPage from "./UserLogin";
 import { useAppSelector, useAppDispatch } from '../app/hooks';
+import { RootState } from "../app/store";
 import { addQuestion } from '../reducers/questionSlice';
 import { setQuestionComponent } from '../reducers/componentSlice';
-import { RootState } from "../app/store";
 import { setStatus } from "../reducers/statusSlice";
 
 const StartPage = () => {
@@ -43,7 +43,11 @@ const StartPage = () => {
 
   return (
     <>
-      {!isActive ? (<><InactiveHomepage /> <WebSocketComponent topics={['/topic/status']} onMessage={(msg: boolean) => onStatusMessageReceived(msg)} /></>) : (
+      {!isActive ? (
+        <>
+          <InactiveHomepage />
+          <WebSocketComponent topics={['/topic/status']} onMessage={(msg: boolean) => onStatusMessageReceived(msg)} />
+        </>) : (
         <div className="start-page">
           <WebSocketComponent topics={['/topic/status']} onMessage={(msg: boolean) => onStatusMessageReceived(msg)} />
           <WebSocketComponent topics={['/topic/question']} onMessage={(msg: IQuestionData) => onQuestionMessageReceived(msg)} />

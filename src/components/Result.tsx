@@ -56,7 +56,7 @@ const Result = () => {
                         : (<img src={require('../util/icons/imageMale1.jpg')} alt="user icon" />)}
                 </div>
                 <div className="result__text">{userName}</div>
-                <div className="result__text"> {Constants.QUESTION_FIELD} {questionNumber} - {Constants.RESULT_FIELD}</div>
+                <div className="result__text"> {Constants.QUESTION_FIELD} {questionNumber} - {Constants.VOTE_RESULT_FIELD}</div>
                 <div className="result__question-text">{result?.question.questionText}</div>
                 <div className="result__box">
                     <div className="result__title">

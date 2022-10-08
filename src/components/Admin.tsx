@@ -7,8 +7,6 @@ import Constants from '../util/Constants';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { setStatus } from '../reducers/statusSlice';
 import { RootState } from '../app/store';
-import { setUserSubmitted, setQuestionComponent } from '../reducers/componentSlice';
-import { removeUser } from '../reducers/userSlice';
 
 const Admin = () => {
   const initialQuestionState = {
@@ -24,20 +22,8 @@ const Admin = () => {
   const [numberOfQuestions, setNumberOfQuestions] = useState<number>(0);
   const [question, setQuestion] = useState<IQuestionData>(initialQuestionState);
   const [showQuestionButton, setShowQuestionButton] = useState<boolean>(false);
-  const [showFinalButtons, setShowFinalButtons] = useState<boolean>(false);
   const [timer, setTimer] = useState<number>(0);
-
   const dispatch = useAppDispatch();
-
-  const showResult = () => {
-    AdminApi.showResult(question.questionId)
-      .then((response: any) => {
-        getQuestion(response.data.question.questionNumber + 1)
-      })
-      .catch((e: Error) => {
-        console.log(e);
-      });
-  };
 
   const getQuestion = (questionNo: number) => {
     AdminApi.getQuestionByNumber(questionNo)
@@ -48,34 +34,10 @@ const Admin = () => {
       .catch((e: Error) => {
         console.log(e);
       });
-
   };
-  const endSession = () => {
-    dispatch(setStatus({ isActive: false }));
-    dispatch(setUserSubmitted(false));
-    dispatch(setQuestionComponent(false));
-    dispatch(removeUser());
-    AdminApi.endSession()
-      .then((response: any) => {
-        console.log(response.data);
-      })
-      .catch((e: Error) => {
-        console.log(e);
-      });
-  };
-
-  const showFinalResult = () => {
-    AdminApi.showFinalResult()
-      .then((response: any) => {
-        console.log(response.data);
-      })
-      .catch((e: Error) => {
-        console.log(e);
-      });
-  };
-
 
   let onMessageReceived = (msg: number) => {
+    console.log(msg);
     setNumberOfUsers(msg);
   }
 
@@ -96,36 +58,63 @@ const Admin = () => {
       .then((response: any) => {
         setTimer(question.time)
         setShowQuestionButton(false)
-        if (numberOfQuestions === question.questionNumber) {
-          setShowFinalButtons(true)
-        }
-
       })
       .catch((e: Error) => {
         console.log(e);
       });
   }
 
-  function handleTimeChange(e: React.FormEvent<HTMLInputElement>) {
+  const handleTimeChange = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault()
-    let time :number ;
-    if(e.currentTarget.value !== ""){
+    let time: number;
+    if (e.currentTarget.value !== "") {
       time = parseInt(e.currentTarget.value)
 
       AdminApi.addQuestionTime(question.questionId, time)
+        .then((response: any) => {
+          setQuestion(response.data)
+        })
+        .catch((e: Error) => {
+          console.log(e);
+        });
+    } else {
+      setQuestion({ ...question, time: NaN })
+    }
+  }
+
+  const showResult = () => {
+    AdminApi.showResult(question.questionId)
       .then((response: any) => {
-        setQuestion(response.data)
+        setTimer(-1);
+        getQuestion(response.data.question.questionNumber + 1);
       })
       .catch((e: Error) => {
         console.log(e);
       });
-    }   else {
-      setQuestion({...question,time : NaN})
-    }
-  }
+  };
 
+  const endSession = () => {
+    dispatch(setStatus({ isActive: false }));
+    AdminApi.endSession()
+      .then((response: any) => {
+        console.log(response.data);
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+  };
 
- 
+  const showFinalResult = () => {
+    AdminApi.showFinalResult()
+      .then((response: any) => {
+        console.log(response.data);
+        setTimer(0);
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+  };
+
   useEffect(() => {
     if (timer > 0) {
       setTimeout(() => {
@@ -138,11 +127,8 @@ const Admin = () => {
         showFinalResult()
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ timer]);
-
-
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [timer]);
 
   useEffect(() => {
     AdminApi.getNumberOfQuestions()
@@ -152,13 +138,11 @@ const Admin = () => {
       .catch((e: Error) => {
         console.log(e);
       });
-
     getQuestion(1)
   }, [numberOfQuestions])
 
-
   return (
-    <div>Admin
+    <div> {Constants.ADMIN_TITLE}
       <br />
       {!isActive && <button onClick={activateApp} className="btn btn-success">
         {Constants.ACTIVATE_BUTTON}
@@ -168,29 +152,54 @@ const Admin = () => {
         <div>
           <div>
             <WebSocketComponent topics={['/topic/message']} onMessage={(msg: number) => onMessageReceived(msg)} />
-            <p>online users: {numberOfUsers}</p>
-            {!showQuestionButton && <div><p>Question {question.questionNumber} is on screen....</p> <p> {timer} seconds remaining</p>
-              {!showFinalButtons && <button onClick={() => showResult()} className="btn btn-success">
-                Show Result {question.questionNumber}
-              </button>}
-            </div>}
-            {showQuestionButton && question.questionNumber !== 1 && <p>Result {question.questionNumber - 1} is on screen....</p>}
-            {showQuestionButton && <div>
-              <label>Time for {question.questionNumber}: </label><input type="text"
-                name="time"
-                value={question.time || ''}
-                onChange={(e)=>handleTimeChange(e)} />
-              <button onClick={() => showQuestion()} className="btn btn-success">
-                Show Question {question.questionNumber}
-              </button> </div>}
-            {showFinalButtons &&
-              <div> 
-              <button onClick={showFinalResult} className="btn btn-success">
-                {Constants.FINAL_RESULT_BUTTON}
-              </button>
-              <button onClick={endSession} className="btn btn-success">
-                {Constants.END_BUTTON}
-              </button> </div>}
+            <p>{Constants.ONLINE_USERS} {numberOfUsers}</p>
+            {!showQuestionButton ?
+              (<div>
+                {timer > 0 ? (
+                  <>
+                    <p>{Constants.QUESTION_FIELD} {question.questionNumber} {Constants.ON_SCREEN_FIELD}</p>
+                    <p> {timer} {Constants.TIME_REMANING}</p>
+                  </>
+                ) : null}
+                {question.questionNumber < numberOfQuestions ? (
+                  <button onClick={() => showResult()} className="btn btn-success">
+                    {Constants.RESULT_BUTTON} {question.questionNumber}
+                  </button>
+                ) : (
+                  <>
+                    {timer <= 0 ? (
+                      <p>{Constants.RESULT_FIELD} {question.questionNumber} {Constants.ON_SCREEN_FIELD}</p>
+                    ) : (
+                      <div>
+                        <button onClick={showFinalResult} className="btn btn-success">
+                          {Constants.FINAL_RESULT_BUTTON}
+                        </button>
+                      </div>
+                    )}
+                    <div>
+                      <button onClick={endSession} className="btn btn-success">
+                        {Constants.END_BUTTON}
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>) :
+              (<>
+                {question.questionNumber !== 1 ?
+                  (<p>{Constants.RESULT_FIELD} {question.questionNumber - 1} {Constants.ON_SCREEN_FIELD}</p>) : null}
+                <div>
+                  <label>{Constants.TIME_FOR} {question.questionNumber}: </label>
+                  <input type="text"
+                    name="time"
+                    value={question.time || ''}
+                    onChange={(e) => handleTimeChange(e)} />
+                  <button onClick={() => showQuestion()} className="btn btn-success">
+                    {Constants.QUESTION_BUTTON} {question.questionNumber}
+                  </button>
+                </div>
+              </>
+              )
+            }
           </div>
         </div>}
     </div>

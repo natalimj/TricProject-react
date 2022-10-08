@@ -22,7 +22,6 @@ const FinalResult = () => {
   useEffect(() => {
     UserApi.getFinalResult(currentUser.userId)
       .then((response: any) => {
-        console.log(response.data);
         setFinalResults(response.data)
       })
       .catch((e: Error) => {

@@ -9,8 +9,6 @@ import { RootState } from '../app/store';
 import IAnswerData from '../models/Answer';
 import { addAnswer } from '../reducers/answerSlice';
 import React from 'react';
-import WebSocketComponent from './WebSocketComponent';
-import FinalResult from './FinalResult';
 
 const Question = () => {
   const dispatch = useAppDispatch();
@@ -26,7 +24,6 @@ const Question = () => {
   const [selectedAnswer, setSelectedAnswer] = useState<IAnswerData>({ answerText: '' });
   const [firstAnswer, setFirstAnswer] = useState<boolean>(false);
   const [secondAnswer, setSecondAnswer] = useState<boolean>(false);
-  const [showFinalResult, setshowFinalResult] = useState<boolean>(false);
   const [timer, setTimer] = useState<number>(currentQuestion.time);
 
   const vote = (answer: IAnswerData) => {
@@ -38,7 +35,6 @@ const Question = () => {
 
     UserApi.saveVote(voteData)
       .then((response: any) => {
-        console.log(response.data);
         dispatch(addAnswer(answer));
       })
       .catch((e: Error) => {
@@ -58,47 +54,43 @@ const Question = () => {
     }
   }
 
-  const onFinalResultMessageReceived = () => {
-    setshowFinalResult(true);
-  }
-
   useEffect(() => {
-    if(timer > 0){
+    if (timer > 0) {
       setTimeout(() => {
-        setTimer(timer =>timer-1)
+        setTimer(timer => timer - 1)
       }, 1000);
-    } 
+    }
   }, [timer]);
 
-  
+
   return (
     <div className='question-container'>
-      <WebSocketComponent topics={['/topic/finalResult']} onMessage={() => onFinalResultMessageReceived()} />
       {submitted ? ((<WaitingPage />))
-        : (showFinalResult ? (<FinalResult />)
-          : (<>
-          <div className='question'>
-            <div className='question__timer-text'> {timer} seconds remaining</div>
-            <div className='question__timer'><div className='question__inner-timer' style={{"width" : `${(100*timer)/(currentQuestion.time)}%`}}></div></div>
-            <div className='question__header'>
-              {Constants.QUESTION_FIELD} {currentQuestion.questionNumber}
+        : (
+          <>
+            <div className='question'>
+              <div className='question__timer-text'> {timer} seconds remaining</div>
+              <div className='question__timer'><div className='question__inner-timer' style={{ "width": `${(100 * timer) / (currentQuestion.time)}%` }}></div></div>
+              <div className='question__header'>
+                {Constants.QUESTION_FIELD} {currentQuestion.questionNumber}
+              </div>
+              <div className='question__header question__header--text'>
+                {currentQuestion.questionText}
+              </div>
+              <div className='question__answer-group'>
+                {currentQuestion.answers && currentQuestion.answers.map((answer, index) => (
+                  <button onClick={() => chooseAnswer(answer, index)} className={(firstAnswer && index === 0) || (secondAnswer && index === 1) ? 'question__answer-button question__active-button' : 'question__answer-button'}>
+                    <div className="question__answer-text">
+                      {answer.answerText.toString()}
+                    </div>
+                  </button>
+                ))}
+              </div>
+              <button onClick={() => { vote(selectedAnswer) }} className={firstAnswer || secondAnswer ? 'question__submit-button question__active-button' : 'question__submit-button'} disabled={!firstAnswer && !secondAnswer}>
+                {Constants.CONFIRM_BUTTON}
+              </button>
             </div>
-            <div className='question__header question__header--text'>
-              {currentQuestion.questionText}
-            </div>
-            <div className='question__answer-group'>
-              {currentQuestion.answers && currentQuestion.answers.map((answer, index) => (
-                <button onClick={() => chooseAnswer(answer, index)} className={(firstAnswer && index === 0) || (secondAnswer && index === 1) ? 'question__answer-button question__active-button' : 'question__answer-button'}>
-                  <div className="question__answer-text">
-                    {answer.answerText.toString()}
-                  </div>
-                </button>
-              ))}
-            </div>
-            <button onClick={() => { vote(selectedAnswer) }} className={firstAnswer || secondAnswer ? 'question__submit-button question__active-button' : 'question__submit-button'} disabled={!firstAnswer && !secondAnswer}>
-              {Constants.CONFIRM_BUTTON}
-            </button>  
-          </div></>)
+          </>
         )}
     </div>
   )
