@@ -1,12 +1,17 @@
 import React from 'react';
+import '../style/WaitingPage.css';
 import { BeatLoader } from "react-spinners";
 import Constants from '../util/Constants';
 
-function WaitingPage() {
+interface Props {
+  startScreen: boolean;
+}
+
+const WaitingPage: React.FC<Props> = ({startScreen}) => {
   return (
-    <div data-testid="waiting-spinner" style={{ marginTop: "300px" }}>
+    <div data-testid="waiting-spinner" className='waiting-container' style={{ marginTop: "300px" }}>
       <BeatLoader color="#FFADCB" size={100} speedMultiplier={1} />
-      <h5>{Constants.WAITING_PROMPT}</h5>
+      <div className='waiting-container__text'>{startScreen ? Constants.WAITING_PROMPT_BEGIN : Constants.WAITING_PROMPT_RESULT}</div>
     </div>
   )
 }

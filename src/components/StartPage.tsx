@@ -54,7 +54,7 @@ const StartPage = () => {
           {sessionStarted ? (
             <div className="start-page-user">
               {userSubmitted ? (
-                <div className="start-page-question"> {playStarted ? (<MainPage />) : (<WaitingPage />)}</div>
+                <div className="start-page-question"> {playStarted ? (<MainPage />) : (<WaitingPage startScreen={true}/>)}</div>
               ) : (
                 <UserLoginPage />
               )}

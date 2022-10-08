@@ -65,7 +65,7 @@ const Question = () => {
 
   return (
     <div className='question-container'>
-      {submitted ? ((<WaitingPage />))
+      {submitted ? ((<WaitingPage startScreen={false}/>))
         : (
           <>
             <div className='question'>
