@@ -11,6 +11,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./components/login.component";
 import PrivateRoutes from "./components/PrivateRoute";
 import { PersistGate } from "redux-persist/integration/react";
+import 'react-notifications/lib/notifications.css';
+import { NotificationContainer } from 'react-notifications';
 
 
 function App() {
@@ -30,6 +32,7 @@ function App() {
               <Route path="*" element={<Page404 />} />
             </Routes>
           </BrowserRouter>
+          <NotificationContainer />
         </div>
       </PersistGate>
     </Provider>

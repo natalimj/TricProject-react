@@ -7,6 +7,8 @@ import Constants from '../util/Constants';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { setStatus } from '../reducers/statusSlice';
 import { RootState } from '../app/store';
+import 'react-notifications/lib/notifications.css';
+import { NotificationManager } from 'react-notifications';
 
 const Admin = () => {
   const initialQuestionState = {
@@ -32,24 +34,22 @@ const Admin = () => {
         setShowQuestionButton(true)
       })
       .catch((e: Error) => {
-        console.log(e);
+        NotificationManager.error(e.message,'Error!', 5000);
       });
   };
 
   let onMessageReceived = (msg: number) => {
-    console.log(msg);
     setNumberOfUsers(msg);
   }
 
   const activateApp = () => {
     AdminApi.activateApp()
       .then((response: any) => {
-        console.log(response.data);
         dispatch(setStatus({ isActive: true }))
         getQuestion(1)
       })
       .catch((e: Error) => {
-        console.log(e);
+        NotificationManager.error(e.message,'Error!', 5000);
       });
   };
 
@@ -58,9 +58,10 @@ const Admin = () => {
       .then((response: any) => {
         setTimer(question.time)
         setShowQuestionButton(false)
+        NotificationManager.info('Question '+question.questionNumber+' on screen', 'Info!', 2000);
       })
       .catch((e: Error) => {
-        console.log(e);
+        NotificationManager.error(e.message,'Error!', 5000);
       });
   }
 
@@ -75,7 +76,7 @@ const Admin = () => {
           setQuestion(response.data)
         })
         .catch((e: Error) => {
-          console.log(e);
+          NotificationManager.error(e.message,'Error!', 5000);
         });
     } else {
       setQuestion({ ...question, time: NaN })
@@ -87,9 +88,10 @@ const Admin = () => {
       .then((response: any) => {
         setTimer(-1);
         getQuestion(response.data.question.questionNumber + 1);
+        NotificationManager.info('Result '+response.data.question.questionNumber+' on screen', 'Info!', 2000);
       })
       .catch((e: Error) => {
-        console.log(e);
+        NotificationManager.error(e.message,'Error!', 5000);
       });
   };
 
@@ -97,25 +99,28 @@ const Admin = () => {
     dispatch(setStatus({ isActive: false }));
     AdminApi.endSession()
       .then((response: any) => {
-        console.log(response.data);
+        NotificationManager.info('User data has been deleted', 'Info!', 2000);
       })
       .catch((e: Error) => {
-        console.log(e);
+        NotificationManager.error(e.message,'Error!', 5000);
       });
   };
 
   const showFinalResult = () => {
     AdminApi.showFinalResult()
       .then((response: any) => {
-        console.log(response.data);
+        if(question.questionNumber !== 0){
+          NotificationManager.info('Final Result on screen', 'Info!', 2000);
         setTimer(0);
+        }     
       })
       .catch((e: Error) => {
-        console.log(e);
+        NotificationManager.error(e.message,'Error!', 5000);
       });
   };
 
   useEffect(() => {
+
     if (timer > 0) {
       setTimeout(() => {
         setTimer(timer => timer - 1)
@@ -131,14 +136,16 @@ const Admin = () => {
   }, [timer]);
 
   useEffect(() => {
+    
     AdminApi.getNumberOfQuestions()
       .then((response: any) => {
         setNumberOfQuestions(response.data)
+        getQuestion(1)
       })
       .catch((e: Error) => {
-        console.log(e);
+        NotificationManager.error(e.message,'Error!', 5000);
       });
-    getQuestion(1)
+    
   }, [numberOfQuestions])
 
   return (

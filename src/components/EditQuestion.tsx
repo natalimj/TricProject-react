@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useState } from 'react'
 import { AiOutlineDelete, AiOutlineSave } from "react-icons/ai";
-import { BiTimeFive } from "react-icons/bi";
 import AdminApi from '../api/AdminApi';
 import IQuestionData from '../models/Question'
+import { NotificationManager } from 'react-notifications';
 
 type Props = {
     question: IQuestionData
@@ -37,9 +37,10 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
         AdminApi.deleteQuestion(questionId)
             .then((response: any) => {
                 setQuestions(questions.filter(question => question.questionId !== questionId))
+                NotificationManager.success('Question has been deleted', 'Success!', 2000);
             })
             .catch((e: Error) => {
-                console.log(e);
+                NotificationManager.error(e.message, 'Error!', 5000);
             });
     }
 
@@ -47,13 +48,13 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
         if (questionText !== "" && firstAnswer !== "" && secondAnswer !== "") {
             AdminApi.editQuestion(questionText, firstAnswer, secondAnswer, questionId)
                 .then((response: any) => {
-                    console.log(response.data);
+                    NotificationManager.success('Question has been edited', 'Success!', 2000);
                 })
                 .catch((e: Error) => {
-                    console.log(e);
+                    NotificationManager.error(e.message, 'Error!', 5000);
                 });
         } else {
-            console.log("empty field alert")
+            NotificationManager.warning('Please fill all required fields ', 'Warning!', 2000);
         }
     }
 
@@ -68,7 +69,6 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                             defaultValue={question.questionText}
                             name="questionText" />
                     </div>
-                    <div className="questions__icon"><BiTimeFive size={30} /></div>
                 </div>
                 <div className="questions__line">
                     <div className="questions__input">
