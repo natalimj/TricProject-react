@@ -1,0 +1,10 @@
+@import url("../styles.css");
+
+.innactive-container__text {
+    font-size: var(--font-size-larger);
+}
+
+.innactive-container__link a {
+    font-size: var(--font-size-larger);
+    color: var(--color-pink);
+}

@@ -5,7 +5,7 @@ import IResultData from '../models/Result';
 import AdminApi from '../api/AdminApi';
 import { useAppSelector } from '../app/hooks';
 import { RootState } from '../app/store';
-import { BsCircleFill } from "react-icons/bs";
+import { BsFillSquareFill } from "react-icons/bs";
 import Constants from "../util/Constants";
 
 const Result = () => {
@@ -14,7 +14,7 @@ const Result = () => {
             questionNumber: 0,
             questionText: '',
             answers: [],
-            time:0
+            time: 0
         },
         firstAnswerRate: 0.0,
         secondAnswerRate: 0.0,
@@ -25,9 +25,7 @@ const Result = () => {
             answerText: ""
         }
     };
-
     const questionId = useAppSelector((state: RootState) => state.question.questionId);
-    const questionNumber = useAppSelector((state: RootState) => state.question.questionNumber);
     const [result, setResult] = useState<IResultData>(initialResultState);
     const userName = useAppSelector((state: RootState) => state.user.username);
     const userIcon = useAppSelector((state: RootState) => state.user.imagePath);
@@ -49,7 +47,6 @@ const Result = () => {
             });
     }, [questionId, userAnswer.answerText]);
 
-
     return (
         <div className='result'>
             <div className="result__inner-container">
@@ -58,7 +55,7 @@ const Result = () => {
                         : (<img src={require('../util/icons/imageMale1.jpg')} alt="user icon" />)}
                 </div>
                 <div className="result__text">{userName}</div>
-                <div className="result__text"> {Constants.QUESTION_FIELD} {questionNumber} - {Constants.RESULT_FIELD}</div>
+                <div className="result__text">{Constants.VOTE_RESULT_FIELD}</div>
                 <div className="result__question-text">{result?.question.questionText}</div>
                 <div className="result__box">
                     <div className="result__title">
@@ -66,14 +63,16 @@ const Result = () => {
                         <span className="result__answer-text">{result.secondAnswer.answerText}</span>
                     </div>
                     <div className="result__slider">
-                        <div className="result__first-answer"
+                        <div className="result__answer-bar result__answer-bar--left"
                             style={{ "width": `${result.firstAnswerRate}%` }}>{result.firstAnswer.answerText === userAnswer.answerText && `${result.firstAnswerRate}%`}</div>
-                        <div className="result__second-answer"
+                        <div className="result__answer-bar result__answer-bar--right"
                             style={{ "width": `${result.secondAnswerRate}%` }}>{result.secondAnswer.answerText === userAnswer.answerText && `${result.secondAnswerRate}%`}</div>
                     </div>
-                    <div style={response ? { color: "#FFADCB" } : { color: "#E1E1DA" }} className="result__user-answer"><BsCircleFill />{Constants.USER_RESPONSE}</div>
+                    <div style={response ? { color: "#FFADCB" } : { color: "#E1E1DA" }} className="result__user-answer">
+                        <BsFillSquareFill /> 
+                        <div className='result__user-answer--text'>- {Constants.USER_RESPONSE}</div>
+                    </div>
                 </div>
-
             </div>
         </div>
     )

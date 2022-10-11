@@ -7,13 +7,14 @@
 .result__inner-container {
     width: 50%;
     flex-direction: column;
-    padding-top: 30px;
+    padding-top: 2%;
 }
 
 .result__avatar-container {
     background-color: var(--color-off-white);
-    height: 200px;
-    width: 200px;
+    height: 25%;
+    width: 25%;
+    min-width: 150px;
     margin: auto;
     border: var(--color-pink) solid 4px;
 }
@@ -24,76 +25,75 @@
 }
 
 .result__text {
-    height: 50px;
-    padding: 10px;
-    font-size: 30px;
+    font-size: var(--font-size-larger);
     color: var(--color-off-white);
-    font-weight: bold;
+    margin: 5% 0;
 }
 
 .result__question-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: var(--color-off-white);
     color: var(--color-dark-grey);
-    font-weight: bold;
-    height: 130px;
+    height: 20%;
     width: 70%;
-    padding: 10px;
-    font-size: 25px;
+    font-size: var(--font-size-larger);
     margin: auto;
     border: var(--color-pink) solid 2px;
 }
 
 .result__answer-text {
     color: var(--color-pink);
-    font-size: 25px;
-    margin-bottom: 10px;
+    font-size: var(--font-size-larger);
+    margin-bottom: 2%;
+}
+
+.result__user-answer--text {
+    margin-left: 1%;
 }
 
 .result__user-answer {
-    margin-top: 25px;
+    display: flex;
+    align-items: center;
+    margin-top: 5%;
 }
 
 .result__box {
-    height: 180px;
     width: 90%;
     margin: auto;
-    padding: 10px;
-    margin-top: 50px;
+    margin-top: 5%;
 }
-
 
 .result__title {
     display: flex;
     justify-content: space-between;
-    padding: 5px;
 }
 
 .result__slider {
-    height: 40px;
+    height: 5vh;
     margin: auto;
     display: flex;
     flex-direction: row;
     color: var(--color-dark-grey);
 }
 
-.result__first-answer {
+.result__answer-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.result__answer-bar--left {
     background-color: var(--color-pink);
-    height: 40px;
-    font-size: 20px;
-    font-weight: bold;
 }
 
-.result__second-answer {
+.result__answer-bar--right {
     background-color: var(--color-off-white);
-    height: 40px;
-    font-size: 20px;
-    font-weight: bold;
 }
-
 
 @media (max-width: 800px) {
     .result__inner-container {
         width: 90%;
     }
-
 }

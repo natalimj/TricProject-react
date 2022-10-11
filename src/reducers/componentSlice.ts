@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-
 export interface ComponentState {
     questionComponentValue: boolean;
     userSubmittedValue: boolean;
@@ -10,7 +9,6 @@ const initialState: ComponentState = {
     questionComponentValue: false,
     userSubmittedValue: false,
 };
-
 
 export const componentSlice = createSlice({
     name: 'component',
