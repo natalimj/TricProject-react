@@ -6,10 +6,11 @@ import { Route, Routes, BrowserRouter} from "react-router-dom";
 import Admin from './components/Admin';
 import Page404 from './components/404Page';
 import StartPage from './components/StartPage';
-import Questions from "./components/Questions";
+import Questions from "./components/ManageQuestions";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./components/login.component";
 import PrivateRoutes from "./components/PrivateRoute";
+import { PersistGate } from "redux-persist/integration/react";
 
 
 function App() {
