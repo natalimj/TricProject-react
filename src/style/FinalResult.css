@@ -1,0 +1,137 @@
+@import url("../styles.css");
+
+.finalresult {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.finalresult__inner-container {
+    background-color: var(--color-pink);
+    width: 50%;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+
+}
+
+.finalresult__user-box {
+    background-color: var(--color-dark-grey);
+    height: 25vh;
+    width: 95%;
+    margin: auto;
+    display: flex;
+    margin-bottom: 3vh;
+}
+
+.finalresult__result-box {
+    background-color: var(--color-dark-grey);
+    height: 57vh;
+    width: 95%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    color: var(--color-off-white);
+}
+
+.finalresult__avatar-container {
+    background-color: var(--color-off-white);
+    width: 30%;
+    color: var(--color-dark-grey);
+    display: flex;
+    height: 100%;
+}
+
+.finalresult__avatar-container img {
+    width: 100%;
+}
+
+.finalresult__text-container {
+    color: var(--color-off-white);
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    overflow: hidden;
+}
+
+.finalresult__result-box>div:nth-of-type(1) {
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+.finalresult__slider {
+    height: 40px;
+    color: var(--color-dark-grey);
+    display: flex;
+    width: 90%;
+    margin: auto;
+    flex-direction: row;
+    margin-bottom: 2vh;
+}
+
+.finalresult__first-answer {
+    background-color: var(--color-pink);
+    height: 4vh;
+    font-weight: bold;
+}
+
+.finalresult__second-answer {
+    background-color: var(--color-off-white);
+    height: 4vh;
+    font-weight: bold;
+}
+
+.pink-background {
+    background-color: var(--color-pink);
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.finalresult__download {
+    background-color: var(--color-pink);
+    color: var(--color-dark-grey);
+    font-size: var(--font-size-larger);
+    margin-top: 2%;
+}
+
+.finalresult__title {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    width: 90%;
+    margin: auto;
+}
+
+.finalresult__answer-text {
+    margin-bottom: 10px;
+}
+
+@media (max-width: 800px) {
+    .finalresult__inner-container {
+        width: 90%;
+    }
+
+    .finalresult__avatar-container {
+        width: 40%;
+    }
+
+    .finalresult__text-container {
+        width: 60%;
+    }
+}
+
+@media (max-width: 1400px) and (min-width: 801px) {
+    .finalresult__inner-container {
+        width: 70%;
+    }
+
+    .finalresult__avatar-container {
+        width: 35%;
+    }
+
+    .finalresult__text-container {
+        width: 65%;
+    }
+}
