@@ -1,17 +1,13 @@
 import React, { useState, ChangeEvent } from 'react';
 import '../style/UserLogin.css'
 import UserApi from '../api/UserApi';
+import Constants from '../util/Constants';
+import IUserData from '../models/User';
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { RootState } from '../app/store';
-import IUserData from '../models/User';
-import {
-    addUser
-} from '../reducers/userSlice';
-import {
-    setUserSubmitted
-} from '../reducers/componentSlice';
-import Constants from '../util/Constants';
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { addUser } from '../reducers/userSlice';
+import { setUserSubmitted } from '../reducers/componentSlice';
 
 const UserLoginPage = () => {
     const currentUser: IUserData = {
@@ -21,13 +17,11 @@ const UserLoginPage = () => {
     }
     const [user, setUser] = useState<IUserData>(currentUser);
     const dispatch = useAppDispatch();
-
     const [currentListIndex, setCurrentListIndex] = useState<number>(0);
     const imageList = ['imageFemale1', 'imageFemale2', 'imageMale1', 'imageMale2', 'imageMale3', 'imageMale4'];
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-        console.log(value);
         setUser({ ...user, [name]: value });
     };
 
@@ -51,7 +45,6 @@ const UserLoginPage = () => {
 
     const goRight = () => {
         setCurrentListIndex(currentListIndex + 1);
-        console.log('click right');
     }
 
     return (
@@ -100,4 +93,5 @@ const UserLoginPage = () => {
         </div>
     )
 }
+
 export default UserLoginPage

@@ -4,7 +4,6 @@ import { BiTimeFive } from "react-icons/bi";
 import AdminApi from '../api/AdminApi';
 import IQuestionData from '../models/Question'
 
-
 type Props = {
     question: IQuestionData
     questions: IQuestionData[]
@@ -17,6 +16,7 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
         firstAnswer: question.answers[0].answerText,
         secondAnswer: question.answers[1].answerText,
     });
+    const { questionText, firstAnswer, secondAnswer } = formValue;
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -33,9 +33,7 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
         });
     };
 
-    const { questionText, firstAnswer, secondAnswer } = formValue;
-
-    function deleteQuestion(questionId: any) {
+    const deleteQuestion = (questionId: any) => {
         AdminApi.deleteQuestion(questionId)
             .then((response: any) => {
                 setQuestions(questions.filter(question => question.questionId !== questionId))
@@ -45,7 +43,7 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
             });
     }
 
-    function editQuestion(questionId: any) {
+    const editQuestion = (questionId: any) => {
         if (questionText !== "" && firstAnswer !== "" && secondAnswer !== "") {
             AdminApi.editQuestion(questionText, firstAnswer, secondAnswer, questionId)
                 .then((response: any) => {
@@ -61,39 +59,39 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
 
     return (
         <div key={question.questionId}>
-            <div className="questions_box">
-                <div className="questions_line">
-                    <div className="questions_input">
+            <div className="questions__box">
+                <div className="questions__line">
+                    <div className="questions__input">
                         <input type="text"
                             onChange={handleChange}
-                            className='questions_text'
+                            className='questions__text'
                             defaultValue={question.questionText}
                             name="questionText" />
                     </div>
-                    <div className="questions_icon"><BiTimeFive size={30} /></div>
+                    <div className="questions__icon"><BiTimeFive size={30} /></div>
                 </div>
-                <div className="questions_line">
-                    <div className="questions_input">
+                <div className="questions__line">
+                    <div className="questions__input">
                         <input type="text"
                             onChange={handleChange}
-                            className='questions_text'
+                            className='questions__text'
                             defaultValue={question.answers[0].answerText}
                             name="firstAnswer" />
                     </div>
-                    <div className="questions_icon" onClick={() => editQuestion(question.questionId)} ><AiOutlineSave size={30} /></div>
+                    <div className="questions__icon" onClick={() => editQuestion(question.questionId)} ><AiOutlineSave size={30} /></div>
                 </div>
-                <div className="questions_line"><div className="questions_input">
-                    <input type="text"
-                        className="questions_text"
-                        onChange={handleChange}
-                        defaultValue={question.answers[1].answerText}
-                        name="secondAnswer" />
-                </div>
-                    <div className="questions_icon" onClick={() => deleteQuestion(question.questionId)}><AiOutlineDelete size={30} /></div>
+                <div className="questions__line">
+                    <div className="questions__input">
+                        <input type="text"
+                            className="questions__text"
+                            onChange={handleChange}
+                            defaultValue={question.answers[1].answerText}
+                            name="secondAnswer" />
+                    </div>
+                    <div className="questions__icon" onClick={() => deleteQuestion(question.questionId)}><AiOutlineDelete size={30} /></div>
                 </div>
             </div>
         </div>
-
     )
 }
 

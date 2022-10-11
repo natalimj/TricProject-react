@@ -1,10 +1,11 @@
+import React from 'react';
 import '../style/ManageQuestions.css';
 import IQuestionData from '../models/Question';
 import { useEffect, useState } from 'react';
 import AdminApi from '../api/AdminApi';
 import { BiDownArrow, BiUpArrow } from "react-icons/bi";
-import React from 'react';
 import EditQuestion from './EditQuestion';
+import Constants from '../util/Constants';
 
 
 const Questions = () => {
@@ -24,8 +25,7 @@ const Questions = () => {
             });
     }, [])
 
-
-    function addQuestion() {
+    const addQuestion = () => {
         if (questionText !== "" && firstAnswer !== "" && secondAnswer !== "") {
             AdminApi.addQuestion(questionText, firstAnswer, secondAnswer)
                 .then((response: any) => {
@@ -41,44 +41,52 @@ const Questions = () => {
             console.log("empty field alert")
         }
     }
-    function showEditQuestions() {
+
+    const showEditQuestions = () => {
         setShowQuestions(!showQuestions)
     }
 
     return (
         <div className='questions'>
             <div className='questions__header'>
-                New Question
+                {Constants.NEW_QUESTION_TITLE}
             </div>
             <div>
-                <div className="questions_box">
-                    <div className="questions_line"><div className="questions_input">
-                        <input type="text"
-                            value={questionText}
-                            className="questions_text"
-                            placeholder="Enter question"
-                            onChange={(e) => setQuestionText(e.target.value)} /></div></div>
-
-                    <div className="questions_line"><div className="questions_input">
-                        <input type="text"
-                            value={firstAnswer}
-                            className="questions_text"
-                            placeholder="Enter first answer"
-                            onChange={(e) => setFirstAnswer(e.target.value)} /></div></div>
-
-                    <div className="questions_line"><div className="questions_input">
-                        <input type="text"
-                            value={secondAnswer}
-                            className="questions_text"
-                            placeholder="Enter second answer"
-                            onChange={(e) => setSecondAnswer(e.target.value)} /></div></div>
+                <div className="questions__box">
+                    <div className="questions__line">
+                        <div className="questions__input">
+                            <input type="text"
+                                value={questionText}
+                                className="questions__text"
+                                placeholder="Enter question"
+                                onChange={(e) => setQuestionText(e.target.value)} />
+                        </div>
+                    </div>
+                    <div className="questions__line">
+                        <div className="questions__input">
+                            <input type="text"
+                                value={firstAnswer}
+                                className="questions__text"
+                                placeholder="Enter first answer"
+                                onChange={(e) => setFirstAnswer(e.target.value)} />
+                        </div>
+                    </div>
+                    <div className="questions__line">
+                        <div className="questions__input">
+                            <input type="text"
+                                value={secondAnswer}
+                                className="questions__text"
+                                placeholder="Enter second answer"
+                                onChange={(e) => setSecondAnswer(e.target.value)} />
+                        </div>
+                    </div>
                 </div>
                 <button className="questions__save-button" onClick={addQuestion}>
-                    Save
+                    {Constants.SAVE_BUTTON}
                 </button>
             </div>
             <div className='questions__header' onClick={() => showEditQuestions()}>
-                Questions
+                {Constants.QUESTION_LIST_TITLE}
                 <span> {showQuestions ? (<BiUpArrow size={30} />) : (<BiDownArrow size={30} />)}</span>
             </div>
             {showQuestions && <div>
@@ -87,7 +95,6 @@ const Questions = () => {
                 ))}
             </div>}
         </div>
-
     )
 }
 

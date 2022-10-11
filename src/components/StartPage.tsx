@@ -1,22 +1,18 @@
 import React, { useState, useEffect } from "react";
 import '../style/StartPage.css';
+import UserApi from "../api/UserApi";
 import IQuestionData from '../models/Question';
 import Constants from "../util/Constants";
 import WaitingPage from "./WaitingPage";
 import InactiveHomepage from "./InactiveHomepage";
 import WebSocketComponent from "./WebSocketComponent";
 import MainPage from "./MainPage";
-import { useAppSelector, useAppDispatch } from '../app/hooks';
-import {
-  addQuestion
-} from '../reducers/questionSlice';
-import {
-  setQuestionComponent
-} from '../reducers/componentSlice';
 import UserLoginPage from "./UserLogin";
+import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { RootState } from "../app/store";
+import { addQuestion } from '../reducers/questionSlice';
+import { setQuestionComponent } from '../reducers/componentSlice';
 import { setStatus } from "../reducers/statusSlice";
-import UserApi from "../api/UserApi";
 
 const StartPage = () => {
   const isActive = useAppSelector((state: RootState) => state.status.isActive);
@@ -45,17 +41,20 @@ const StartPage = () => {
       });
   }, [dispatch])
 
-
   return (
     <>
-      {!isActive ? (<><InactiveHomepage /> <WebSocketComponent topics={['/topic/status']} onMessage={(msg: boolean) => onStatusMessageReceived(msg)} /></>) : (
+      {!isActive ? (
+        <>
+          <InactiveHomepage />
+          <WebSocketComponent topics={['/topic/status']} onMessage={(msg: boolean) => onStatusMessageReceived(msg)} />
+        </>) : (
         <div className="start-page">
           <WebSocketComponent topics={['/topic/status']} onMessage={(msg: boolean) => onStatusMessageReceived(msg)} />
           <WebSocketComponent topics={['/topic/question']} onMessage={(msg: IQuestionData) => onQuestionMessageReceived(msg)} />
           {sessionStarted ? (
             <div className="start-page-user">
               {userSubmitted ? (
-                <div className="start-page-question"> {playStarted ? (<MainPage />) : (<WaitingPage />)}</div>
+                <div className="start-page-question"> {playStarted ? (<MainPage />) : (<WaitingPage startScreen={true}/>)}</div>
               ) : (
                 <UserLoginPage />
               )}
