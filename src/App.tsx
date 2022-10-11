@@ -2,14 +2,12 @@ import { PersistGate } from "redux-persist/integration/react";
 import './App.css';
 import { Provider } from 'react-redux';
 import { store, persistor } from './app/store';
-import { Route, Routes, BrowserRouter, Navigate, useNavigate, useLocation } from "react-router-dom";
+import { Route, Routes, BrowserRouter} from "react-router-dom";
 import Admin from './components/Admin';
 import Page404 from './components/Page404';
 import StartPage from './components/StartPage';
 import Questions from "./components/Questions";
-import {Component} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { props } from "cypress/types/bluebird";
 import Login from "./components/login.component";
 import PrivateRoutes from "./components/PrivateRoute";
 
