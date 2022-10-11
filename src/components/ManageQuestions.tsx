@@ -1,4 +1,3 @@
-import React from 'react';
 import '../style/ManageQuestions.css';
 import IQuestionData from '../models/Question';
 import { useEffect, useState } from 'react';
@@ -6,7 +5,7 @@ import AdminApi from '../api/AdminApi';
 import { BiDownArrow, BiUpArrow } from "react-icons/bi";
 import EditQuestion from './EditQuestion';
 import Constants from '../util/Constants';
-
+import { NotificationManager } from 'react-notifications';
 
 const Questions = () => {
     const [questions, setQuestions] = useState<IQuestionData[]>([]);
@@ -21,9 +20,10 @@ const Questions = () => {
                 setQuestions(response.data)
             })
             .catch((e: Error) => {
-                console.log(e);
+                NotificationManager.error(e.message, 'Error!', 5000);
             });
     }, [])
+
 
     const addQuestion = () => {
         if (questionText !== "" && firstAnswer !== "" && secondAnswer !== "") {
@@ -33,16 +33,16 @@ const Questions = () => {
                     setQuestionText("")
                     setFirstAnswer("")
                     setSecondAnswer("")
+                    NotificationManager.success('A new question has been added', 'Success!', 2000);
                 })
                 .catch((e: Error) => {
-                    console.log(e);
+                    NotificationManager.error(e.message, 'Error!', 5000);
                 });
         } else {
-            console.log("empty field alert")
+            NotificationManager.warning('Please fill all required fields ', 'Warning!', 2000);
         }
     }
-
-    const showEditQuestions = () => {
+    const showEditQuestions = () =>{
         setShowQuestions(!showQuestions)
     }
 

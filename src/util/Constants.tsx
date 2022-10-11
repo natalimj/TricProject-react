@@ -40,6 +40,8 @@ const Constants = {
 	TIME_REMANING: "seconds remaining",
 	TIME_FOR: "Time for question",
 	HUMANLAB: "HumanLab",
+	QUESTIONS_FIELD: "Questions",
+	ALL_QUESTIONS_FIELD: "Show All Questions",
 };
 
 export default Constants;
