@@ -65,7 +65,7 @@ const StartPage = () => {
               <div className="start-page-landing__title">
                 {Constants.APP_TITLE}
               </div>
-              <button onClick={() => setSessionStarted(true)} className="submit-button">
+              <button onClick={() => setSessionStarted(true)} className="submit-button" data-cy="join">
                 {Constants.JOIN_BUTTON}
               </button>
             </div>
