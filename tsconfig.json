@@ -22,6 +22,6 @@
     "noImplicitAny": false
   },
   "include": [
-    "**/*.ts"
+    "**/*.tsx", "./src", "cypress.d.ts"
   ]
 }

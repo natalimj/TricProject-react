@@ -9,7 +9,7 @@ interface Props {
 
 const WaitingPage: React.FC<Props> = ({startScreen}) => {
   return (
-    <div data-testid="waiting-spinner" className='waiting-container' style={{ marginTop: "300px" }}>
+    <div data-cy="spinner" className='waiting-container' style={{ marginTop: "300px" }}>
       <BeatLoader color="#FFADCB" size={100} speedMultiplier={1} />
       <div className='waiting-container__text'>{startScreen ? Constants.WAITING_PROMPT_BEGIN : Constants.WAITING_PROMPT_RESULT}</div>
     </div>
