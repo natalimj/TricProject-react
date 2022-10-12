@@ -1,0 +1,54 @@
+@import url("../styles.css");
+
+.admin-login {
+    margin-top: 5%;
+}
+
+.admin-login__image {
+    margin-bottom: 5%;
+}
+
+.admin-login__login-field {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-login__login-label {
+    margin-bottom: 0;
+    font-size: var(--font-size-header);
+}
+
+.admin-login__error-message {
+    color: var(--color-pink);
+}
+
+.admin-login__field {
+    border: none;
+    outline: none;
+    background-color: var(--color-off-white);
+    font-size: var(--font-size-header);
+    color: var(--color-dark-grey);
+    margin: 10px 25px;
+    text-align: center;
+}
+
+.admin-login__field:focus,
+.admin-login__field:active {
+    border: none;
+    outline: solid 2px var(--color-pink);
+}
+
+.admin-login__submit-button {
+    background: none;
+    background-color: var(--color-pink);
+    color: var(--color-black);
+    border: 3px solid var(--color-black);
+    padding: 10px 10px;
+    font: inherit;
+    font-size: var(--font-size-header);
+    cursor: pointer;
+    outline: inherit;
+    margin-top: 10%;
+}

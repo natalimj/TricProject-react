@@ -2,7 +2,7 @@ import axios from "axios";
 import Constants from "../util/Constants";
 
 
-const API_URL = Constants.BASE_URL+'/api/auth/';
+const API_URL = Constants.BASE_URL+'api/auth/';
 
 class AuthService {
   login(username: string, password: string) {
