@@ -8,7 +8,7 @@ import Page404 from './components/404Page';
 import StartPage from './components/StartPage';
 import Questions from "./components/ManageQuestions";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Login from "./components/login.component";
+import Login from "./components/AdminLogin";
 import PrivateRoutes from "./components/PrivateRoute";
 import { PersistGate } from "redux-persist/integration/react";
 import 'react-notifications/lib/notifications.css';
