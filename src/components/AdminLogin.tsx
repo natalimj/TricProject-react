@@ -94,53 +94,51 @@ export default class Login extends Component<Props, State> {
 
     return (
       <div className="admin-login">
-        <div className="admin-login__body">
-          <img
-            src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-            alt="profile-img"
-            className="admin-login__image"
-          />
-          <Formik
-            initialValues={initialValues}
-            validationSchema={this.validationSchema}
-            onSubmit={this.handleLogin}>
-            <Form className="admin-login__form">
-              <div className="admin-login__login-field">
-                <label htmlFor="username" className="admin-login__login-label">Username</label>
-                <Field name="username" type="text" className="admin-login__field" />
-                <ErrorMessage
-                  name="username"
-                  component="div"
-                  className="admin-login__error-message"
-                />
-              </div>
-              <div className="admin-login__login-field">
-                <label htmlFor="password" className="admin-login__login-label">Password</label>
-                <Field name="password" type="password" className="admin-login__field" />
-                <ErrorMessage
-                  name="password"
-                  component="div"
-                  className="admin-login__error-message"
-                />
-              </div>
-              <div className="admin-login__login-field">
-                <button type="submit" className="admin-login__submit-button" disabled={loading}>
-                  {loading && (
-                    <span className="admin-login__submit__button--text"></span>
-                  )}
-                  <span className="admin-login__submit__button--text">Login</span>
-                </button>
-              </div>
-              {message && (
-                <div className="admin-login__message-body">
-                  <div className="admin-login__error-message" role="alert">
-                    {message}
-                  </div>
+        <img
+          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+          alt="profile-img"
+          className="admin-login__image"
+        />
+        <Formik
+          initialValues={initialValues}
+          validationSchema={this.validationSchema}
+          onSubmit={this.handleLogin}>
+          <Form className="admin-login__form">
+            <div className="admin-login__login-field">
+              <label htmlFor="username" className="admin-login__login-label">Username</label>
+              <Field name="username" type="text" className="admin-login__field" />
+              <ErrorMessage
+                name="username"
+                component="div"
+                className="admin-login__error-message"
+              />
+            </div>
+            <div className="admin-login__login-field">
+              <label htmlFor="password" className="admin-login__login-label">Password</label>
+              <Field name="password" type="password" className="admin-login__field" />
+              <ErrorMessage
+                name="password"
+                component="div"
+                className="admin-login__error-message"
+              />
+            </div>
+            <div className="admin-login__login-field">
+              <button type="submit" className="admin-login__submit-button" disabled={loading}>
+                {loading && (
+                  <span className="admin-login__submit__button--text"></span>
+                )}
+                <span className="admin-login__submit__button--text">Login</span>
+              </button>
+            </div>
+            {message && (
+              <div className="admin-login__message-body">
+                <div className="admin-login__error-message" role="alert">
+                  {message}
                 </div>
-              )}
-            </Form>
-          </Formik>
-        </div>
+              </div>
+            )}
+          </Form>
+        </Formik>
       </div>
     );
   }

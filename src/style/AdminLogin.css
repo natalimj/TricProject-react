@@ -1,21 +1,7 @@
 @import url("../styles.css");
 
 .admin-login {
-    width: inherit;
-    height: inherit;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.admin-login__body {
-    width: 80%;
-    height: inherit;
-}
-
-.admin-login__form {
-    
+    margin-top: 5%;
 }
 
 .admin-login__image {
