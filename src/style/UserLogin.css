@@ -64,6 +64,7 @@
 
 .user-form--user-arrow {
     display: flex;
+    cursor: pointer;
 }
 
 .user-form--user-arrow:active {
