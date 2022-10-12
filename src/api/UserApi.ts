@@ -21,7 +21,7 @@ const getAppStatus = () => {
 }
 
 const showResult = (questionId: any) => {
-    return http.get<IResultData>("userApi/result", {
+    return http.get<IResultData>("adminApi/result", {
       params: {
         questionId: questionId
       }
