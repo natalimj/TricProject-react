@@ -2,11 +2,11 @@ import React from 'react';
 import { useEffect, useState } from 'react'
 import '../style/Result.css';
 import IResultData from '../models/Result';
-import AdminApi from '../api/AdminApi';
 import { useAppSelector } from '../app/hooks';
 import { RootState } from '../app/store';
 import { BsFillSquareFill } from "react-icons/bs";
 import Constants from "../util/Constants";
+import UserApi from '../api/UserApi';
 
 const Result = () => {
     const initialResultState = {
@@ -33,7 +33,7 @@ const Result = () => {
     const [response, setResponse] = useState<boolean>(false);
 
     useEffect(() => {
-        AdminApi.showResult(questionId)
+        UserApi.showResult(questionId)
             .then((response: any) => {
                 setResult(response.data);
                 if (userAnswer.answerText === response.data.firstAnswer.answerText) {

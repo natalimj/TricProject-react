@@ -52,3 +52,9 @@
     outline: inherit;
     margin-top: 10%;
 }
+
+@media screen and (max-width: 450px) {
+    .admin-login__field {
+        font-size: var(--font-size-default);
+    }
+}

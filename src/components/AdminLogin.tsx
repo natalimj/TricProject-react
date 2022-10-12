@@ -5,6 +5,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 import AuthService from "../services/auth.service";
+import Constants from "../util/Constants";
 
 type Props = {};
 
@@ -95,6 +96,7 @@ export default class Login extends Component<Props, State> {
     return (
       <div className="admin-login">
         <img
+          /*todo: change to app logo*/
           src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
           alt="profile-img"
           className="admin-login__image"
@@ -105,7 +107,7 @@ export default class Login extends Component<Props, State> {
           onSubmit={this.handleLogin}>
           <Form className="admin-login__form">
             <div className="admin-login__login-field">
-              <label htmlFor="username" className="admin-login__login-label">Username</label>
+              <label htmlFor="username" className="admin-login__login-label">{Constants.USERNAME_FIELD}</label>
               <Field name="username" type="text" className="admin-login__field" />
               <ErrorMessage
                 name="username"
@@ -114,7 +116,7 @@ export default class Login extends Component<Props, State> {
               />
             </div>
             <div className="admin-login__login-field">
-              <label htmlFor="password" className="admin-login__login-label">Password</label>
+              <label htmlFor="password" className="admin-login__login-label">{Constants.PASSWORD_FIELD}</label>
               <Field name="password" type="password" className="admin-login__field" />
               <ErrorMessage
                 name="password"
@@ -124,10 +126,7 @@ export default class Login extends Component<Props, State> {
             </div>
             <div className="admin-login__login-field">
               <button type="submit" className="admin-login__submit-button" disabled={loading}>
-                {loading && (
-                  <span className="admin-login__submit__button--text"></span>
-                )}
-                <span className="admin-login__submit__button--text">Login</span>
+                <span className="admin-login__submit__button--text">{Constants.SUBMIT_BUTTON}</span>
               </button>
             </div>
             {message && (

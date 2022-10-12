@@ -2,6 +2,7 @@ import http from "../util/Http-common";
 import IUserData from "../models/User";
 import IVoteData from "../models/Vote";
 import FinalResult from "../models/FinalResult";
+import IResultData from "../models/Result";
 
 const getAllUsers = () => {
     return http.get<Array<IUserData>>("userApi/users");
@@ -19,6 +20,14 @@ const getAppStatus = () => {
     return http.get<boolean>("userApi/getAppStatus");
 }
 
+const showResult = (questionId: any) => {
+    return http.get<IResultData>("userApi/result", {
+      params: {
+        questionId: questionId
+      }
+    })
+  };
+
 const getFinalResult = (userId: any) => {
     return http.get<Array<FinalResult>>("userApi/finalResult", {
         params: {
@@ -32,6 +41,7 @@ const UserApi = {
     createUser,
     saveVote,
     getAppStatus,
+    showResult,
     getFinalResult
 };
 export default UserApi;
