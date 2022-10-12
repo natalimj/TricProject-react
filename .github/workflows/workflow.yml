@@ -4,9 +4,9 @@ on: push
 
 jobs:
   build_and_deploy_job_on_Master:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed') && github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
-    name: Build and Deploy Job
+    name: Build and Deploy Job On Master
     steps:
       - uses: actions/checkout@v2
         with:
