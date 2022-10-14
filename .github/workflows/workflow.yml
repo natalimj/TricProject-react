@@ -55,6 +55,8 @@ jobs:
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
       # install the dependencies
+      - name: install
+        run: npm install
       - name: install dependencies
         run: npm ci --ignore-scripts
       # run the tests
