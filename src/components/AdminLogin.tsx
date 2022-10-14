@@ -14,7 +14,8 @@ type State = {
   username: string,
   password: string,
   loading: boolean,
-  message: string
+  message: string,
+  overrider: boolean
 };
 
 export default class Login extends Component<Props, State> {
@@ -27,7 +28,8 @@ export default class Login extends Component<Props, State> {
       username: "",
       password: "",
       loading: false,
-      message: ""
+      message: "",
+      overrider: false,
     };
   }
 
@@ -35,6 +37,7 @@ export default class Login extends Component<Props, State> {
     const currentUser = AuthService.getCurrentUser();
 
     if (currentUser) {
+      console.log("SEEING IT AS CURRECT USER")
       this.setState({ redirect: "/admin" });
     };
   }
@@ -62,7 +65,8 @@ export default class Login extends Component<Props, State> {
     AuthService.login(username, password).then(
       () => {
         this.setState({
-          redirect: "/admin"
+          redirect: "/admin",
+          overrider: true
         });
       },
       error => {
@@ -82,7 +86,8 @@ export default class Login extends Component<Props, State> {
   }
 
   render() {
-    if (this.state.redirect) {
+    if (this.state.redirect && this.state.overrider) {
+      this.setState({overrider: false});
       return <Navigate to={this.state.redirect} />
     }
 

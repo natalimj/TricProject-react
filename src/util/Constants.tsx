@@ -1,8 +1,8 @@
 const Constants = {
-	BASE_URL : "https://tricproject.azurewebsites.net/",
-	SOCKET_URL: "https://tricproject.azurewebsites.net/ws-message",
-	//BASE_URL: "http://localhost:8080/",
-	//SOCKET_URL: "http://localhost:8080/ws-message",
+	//BASE_URL : "https://tricproject.azurewebsites.net/",
+	//SOCKET_URL: "https://tricproject.azurewebsites.net/ws-message",
+	BASE_URL: "http://localhost:8080/",
+	SOCKET_URL: "http://localhost:8080/ws-message",
 
 	/* LABELS */
 	APP_TITLE: "TRIC",
@@ -19,10 +19,11 @@ const Constants = {
 	WAITING_PROMPT_RESULT: "Gathering votes...",
 	WAITING_PROMPT_BEGIN: "Waiting for the first question...",
 	DOWNLOAD :"DOWNLOAD",
-	FINAL_RESULT_FIELD: "YOUR DIGITAL PROFILE" ,
+	DIGITAL_PROFILE_FIELD: "YOUR DIGITAL PROFILE" ,
 	USER_RESPONSE : "Your response",
 	FINAL_RESULT_BUTTON:" Show Final Result",
 	RESULT_FIELD: "Result",
+	FINAL_RESULT_FIELD: "Final Result",
 	RESULT_BUTTON : "Show Result",
 	QUESTION_BUTTON: "Show Question",
 	START_BUTTON: "Start",
@@ -40,10 +41,12 @@ const Constants = {
 	ONLINE_USERS: "Online users:",
 	ON_SCREEN_FIELD: "is on screen...",
 	TIME_REMANING: "seconds remaining",
-	TIME_FOR: "Time for Question",
+	TIME_FOR: "Time* for Question",
 	HUMANLAB: "HumanLab",
 	QUESTIONS_FIELD: "Questions",
 	ALL_QUESTIONS_FIELD: "Show All Questions",
+	NEXT_QUESTION_TEXT: "Next question is:",
+	SET_TIME_INFO: "*Time is expressed in SECONDS",
 };
 
 export default Constants;
