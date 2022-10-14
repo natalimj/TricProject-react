@@ -2,7 +2,7 @@ import '../style/ManageQuestions.css';
 import IQuestionData from '../models/Question';
 import { useEffect, useState } from 'react';
 import AdminApi from '../api/AdminApi';
-import { BiDownArrow, BiUpArrow } from "react-icons/bi";
+import { BiDownArrow, BiUpArrow, BiLeftArrowAlt } from "react-icons/bi";
 import EditQuestion from './EditQuestion';
 import Constants from '../util/Constants';
 import { NotificationManager } from 'react-notifications';
@@ -42,9 +42,14 @@ const Questions = () => {
             NotificationManager.warning('Please fill all required fields ', 'Warning!', 2000);
         }
     }
-    const showEditQuestions = () =>{
+
+    const showEditQuestions = () => {
         setShowQuestions(!showQuestions)
     }
+
+    const goToAdminPage = () => {
+        window.location.href = "/admin";
+      };
 
     return (
         <div className='questions'>
@@ -85,7 +90,7 @@ const Questions = () => {
                     {Constants.SAVE_BUTTON}
                 </button>
             </div>
-            <div className='questions__header' onClick={() => showEditQuestions()}>
+            <div className='questions__header questions__header--accordion' onClick={() => showEditQuestions()}>
                 {Constants.QUESTION_LIST_TITLE}
                 <span> {showQuestions ? (<BiUpArrow size={30} />) : (<BiDownArrow size={30} />)}</span>
             </div>
@@ -94,6 +99,9 @@ const Questions = () => {
                     <EditQuestion key={question.questionId} question={question} questions={questions} setQuestions={setQuestions} />
                 ))}
             </div>}
+            <div className='questions__back-button' onClick={goToAdminPage}>
+                <BiLeftArrowAlt size={30} />
+            </div>
         </div>
     )
 }

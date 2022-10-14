@@ -1,6 +1,5 @@
 import http from "../util/Http-common";
 import IQuestionData from "../models/Question";
-import IResultData from "../models/Result";
 import IStatusData from "../models/Status";
 import authHeader from "../services/auth-header";
 
@@ -10,15 +9,6 @@ const endSession = () => {
 
 const showFinalResult = () => {
   return http.post("adminApi/showFinalResult","",{ headers: authHeader() });
-};
-
-const showResult = (questionId: any) => {
-  return http.get<IResultData>("adminApi/result", {
-    params: {
-      questionId: questionId
-    },
-    headers: authHeader()
-  })
 };
 
 const getQuestionByNumber = (questionNumber: number) => {
@@ -99,7 +89,6 @@ const getNumberOfQuestions = () => {
 
 const AdminApi = {
   endSession,
-  showResult,
   getQuestionByNumber,
   activateApp,
   getAllQuestions,

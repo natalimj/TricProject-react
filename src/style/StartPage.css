@@ -32,6 +32,10 @@
     margin-bottom: 10px;
 }
 
+.submit-button:active {
+    background-color: var(--color-pink-darker);
+}
+
 @media screen and (max-height: 650px) {
     .submit-button{
         padding: 5px 5px;
