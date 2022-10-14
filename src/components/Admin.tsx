@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react'
+import '../style/Admin.css';
 import WebSocketComponent from './WebSocketComponent';
 import AdminApi from '../api/AdminApi';
 import IQuestionData from '../models/Question';
@@ -9,6 +10,7 @@ import { setStatus } from '../reducers/statusSlice';
 import { RootState } from '../app/store';
 import 'react-notifications/lib/notifications.css';
 import { NotificationManager } from 'react-notifications';
+import UserApi from '../api/UserApi';
 
 const Admin = () => {
   const initialQuestionState = {
@@ -34,7 +36,7 @@ const Admin = () => {
         setShowQuestionButton(true)
       })
       .catch((e: Error) => {
-        NotificationManager.error(e.message,'Error!', 5000);
+        NotificationManager.error(e.message, 'Error!', 5000);
       });
   };
 
@@ -49,8 +51,12 @@ const Admin = () => {
         getQuestion(1)
       })
       .catch((e: Error) => {
-        NotificationManager.error(e.message,'Error!', 5000);
+        NotificationManager.error(e.message, 'Error!', 5000);
       });
+  };
+
+  const editQuestions = () => {
+    window.location.href = "/admin/questions";
   };
 
   const showQuestion = () => {
@@ -58,10 +64,10 @@ const Admin = () => {
       .then((response: any) => {
         setTimer(question.time)
         setShowQuestionButton(false)
-        NotificationManager.info('Question '+question.questionNumber+' on screen', 'Info!', 2000);
+        NotificationManager.info('Question ' + question.questionNumber + ' on screen', 'Info!', 2000);
       })
       .catch((e: Error) => {
-        NotificationManager.error(e.message,'Error!', 5000);
+        NotificationManager.error(e.message, 'Error!', 5000);
       });
   }
 
@@ -76,7 +82,7 @@ const Admin = () => {
           setQuestion(response.data)
         })
         .catch((e: Error) => {
-          NotificationManager.error(e.message,'Error!', 5000);
+          NotificationManager.error(e.message, 'Error!', 5000);
         });
     } else {
       setQuestion({ ...question, time: NaN })
@@ -84,14 +90,14 @@ const Admin = () => {
   }
 
   const showResult = () => {
-    AdminApi.showResult(question.questionId)
+    UserApi.showResult(question.questionId)
       .then((response: any) => {
         setTimer(-1);
         getQuestion(response.data.question.questionNumber + 1);
-        NotificationManager.info('Result '+response.data.question.questionNumber+' on screen', 'Info!', 2000);
+        NotificationManager.info('Result ' + response.data.question.questionNumber + ' on screen', 'Info!', 2000);
       })
       .catch((e: Error) => {
-        NotificationManager.error(e.message,'Error!', 5000);
+        NotificationManager.error(e.message, 'Error!', 5000);
       });
   };
 
@@ -102,20 +108,20 @@ const Admin = () => {
         NotificationManager.info('User data has been deleted', 'Info!', 2000);
       })
       .catch((e: Error) => {
-        NotificationManager.error(e.message,'Error!', 5000);
+        NotificationManager.error(e.message, 'Error!', 5000);
       });
   };
 
   const showFinalResult = () => {
     AdminApi.showFinalResult()
       .then((response: any) => {
-        if(question.questionNumber !== 0){
+        if (question.questionNumber !== 0) {
           NotificationManager.info('Final Result on screen', 'Info!', 2000);
-        setTimer(0);
-        }     
+          setTimer(0);
+        }
       })
       .catch((e: Error) => {
-        NotificationManager.error(e.message,'Error!', 5000);
+        NotificationManager.error(e.message, 'Error!', 5000);
       });
   };
 
@@ -136,79 +142,94 @@ const Admin = () => {
   }, [timer]);
 
   useEffect(() => {
-    
     AdminApi.getNumberOfQuestions()
       .then((response: any) => {
         setNumberOfQuestions(response.data)
         getQuestion(1)
       })
       .catch((e: Error) => {
-        NotificationManager.error(e.message,'Error!', 5000);
+        NotificationManager.error(e.message, 'Error!', 5000);
       });
-    
+
   }, [numberOfQuestions])
 
   return (
-    <div> {Constants.ADMIN_TITLE}
-      <br />
-      {!isActive && <button onClick={activateApp} className="btn btn-success">
-        {Constants.ACTIVATE_BUTTON}
-      </button>}
-      <br />
-      {isActive &&
-        <div>
-          <div>
-            <WebSocketComponent topics={['/topic/message']} onMessage={(msg: number) => onMessageReceived(msg)} />
-            <p>{Constants.ONLINE_USERS} {numberOfUsers}</p>
-            {!showQuestionButton ?
-              (<div>
-                {timer > 0 ? (
-                  <>
-                    <p>{Constants.QUESTION_FIELD} {question.questionNumber} {Constants.ON_SCREEN_FIELD}</p>
-                    <p> {timer} {Constants.TIME_REMANING}</p>
-                  </>
-                ) : null}
-                {question.questionNumber < numberOfQuestions ? (
-                  <button onClick={() => showResult()} className="btn btn-success">
-                    {Constants.RESULT_BUTTON} {question.questionNumber}
-                  </button>
-                ) : (
-                  <>
-                    {timer <= 0 ? (
-                      <p>{Constants.RESULT_FIELD} {question.questionNumber} {Constants.ON_SCREEN_FIELD}</p>
-                    ) : (
-                      <div>
-                        <button onClick={showFinalResult} className="btn btn-success">
-                          {Constants.FINAL_RESULT_BUTTON}
-                        </button>
-                      </div>
-                    )}
-                    <div>
-                      <button onClick={endSession} className="btn btn-success">
-                        {Constants.END_BUTTON}
-                      </button>
-                    </div>
-                  </>
-                )}
-              </div>) :
-              (<>
-                {question.questionNumber !== 1 ?
-                  (<p>{Constants.RESULT_FIELD} {question.questionNumber - 1} {Constants.ON_SCREEN_FIELD}</p>) : null}
-                <div>
-                  <label>{Constants.TIME_FOR} {question.questionNumber}: </label>
-                  <input type="text"
-                    name="time"
-                    value={question.time || ''}
-                    onChange={(e) => handleTimeChange(e)} />
-                  <button onClick={() => showQuestion()} className="btn btn-success">
-                    {Constants.QUESTION_BUTTON} {question.questionNumber}
-                  </button>
-                </div>
-              </>
-              )
-            }
+    <div className='admin-console'>
+      <div className='admin-console__header'>
+        {Constants.ADMIN_TITLE}
+      </div>
+      {!isActive &&
+        <div className='admin-console__body'>
+          <div className='admin-console__logo'></div>
+          <div className='admin-console__buttons'>
+            <button className="admin-console__submit-button--secondary">
+              {Constants.EDIT_CONTRIBUTORS}
+            </button>
+            <button onClick={editQuestions} className="admin-console__submit-button--secondary">
+              {Constants.EDIT_QUESTIONS}
+            </button>
+            <button onClick={activateApp} className="admin-console__submit-button">
+              {Constants.START_BUTTON}
+            </button>
           </div>
-        </div>}
+        </div>
+      }
+      {isActive &&
+        <div className='admin-console__body admin-console__body--active'>
+          <WebSocketComponent topics={['/topic/message']} onMessage={(msg: number) => onMessageReceived(msg)} />
+          <div className='admin-console__text'>
+            {Constants.ONLINE_USERS} {numberOfUsers}
+          </div>
+          {!showQuestionButton ?
+            (<div className='admin-console__buttons'>
+              {timer > 0 ? (
+                <>
+                  <div className='admin-console__text'>{Constants.QUESTION_FIELD} {question.questionNumber} {Constants.ON_SCREEN_FIELD}</div>
+                  <div className='admin-console__text'> {timer} {Constants.TIME_REMANING}</div>
+                </>
+              ) : null}
+              {question.questionNumber < numberOfQuestions ? (
+                <button onClick={() => showResult()} className="admin-console__submit-button--secondary">
+                  {Constants.RESULT_BUTTON} {question.questionNumber}
+                </button>
+              ) : (
+                <>
+                  {timer <= 0 ? (
+                    <div className='admin-console__text'>{Constants.RESULT_FIELD} {question.questionNumber} {Constants.ON_SCREEN_FIELD}</div>
+                  ) : (
+                    <>
+                      <button onClick={showFinalResult} className="admin-console__submit-button--secondary">
+                        {Constants.FINAL_RESULT_BUTTON}
+                      </button>
+                    </>
+                  )}
+                  <button onClick={endSession} className="admin-console__submit-button">
+                    {Constants.END_BUTTON}
+                  </button>
+                </>
+              )}
+            </div>) :
+            (<div className='admin-console__buttons'>
+              {question.questionNumber !== 1 ?
+                (<div className='admin-console__text'>{Constants.RESULT_FIELD} {question.questionNumber - 1} {Constants.ON_SCREEN_FIELD}</div>) : null}
+              <div className='admin-console__edit-time'>
+                <div className='admin-console__text admin-console__text--medium'>
+                  {Constants.TIME_FOR} {question.questionNumber}:
+                </div>
+                <input type="text"
+                  name="time"
+                  value={question.time || ''}
+                  onChange={(e) => handleTimeChange(e)}
+                  className="admin-console__input" />
+              </div>
+              <button onClick={() => showQuestion()} className="admin-console__submit-button--secondary">
+                {Constants.QUESTION_BUTTON} {question.questionNumber}
+              </button>
+            </div>
+            )
+          }
+        </div>
+      }
     </div>
   )
 }

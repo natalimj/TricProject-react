@@ -15,7 +15,7 @@
 }
 
 .user-form__avatar-container {
-    height: 45vh;
+    max-height: 350px;
     display: flex;
     flex-direction: column;
 }
@@ -40,7 +40,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    height: 87.5%;
+    align-items: center;
 }
 
 .user-form__avatar-selector-item {
@@ -59,9 +59,14 @@
 
 .user-form--avatar-image img {
     width: 100%;
-    height: 100%;
+    max-height: 280px;
 }
 
 .user-form--user-arrow {
     display: flex;
+    cursor: pointer;
+}
+
+.user-form--user-arrow:active {
+    color: var(--color-pink);
 }

@@ -12,9 +12,13 @@
     background-color: var(--color-grey);
     color: var(--color-off-white);
     width: 80%;
-    margin: auto;
-    border: var(--color-black) solid 4px;
+    margin: 0 auto;
+    outline: var(--color-black) solid 2px;
     font-size: var(--font-size-header);
+}
+
+.questions__header--accordion {
+    cursor: pointer;
 }
 
 .questions__header span {
@@ -81,6 +85,20 @@
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 30px;
+}
+
+.questions__back-button {
+    color: var(--color-pink);
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+
+.questions__back-button svg {
+    height: 50px;
+    width: 50px;
 }
 
 @media (max-width: 900px) {

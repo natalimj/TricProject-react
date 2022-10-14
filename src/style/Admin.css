@@ -1,0 +1,105 @@
+@import url("../styles.css");
+
+.admin-console {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.admin-console__body,
+.admin-console__buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.admin-console__buttons > * {
+    margin-bottom: 5%;
+}
+
+.admin-console__body {
+    height: 100%;
+    justify-content: space-between;
+}
+
+.admin-console__body--active {
+    justify-content: center;
+}
+
+.admin-console__header {
+    font-size: var(--font-size-header);
+    background-color: var(--color-grey);
+    border: 3px solid var(--color-black);
+    padding: 5px 0;
+    margin: 23px 0;
+}
+
+.admin-console__logo {
+    background-color: var(--color-grey);
+    border: 3px solid var(--color-black);
+    height: 300px;
+    width: 300px;
+}
+
+.admin-console__submit-button,
+.admin-console__submit-button--secondary {
+    width: 300px;
+    background: none;
+    color: var(--color-black);
+    border: 3px solid var(--color-black);
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    margin-bottom: 5%;
+}
+
+.admin-console__submit-button {
+    background-color: var(--color-pink);
+    padding: 10px 10px;
+    font-size: var(--font-size-header);
+}
+
+.admin-console__submit-button:active {
+    background-color: var(--color-pink-darker);
+}
+
+.admin-console__submit-button--secondary {
+    background-color: var(--color-off-white);
+    font-size: var(--font-size-larger);
+}
+
+.admin-console__submit-button--secondary:active {
+    background-color: var(--color-off-white-darker);
+}
+
+.admin-console__input {
+    width: 150px;
+    font-size: var(--font-size-header);
+    outline: 2px solid var(--color-pink-darker);
+    border: none;
+    background-color: var(--color-off-white);
+    color: var(--color-dark-grey);
+    margin: 10px 0;
+    text-align: center;
+}
+
+.admin-console__input:focus,
+.admin-console__input:active {
+    border: none;
+    outline: solid 2px var(--color-pink);
+}
+
+.admin-console__text {
+    font-size: var(--font-size-larger);
+    color: var(--color-pink);
+}
+
+.admin-console__edit-time {
+    max-width: 300px;
+    display: flex;
+}
+
+.admin-console__text--medium {
+    font-size: var(--font-size-medium);
+}
