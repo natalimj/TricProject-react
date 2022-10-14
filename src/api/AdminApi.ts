@@ -4,7 +4,7 @@ import IStatusData from "../models/Status";
 import authHeader from "../services/auth-header";
 
 const endSession = () => {
-  return http.post("adminApi/endSession","",{ headers: authHeader() });
+  return http.get("adminApi/endSession",{ headers: authHeader() });
 };
 
 const showFinalResult = () => {

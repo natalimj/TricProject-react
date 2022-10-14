@@ -105,6 +105,13 @@ const Admin = () => {
     dispatch(setStatus({ isActive: false }));
     AdminApi.endSession()
       .then((response: any) => {
+         const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
+            JSON.stringify(response.data)
+          )}`;
+         const link = document.createElement("a");
+          link.href = jsonString;
+          link.download = "ResultData.json";
+          link.click(); 
         NotificationManager.info('User data has been deleted', 'Info!', 2000);
       })
       .catch((e: Error) => {
