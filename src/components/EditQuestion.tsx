@@ -68,7 +68,7 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                             className='questions__text'
                             defaultValue={question.questionText}
                             name="questionText"
-                            maxLength={150} />
+                            maxLength={75} />
                     </div>
                 </div>
                 <div className="questions__line">
@@ -78,7 +78,7 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                             className='questions__text'
                             defaultValue={question.answers[0].answerText}
                             name="firstAnswer"
-                            maxLength={150} />
+                            maxLength={50} />
                     </div>
                     <div className="questions__icon" onClick={() => editQuestion(question.questionId)} ><AiOutlineSave size={30} /></div>
                 </div>
@@ -89,7 +89,7 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                             onChange={handleChange}
                             defaultValue={question.answers[1].answerText}
                             name="secondAnswer"
-                            maxLength={150} />
+                            maxLength={50} />
                     </div>
                     <div className="questions__icon" onClick={() => deleteQuestion(question.questionId)}><AiOutlineDelete size={30} /></div>
                 </div>

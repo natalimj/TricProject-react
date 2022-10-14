@@ -65,7 +65,7 @@ const Questions = () => {
                                 className="questions__text"
                                 placeholder="Enter question"
                                 onChange={(e) => setQuestionText(e.target.value)} 
-                                maxLength={150} />
+                                maxLength={75} />
                         </div>
                     </div>
                     <div className="questions__line">
@@ -75,7 +75,7 @@ const Questions = () => {
                                 className="questions__text"
                                 placeholder="Enter first answer"
                                 onChange={(e) => setFirstAnswer(e.target.value)}
-                                maxLength={150} />
+                                maxLength={50} />
                         </div>
                     </div>
                     <div className="questions__line">
@@ -85,7 +85,7 @@ const Questions = () => {
                                 className="questions__text"
                                 placeholder="Enter second answer"
                                 onChange={(e) => setSecondAnswer(e.target.value)}
-                                maxLength={150} />
+                                maxLength={50} />
                         </div>
                     </div>
                 </div>

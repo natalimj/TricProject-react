@@ -28,7 +28,6 @@ const StartPage = () => {
   }
 
   const onStatusMessageReceived = (msg: boolean) => {
-    console.log(msg)
     dispatch(setStatus({ isActive: msg }))
   }
 

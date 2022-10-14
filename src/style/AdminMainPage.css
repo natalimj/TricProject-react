@@ -119,4 +119,6 @@
     border: 3px solid var(--color-black);
     padding: 5px 0;
     width: 100%;
+    word-break: break-word;
+    max-width: 400px;
 }

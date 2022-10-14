@@ -23,7 +23,7 @@ const AdminConsole = () => {
     const [numberOfQuestions, setNumberOfQuestions] = useState<number>(0);
     const [question, setQuestion] = useState<IQuestionData>(initialQuestionState);
     const [showQuestionButton, setShowQuestionButton] = useState<boolean>(false);
-    const [timer, setTimer] = useState<number>(1);
+    const [timer, setTimer] = useState<number>(0);
     const maxTimeValue: number = 36000;
     const minTimeValue: number = 1;
     const dispatch = useAppDispatch();
@@ -131,10 +131,12 @@ const AdminConsole = () => {
                 setTimer(timer => timer - 1)
             }, 1000);
         } else if (timer === 0) {
-            if (question.questionNumber !== numberOfQuestions) {
-                showResult();
-            } else {
-                showFinalResult()
+            if(question.questionNumber !== 1) {
+                if (question.questionNumber !== numberOfQuestions) {
+                    showResult();
+                } else {
+                    showFinalResult()
+                }
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
