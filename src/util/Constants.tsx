@@ -1,8 +1,8 @@
 const Constants = {
-	BASE_URL : "https://tricproject.azurewebsites.net/",
-	SOCKET_URL: "https://tricproject.azurewebsites.net/ws-message",
-	//BASE_URL: "http://localhost:8080/",
-	//SOCKET_URL: "http://localhost:8080/ws-message",
+	//BASE_URL : "https://tricproject.azurewebsites.net/",
+	//SOCKET_URL: "https://tricproject.azurewebsites.net/ws-message",
+	BASE_URL: "http://localhost:8080/",
+	SOCKET_URL: "http://localhost:8080/ws-message",
 
 	/* LABELS */
 	APP_TITLE: "TRIC",
@@ -47,6 +47,7 @@ const Constants = {
 	ALL_QUESTIONS_FIELD: "Show All Questions",
 	NEXT_QUESTION_TEXT: "Next question is:",
 	SET_TIME_INFO: "*Time is expressed in SECONDS",
+	TIME_LENGTH_INFO: "*MAX time length is 36000s",
 };
 
 export default Constants;

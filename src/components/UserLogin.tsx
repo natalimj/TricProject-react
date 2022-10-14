@@ -64,6 +64,7 @@ const UserLoginPage = () => {
                         value={user.username}
                         onChange={handleInputChange}
                         name="username"
+                        maxLength={25}
                     />
                 </div>
             </div>

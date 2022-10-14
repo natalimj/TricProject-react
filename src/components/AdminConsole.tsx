@@ -23,7 +23,9 @@ const AdminConsole = () => {
     const [numberOfQuestions, setNumberOfQuestions] = useState<number>(0);
     const [question, setQuestion] = useState<IQuestionData>(initialQuestionState);
     const [showQuestionButton, setShowQuestionButton] = useState<boolean>(false);
-    const [timer, setTimer] = useState<number>(0);
+    const [timer, setTimer] = useState<number>(1);
+    const maxTimeValue: number = 36000;
+    const minTimeValue: number = 1;
     const dispatch = useAppDispatch();
 
     const getQuestion = (questionNo: number) => {
@@ -58,14 +60,23 @@ const AdminConsole = () => {
         let time: number;
         if (e.currentTarget.value !== "") {
             time = parseInt(e.currentTarget.value)
-
-            AdminApi.addQuestionTime(question.questionId, time)
-                .then((response: any) => {
-                    setQuestion(response.data)
-                })
-                .catch((e: Error) => {
-                    NotificationManager.error(e.message, 'Error!', 5000);
-                });
+            if (time) {
+                if (time > maxTimeValue) {
+                    time = maxTimeValue;
+                }
+                if (time < minTimeValue) {
+                    time = minTimeValue;
+                }
+                AdminApi.addQuestionTime(question.questionId, time)
+                    .then((response: any) => {
+                        setQuestion(response.data)
+                    })
+                    .catch((e: Error) => {
+                        NotificationManager.error(e.message, 'Error!', 5000);
+                    });
+            } else {
+                setQuestion({ ...question, time: NaN })
+            }
         } else {
             setQuestion({ ...question, time: NaN })
         }
@@ -166,10 +177,12 @@ const AdminConsole = () => {
                                         {Constants.TIME_FOR} {question.questionNumber}:
                                     </div>
                                     <input type="text"
+                                        pattern='[0-9]{2}'
                                         name="time"
                                         value={question.time || ''}
                                         onChange={(e) => handleTimeChange(e)}
-                                        className="admin-console__input" />
+                                        className="admin-console__input"
+                                        maxLength={5} />
                                 </div>
                                 <button onClick={() => showQuestion()} className="admin-console__submit-button--secondary">
                                     {Constants.QUESTION_BUTTON} {question.questionNumber}
@@ -177,6 +190,9 @@ const AdminConsole = () => {
                             </div>
                             <div className='admin-console__text admin-console__text--helper'>
                                 {Constants.SET_TIME_INFO}
+                                <div>
+                                    {Constants.TIME_LENGTH_INFO}
+                                </div>
                             </div>
                         </>
                     ) : (
