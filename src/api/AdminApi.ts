@@ -4,11 +4,11 @@ import IStatusData from "../models/Status";
 import authHeader from "../services/auth-header";
 
 const endSession = () => {
-  return http.post("adminApi/endSession","",{ headers: authHeader() });
+  return http.get("adminApi/endSession", { headers: authHeader() });
 };
 
 const showFinalResult = () => {
-  return http.post("adminApi/showFinalResult","",{ headers: authHeader() });
+  return http.post("adminApi/showFinalResult", "", { headers: authHeader() });
 };
 
 const getQuestionByNumber = (questionNumber: number) => {
@@ -30,11 +30,11 @@ const showQuestion = (questionNumber: number) => {
 };
 
 const activateApp = () => {
-  return http.post<IStatusData>("adminApi/activate","",{ headers: authHeader() });
+  return http.post<IStatusData>("adminApi/activate", "", { headers: authHeader() });
 };
 
 const getAllQuestions = () => {
-  return http.get<Array<IQuestionData>>("adminApi/questions",{ headers: authHeader() });
+  return http.get<Array<IQuestionData>>("adminApi/questions", { headers: authHeader() });
 };
 
 const addQuestion = (questionText: string, firstAnswer: string, secondAnswer: string) => {
@@ -49,8 +49,8 @@ const addQuestion = (questionText: string, firstAnswer: string, secondAnswer: st
   )
 };
 
-const addQuestionTime = (questionId :any, time: number) => {
-  return http.post<IQuestionData>("adminApi/addQuestionTime", {},{
+const addQuestionTime = (questionId: any, time: number) => {
+  return http.post<IQuestionData>("adminApi/addQuestionTime", {}, {
     params: {
       questionId: questionId,
       time: time,
@@ -60,8 +60,8 @@ const addQuestionTime = (questionId :any, time: number) => {
   )
 };
 
-const deleteQuestion =( questionId: number) =>{
-  return http.delete<number>("adminApi/deleteQuestion",{
+const deleteQuestion = (questionId: number) => {
+  return http.delete<number>("adminApi/deleteQuestion", {
     params: {
       questionId: questionId
     },
@@ -83,7 +83,7 @@ const editQuestion = (questionText: string, firstAnswer: string, secondAnswer: s
 }
 
 const getNumberOfQuestions = () => {
-  return http.get<number>("adminApi/numberOfQuestions",{ headers: authHeader() });
+  return http.get<number>("adminApi/numberOfQuestions", { headers: authHeader() });
 };
 
 
