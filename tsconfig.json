@@ -5,7 +5,7 @@
       "dom",
       "es5"
     ],
-    "types": ["cypress", "node"],
+    "types": ["jest", "node"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -22,6 +22,6 @@
     "noImplicitAny": false
   },
   "include": [
-    "**/*.tsx", "./src", "cypress.d.ts"
+    "**/*.tsx", "./src"
   ]
 }

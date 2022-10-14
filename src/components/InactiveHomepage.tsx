@@ -15,7 +15,7 @@ const InactiveHomepage = () => {
   }, [dispatch])
 
 return (
-  <div className='innactive-container'>
+  <div className='innactive-container' e2e-id="inactive">
     <div className='innactive-container__text'>
       {Constants.NO_ACTIVE_PLAY}
     </div>

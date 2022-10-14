@@ -54,19 +54,3 @@ jobs:
         uses: actions/checkout@v2
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
-      - name: Cypress run
-        uses: cypress-io/github-action@v3
-
-      - name: Upload Screenshots
-        uses: actions/upload-artifact@v3
-        if: failure()
-        with:
-         name: cypress-screenshots
-         path: cypress/screenshots
-
-      - name: Upload Videos
-        uses: actions/upload-artifact@v3
-        if: failure()
-        with:
-         name: cypress-videos
-         path: cypress/videos
