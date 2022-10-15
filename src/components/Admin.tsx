@@ -59,6 +59,10 @@ const Admin = () => {
     window.location.href = "/admin/questions";
   };
 
+  const editContributors = () => {
+    window.location.href = "/admin/contributors";
+  };
+
   const showQuestion = () => {
     AdminApi.showQuestion(question.questionNumber)
       .then((response: any) => {
@@ -169,7 +173,7 @@ const Admin = () => {
         <div className='admin-console__body'>
           <div className='admin-console__logo'></div>
           <div className='admin-console__buttons'>
-            <button className="admin-console__submit-button--secondary">
+            <button onClick={editContributors} className="admin-console__submit-button--secondary">
               {Constants.EDIT_CONTRIBUTORS}
             </button>
             <button onClick={editQuestions} className="admin-console__submit-button--secondary">

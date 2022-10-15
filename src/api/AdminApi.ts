@@ -2,6 +2,7 @@ import http from "../util/Http-common";
 import IQuestionData from "../models/Question";
 import IStatusData from "../models/Status";
 import authHeader from "../services/auth-header";
+import IContributorData from "../models/Contributor";
 
 const endSession = () => {
   return http.get("adminApi/endSession",{ headers: authHeader() });
@@ -86,6 +87,24 @@ const getNumberOfQuestions = () => {
   return http.get<number>("adminApi/numberOfQuestions",{ headers: authHeader() });
 };
 
+const addContributor = (contributor : IContributorData) => { 
+  return http.post<IContributorData>("adminApi/contributor", contributor, { headers: authHeader()} );
+};
+
+
+const editContributor = (contributor : IContributorData) => {
+  return http.patch<IContributorData>("adminApi/editContributor",contributor,{ headers: authHeader() });
+};
+
+
+const deleteContributor = (contributorId : number) => {
+  return http.delete<number>("adminApi/deleteContributor",{
+    params: {
+      contributorId : contributorId
+    },
+    headers: authHeader()
+  })
+}
 
 const AdminApi = {
   endSession,
@@ -98,6 +117,9 @@ const AdminApi = {
   showFinalResult,
   addQuestionTime,
   showQuestion,
-  getNumberOfQuestions
+  getNumberOfQuestions,
+  addContributor,
+  editContributor,
+  deleteContributor
 };
 export default AdminApi;

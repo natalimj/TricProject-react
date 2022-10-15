@@ -44,6 +44,8 @@ const Constants = {
 	HUMANLAB: "HumanLab",
 	QUESTIONS_FIELD: "Questions",
 	ALL_QUESTIONS_FIELD: "Show All Questions",
+	CAST_LIST_TITLE : "Cast",
+	NEW_CAST_TITLE: "New Cast",
 };
 
 export default Constants;
