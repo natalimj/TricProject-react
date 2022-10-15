@@ -4,6 +4,8 @@ import IVoteData from "../models/Vote";
 import FinalResult from "../models/FinalResult";
 import IResultData from "../models/Result";
 import IContributorData from "../models/Contributor";
+import IPlayInfoData from "../models/PlayInfo";
+import authHeader from "../services/auth-header";
 
 const getAllUsers = () => {
     return http.get<Array<IUserData>>("userApi/users");
@@ -45,6 +47,11 @@ const getDevTeam = () => {
     return http.get<Array<IContributorData>>("userApi/devTeam");
 };
 
+
+const getPlayInfo = () => {
+    return http.get<IPlayInfoData>("userApi/getPlayInfo",{ headers: authHeader() });
+  };
+
 const UserApi = {
     getAllUsers,
     createUser,
@@ -53,6 +60,7 @@ const UserApi = {
     showResult,
     getFinalResult,
     getCast,
-    getDevTeam
+    getDevTeam,
+    getPlayInfo
 };
 export default UserApi;

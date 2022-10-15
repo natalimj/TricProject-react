@@ -63,7 +63,7 @@
 .questions__icon {
     background-color: var(--color-pink);
     width: 10%;
-    padding-top: 15px;
+    padding-top: 25px;
 }
 
 .questions__icon:hover {

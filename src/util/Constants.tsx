@@ -46,6 +46,9 @@ const Constants = {
 	ALL_QUESTIONS_FIELD: "Show All Questions",
 	CAST_LIST_TITLE : "Cast",
 	NEW_CAST_TITLE: "New Cast",
+	PLAY_INFO_TITLE : "Play Info",
+	EDIT_BUTTON : "Edit",
+	DELETE_BUTTON : "Delete",
 };
 
 export default Constants;

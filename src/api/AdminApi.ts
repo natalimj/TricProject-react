@@ -3,6 +3,7 @@ import IQuestionData from "../models/Question";
 import IStatusData from "../models/Status";
 import authHeader from "../services/auth-header";
 import IContributorData from "../models/Contributor";
+import IPlayInfoData from "../models/PlayInfo";
 
 const endSession = () => {
   return http.get("adminApi/endSession",{ headers: authHeader() });
@@ -106,6 +107,11 @@ const deleteContributor = (contributorId : number) => {
   })
 }
 
+const editPlayInfo = (playInfo : IPlayInfoData) => {
+  return http.patch<IPlayInfoData>("adminApi/playInfo",playInfo,{ headers: authHeader() });
+};
+
+
 const AdminApi = {
   endSession,
   getQuestionByNumber,
@@ -120,6 +126,7 @@ const AdminApi = {
   getNumberOfQuestions,
   addContributor,
   editContributor,
-  deleteContributor
+  deleteContributor,
+  editPlayInfo
 };
 export default AdminApi;

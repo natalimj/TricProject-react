@@ -2,6 +2,7 @@ import React, { ChangeEvent, useState } from 'react'
 import IContributorData from '../models/Contributor'
 import { NotificationManager } from 'react-notifications';
 import AdminApi from '../api/AdminApi';
+import Constants from '../util/Constants';
 
 type Props = {
     contributorToEdit: IContributorData
@@ -66,7 +67,7 @@ const EditContributor = ({ contributorToEdit, contributors, setContributors }: P
                         name="name" />
                 </div>
                 <div className="questions__icon"
-                    onClick={() => editContributor()} >EDIT</div>
+                    onClick={() => editContributor()} >{Constants.EDIT_BUTTON.toUpperCase()}</div>
             </div>
             <div className="questions__line">
                 <div className="questions__input">
@@ -78,7 +79,7 @@ const EditContributor = ({ contributorToEdit, contributors, setContributors }: P
                         name="description" />
                 </div>
                 <div className="questions__icon"
-                    onClick={() => deleteContributor()}>DELETE</div>
+                    onClick={() => deleteContributor()}>{Constants.DELETE_BUTTON.toUpperCase()}</div>
             </div>
         </div>
     )

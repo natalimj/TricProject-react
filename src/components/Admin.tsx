@@ -60,7 +60,7 @@ const Admin = () => {
   };
 
   const editContributors = () => {
-    window.location.href = "/admin/contributors";
+    window.location.href = "/admin/playInfo";
   };
 
   const showQuestion = () => {
