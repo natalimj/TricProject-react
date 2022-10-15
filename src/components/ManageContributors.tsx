@@ -75,6 +75,7 @@ const Contributors = () => {
               className="questions__text"
               name="name"
               placeholder="Enter name"
+              maxLength={30} 
               onChange={handleChange} />
           </div>
         </div>
@@ -85,6 +86,7 @@ const Contributors = () => {
               className="questions__text"
               name="description"
               placeholder="Enter description"
+              maxLength={40} 
               onChange={handleChange} />
           </div>
         </div>

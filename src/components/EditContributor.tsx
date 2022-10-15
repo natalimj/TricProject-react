@@ -62,6 +62,7 @@ const EditContributor = ({ contributorToEdit, contributors, setContributors }: P
                         onChange={handleChange}
                         className='questions__text'
                         value={contributor.name}
+                        maxLength={30} 
                         name="name" />
                 </div>
                 <div className="questions__icon"
@@ -73,6 +74,7 @@ const EditContributor = ({ contributorToEdit, contributors, setContributors }: P
                         onChange={handleChange}
                         className='questions__text'
                         value={contributor.description}
+                        maxLength={40} 
                         name="description" />
                 </div>
                 <div className="questions__icon"
