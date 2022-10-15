@@ -18,13 +18,17 @@
     margin-bottom: 5%;
 }
 
+.admin-console__buttons--result {
+    margin-bottom: 50%;
+}
+
 .admin-console__body {
     height: 100%;
     justify-content: space-between;
 }
 
 .admin-console__body--active {
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .admin-console__header {
@@ -95,6 +99,11 @@
     color: var(--color-pink);
 }
 
+.admin-console__text--helper{
+    font-size: var(--font-size-default);
+    margin-bottom: 2%;
+}
+
 .admin-console__edit-time {
     max-width: 300px;
     display: flex;
@@ -102,4 +111,14 @@
 
 .admin-console__text--medium {
     font-size: var(--font-size-medium);
+}
+
+.admin-console__next-question-text {
+    font-size: var(--font-size-medium);
+    background-color: var(--color-grey);
+    border: 3px solid var(--color-black);
+    padding: 5px 0;
+    width: 100%;
+    word-break: break-word;
+    max-width: 400px;
 }

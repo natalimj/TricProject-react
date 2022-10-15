@@ -22,11 +22,11 @@ const getAppStatus = () => {
 
 const showResult = (questionId: any) => {
     return http.get<IResultData>("userApi/result", {
-      params: {
-        questionId: questionId
-      }
+        params: {
+            questionId: questionId
+        }
     })
-  };
+};
 
 const getFinalResult = (userId: any) => {
     return http.get<Array<FinalResult>>("userApi/finalResult", {
