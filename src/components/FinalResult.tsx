@@ -43,7 +43,7 @@ const FinalResult = () => {
               <span>HumanLab</span>
             </div>
           </div>
-          <div className="final-result__result-box"><div>{Constants.FINAL_RESULT_FIELD}</div>
+          <div className="final-result__result-box"><div>{Constants.DIGITAL_PROFILE_FIELD}</div>
 
             {finalResults && finalResults.map((finalResult) => (
               <div key={finalResult.category.categoryId}>

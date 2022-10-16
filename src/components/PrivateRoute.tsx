@@ -2,9 +2,10 @@ import { Navigate, Outlet } from 'react-router-dom'
 import { isAuth } from '../services/auth.service'
 
 const PrivateRoutes = () => {
-  let auth = isAuth()
-return (
-    auth ? <Outlet/> : <Navigate to='/login'/>
+  const auth = isAuth();
+  
+  return (
+    auth ? <Outlet /> : <Navigate to='/login' />
   )
 }
 
