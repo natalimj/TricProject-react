@@ -35,6 +35,15 @@
     word-wrap: break-word;
 }
 
+.questions__box-small {
+    background-color: var(--color-off-white);
+    color: var(--color-black);
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    word-wrap: break-word;
+}
+
 .questions__line {
     display: flex;
     border-bottom: var(--color-black) solid 1px;

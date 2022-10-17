@@ -96,7 +96,7 @@ const PlayInfo = () => {
       <div className='questions__header'>
         {Constants.PLAY_INFO_TITLE}
       </div>
-      <div className="questions__box">
+      <div className="questions__box-small">
         <div className="questions__line">
           <div className="questions__input">
             <input type="text"
@@ -104,7 +104,7 @@ const PlayInfo = () => {
               className="questions__text"
               name="playInfoText"
               placeholder="Enter play Info"
-              maxLength={500}
+              maxLength={700}
               onChange={handlePlayInfoChange} />
           </div>
           <div className="questions__icon"
@@ -114,7 +114,7 @@ const PlayInfo = () => {
       <div className='questions__header'>
         {Constants.NEW_CAST_TITLE}
       </div>
-      <div className="questions__box">
+      <div className="questions__box-small">
         <div className="questions__line">
           <div className="questions__input">
             <input type="text"

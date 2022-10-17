@@ -1,0 +1,58 @@
+@import url("../styles.css");
+
+.play-info{
+    width: 50%;
+    height: 100vh;
+}
+
+.play-info__inner-container{
+    background-color: var(--color-grey);
+    height: 96vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    bottom: 0px;
+    padding-top: 4vh;
+}
+
+.play-info__name-smaller-text{
+    margin-top: 15px;
+    font-size: var(font-size-default);
+}
+
+.play-info__header{
+    font-size: var(--font-size-header);
+    background-color: var(--color-pink);
+    color: var(--color-dark-grey);
+    border: 3px solid var(--color-black);
+    width: 95%;
+    margin: auto;
+}
+.play-info_text{
+    word-wrap: break-word;
+    padding: 35px;
+    text-align: justify;
+}
+
+.play-info_name{
+    margin-top: 25px;
+    font-size: var(--font-size-larger);
+}
+
+.play-info_close-icon{
+    height: 4vh;
+    padding-right: 5px;
+    display: flex;
+    justify-content:flex-end;
+}
+.play-info_arrow-icon{
+    position:absolute;
+    bottom: 20px;
+    right: 20px;
+}
+@media (max-width: 1000px) {
+    .play-info{
+        width: 90%;
+    }
+}
+

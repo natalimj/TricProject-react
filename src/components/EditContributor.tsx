@@ -56,7 +56,7 @@ const EditContributor = ({ contributorToEdit, contributors, setContributors }: P
 
     return (
 
-        <div key={contributor.contributorId} className="questions__box">
+        <div key={contributor.contributorId} className="questions__box-small">
             <div className="questions__line">
                 <div className="questions__input">
                     <input type="text"
