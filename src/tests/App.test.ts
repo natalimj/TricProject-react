@@ -6,7 +6,9 @@ describe("TRIC_TEST", () => {
   let adminPage;
 
   beforeAll(async () => {
-    browser = await puppeteer.launch();
+    browser = await puppeteer.launch({
+      headless: true,
+    });
     userPage = await browser.newPage();
     adminPage = await browser.newPage();
     await userPage.goto("http://localhost:3000");
