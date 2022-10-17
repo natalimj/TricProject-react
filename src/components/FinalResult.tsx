@@ -8,6 +8,8 @@ import ExportAsImage from '../util/ExportAsImage';
 import moment from 'moment';
 import { useAppSelector } from '../app/hooks';
 import { RootState } from '../app/store';
+import { BsInfoCircle } from 'react-icons/bs';
+import PlayInfo from './PlayInfo';
 
 const FinalResult = () => {
   const currentUser: IUserData = {
@@ -16,8 +18,10 @@ const FinalResult = () => {
     imagePath: useAppSelector((state: RootState) => state.user.imagePath)
   }
   const [finalResults, setFinalResults] = useState<IFinalResultData[]>([]);
+  const [showPlayInfo, setShowPlayInfo] = useState<boolean>(false)
   const exportRef = useRef<HTMLHeadingElement>(null);
   const today = moment().format('DD-MM-YYYY');
+  
 
   useEffect(() => {
     UserApi.getFinalResult(currentUser.userId)
@@ -30,7 +34,8 @@ const FinalResult = () => {
   }, [currentUser.userId])
 
   return (
-    <div className='final-result'>
+   <> 
+   {!showPlayInfo && <div className='final-result'>
       <div className="final-result__inner-container">
         <div ref={exportRef} className="final-result__pink-background">
           <div className="final-result__user-box">
@@ -43,7 +48,7 @@ const FinalResult = () => {
               <span>HumanLab</span>
             </div>
           </div>
-          <div className="final-result__result-box"><div>{Constants.DIGITAL_PROFILE_FIELD}</div>
+          <div className="final-result__result-box"><div>{Constants.FINAL_RESULT_FIELD}</div>
 
             {finalResults && finalResults.map((finalResult) => (
               <div key={finalResult.category.categoryId}>
@@ -57,11 +62,14 @@ const FinalResult = () => {
                 </div>
               </div>
             ))}
-          </div>
+               <div className='final-result__info-icon'><BsInfoCircle size={30} onClick={()=>setShowPlayInfo(true)}/></div>
+          </div>   
         </div>
         <div className="final-result__download" onClick={() => ExportAsImage(exportRef.current, `TRIC-${today}`)}>{Constants.DOWNLOAD}</div>
       </div>
-    </div>
+    </div> }
+    {showPlayInfo && <PlayInfo/>}
+    </>
   )
 }
 

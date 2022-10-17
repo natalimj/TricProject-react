@@ -87,11 +87,10 @@ const Questions = () => {
                                 onChange={(e) => setSecondAnswer(e.target.value)}
                                 maxLength={50} />
                         </div>
+                        <div className="questions__icon"
+                        onClick={addQuestion} >{Constants.SAVE_BUTTON.toUpperCase()}</div>
                     </div>
                 </div>
-                <button className="questions__save-button" onClick={addQuestion}>
-                    {Constants.SAVE_BUTTON}
-                </button>
             </div>
             <div className='questions__header questions__header--accordion' onClick={() => showEditQuestions()}>
                 {Constants.QUESTION_LIST_TITLE}

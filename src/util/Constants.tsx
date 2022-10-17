@@ -45,9 +45,16 @@ const Constants = {
 	HUMANLAB: "HumanLab",
 	QUESTIONS_FIELD: "Questions",
 	ALL_QUESTIONS_FIELD: "Show All Questions",
+	CAST_LIST_TITLE : "Cast",
+	NEW_CAST_TITLE: "New Cast",
+	PLAY_INFO_TITLE : "Play Info",
+	EDIT_BUTTON : "Edit",
+	DELETE_BUTTON : "Delete",
 	NEXT_QUESTION_TEXT: "Next question is:",
 	SET_TIME_INFO: "*Time is expressed in SECONDS",
 	TIME_LENGTH_INFO: "*MAX time length is 36000s",
+	DEVELOPERS_TITLE: "Developers",
+
 };
 
 export default Constants;
