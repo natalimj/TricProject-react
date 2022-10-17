@@ -57,6 +57,10 @@ jobs:
         with:
           path: '**/node_modules'
           key: node_modules-${{ hashFiles('**/package-lock.json') }}
+
+      # install the dependencies
+      - name: install
+        run: npm install
           
       # install the dependencies
       - name: install dependencies
