@@ -12,8 +12,8 @@ describe("TRIC_TEST", () => {
    })
     userPage = await browser.newPage();
     adminPage = await browser.newPage();
-    await userPage.goto("http://localhost:3000");
-    await adminPage.goto("http://localhost:3000/admin");
+    await userPage.goto("https://jolly-forest-02e0b3603-test.westeurope.1.azurestaticapps.net");
+    await adminPage.goto("https://jolly-forest-02e0b3603-test.westeurope.1.azurestaticapps.net/admin");
   });
 
   it("Join the app", async () => {
