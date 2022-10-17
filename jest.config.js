@@ -1,10 +1,21 @@
-module.exports = {
-  preset: 'jest-puppeteer',
-  transform: {"\\.ts$": ['ts-jest']},
-  launch: {
-    headless: process.env.CI === "true",
-    ignoreDefaultArgs: ["--disable-extensions"],
-    args: ["--no-sandbox"],
-    executablePath: "chrome.exe"
-  }
-};
+const config = {
+  "preset": "jest-puppeteer",
+  "collectCoverage": true,
+  "collectCoverageFrom": [
+    "src/**/*"
+  ],
+  "coverageReporters": [
+    "text",
+    "lcov",
+    "cobertura"
+  ],
+  "setupFilesAfterEnv": [
+  "jest-puppeteer-istanbul/lib/setup"
+  ],
+  "reporters": [
+    "default",
+    "jest-puppeteer-istanbul/lib/reporter"
+  ],
+  "coverageDirectory": "coverage"
+}
+module.exports = config;
