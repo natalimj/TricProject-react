@@ -67,7 +67,7 @@ jobs:
           
       # install the dependencies
       - name: install dependencies
-        run: npm ci --ignore-scripts
+        run: npm ci
 
       # run the tests
       - name: test
