@@ -59,7 +59,7 @@ const UserLoginPage = () => {
                         type="text"
                         className="user-form__form-control"
                         id="username"
-                        data-cy="username"
+                        e2e-id="username"
                         required
                         value={user.username}
                         onChange={handleInputChange}
@@ -88,7 +88,7 @@ const UserLoginPage = () => {
                         : <div className='user-form__avatar-selector-item'></div>}
                 </div>
             </div>
-            <button onClick={saveUser} className="submit-button" data-cy="create">
+            <button onClick={saveUser} className="submit-button" e2e-id="create">
                 {Constants.SUBMIT_BUTTON}
             </button>
         </div>

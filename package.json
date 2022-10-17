@@ -8,7 +8,6 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
-    "@types/jest": "^27.5.2",
     "@types/node": "^17.0.45",
     "axios": "^0.27.2",
     "bootstrap": "^4.6.0",
@@ -29,6 +28,10 @@
     "react-toastify": "^9.0.8",
     "redux-persist": "^6.0.0",
     "sockjs": "^0.3.24",
+    "jest": "^29.0.0",
+    "jest-puppeteer": "^6.1.1",
+    "puppeteer": "^18.1.0",
+    "ts-jest": "^29.0.3",
     "web-vitals": "^2.1.4",
     "yarn": "^1.22.19",
     "yup": "^0.32.11"
@@ -36,7 +39,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest -c jest-browser-tests.config.js --runInBand",
+    "test:integration": "jest -c jest-browser-tests.config.js",
+    "ci:integration": "jest -c jest-browser-tests.config.js --runInBand",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -58,9 +63,12 @@
     ]
   },
   "devDependencies": {
+    "@types/expect-puppeteer": "^5.0.1",
+    "@types/jest": "^29.1.2",
+    "@types/jest-environment-puppeteer": "^5.0.2",
+    "@types/puppeteer": "^5.4.7",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
-    "cypress": "^10.8.0",
     "typescript": "^4.8.3"
   },
   "overrides": {

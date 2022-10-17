@@ -46,27 +46,30 @@ jobs:
           output_location: "" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
           deployment_environment: "test"
-  cypress-run:
+  ci:
     needs: build_and_deploy_job
     runs-on: ubuntu-20.04
+    container: lironavon/docker-puppeteer-container:14.16.0
+    env:
+      CI: true
     steps:
-      - name: Checkout
+      # add git to the container and set it up with the token
+      - name: setup git in container
         uses: actions/checkout@v2
-      # Install NPM dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run
-        uses: cypress-io/github-action@v3
-
-      - name: Upload Screenshots
-        uses: actions/upload-artifact@v3
-        if: failure()
         with:
-         name: cypress-screenshots
-         path: cypress/screenshots
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload Videos
-        uses: actions/upload-artifact@v3
-        if: failure()
+      # cache the dependencies from any node_modules directory
+      - name: cache dependencies
+        uses: actions/cache@v2
         with:
-         name: cypress-videos
-         path: cypress/videos
+          path: '**/node_modules'
+          key: node_modules-${{ hashFiles('**/package-lock.json') }}
+          
+      # install the dependencies
+      - name: install dependencies
+        run: npm ci
+
+      # run the tests
+      - name: test
+        run: npm test
