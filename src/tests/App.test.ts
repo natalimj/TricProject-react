@@ -1,6 +1,18 @@
 import puppeteer from "puppeteer";
 
-describe("TRIC_TEST", () => {
+describe("Feature 1 - Questions database and display", () => {
+
+});
+
+describe("Feature 2 - Voting System", () => {
+
+});
+
+describe("Feature 3 - Voting Rounds", () => {
+
+});
+
+describe("Feature 4 - User Personalization", () => {
   let browser;
   let userPage;
   let adminPage;
@@ -17,11 +29,30 @@ describe("TRIC_TEST", () => {
   });
 
   it("Join the app", async () => {
-    //await userPage.waitForSelector('[e2e-id="inactive"]');
     await userPage.waitForSelector('[e2e-id="join"]');
     await userPage.click('[e2e-id="join"]');
     await userPage.waitForSelector('[e2e-id="create"]');
   });
 
+  it("Create user", async () => {
+
+  });
+
   afterAll(() => browser.close());
+});
+
+describe("Feature 5 - Contribututors Page", () => {
+
+});
+
+describe("Feature 6 - Answer Prediction", () => {
+
+});
+
+describe("Feature 7 - Personal Voting Results", () => {
+
+});
+
+describe("Feature 8 - Downtime management and ending the play", () => {
+
 });
