@@ -35,11 +35,14 @@ const StartPage = () => {
     UserApi.getAppStatus()
       .then((response: any) => {
         dispatch(setStatus({ isActive: response.data }))
+        if(!isActive){
+          setPlayStarted(false);
+        }
       })
       .catch((e: Error) => {
         console.log(e);
       });
-  }, [dispatch])
+  }, [dispatch, isActive])
 
   return (
     <>

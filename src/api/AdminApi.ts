@@ -88,27 +88,31 @@ const getNumberOfQuestions = () => {
   return http.get<number>("adminApi/numberOfQuestions", { headers: authHeader() });
 };
 
-const addContributor = (contributor : IContributorData) => { 
-  return http.post<IContributorData>("adminApi/contributor", contributor, { headers: authHeader()} );
+const getActiveUsers = () => {
+  return http.get<number>("adminApi/activeUsers", { headers: authHeader() });
+};
+
+const addContributor = (contributor: IContributorData) => {
+  return http.post<IContributorData>("adminApi/contributor", contributor, { headers: authHeader() });
 };
 
 
-const editContributor = (contributor : IContributorData) => {
-  return http.patch<IContributorData>("adminApi/editContributor",contributor,{ headers: authHeader() });
+const editContributor = (contributor: IContributorData) => {
+  return http.patch<IContributorData>("adminApi/editContributor", contributor, { headers: authHeader() });
 };
 
 
-const deleteContributor = (contributorId : number) => {
-  return http.delete<number>("adminApi/deleteContributor",{
+const deleteContributor = (contributorId: number) => {
+  return http.delete<number>("adminApi/deleteContributor", {
     params: {
-      contributorId : contributorId
+      contributorId: contributorId
     },
     headers: authHeader()
   })
 }
 
-const editPlayInfo = (playInfo : IPlayInfoData) => {
-  return http.patch<IPlayInfoData>("adminApi/playInfo",playInfo,{ headers: authHeader() });
+const editPlayInfo = (playInfo: IPlayInfoData) => {
+  return http.patch<IPlayInfoData>("adminApi/playInfo", playInfo, { headers: authHeader() });
 };
 
 
@@ -124,6 +128,7 @@ const AdminApi = {
   addQuestionTime,
   showQuestion,
   getNumberOfQuestions,
+  getActiveUsers,
   addContributor,
   editContributor,
   deleteContributor,

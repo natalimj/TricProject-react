@@ -28,6 +28,7 @@
     color: var(--color-dark-grey);
     margin: 10px 25px;
     text-align: center;
+    max-height: 45px;
 }
 
 .user-form__form-control:focus,
@@ -69,4 +70,22 @@
 
 .user-form--user-arrow:active {
     color: var(--color-pink);
+}
+
+@media screen and (max-height: 650px) {
+
+    .user-form__header,
+    .user-form_avatar-header {
+        font-size: var(--font-size-medium);
+    }
+
+    .user-form__header,
+    .user-form__avatar-container {
+        margin: 15px 0;
+    }
+
+    .user-form__form-control {
+        height: 30px;
+        margin: 5px 10px;
+    }
 }

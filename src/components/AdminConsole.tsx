@@ -134,13 +134,8 @@ const AdminConsole = () => {
                 setTimer(timer => timer - 1)
             }, 1000);
         } else if (timer === 0 && numberOfQuestions !== 0) {
-            if (question.questionNumber !== 1) {
-                if (question.questionNumber !== numberOfQuestions) {
-                    showResult();
-                } else {
-                    showFinalResult();
-                }
-            }
+            console.log(timer)
+            question.questionNumber !== numberOfQuestions ? showResult() : showFinalResult();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [timer]);
@@ -156,6 +151,17 @@ const AdminConsole = () => {
             });
 
     }, [numberOfQuestions])
+
+    useEffect(() => {
+        AdminApi.getActiveUsers()
+            .then((response: any) => {
+                setNumberOfUsers(response.data)
+            })
+            .catch((e: Error) => {
+                NotificationManager.error(e.message, 'Error!', 5000);
+            });
+
+    }, [numberOfUsers])
 
     return (
         <>

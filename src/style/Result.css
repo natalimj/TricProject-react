@@ -34,19 +34,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    max-width: 90%;
     background-color: var(--color-off-white);
     color: var(--color-dark-grey);
-    height: 20%;
-    width: 70%;
     font-size: var(--font-size-larger);
     margin: auto;
     border: var(--color-pink) solid 2px;
+    word-break: break-word;
 }
 
 .result__answer-text {
     color: var(--color-pink);
     font-size: var(--font-size-larger);
     margin-bottom: 2%;
+    word-break: break-word;
 }
 
 .result__user-answer--text {
@@ -90,6 +91,10 @@
 
 .result__answer-bar--right {
     background-color: var(--color-off-white);
+}
+
+.result__answer-text--right{
+    color: var(--color-off-white);
 }
 
 @media (max-width: 800px) {
