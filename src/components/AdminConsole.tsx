@@ -130,12 +130,13 @@ const AdminConsole = () => {
             setTimeout(() => {
                 setTimer(timer => timer - 1)
             }, 1000);
-        } else if (timer === 0) {
-            if(question.questionNumber !== 1) {
+        } else if (timer === 0 && numberOfQuestions !== 0) {
+            if (question.questionNumber !== 1) {
                 if (question.questionNumber !== numberOfQuestions) {
                     showResult();
                 } else {
-                    showFinalResult()
+                    console.log(numberOfQuestions)
+                    showFinalResult();
                 }
             }
         }

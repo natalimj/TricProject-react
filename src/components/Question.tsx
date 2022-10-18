@@ -34,7 +34,7 @@ const Question = () => {
     };
 
     UserApi.saveVote(voteData)
-      .then((response: any) => {
+      .then(() => {
         dispatch(addAnswer(answer));
       })
       .catch((e: Error) => {
