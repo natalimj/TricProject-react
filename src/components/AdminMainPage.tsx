@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import '../style/AdminMainPage.css';
 import AdminApi from '../api/AdminApi';
 import Constants from '../util/Constants';
@@ -8,6 +8,7 @@ import { RootState } from '../app/store';
 import 'react-notifications/lib/notifications.css';
 import { NotificationManager } from 'react-notifications';
 import AdminConsole from './AdminConsole';
+import UserApi from '../api/UserApi';
 
 const Admin = () => {
   const isActive = useAppSelector((state: RootState) => state.status.isActive);
@@ -31,6 +32,15 @@ const Admin = () => {
     window.location.href = "/admin/playInfo";
   };
 
+  useEffect(() => {
+    UserApi.getAppStatus()
+      .then((response: any) => {
+        dispatch(setStatus({ isActive: response.data }))
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+  }, [dispatch])
 
   return (
     <>

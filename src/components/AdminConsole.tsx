@@ -95,7 +95,6 @@ const AdminConsole = () => {
     };
 
     const endSession = () => {
-        dispatch(setStatus({ isActive: false }));
         AdminApi.endSession()
             .then((response: any) => {
                 const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
@@ -106,6 +105,10 @@ const AdminConsole = () => {
                 link.download = "ResultData.json";
                 link.click();
                 NotificationManager.info('User data has been deleted', 'Info!', 2000);
+            }).then(() => {
+                dispatch(setStatus({ isActive: false }));
+                localStorage.removeItem("admin");
+                window.location.href = "/login";
             })
             .catch((e: Error) => {
                 NotificationManager.error(e.message, 'Error!', 5000);
