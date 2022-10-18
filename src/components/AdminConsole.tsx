@@ -135,7 +135,6 @@ const AdminConsole = () => {
                 if (question.questionNumber !== numberOfQuestions) {
                     showResult();
                 } else {
-                    console.log(numberOfQuestions)
                     showFinalResult();
                 }
             }
