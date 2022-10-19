@@ -1,18 +1,6 @@
-export default function authHeader() {
-    const adminStr = localStorage.getItem("admin");
-    
-    type adminType = {
-        accessToken: String
-    }
-
-    let admin : adminType = {accessToken: ""};
-
-    if (adminStr)
-        admin = JSON.parse(adminStr);
-
-    if (admin && admin.accessToken) {
-        return { Authorization: 'Bearer ' + admin.accessToken };
-
+export default function authHeader(accessToken:string) {
+    if (accessToken !== '') {
+        return { Authorization: 'Bearer ' + accessToken };
     } else {
         return { Authorization: '' };
     }

@@ -4,11 +4,13 @@ import WebSocketComponent from './WebSocketComponent';
 import AdminApi from '../api/AdminApi';
 import IQuestionData from '../models/Question';
 import Constants from '../util/Constants';
-import { useAppDispatch } from '../app/hooks';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { setStatus } from '../reducers/statusSlice';
 import 'react-notifications/lib/notifications.css';
 import { NotificationManager } from 'react-notifications';
 import UserApi from '../api/UserApi';
+import { logoutAdmin } from '../reducers/adminSlice';
+import { RootState } from '../app/store';
 
 const AdminConsole = () => {
     const initialQuestionState = {
@@ -23,13 +25,14 @@ const AdminConsole = () => {
     const [numberOfQuestions, setNumberOfQuestions] = useState<number>(0);
     const [question, setQuestion] = useState<IQuestionData>(initialQuestionState);
     const [showQuestionButton, setShowQuestionButton] = useState<boolean>(false);
+    const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
     const [timer, setTimer] = useState<number>(0);
     const maxTimeValue: number = 36000;
     const minTimeValue: number = 1;
     const dispatch = useAppDispatch();
 
     const getQuestion = (questionNo: number) => {
-        AdminApi.getQuestionByNumber(questionNo)
+        AdminApi.getQuestionByNumber(questionNo, accessToken)
             .then((response: any) => {
                 setQuestion(response.data)
                 setShowQuestionButton(true)
@@ -44,7 +47,7 @@ const AdminConsole = () => {
     }
 
     const showQuestion = () => {
-        AdminApi.showQuestion(question.questionNumber)
+        AdminApi.showQuestion(question.questionNumber, accessToken)
             .then(() => {
                 setTimer(question.time)
                 setShowQuestionButton(false)
@@ -67,7 +70,7 @@ const AdminConsole = () => {
                 if (time < minTimeValue) {
                     time = minTimeValue;
                 }
-                AdminApi.addQuestionTime(question.questionId, time)
+                AdminApi.addQuestionTime(question.questionId, time, accessToken)
                     .then((response: any) => {
                         setQuestion(response.data)
                     })
@@ -95,7 +98,7 @@ const AdminConsole = () => {
     };
 
     const endSession = () => {
-        AdminApi.endSession()
+        AdminApi.endSession(accessToken)
             .then((response: any) => {
                 const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
                     JSON.stringify(response.data)
@@ -107,7 +110,7 @@ const AdminConsole = () => {
                 NotificationManager.info('User data has been deleted', 'Info!', 2000);
             }).then(() => {
                 dispatch(setStatus({ isActive: false }));
-                localStorage.removeItem("admin");
+                dispatch(logoutAdmin());
                 window.location.href = "/login";
             })
             .catch((e: Error) => {
@@ -116,7 +119,7 @@ const AdminConsole = () => {
     };
 
     const showFinalResult = () => {
-        AdminApi.showFinalResult()
+        AdminApi.showFinalResult(accessToken)
             .then(() => {
                 if (question.questionNumber !== 0) {
                     NotificationManager.info('Final Result on screen', 'Info!', 2000);
@@ -134,28 +137,29 @@ const AdminConsole = () => {
                 setTimer(timer => timer - 1)
             }, 1000);
         } else if (timer === 0 && numberOfQuestions !== 0) {
-            console.log(timer)
             question.questionNumber !== numberOfQuestions ? showResult() : showFinalResult();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [timer]);
 
     useEffect(() => {
-        AdminApi.getNumberOfQuestions()
+        AdminApi.getNumberOfQuestions(accessToken)
             .then((response: any) => {
-                setNumberOfQuestions(response.data)
-                getQuestion(1)
+                setNumberOfQuestions(response.data);
+                if (numberOfQuestions !== 0) {
+                    getQuestion(1);
+                }
             })
             .catch((e: Error) => {
                 NotificationManager.error(e.message, 'Error!', 5000);
             });
-
-    }, [numberOfQuestions])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [numberOfQuestions, accessToken])
 
     return (
         <>
             <WebSocketComponent topics={['/topic/message']} onMessage={(msg: number) => onMessageReceived(msg)} />
-            <div className='admin-console__body admin-console__body--active' id={showQuestionButton?'':'admin-console__body--result'}>
+            <div className='admin-console__body admin-console__body--active' id={showQuestionButton ? '' : 'admin-console__body--result'}>
                 <div className='admin-console__text'>
                     {Constants.ONLINE_USERS} {numberOfUsers}
                     {question.questionNumber !== 1 && showQuestionButton ? (

@@ -8,14 +8,17 @@ import IPlayInfoData from '../models/PlayInfo';
 import '../style/PlayInfo.css';
 import Constants from '../util/Constants';
 import FinalResult from './FinalResult';
+import { useAppSelector } from '../app/hooks';
+import { RootState } from '../app/store';
 
 const PlayInfo = () => {
 
   const [cast, setCast] = useState<IContributorData[]>([]);
   const [developers, setDevelopers] = useState<IContributorData[]>([]);
   const [playInfo, setPlayInfo] = useState<IPlayInfoData>();
-  const [showFirstPage, setShowFirstPage] = useState<boolean>(true)
-  const [showPlayInfo, setShowPlayInfo] = useState<boolean>(true)
+  const [showFirstPage, setShowFirstPage] = useState<boolean>(true);
+  const [showPlayInfo, setShowPlayInfo] = useState<boolean>(true);
+  const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
 
   useEffect(() => {
     UserApi.getCast()
@@ -30,13 +33,13 @@ const PlayInfo = () => {
       }).catch((e: Error) => {
         NotificationManager.error(e.message, 'Error!', 5000);
       });
-    UserApi.getPlayInfo()
+    UserApi.getPlayInfo(accessToken)
       .then((response: any) => {
         setPlayInfo(response.data)
       }).catch((e: Error) => {
         NotificationManager.error(e.message, 'Error!', 5000);
       });
-  }, [])
+  }, [accessToken])
 
   return (
     <>

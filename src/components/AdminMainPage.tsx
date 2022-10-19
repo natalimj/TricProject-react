@@ -13,9 +13,10 @@ import UserApi from '../api/UserApi';
 const Admin = () => {
   const isActive = useAppSelector((state: RootState) => state.status.isActive);
   const dispatch = useAppDispatch();
+  const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
 
   const activateApp = () => {
-    AdminApi.activateApp()
+    AdminApi.activateApp(accessToken)
       .then(() => {
         dispatch(setStatus({ isActive: true }))
       })

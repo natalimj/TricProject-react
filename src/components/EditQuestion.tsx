@@ -3,6 +3,8 @@ import { AiOutlineDelete, AiOutlineSave } from "react-icons/ai";
 import AdminApi from '../api/AdminApi';
 import IQuestionData from '../models/Question'
 import { NotificationManager } from 'react-notifications';
+import { useAppSelector } from '../app/hooks';
+import { RootState } from '../app/store';
 
 type Props = {
     question: IQuestionData
@@ -17,6 +19,7 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
         secondAnswer: question.answers[1].answerText,
     });
     const { questionText, firstAnswer, secondAnswer } = formValue;
+    const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -34,7 +37,7 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
     };
 
     const deleteQuestion = (questionId: any) => {
-        AdminApi.deleteQuestion(questionId)
+        AdminApi.deleteQuestion(questionId, accessToken)
             .then((response: any) => {
                 setQuestions(questions.filter(question => question.questionId !== questionId))
                 NotificationManager.success('Question has been deleted', 'Success!', 2000);
@@ -46,7 +49,7 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
 
     const editQuestion = (questionId: any) => {
         if (questionText !== "" && firstAnswer !== "" && secondAnswer !== "") {
-            AdminApi.editQuestion(questionText, firstAnswer, secondAnswer, questionId)
+            AdminApi.editQuestion(questionText, firstAnswer, secondAnswer, questionId, accessToken)
                 .then((response: any) => {
                     NotificationManager.success('Question has been edited', 'Success!', 2000);
                 })

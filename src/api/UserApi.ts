@@ -48,8 +48,8 @@ const getDevTeam = () => {
 };
 
 
-const getPlayInfo = () => {
-    return http.get<IPlayInfoData>("userApi/getPlayInfo",{ headers: authHeader() });
+const getPlayInfo = (accessToken:string) => {
+    return http.get<IPlayInfoData>("userApi/getPlayInfo",{ headers: authHeader(accessToken) });
   };
 
 const UserApi = {
