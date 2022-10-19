@@ -7,6 +7,14 @@
     width: 90%;
 }
 
+.start-page-landing {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
 .start-page-landing__title {
     font-family: var(--title-font);
     font-size: var(--font-size-header-large);
@@ -23,6 +31,7 @@
     font-size: var(--font-size-header);
     cursor: pointer;
     outline: inherit;
+    margin-bottom: 2%;
 }
 
 .submit-button:active {
