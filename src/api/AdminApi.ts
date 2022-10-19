@@ -4,7 +4,6 @@ import IStatusData from "../models/Status";
 import authHeader from "../services/auth-header";
 import IContributorData from "../models/Contributor";
 import IPlayInfoData from "../models/PlayInfo";
-import { access } from "fs";
 
 const endSession = (accessToken: string) => {
   return http.get("adminApi/endSession", { headers: authHeader(accessToken) });
