@@ -4,6 +4,7 @@ import IStatusData from "../models/Status";
 import authHeader from "../services/auth-header";
 import IContributorData from "../models/Contributor";
 import IPlayInfoData from "../models/PlayInfo";
+import { access } from "fs";
 
 const endSession = (accessToken: string) => {
   return http.get("adminApi/endSession", { headers: authHeader(accessToken) });
@@ -35,12 +36,12 @@ const activateApp = (accessToken: string) => {
   return http.post<IStatusData>("adminApi/activate", "", { headers: authHeader(accessToken) });
 };
 
-const deactivateApp = () => {
-  return http.post<IStatusData>("adminApi/deactivate", "", { headers: authHeader() });
+const deactivateApp = (accessToken: string) => {
+  return http.post<IStatusData>("adminApi/deactivate", "", { headers: authHeader(accessToken) });
 };
 
-const getAllQuestions = () => {
-  return http.get<Array<IQuestionData>>("adminApi/questions", { headers: authHeader() });
+const getAllQuestions = (accessToken: string) => {
+  return http.get<Array<IQuestionData>>("adminApi/questions", { headers: authHeader(accessToken) });
 };
 
 const addQuestion = (questionText: string, firstAnswer: string, secondAnswer: string, accessToken: string) => {
@@ -75,13 +76,13 @@ const deleteQuestion = (questionId: number, accessToken: string) => {
   })
 }
 
-const deleteAllQuestions = () => {
+const deleteAllQuestions = (accessToken: string) => {
   return http.delete<number>("adminApi/deleteQuestions", {
-    headers: authHeader()
+    headers: authHeader(accessToken)
   })
 }
 
-const editQuestion = (questionText: string, firstAnswer: string, secondAnswer: string, questionId: number) => {
+const editQuestion = (questionText: string, firstAnswer: string, secondAnswer: string, questionId: number,accessToken: string) => {
   return http.patch<IQuestionData>("adminApi/editQuestion", {}, {
     params: {
       questionText: questionText,

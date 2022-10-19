@@ -60,7 +60,7 @@ const Admin = () => {
                 <button onClick={editQuestions} className="admin-console__submit-button--secondary">
                   {Constants.EDIT_QUESTIONS}
                 </button>
-                <button onClick={activateApp} className="admin-console__submit-button">
+                <button onClick={activateApp} className="admin-console__submit-button" e2e-id="start">
                   {Constants.START_BUTTON}
                 </button>
               </div>
