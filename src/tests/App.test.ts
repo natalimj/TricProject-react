@@ -1,10 +1,12 @@
 import puppeteer from "puppeteer";
 import AdminApi from "../api/AdminApi";
 import { store } from "../app/store";
+import { useAppSelector } from '../app/hooks';
 
 let browser;
 let adminPage;
 let userPage;
+
 
 beforeAll(async () => {
     browser = await puppeteer.launch({
@@ -21,9 +23,10 @@ beforeAll(async () => {
     await adminPage.type('[e2e-id="usernameAdmin"]',"mod");
     console.log("3");
     await adminPage.type('[e2e-id="passwordAdmin"]',"12345678");
-    console.log("4");
-    const localStorage = await adminPage.evaluate(() =>  Object.assign({}, window.localStorage))
     await adminPage.click('[e2e-id="login"]');
+    await delay(4000);
+    const accessToken = useAppSelector((state) => state.admin.accessToken);
+    console.log(store.getState().admin.accessToken);
     await AdminApi.deleteAllQuestions(store.getState().admin.accessToken);
     await AdminApi.deactivateApp(store.getState().admin.accessToken);
     await AdminApi.addQuestion("Which DJ is better?", "Boris Brejcha", "Ann Clue",store.getState().admin.accessToken);
@@ -84,3 +87,9 @@ describe("Feature 7 - Personal Voting Results", () => {
 describe("Feature 8 - Downtime management and ending the play", () => {
 
 });
+
+function delay(time) {
+  return new Promise(function(resolve) { 
+      setTimeout(resolve, time)
+  });
+}
