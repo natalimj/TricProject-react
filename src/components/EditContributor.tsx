@@ -3,6 +3,8 @@ import IContributorData from '../models/Contributor'
 import { NotificationManager } from 'react-notifications';
 import AdminApi from '../api/AdminApi';
 import Constants from '../util/Constants';
+import { useAppSelector } from '../app/hooks';
+import { RootState } from '../app/store';
 
 type Props = {
     contributorToEdit: IContributorData
@@ -13,6 +15,7 @@ type Props = {
 const EditContributor = ({ contributorToEdit, contributors, setContributors }: Props) => {
 
     const [contributor, setContributor] = useState(contributorToEdit);
+    const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
@@ -30,7 +33,7 @@ const EditContributor = ({ contributorToEdit, contributors, setContributors }: P
 
     const editContributor = () => {
         if (contributor.name !== "" && contributor.description !== "") {
-            AdminApi.editContributor(contributor)
+            AdminApi.editContributor(contributor, accessToken)
                 .then((response: any) => {
                     NotificationManager.success('Contributor has been edited', 'Success!', 2000);
                 })
@@ -44,7 +47,7 @@ const EditContributor = ({ contributorToEdit, contributors, setContributors }: P
 
 
     const deleteContributor = () => {
-        AdminApi.deleteContributor(contributor.contributorId)
+        AdminApi.deleteContributor(contributor.contributorId, accessToken)
             .then((response: any) => {
                 setContributors(contributors.filter(contr => contr.contributorId !== contributor.contributorId))
                 NotificationManager.success('Contributor has been deleted', 'Success!', 2000);

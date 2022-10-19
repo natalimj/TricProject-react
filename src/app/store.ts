@@ -6,6 +6,7 @@ import questionReducer from '../reducers/questionSlice';
 import answerReducer from '../reducers/answerSlice';
 import componentReducer from '../reducers/componentSlice';
 import statusReducer from '../reducers/statusSlice';
+import adminReducer from '../reducers/adminSlice';
 
 const persistConfig = {
   key: "primary",
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   answer: answerReducer,
   component: componentReducer,
   status: statusReducer,
+  admin: adminReducer,
 })
 
 const persistedRootReducer = persistReducer(persistConfig, rootReducer);

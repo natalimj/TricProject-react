@@ -6,28 +6,31 @@ import { BiDownArrow, BiUpArrow, BiLeftArrowAlt } from "react-icons/bi";
 import EditQuestion from './EditQuestion';
 import Constants from '../util/Constants';
 import { NotificationManager } from 'react-notifications';
+import { useAppSelector } from '../app/hooks';
+import { RootState } from '../app/store';
 
 const Questions = () => {
     const [questions, setQuestions] = useState<IQuestionData[]>([]);
     const [questionText, setQuestionText] = useState("");
     const [firstAnswer, setFirstAnswer] = useState("");
     const [secondAnswer, setSecondAnswer] = useState("");
-    const [showQuestions, setShowQuestions] = useState<boolean>(false)
+    const [showQuestions, setShowQuestions] = useState<boolean>(false);
+    const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
 
     useEffect(() => {
-        AdminApi.getAllQuestions()
+        AdminApi.getAllQuestions(accessToken)
             .then((response: any) => {
                 setQuestions(response.data)
             })
             .catch((e: Error) => {
                 NotificationManager.error(e.message, 'Error!', 5000);
             });
-    }, [])
+    }, [accessToken])
 
 
     const addQuestion = () => {
         if (questionText !== "" && firstAnswer !== "" && secondAnswer !== "") {
-            AdminApi.addQuestion(questionText, firstAnswer, secondAnswer)
+            AdminApi.addQuestion(questionText, firstAnswer, secondAnswer, accessToken)
                 .then((response: any) => {
                     setQuestions([...questions, response.data])
                     setQuestionText("")
@@ -49,7 +52,7 @@ const Questions = () => {
 
     const goToAdminPage = () => {
         window.location.href = "/admin";
-      };
+    };
 
     return (
         <div className='questions'>
@@ -64,7 +67,7 @@ const Questions = () => {
                                 value={questionText}
                                 className="questions__text"
                                 placeholder="Enter question"
-                                onChange={(e) => setQuestionText(e.target.value)} 
+                                onChange={(e) => setQuestionText(e.target.value)}
                                 maxLength={75} />
                         </div>
                     </div>
@@ -88,7 +91,7 @@ const Questions = () => {
                                 maxLength={50} />
                         </div>
                         <div className="questions__icon"
-                        onClick={addQuestion} >{Constants.SAVE_BUTTON.toUpperCase()}</div>
+                            onClick={addQuestion} >{Constants.SAVE_BUTTON.toUpperCase()}</div>
                     </div>
                 </div>
             </div>

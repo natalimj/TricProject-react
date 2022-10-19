@@ -14,8 +14,8 @@ const PlayInfo = () => {
   const [cast, setCast] = useState<IContributorData[]>([]);
   const [developers, setDevelopers] = useState<IContributorData[]>([]);
   const [playInfo, setPlayInfo] = useState<IPlayInfoData>();
-  const [showFirstPage, setShowFirstPage] = useState<boolean>(true)
-  const [showPlayInfo, setShowPlayInfo] = useState<boolean>(true)
+  const [showFirstPage, setShowFirstPage] = useState<boolean>(true);
+  const [showPlayInfo, setShowPlayInfo] = useState<boolean>(true);
 
   useEffect(() => {
     UserApi.getCast()

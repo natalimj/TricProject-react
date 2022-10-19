@@ -7,6 +7,14 @@
     width: 90%;
 }
 
+.start-page-landing {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
 .start-page-landing__title {
     font-family: var(--title-font);
     font-size: var(--font-size-header-large);
@@ -23,13 +31,7 @@
     font-size: var(--font-size-header);
     cursor: pointer;
     outline: inherit;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 10px;
+    margin-bottom: 2%;
 }
 
 .submit-button:active {
@@ -37,7 +39,7 @@
 }
 
 @media screen and (max-height: 650px) {
-    .submit-button{
+    .submit-button {
         padding: 5px 5px;
     }
 }
