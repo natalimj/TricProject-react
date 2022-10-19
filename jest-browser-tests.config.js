@@ -2,7 +2,7 @@ module.exports = {
   "preset": "jest-puppeteer",
   "testEnvironment": "node",
   "transform": {
-    "^.+\\.ts?$": "ts-jest"
+    "^.+\\.(ts|js)x?$": "ts-jest"
   },
   "transformIgnorePatterns": ["<rootDir>/node_modules/"],
   testTimeout: 20000

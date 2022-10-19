@@ -1,5 +1,5 @@
 export default function authHeader() {
-    const adminStr = localStorage.getItem("admin");
+    const adminStr = window.localStorage.getItem("admin");
     
     type adminType = {
         accessToken: String

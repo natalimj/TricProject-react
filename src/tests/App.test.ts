@@ -10,18 +10,20 @@ beforeAll(async () => {
     headless: true,
     args: ['--no-sandbox']
     })
+    adminPage = await browser.newPage();
     userPage = await browser.newPage();
     await userPage.goto("https://jolly-forest-02e0b3603-test.westeurope.1.azurestaticapps.net");
     await adminPage.goto("https://jolly-forest-02e0b3603-test.westeurope.1.azurestaticapps.net/admin");
     await adminPage.waitForSelector('[e2e-id="login"]');
     await adminPage.type('[e2e-id="usernameAdmin"]',"mod");
     await adminPage.type('[e2e-id="passwordAdmin"]',"12345678");
+    const localStorage = await adminPage.evaluate(() =>  Object.assign({}, window.localStorage))
     await adminPage.click('[e2e-id="login"]');
-    AdminApi.deleteAllQuestions();
-    AdminApi.deactivateApp();
-    AdminApi.addQuestion("Which DJ is better?", "Boris Brejcha", "Ann Clue");
-    AdminApi.addQuestion("Which genre is better?", "Techno", "Trance");
-    AdminApi.addQuestion("Which festival is better?", "Electric Castle", "Untold");
+    await AdminApi.deleteAllQuestions();
+    await AdminApi.deactivateApp();
+    await AdminApi.addQuestion("Which DJ is better?", "Boris Brejcha", "Ann Clue");
+    await AdminApi.addQuestion("Which genre is better?", "Techno", "Trance");
+    await AdminApi.addQuestion("Which festival is better?", "Electric Castle", "Untold");
 });
 
 describe("Feature 1 - Questions database and display", () => {
