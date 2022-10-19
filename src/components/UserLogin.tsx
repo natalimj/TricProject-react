@@ -59,7 +59,7 @@ const UserLoginPage = () => {
                         type="text"
                         className="user-form__form-control"
                         id="username"
-                        e2e-id="username"
+                        e2e-id="usernameUser"
                         required
                         value={user.username}
                         onChange={handleInputChange}
