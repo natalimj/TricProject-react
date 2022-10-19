@@ -1,9 +1,7 @@
 import jwt_decode, { JwtPayload } from 'jwt-decode';
-import { RootState } from '../app/store';
-import { logoutAdmin } from '../reducers/adminSlice';
+import { AdminState, logoutAdmin } from '../reducers/adminSlice';
 
-export const isAuth = (dispatch, useAppSelector) => {
-  const admin = useAppSelector((state: RootState) => state.admin);
+export const isAuth = (dispatch, admin: AdminState) => {
   if (!admin.id) {
     return false;
   }
