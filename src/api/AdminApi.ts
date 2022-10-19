@@ -88,10 +88,6 @@ const getNumberOfQuestions = () => {
   return http.get<number>("adminApi/numberOfQuestions", { headers: authHeader() });
 };
 
-const getActiveUsers = () => {
-  return http.get<number>("adminApi/activeUsers", { headers: authHeader() });
-};
-
 const addContributor = (contributor: IContributorData) => {
   return http.post<IContributorData>("adminApi/contributor", contributor, { headers: authHeader() });
 };
@@ -128,7 +124,6 @@ const AdminApi = {
   addQuestionTime,
   showQuestion,
   getNumberOfQuestions,
-  getActiveUsers,
   addContributor,
   editContributor,
   deleteContributor,

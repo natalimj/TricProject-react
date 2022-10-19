@@ -152,17 +152,6 @@ const AdminConsole = () => {
 
     }, [numberOfQuestions])
 
-    useEffect(() => {
-        AdminApi.getActiveUsers()
-            .then((response: any) => {
-                setNumberOfUsers(response.data)
-            })
-            .catch((e: Error) => {
-                NotificationManager.error(e.message, 'Error!', 5000);
-            });
-
-    }, [numberOfUsers])
-
     return (
         <>
             <WebSocketComponent topics={['/topic/message']} onMessage={(msg: number) => onMessageReceived(msg)} />
