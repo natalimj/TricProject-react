@@ -5,7 +5,6 @@ import FinalResult from "../models/FinalResult";
 import IResultData from "../models/Result";
 import IContributorData from "../models/Contributor";
 import IPlayInfoData from "../models/PlayInfo";
-import authHeader from "../services/auth-header";
 
 const getAllUsers = () => {
     return http.get<Array<IUserData>>("userApi/users");
@@ -48,8 +47,8 @@ const getDevTeam = () => {
 };
 
 
-const getPlayInfo = (accessToken:string) => {
-    return http.get<IPlayInfoData>("userApi/getPlayInfo",{ headers: authHeader(accessToken) });
+const getPlayInfo = () => {
+    return http.get<IPlayInfoData>("userApi/getPlayInfo");
   };
 
 const UserApi = {

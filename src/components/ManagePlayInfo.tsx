@@ -34,13 +34,13 @@ const PlayInfo = () => {
       }).catch((e: Error) => {
         NotificationManager.error(e.message, 'Error!', 5000);
       });
-    UserApi.getPlayInfo(accessToken)
+    UserApi.getPlayInfo()
       .then((response: any) => {
         setPlayInfo(response.data)
       }).catch((e: Error) => {
         NotificationManager.error(e.message, 'Error!', 5000);
       });
-  }, [accessToken])
+  }, [])
 
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
