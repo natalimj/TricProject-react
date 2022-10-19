@@ -13,6 +13,7 @@ import PrivateRoutes from "./components/PrivateRoute";
 import { PersistGate } from "redux-persist/integration/react";
 import 'react-notifications/lib/notifications.css';
 import { NotificationContainer } from 'react-notifications';
+import PlayInfo from "./components/ManagePlayInfo";
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
               <Route path="/" element={<StartPage />} />
               <Route element={<PrivateRoutes />}>
                 <Route path="/admin/questions" element={<Questions />} />
+                <Route path="/admin/playInfo" element={<PlayInfo />} />
                 <Route path='/admin' element={<Admin />} />
               </Route>
               <Route path="/login" element={<Login />} />
