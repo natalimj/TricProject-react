@@ -155,7 +155,7 @@ const AdminConsole = () => {
     return (
         <>
             <WebSocketComponent topics={['/topic/message']} onMessage={(msg: number) => onMessageReceived(msg)} />
-            <div className='admin-console__body admin-console__body--active'>
+            <div className='admin-console__body admin-console__body--active' id={showQuestionButton?'':'admin-console__body--result'}>
                 <div className='admin-console__text'>
                     {Constants.ONLINE_USERS} {numberOfUsers}
                     {question.questionNumber !== 1 && showQuestionButton ? (
