@@ -60,7 +60,7 @@ const Result = () => {
                 <div className="result__box">
                     <div className="result__title">
                         <span className="result__answer-text">{result.firstAnswer.answerText}</span>
-                        <span className="result__answer-text">{result.secondAnswer.answerText}</span>
+                        <span className="result__answer-text result__answer-text--right">{result.secondAnswer.answerText}</span>
                     </div>
                     <div className="result__slider">
                         <div className="result__answer-bar result__answer-bar--left"

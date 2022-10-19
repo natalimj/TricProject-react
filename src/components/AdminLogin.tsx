@@ -1,13 +1,11 @@
-import { Component } from "react";
-import { Navigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import '../style/AdminLogin.css';
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-
-import AuthService from "../services/auth.service";
 import Constants from "../util/Constants";
-
-type Props = {};
+import axios from "axios";
+import { useAppDispatch } from '../app/hooks';
+import { logAdmin } from '../reducers/adminSlice';
 
 type State = {
   redirect: string | null,
@@ -18,55 +16,54 @@ type State = {
   overrider: boolean
 };
 
-export default class Login extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.handleLogin = this.handleLogin.bind(this);
+const Login = () => {
+  const API_URL = Constants.BASE_URL + 'api/auth/';
+  const [state, setState] = useState<State>({
+    redirect: null,
+    username: "",
+    password: "",
+    loading: false,
+    message: "",
+    overrider: false,
+  });
+  const dispatch = useAppDispatch();
 
-    this.state = {
-      redirect: null,
-      username: "",
-      password: "",
-      loading: false,
-      message: "",
-      overrider: false,
-    };
-  }
-
-  componentDidMount() {
-    const currentUser = AuthService.getCurrentUser();
-
-    if (currentUser) {
-      console.log("SEEING IT AS CURRECT USER")
-      this.setState({ redirect: "/admin" });
-    };
-  }
-
-  componentWillUnmount() {
-    window.location.reload();
-  }
-
-  validationSchema() {
+  const validationSchema = () => {
     return Yup.object().shape({
       username: Yup.string().required("This field is required!"),
       password: Yup.string().required("This field is required!"),
     });
   }
 
-  handleLogin(formValue: { username: string; password: string }) {
+  const login = (username: string, password: string) => {
+    return axios
+      .post(API_URL + "signin", {
+        username,
+        password
+      })
+      .then(response => {
+        if (response.data.accessToken) {
+          dispatch(logAdmin(response.data))
+        }
+        return response.data;
+      });
+  }
+
+  const handleLogin = (formValue: { username: string; password: string }) => {
     const { username, password } = formValue;
 
-    this.setState({
+    setState({
       message: "",
-      loading: true
+      loading: true,
+      username: state.username, password: state.password, overrider: state.overrider, redirect: state.redirect
     });
 
-
-    AuthService.login(username, password).then(
+    login(username, password).then(
       () => {
-        this.setState({
+        setState({
           redirect: "/admin",
-          overrider: true
+          overrider: true,
+          username: state.username, password: state.password, message: state.message, loading: state.loading,
         });
       },
       error => {
@@ -76,74 +73,78 @@ export default class Login extends Component<Props, State> {
             error.response.data.message) ||
           error.message ||
           error.toString();
-
-        this.setState({
+        setState({
           loading: false,
-          message: resMessage
+          message: resMessage,
+          username: state.username, password: state.password, overrider: state.overrider, redirect: state.redirect
         });
       }
     );
   }
 
-  render() {
-    if (this.state.redirect && this.state.overrider) {
-      this.setState({overrider: false});
-      return <Navigate to={this.state.redirect} />
+  useEffect(() => {
+    if (state.redirect && state.overrider) {
+      setState({
+        overrider: false,
+        username: state.username, password: state.password, redirect: state.redirect, message: state.message, loading: state.loading,
+      });
+      window.location.href = state.redirect ?? '/admin';
     }
+  }, [state])
 
-    const { loading, message } = this.state;
+  const { loading, message } = state;
+  const initialValues = {
+    username: "",
+    password: "",
+  };
 
-    const initialValues = {
-      username: "",
-      password: "",
-    };
-
-    return (
-      <div className="admin-login">
-        <img
-          /*todo: change to app logo*/
-          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-          alt="profile-img"
-          className="admin-login__image"
-        />
-        <Formik
-          initialValues={initialValues}
-          validationSchema={this.validationSchema}
-          onSubmit={this.handleLogin}>
-          <Form className="admin-login__form">
-            <div className="admin-login__login-field">
-              <label htmlFor="username" className="admin-login__login-label">{Constants.USERNAME_FIELD}</label>
-              <Field name="username" type="text" className="admin-login__field" />
-              <ErrorMessage
-                name="username"
-                component="div"
-                className="admin-login__error-message"
-              />
-            </div>
-            <div className="admin-login__login-field">
-              <label htmlFor="password" className="admin-login__login-label">{Constants.PASSWORD_FIELD}</label>
-              <Field name="password" type="password" className="admin-login__field" />
-              <ErrorMessage
-                name="password"
-                component="div"
-                className="admin-login__error-message"
-              />
-            </div>
-            <div className="admin-login__login-field">
-              <button type="submit" className="admin-login__submit-button" disabled={loading}>
-                <span className="admin-login__submit__button--text">{Constants.SUBMIT_BUTTON}</span>
-              </button>
-            </div>
-            {message && (
-              <div className="admin-login__message-body">
-                <div className="admin-login__error-message" role="alert">
-                  {message}
-                </div>
+  return (
+    <div className="admin-login">
+      <img
+        /*todo: change to app logo*/
+        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+        alt="profile-img"
+        className="admin-login__image"
+      />
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleLogin}>
+        <Form className="admin-login__form">
+          <div className="admin-login__login-field">
+            <label htmlFor="username" className="admin-login__login-label">{Constants.USERNAME_FIELD}</label>
+            <Field name="username" type="text" className="admin-login__field" />
+            <ErrorMessage
+              name="username"
+              component="div"
+              className="admin-login__error-message"
+            />
+          </div>
+          <div className="admin-login__login-field">
+            <label htmlFor="password" className="admin-login__login-label">{Constants.PASSWORD_FIELD}</label>
+            <Field name="password" type="password" className="admin-login__field" />
+            <ErrorMessage
+              name="password"
+              component="div"
+              className="admin-login__error-message"
+            />
+          </div>
+          <div className="admin-login__login-field">
+            <button type="submit" className="admin-login__submit-button" disabled={loading}>
+              <span className="admin-login__submit__button--text">{Constants.SUBMIT_BUTTON}</span>
+            </button>
+          </div>
+          {message && (
+            <div className="admin-login__message-body">
+              <div className="admin-login__error-message" role="alert">
+                {message}
               </div>
-            )}
-          </Form>
-        </Formik>
-      </div>
-    );
-  }
+            </div>
+          )}
+        </Form>
+      </Formik>
+    </div>
+  );
 }
+
+export default Login;

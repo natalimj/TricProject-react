@@ -5,73 +5,73 @@ import authHeader from "../services/auth-header";
 import IContributorData from "../models/Contributor";
 import IPlayInfoData from "../models/PlayInfo";
 
-const endSession = () => {
-  return http.get("adminApi/endSession", { headers: authHeader() });
+const endSession = (accessToken: string) => {
+  return http.get("adminApi/endSession", { headers: authHeader(accessToken) });
 };
 
-const showFinalResult = () => {
-  return http.post("adminApi/showFinalResult", "", { headers: authHeader() });
+const showFinalResult = (accessToken: string) => {
+  return http.post("adminApi/showFinalResult", "", { headers: authHeader(accessToken) });
 };
 
-const getQuestionByNumber = (questionNumber: number) => {
+const getQuestionByNumber = (questionNumber: number, accessToken: string) => {
   return http.get<IQuestionData>("adminApi/question", {
     params: {
       questionNumber: questionNumber
     },
-    headers: authHeader()
+    headers: authHeader(accessToken)
   })
 };
 
-const showQuestion = (questionNumber: number) => {
+const showQuestion = (questionNumber: number, accessToken: string) => {
   return http.get<IQuestionData>("adminApi/showQuestion", {
     params: {
       questionNumber: questionNumber
     },
-    headers: authHeader()
+    headers: authHeader(accessToken)
   })
 };
 
-const activateApp = () => {
-  return http.post<IStatusData>("adminApi/activate", "", { headers: authHeader() });
+const activateApp = (accessToken: string) => {
+  return http.post<IStatusData>("adminApi/activate", "", { headers: authHeader(accessToken) });
 };
 
-const getAllQuestions = () => {
-  return http.get<Array<IQuestionData>>("adminApi/questions", { headers: authHeader() });
+const getAllQuestions = (accessToken: string) => {
+  return http.get<Array<IQuestionData>>("adminApi/questions", { headers: authHeader(accessToken) });
 };
 
-const addQuestion = (questionText: string, firstAnswer: string, secondAnswer: string) => {
+const addQuestion = (questionText: string, firstAnswer: string, secondAnswer: string, accessToken: string) => {
   return http.post<IQuestionData>("adminApi/addQuestion", {}, {
     params: {
       questionText: questionText,
       firstAnswer: firstAnswer,
       secondAnswer: secondAnswer
     },
-    headers: authHeader()
+    headers: authHeader(accessToken)
   }
   )
 };
 
-const addQuestionTime = (questionId: any, time: number) => {
+const addQuestionTime = (questionId: any, time: number, accessToken: string) => {
   return http.post<IQuestionData>("adminApi/addQuestionTime", {}, {
     params: {
       questionId: questionId,
       time: time,
     },
-    headers: authHeader()
+    headers: authHeader(accessToken)
   }
   )
 };
 
-const deleteQuestion = (questionId: number) => {
+const deleteQuestion = (questionId: number, accessToken: string) => {
   return http.delete<number>("adminApi/deleteQuestion", {
     params: {
       questionId: questionId
     },
-    headers: authHeader()
+    headers: authHeader(accessToken)
   })
 }
 
-const editQuestion = (questionText: string, firstAnswer: string, secondAnswer: string, questionId: number) => {
+const editQuestion = (questionText: string, firstAnswer: string, secondAnswer: string, questionId: number, accessToken: string) => {
   return http.patch<IQuestionData>("adminApi/editQuestion", {}, {
     params: {
       questionText: questionText,
@@ -79,36 +79,36 @@ const editQuestion = (questionText: string, firstAnswer: string, secondAnswer: s
       secondAnswer: secondAnswer,
       questionId: questionId
     },
-    headers: authHeader()
+    headers: authHeader(accessToken)
   }
   )
 }
 
-const getNumberOfQuestions = () => {
-  return http.get<number>("adminApi/numberOfQuestions", { headers: authHeader() });
+const getNumberOfQuestions = (accessToken: string) => {
+  return http.get<number>("adminApi/numberOfQuestions", { headers: authHeader(accessToken) });
 };
 
-const addContributor = (contributor : IContributorData) => { 
-  return http.post<IContributorData>("adminApi/contributor", contributor, { headers: authHeader()} );
-};
-
-
-const editContributor = (contributor : IContributorData) => {
-  return http.patch<IContributorData>("adminApi/editContributor",contributor,{ headers: authHeader() });
+const addContributor = (contributor: IContributorData, accessToken: string) => {
+  return http.post<IContributorData>("adminApi/contributor", contributor, { headers: authHeader(accessToken) });
 };
 
 
-const deleteContributor = (contributorId : number) => {
-  return http.delete<number>("adminApi/deleteContributor",{
+const editContributor = (contributor: IContributorData, accessToken: string) => {
+  return http.patch<IContributorData>("adminApi/editContributor", contributor, { headers: authHeader(accessToken) });
+};
+
+
+const deleteContributor = (contributorId: number, accessToken: string) => {
+  return http.delete<number>("adminApi/deleteContributor", {
     params: {
-      contributorId : contributorId
+      contributorId: contributorId
     },
-    headers: authHeader()
+    headers: authHeader(accessToken)
   })
 }
 
-const editPlayInfo = (playInfo : IPlayInfoData) => {
-  return http.patch<IPlayInfoData>("adminApi/playInfo",playInfo,{ headers: authHeader() });
+const editPlayInfo = (playInfo: IPlayInfoData, accessToken: string) => {
+  return http.patch<IPlayInfoData>("adminApi/playInfo", playInfo, { headers: authHeader(accessToken) });
 };
 
 

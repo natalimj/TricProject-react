@@ -7,6 +7,8 @@ import EditContributor from './EditContributor';
 import AdminApi from '../api/AdminApi';
 import IPlayInfoData from '../models/PlayInfo';
 import { BiLeftArrowAlt } from 'react-icons/bi';
+import { useAppSelector } from '../app/hooks';
+import { RootState } from '../app/store';
 
 const PlayInfo = () => {
   const initialContributor = {
@@ -23,6 +25,7 @@ const PlayInfo = () => {
   const [contributors, setContributors] = useState<IContributorData[]>([]);
   const [contributor, setContributor] = useState(initialContributor);
   const [playInfo, setPlayInfo] = useState<IPlayInfoData>(initialPlayInfo);
+  const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
 
   useEffect(() => {
     UserApi.getCast()
@@ -62,7 +65,7 @@ const PlayInfo = () => {
   }
 
   const editPlayInfo = () => {
-    AdminApi.editPlayInfo(playInfo)
+    AdminApi.editPlayInfo(playInfo, accessToken)
       .then((response: any) => {
         NotificationManager.success('Play Info has been saved', 'Success!', 2000);
       }).catch((e: Error) => {
@@ -78,7 +81,7 @@ const PlayInfo = () => {
 
   const addContributor = () => {
     if (contributor.name !== "" && contributor.description !== "") {
-      AdminApi.addContributor(contributor)
+      AdminApi.addContributor(contributor, accessToken)
         .then((response: any) => {
           setContributors([...contributors, response.data])
           setContributor(initialContributor)
@@ -141,7 +144,7 @@ const PlayInfo = () => {
         </div>
       </div>
       <div className='questions__header'>
-        {Constants.CAST_LIST_TITLE}    
+        {Constants.CAST_LIST_TITLE}
       </div>
       {contributors && contributors.map((contr) => (
         <EditContributor key={contr.contributorId}
