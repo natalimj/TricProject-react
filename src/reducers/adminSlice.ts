@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { useAppSelector } from '../app/hooks';
 
 export interface AdminState {
     accessToken: string,
