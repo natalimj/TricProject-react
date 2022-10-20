@@ -73,22 +73,22 @@ const Question = () => {
               <div className='question__timer'>
                 <div className='question__inner-timer' style={{ "width": `${(100 * timer) / (currentQuestion.time)}%` }}></div>
               </div>
-              <div className='question__header'>
+              <div className='question__header' e2e-id="questionHeader">
                 {Constants.QUESTION_FIELD} {currentQuestion.questionNumber}
               </div>
-              <div className='question__header question__header--text'>
+              <div className='question__header question__header--text' e2e-id="questionText">
                 {currentQuestion.questionText}
               </div>
               <div className='question__answer-group'>
                 {currentQuestion.answers && currentQuestion.answers.map((answer, index) => (
-                  <button onClick={() => chooseAnswer(answer, index)} className={(firstAnswer && index === 0) || (secondAnswer && index === 1) ? 'question__answer-button question__active-button' : 'question__answer-button'}>
+                  <button onClick={() => chooseAnswer(answer, index)} className={(firstAnswer && index === 0) || (secondAnswer && index === 1) ? 'question__answer-button question__active-button' : 'question__answer-button'} e2e-id={"questionAnswer"+index}>
                     <div className="question__answer-text">
                       {answer.answerText.toString()}
                     </div>
                   </button>
                 ))}
               </div>
-              <button onClick={() => { vote(selectedAnswer) }} className={firstAnswer || secondAnswer ? 'question__submit-button question__active-button' : 'question__submit-button'} disabled={!firstAnswer && !secondAnswer}>
+              <button onClick={() => { vote(selectedAnswer) }} className={firstAnswer || secondAnswer ? 'question__submit-button question__active-button' : 'question__submit-button'} disabled={!firstAnswer && !secondAnswer} e2e-id="questionConfirm">
                 {Constants.CONFIRM_BUTTON}
               </button>
             </div>

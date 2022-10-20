@@ -67,6 +67,7 @@ const Questions = () => {
                                 value={questionText}
                                 className="questions__text"
                                 placeholder="Enter question"
+                                e2e-id="questionText"
                                 onChange={(e) => setQuestionText(e.target.value)}
                                 maxLength={75} />
                         </div>
@@ -77,6 +78,7 @@ const Questions = () => {
                                 value={firstAnswer}
                                 className="questions__text"
                                 placeholder="Enter first answer"
+                                e2e-id="questionAnswer1"
                                 onChange={(e) => setFirstAnswer(e.target.value)}
                                 maxLength={50} />
                         </div>
@@ -87,15 +89,16 @@ const Questions = () => {
                                 value={secondAnswer}
                                 className="questions__text"
                                 placeholder="Enter second answer"
+                                e2e-id="questionAnswer2"
                                 onChange={(e) => setSecondAnswer(e.target.value)}
                                 maxLength={50} />
                         </div>
-                        <div className="questions__icon"
+                        <div className="questions__icon" e2e-id="questionSave"
                             onClick={addQuestion} >{Constants.SAVE_BUTTON.toUpperCase()}</div>
                     </div>
                 </div>
             </div>
-            <div className='questions__header questions__header--accordion' onClick={() => showEditQuestions()}>
+            <div className='questions__header questions__header--accordion' e2e-id="questionAccordion" onClick={() => showEditQuestions()}>
                 {Constants.QUESTION_LIST_TITLE}
                 <span> {showQuestions ? (<BiUpArrow size={30} />) : (<BiDownArrow size={30} />)}</span>
             </div>
@@ -104,7 +107,7 @@ const Questions = () => {
                     <EditQuestion key={question.questionId} question={question} questions={questions} setQuestions={setQuestions} />
                 ))}
             </div>}
-            <div className='questions__back-button' onClick={goToAdminPage}>
+            <div className='questions__back-button' onClick={goToAdminPage} e2e-id="back">
                 <BiLeftArrowAlt size={30} />
             </div>
         </div>

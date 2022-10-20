@@ -43,7 +43,7 @@ const FinalResult = () => {
               <img src={require('../util/icons/' + currentUser.imagePath + '.jpg')} alt="user icon" />
             </div>
             <div className="final-result__text-container">
-              <span>{currentUser.username}</span>
+              <span e2e-id="finalUsername">{currentUser.username}</span>
               <span>{today}</span>
               <span>HumanLab</span>
             </div>
@@ -62,10 +62,10 @@ const FinalResult = () => {
                 </div>
               </div>
             ))}
-               <div className='final-result__info-icon'><BsInfoCircle size={30} onClick={()=>setShowPlayInfo(true)}/></div>
+               <div className='final-result__info-icon'><BsInfoCircle size={30} onClick={()=>setShowPlayInfo(true)} e2e-id="infoButton"/></div>
           </div>   
         </div>
-        <div className="final-result__download" onClick={() => ExportAsImage(exportRef.current, `TRIC-${today}`)}>{Constants.DOWNLOAD}</div>
+        <div className="final-result__download" e2e-id="download" onClick={() => ExportAsImage(exportRef.current, `TRIC-${today}`)}>{Constants.DOWNLOAD}</div>
       </div>
     </div> }
     {showPlayInfo && <PlayInfo/>}

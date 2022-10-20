@@ -54,10 +54,10 @@ const Admin = () => {
             <div className='admin-console__body'>
               <div className='admin-console__logo'></div>
               <div className='admin-console__buttons'>
-                <button onClick={editContributors} className="admin-console__submit-button--secondary">
+                <button onClick={editContributors} className="admin-console__submit-button--secondary" e2e-id="editContributors">
                   {Constants.EDIT_CONTRIBUTORS}
                 </button>
-                <button onClick={editQuestions} className="admin-console__submit-button--secondary">
+                <button onClick={editQuestions} className="admin-console__submit-button--secondary" e2e-id="editQuestions">
                   {Constants.EDIT_QUESTIONS}
                 </button>
                 <button onClick={activateApp} className="admin-console__submit-button" e2e-id="start">

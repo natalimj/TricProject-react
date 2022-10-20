@@ -184,11 +184,12 @@ const AdminConsole = () => {
                                         pattern='[0-9]{2}'
                                         name="time"
                                         value={question.time || ''}
+                                        e2e-id="timerField"
                                         onChange={(e) => handleTimeChange(e)}
                                         className="admin-console__input"
                                         maxLength={5} />
                                 </div>
-                                <button onClick={() => showQuestion()} className="admin-console__submit-button--secondary">
+                                <button onClick={() => showQuestion()} className="admin-console__submit-button--secondary" e2e-id="showQuestion">
                                     {Constants.QUESTION_BUTTON} {question.questionNumber}
                                 </button>
                             </div>
@@ -208,19 +209,19 @@ const AdminConsole = () => {
                                 </>
                             ) : null}
                             {question.questionNumber < numberOfQuestions ? (
-                                <button onClick={() => showResult()} className="admin-console__submit-button--secondary">
+                                <button onClick={() => showResult()} className="admin-console__submit-button--secondary" e2e-id="showResults">
                                     {Constants.RESULT_BUTTON} {question.questionNumber}
                                 </button>
                             ) : (
                                 <>
                                     {timer > 0 ? (
-                                        <button onClick={showFinalResult} className="admin-console__submit-button--secondary">
+                                        <button onClick={showFinalResult} className="admin-console__submit-button--secondary" e2e-id="showFinalResult">
                                             {Constants.FINAL_RESULT_BUTTON}
                                         </button>
                                     ) : (
                                         <>
                                             <div className='admin-console__text'>{Constants.FINAL_RESULT_FIELD} {Constants.ON_SCREEN_FIELD}</div>
-                                            <button onClick={endSession} className="admin-console__submit-button">
+                                            <button onClick={endSession} className="admin-console__submit-button" e2e-id="endSession">
                                                 {Constants.END_BUTTON}
                                             </button>
                                         </>

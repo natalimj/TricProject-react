@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { useAppSelector } from '../app/hooks';
 
 export interface AdminState {
     accessToken: string,
@@ -16,6 +17,10 @@ const initialState: AdminState = {
     tokenType : '',
     username : ''
 };
+
+export function getAccessToken() {
+    return 
+}
 
 
 export const adminSlice = createSlice({
