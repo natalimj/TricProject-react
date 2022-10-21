@@ -71,7 +71,7 @@
 .questions__textarea textarea {
     background-color: var(--color-off-white);
     border: 0;
-    height: 190px;
+    height: 175px;
     overflow: auto;
     resize: none;
 }
@@ -91,7 +91,7 @@
 .questions__icon {
     background-color: var(--color-pink);
     width: 10%;
-    padding-top: 25px;
+    padding-top: 10px;
 }
 
 .questions__icon-textarea {
@@ -134,12 +134,19 @@
     width: 50px;
 }
 
+.question__save-button{
+    padding-top: 20px ;
+}
+
 @media (max-width: 900px) {
     .questions__icon {
         width: 15%;
+        padding-top: 20px;
     }
-
     .answer {
         width: 85%;
+    }
+    .questions__icon-hide{
+        display: none;
     }
 }

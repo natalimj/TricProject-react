@@ -5,6 +5,7 @@ import AdminApi from '../api/AdminApi';
 import Constants from '../util/Constants';
 import { useAppSelector } from '../app/hooks';
 import { RootState } from '../app/store';
+import { AiOutlineDelete, AiOutlineSave } from 'react-icons/ai';
 
 type Props = {
     contributorToEdit: IContributorData
@@ -70,7 +71,7 @@ const EditContributor = ({ contributorToEdit, contributors, setContributors }: P
                         name="name" />
                 </div>
                 <div className="questions__icon"
-                    onClick={() => editContributor()} >{Constants.EDIT_BUTTON.toUpperCase()}</div>
+                    onClick={() => editContributor()} ><AiOutlineSave size={30}/><br></br><span className="questions__icon-hide">{Constants.EDIT_BUTTON.toUpperCase()}</span></div>
             </div>
             <div className="questions__line">
                 <div className="questions__input">
@@ -82,7 +83,7 @@ const EditContributor = ({ contributorToEdit, contributors, setContributors }: P
                         name="description" />
                 </div>
                 <div className="questions__icon"
-                    onClick={() => deleteContributor()}>{Constants.DELETE_BUTTON.toUpperCase()}</div>
+                    onClick={() => deleteContributor()}><AiOutlineDelete size={30}/><br></br><span className="questions__icon-hide">{Constants.DELETE_BUTTON.toUpperCase()}</span></div>
             </div>
         </div>
     )

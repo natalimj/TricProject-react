@@ -114,7 +114,7 @@ const PlayInfo = () => {
               maxLength={700}
               onChange={handlePlayInfoChange} />
           </div>
-          <div className="questions__icon-textarea questions__icon"
+          <div className="questions__icon-textarea questions__icon question__save-button"
             onClick={() => editPlayInfo()} >{Constants.SAVE_BUTTON.toUpperCase()}</div>
         </div>
       </div>
@@ -143,7 +143,7 @@ const PlayInfo = () => {
               maxLength={40}
               onChange={handleChange} />
           </div>
-          <div className="questions__icon"
+          <div className="questions__icon question__save-button"
             onClick={addContributor} >{Constants.SAVE_BUTTON.toUpperCase()}</div>
         </div>
       </div>
