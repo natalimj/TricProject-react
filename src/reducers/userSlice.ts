@@ -7,7 +7,6 @@ const initialState: IUserData = {
     imagePath: '',
 };
 
-
 export const userSlice = createSlice({
     name: 'user',
     initialState,

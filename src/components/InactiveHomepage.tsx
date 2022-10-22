@@ -2,14 +2,14 @@ import React, {useEffect} from 'react';
 import '../style/InactiveHomepage.css';
 import Constants from '../util/Constants';
 import { useAppDispatch } from '../app/hooks';
-import { setQuestionComponent, setUserSubmitted } from '../reducers/componentSlice';
+import { setQuestionComponent, setUserJoined } from '../reducers/componentSlice';
 import { removeUser } from "../reducers/userSlice";
 
 const InactiveHomepage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(setUserSubmitted(false));
+    dispatch(setUserJoined(false));
     dispatch(setQuestionComponent(false));
     dispatch(removeUser());
   }, [dispatch])

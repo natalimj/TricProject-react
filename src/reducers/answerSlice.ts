@@ -6,7 +6,6 @@ const initialState: IAnswerData = {
     answerText: '',
 };
 
-
 export const answerSlice = createSlice({
     name: 'answer',
     initialState,

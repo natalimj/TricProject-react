@@ -17,7 +17,6 @@ const initialState: AdminState = {
     username : ''
 };
 
-
 export const adminSlice = createSlice({
     name: 'admin',
     initialState,

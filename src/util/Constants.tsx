@@ -1,8 +1,8 @@
 const Constants = {
-	BASE_URL : "https://tricproject.azurewebsites.net/",
-	SOCKET_URL: "https://tricproject.azurewebsites.net/ws-message",
-	//BASE_URL: "http://localhost:8080/",
-	//SOCKET_URL: "http://localhost:8080/ws-message",
+	//BASE_URL : "https://tricproject.azurewebsites.net/",
+	//SOCKET_URL: "https://tricproject.azurewebsites.net/ws-message",
+	BASE_URL: "http://localhost:8080/",
+	SOCKET_URL: "http://localhost:8080/ws-message",
 
 	/* LABELS */
 	APP_TITLE: "TRIC",
@@ -23,7 +23,7 @@ const Constants = {
 	USER_RESPONSE : "Your response",
 	FINAL_RESULT_BUTTON:" Show Final Result",
 	RESULT_FIELD: "Result",
-	FINAL_RESULT_FIELD: "Final Result",
+	FINAL_RESULT_FIELD: "Your Profile",
 	RESULT_BUTTON : "Show Result",
 	QUESTION_BUTTON: "Show Question",
 	START_BUTTON: "Start",
