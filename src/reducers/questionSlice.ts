@@ -9,7 +9,6 @@ const initialState: IQuestionData = {
     time:0
 };
 
-
 export const questionSlice = createSlice({
     name: 'answer',
     initialState,

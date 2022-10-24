@@ -21,14 +21,13 @@
 }
 
 .user-form__form-control {
-    font-size: var(--font-size-header);
+    font-size: var(--font-size-larger);
     border: none;
     outline: none;
     background-color: var(--color-off-white);
     color: var(--color-dark-grey);
     margin: 10px 25px;
     text-align: center;
-    max-height: 45px;
 }
 
 .user-form__form-control:focus,
@@ -85,7 +84,6 @@
     }
 
     .user-form__form-control {
-        height: 30px;
         margin: 5px 10px;
     }
 }
