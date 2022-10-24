@@ -38,7 +38,7 @@
 
 .play-info_name{
     margin-top: 25px;
-    font-size: var(--font-size-larger);
+    font-size: var(--font-size-medium);
 }
 
 .play-info_close-icon{
@@ -58,3 +58,33 @@
     }
 }
 
+
+@media (max-height: 900px) {
+    .play-info_name{
+        margin-top: 10px;
+        font-size: var(--font-size-small);
+    }
+}
+
+@media (max-height: 800px) {
+    .play-info_text{
+        overflow: auto;
+        height: 400px;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-height: 600px) {
+    .play-info_text{
+        overflow: auto;
+        height: 300px;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width:300px){
+    .play-info_name{
+        margin-top: 10px;
+        font-size: var(--font-size-small);
+    }
+}
