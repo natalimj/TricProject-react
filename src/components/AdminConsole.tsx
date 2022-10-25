@@ -42,16 +42,25 @@ const AdminConsole = () => {
             });
     };
 
-    let onMessageReceived = (msg: number) => {
+    const onMessageReceived = (msg: number) => {
         setNumberOfUsers(msg);
     }
 
     const showQuestion = () => {
-        AdminApi.showQuestion(question.questionNumber, accessToken)
+        AdminApi.addQuestionTime(question.questionId, question.time ?? 30, accessToken)
+            .then((response: any) => {
+                setQuestion(response.data)
+            })
             .then(() => {
-                setTimer(question.time)
-                setShowQuestionButton(false)
-                NotificationManager.info('Question ' + question.questionNumber + ' on screen', 'Info!', 2000);
+                AdminApi.showQuestion(question.questionNumber, accessToken)
+                    .then(() => {
+                        setTimer(question.time)
+                        setShowQuestionButton(false)
+                        NotificationManager.info('Question ' + question.questionNumber + ' on screen', 'Info!', 2000);
+                    })
+                    .catch((e: Error) => {
+                        NotificationManager.error(e.message, 'Error!', 5000);
+                    });
             })
             .catch((e: Error) => {
                 NotificationManager.error(e.message, 'Error!', 5000);
@@ -70,18 +79,12 @@ const AdminConsole = () => {
                 if (time < minTimeValue) {
                     time = minTimeValue;
                 }
-                AdminApi.addQuestionTime(question.questionId, time, accessToken)
-                    .then((response: any) => {
-                        setQuestion(response.data)
-                    })
-                    .catch((e: Error) => {
-                        NotificationManager.error(e.message, 'Error!', 5000);
-                    });
+                setQuestion({ ...question, time: time });
             } else {
-                setQuestion({ ...question, time: NaN })
+                setQuestion({ ...question, time: NaN });
             }
         } else {
-            setQuestion({ ...question, time: NaN })
+            setQuestion({ ...question, time: NaN });
         }
     }
 

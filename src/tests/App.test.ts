@@ -82,34 +82,35 @@ describe("Feature 1 - Questions database and display", () => {
   it("View Questions", async () => {
     await adminPage.waitForSelector('[e2e-id="questionAccordion"]');
     await adminPage.click('[e2e-id="questionAccordion"]');
-    await adminPage.waitForSelector('[e2e-id="questionNr0"]');
+    await adminPage.waitForSelector('[e2e-id="questionNr1"]');
   });
 
-  // it("Check Questions", async () => {
-  //   await checkQuestion(0,"Which DJ is better?", "Boris Brejcha", "Ann Clue");
-  //   await checkQuestion(1,"Which genre is better?", "Techno", "Trance");
-  //   await checkQuestion(2,"Which festival is better?", "Electric Castle", "Untold");
-  //   await checkQuestion(3,"Where would you like to go?", "Berlin", "Ibiza");
-  // });
+  it("Check Questions", async () => {
+    await checkQuestion(1,"Which DJ is better?", "Boris Brejcha", "Ann Clue");
+    await checkQuestion(2,"Which genre is better?", "Techno", "Trance");
+    await checkQuestion(3,"Which festival is better?", "Electric Castle", "Untold");
+    await checkQuestion(4,"Where would you like to go?", "Berlin", "Ibiza");
+  });
 
   it("Edit Question", async () => {
-    await adminPage.click('[e2e-id="question0EditText"]', {clickCount: 3})
-    await adminPage.type('[e2e-id="question0EditText"]',"What is your favorite stage?");
-    await adminPage.click('[e2e-id="question0EditAnswer1"]', {clickCount: 3})
-    await adminPage.type('[e2e-id="question0EditAnswer1"]',"Main Stage");
-    await adminPage.click('[e2e-id="question0EditAnswer2"]', {clickCount: 3})
-    await adminPage.type('[e2e-id="question0EditAnswer2"]',"Booha");
-    await adminPage.waitForSelector('[e2e-id="question0EditSave"]');
-    await adminPage.click('[e2e-id="question0EditSave"]');
-    await checkQuestion(0,"What is your favorite stage?", "Main Stage", "Booha");
+    await adminPage.click('[e2e-id="question1EditText"]', {clickCount: 3})
+    await adminPage.type('[e2e-id="question1EditText"]',"What is your favorite stage?");
+    await adminPage.click('[e2e-id="question1EditAnswer1"]', {clickCount: 3})
+    await adminPage.type('[e2e-id="question1EditAnswer1"]',"Main Stage");
+    await adminPage.click('[e2e-id="question1EditAnswer2"]', {clickCount: 3})
+    await adminPage.type('[e2e-id="question1EditAnswer2"]',"Booha");
+    await adminPage.waitForSelector('[e2e-id="question1EditSave"]');
+    await adminPage.click('[e2e-id="question1EditSave"]');
+    await delay(1000);
+    await checkQuestion(1,"What is your favorite stage?", "Main Stage", "Booha");
   });
 
-  // it("Delete Question", async () => {
-  //   await adminPage.waitForSelector('[e2e-id="question0EditDelete"]');
-  //   await adminPage.click('[e2e-id="question0EditDelete"]');
-  //   await delay(1000);
-  //   await checkQuestion(0,"Which genre is better?", "Techno", "Trance");
-  // });
+  it("Delete Question", async () => {
+    await adminPage.waitForSelector('[e2e-id="question1EditDelete"]');
+    await adminPage.click('[e2e-id="question1EditDelete"]');
+    await delay(1000);
+    await checkQuestion(1,"Which genre is better?", "Techno", "Trance");
+  });
 
   it("Go back", async () => {
     await adminPage.waitForSelector('[e2e-id="back"]');
@@ -158,32 +159,32 @@ describe("Feature 2 - Voting System", () => {
     await adminPage.click('[e2e-id="showQuestion"]');
   });
 
-  // it("Vote and view results 1", async () => {
-  //   await userPage.waitForSelector('[e2e-id="questionText"]');
-  //   await checkText("questionHeader","Question 1");
-  //   await checkText("questionText","Which DJ is better?");
-  //   await checkText("questionAnswer0","Boris Brejcha");
-  //   await checkText("questionAnswer1","Ann Clue");
-  //   await userPage.click('[e2e-id="questionAnswer0"]');
-  //   await delay(1000);
-  //   await userPage.click('[e2e-id="questionConfirm"]');
-  //   await delay(1000);
-  //   await userPage.waitForSelector('[e2e-id="spinner"]');
-  //   await adminPage.waitForSelector('[e2e-id="showResults"]');
-  //   await adminPage.click('[e2e-id="showResults"]');
-  //   await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
-  //   await delay(2000);
-  //   await checkText("resultQuestionText","Which DJ is better?");
-  //   await checkText("resultQuestionAnswer0","Boris Brejcha");
-  //   await checkText("resultQuestionAnswer1","Ann Clue");
-  //   await checkText("resultUsername","TrashPanda");
-  //   await checkText("resultBar0","100%");
-  //   await adminPage.waitForSelector('[e2e-id="timerField"]');
-  //   await adminPage.click('[e2e-id="timerField"]', {clickCount: 3})
-  //   await adminPage.type('[e2e-id="timerField"]',"100");
-  //   await adminPage.waitForSelector('[e2e-id="showQuestion"]');
-  //   await adminPage.click('[e2e-id="showQuestion"]');
-  // });
+  it("Vote and view results 1", async () => {
+    await userPage.waitForSelector('[e2e-id="questionText"]');
+    await checkText("questionHeader","Question 1");
+    await checkText("questionText","Which DJ is better?");
+    await checkText("questionAnswer0","Boris Brejcha");
+    await checkText("questionAnswer1","Ann Clue");
+    await userPage.click('[e2e-id="questionAnswer0"]');
+    await delay(1000);
+    await userPage.click('[e2e-id="questionConfirm"]');
+    await delay(1000);
+    await userPage.waitForSelector('[e2e-id="spinner"]');
+    await adminPage.waitForSelector('[e2e-id="showResults"]');
+    await adminPage.click('[e2e-id="showResults"]');
+    await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
+    await delay(2000);
+    await checkText("resultQuestionText","Which DJ is better?");
+    await checkText("resultQuestionAnswer0","Boris Brejcha");
+    await checkText("resultQuestionAnswer1","Ann Clue");
+    await checkText("resultUsername","TrashPanda");
+    await checkText("resultBar0","100%");
+    await adminPage.waitForSelector('[e2e-id="timerField"]');
+    await adminPage.click('[e2e-id="timerField"]', {clickCount: 3})
+    await adminPage.type('[e2e-id="timerField"]',"100");
+    await adminPage.waitForSelector('[e2e-id="showQuestion"]');
+    await adminPage.click('[e2e-id="showQuestion"]');
+  });
 
   // it("Vote and view results 2", async () => {
   //   await userPage.waitForSelector('[e2e-id="questionText"]');
