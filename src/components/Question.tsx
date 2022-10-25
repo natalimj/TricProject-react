@@ -8,12 +8,13 @@ import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { RootState } from '../app/store';
 import IAnswerData from '../models/Answer';
 import { addAnswer } from '../reducers/answerSlice';
+import { setUserVoted } from '../reducers/componentSlice';
 import React from 'react';
 
 const Question = () => {
   const dispatch = useAppDispatch();
-  const [submitted, setSubmitted] = useState<boolean>(false);
-  const userId = useAppSelector((state: RootState) => state.user.userId);
+  const voted: number = useAppSelector((state: RootState) => state.component.userVotedValue);
+  const userId: any = useAppSelector((state: RootState) => state.user.userId);
   const currentQuestion: IQuestionData = {
     questionId: useAppSelector((state: RootState) => state.question.questionId),
     questionNumber: useAppSelector((state: RootState) => state.question.questionNumber),
@@ -31,16 +32,16 @@ const Question = () => {
       userId: userId,
       questionId: currentQuestion.questionId,
       answerId: answer.answerId
-    };
+    }
 
     UserApi.saveVote(voteData)
       .then(() => {
         dispatch(addAnswer(answer));
+        dispatch(setUserVoted(voteData.questionId));
       })
       .catch((e: Error) => {
         console.log(e);
       });
-    setSubmitted(true);
   };
 
   const chooseAnswer = (answer: IAnswerData, index: number) => {
@@ -62,14 +63,22 @@ const Question = () => {
     }
   }, [timer]);
 
+  useEffect(() => {
+    if (timer === 0) {
+      vote(currentQuestion.answers[0]);
+      setTimer(-1);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentQuestion.answers]);
+
 
   return (
     <div className='question-container'>
-      {submitted ? ((<WaitingPage startScreen={false}/>))
+      {(voted === currentQuestion.questionId) ? ((<WaitingPage startScreen={false} />))
         : (
           <>
             <div className='question'>
-              <div className='question__timer-text'> {timer} seconds remaining</div>
+              <div className='question__timer-text'> <span className='question__timer-text--seconds'>{timer}</span> seconds remaining</div>
               <div className='question__timer'>
                 <div className='question__inner-timer' style={{ "width": `${(100 * timer) / (currentQuestion.time)}%` }}></div>
               </div>

@@ -7,7 +7,7 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { RootState } from '../app/store';
 import { addUser } from '../reducers/userSlice';
-import { setUserSubmitted } from '../reducers/componentSlice';
+import { setUserJoined } from '../reducers/componentSlice';
 
 const UserLoginPage = () => {
     const currentUser: IUserData = {
@@ -30,7 +30,7 @@ const UserLoginPage = () => {
             user.imagePath = imageList[currentListIndex];
             UserApi.createUser(user)
                 .then((response: any) => {
-                    dispatch(setUserSubmitted(true));  // hide user page - show waiting page
+                    dispatch(setUserJoined(true));  // hide user page - show waiting page
                     dispatch(addUser(response.data));
                 })
                 .catch((e: Error) => {

@@ -17,7 +17,7 @@ import { setStatus } from "../reducers/statusSlice";
 const StartPage = () => {
   const isActive = useAppSelector((state: RootState) => state.status.isActive);
   const [sessionStarted, setSessionStarted] = useState<boolean>(false);
-  const userSubmitted = useAppSelector((state: RootState) => state.component.userSubmittedValue);
+  const userSubmitted = useAppSelector((state: RootState) => state.component.userJoinedValue);
   const [playStarted, setPlayStarted] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 

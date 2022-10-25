@@ -5,6 +5,7 @@ import IQuestionData from '../models/Question'
 import { NotificationManager } from 'react-notifications';
 import { useAppSelector } from '../app/hooks';
 import { RootState } from '../app/store';
+import Constants from '../util/Constants';
 
 type Props = {
     question: IQuestionData
@@ -85,7 +86,7 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                             name="firstAnswer"
                             maxLength={50} />
                     </div>
-                    <div className="questions__icon" e2e-id={"question"+questions.indexOf(question)+"EditSave"} onClick={() => editQuestion(question.questionId)} ><AiOutlineSave size={30} /></div>
+                    <div className="questions__icon" e2e-id={"question"+questions.indexOf(question)+"EditSave"} onClick={() => editQuestion(question.questionId)} ><AiOutlineSave size={30}/><br></br><span className="questions__icon-hide">{Constants.EDIT_BUTTON.toUpperCase()}</span></div>
                 </div>
                 <div className="questions__line">
                     <div className="questions__input">
@@ -97,7 +98,7 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                             name="secondAnswer"
                             maxLength={50} />
                     </div>
-                    <div className="questions__icon" e2e-id={"question"+questions.indexOf(question)+"EditDelete"} onClick={() => deleteQuestion(question.questionId)}><AiOutlineDelete size={30} /></div>
+                    <div className="questions__icon" e2e-id={"question"+questions.indexOf(question)+"EditDelete"} onClick={() => deleteQuestion(question.questionId)}><AiOutlineDelete size={30}/><br></br><span className="questions__icon-hide">{Constants.DELETE_BUTTON.toUpperCase()}</span></div>
                 </div>
             </div>
         </div>

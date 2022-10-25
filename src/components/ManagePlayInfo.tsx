@@ -6,7 +6,7 @@ import Constants from '../util/Constants';
 import EditContributor from './EditContributor';
 import AdminApi from '../api/AdminApi';
 import IPlayInfoData from '../models/PlayInfo';
-import { BiLeftArrowAlt } from 'react-icons/bi';
+import { BiDownArrow, BiLeftArrowAlt, BiUpArrow } from 'react-icons/bi';
 import { useAppSelector } from '../app/hooks';
 import { RootState } from '../app/store';
 
@@ -25,6 +25,7 @@ const PlayInfo = () => {
   const [contributors, setContributors] = useState<IContributorData[]>([]);
   const [contributor, setContributor] = useState(initialContributor);
   const [playInfo, setPlayInfo] = useState<IPlayInfoData>(initialPlayInfo);
+  const [showCast, setShowCast] = useState<boolean>(false);
   const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
 
   useEffect(() => {
@@ -56,7 +57,7 @@ const PlayInfo = () => {
     });
   }
 
-  const handlePlayInfoChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handlePlayInfoChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const value = event.target.value;
     setPlayInfo({
       ...playInfo,
@@ -77,6 +78,9 @@ const PlayInfo = () => {
     window.location.href = "/admin";
   };
 
+  const showEditCast = () => {
+    setShowCast(!showCast)
+}
 
 
   const addContributor = () => {
@@ -101,16 +105,16 @@ const PlayInfo = () => {
       </div>
       <div className="questions__box-small">
         <div className="questions__line">
-          <div className="questions__input">
-            <input type="text"
+          <div className="questions__textarea">
+            <textarea
               value={playInfo.playInfoText}
-              className="questions__text"
+              className="questions__text scroll"
               name="playInfoText"
               placeholder="Enter play Info"
               maxLength={700}
               onChange={handlePlayInfoChange} />
           </div>
-          <div className="questions__icon"
+          <div className="questions__icon-textarea questions__icon question__save-button"
             onClick={() => editPlayInfo()} >{Constants.SAVE_BUTTON.toUpperCase()}</div>
         </div>
       </div>
@@ -139,17 +143,20 @@ const PlayInfo = () => {
               maxLength={40}
               onChange={handleChange} />
           </div>
-          <div className="questions__icon"
+          <div className="questions__icon question__save-button"
             onClick={addContributor} >{Constants.SAVE_BUTTON.toUpperCase()}</div>
         </div>
       </div>
-      <div className='questions__header'>
+      <div className='questions__header questions__header--accordion' onClick={() => showEditCast()}>
         {Constants.CAST_LIST_TITLE}
+        <span> {showCast ? (<BiUpArrow size={30} />) : (<BiDownArrow size={30} />)}</span>
       </div>
-      {contributors && contributors.map((contr) => (
-        <EditContributor key={contr.contributorId}
-          contributorToEdit={contr} contributors={contributors} setContributors={setContributors} />
-      ))}
+      {showCast && <div>
+        {contributors && contributors.map((contr) => (
+          <EditContributor key={contr.contributorId}
+            contributorToEdit={contr} contributors={contributors} setContributors={setContributors} />
+        ))}
+      </div>}
       <div className='questions__back-button' onClick={goToAdminPage}>
         <BiLeftArrowAlt size={30} />
       </div>

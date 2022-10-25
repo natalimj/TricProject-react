@@ -21,7 +21,7 @@ const FinalResult = () => {
   const [showPlayInfo, setShowPlayInfo] = useState<boolean>(false)
   const exportRef = useRef<HTMLHeadingElement>(null);
   const today = moment().format('DD-MM-YYYY');
-  
+
 
   useEffect(() => {
     UserApi.getFinalResult(currentUser.userId)
@@ -34,21 +34,21 @@ const FinalResult = () => {
   }, [currentUser.userId])
 
   return (
-   <> 
-   {!showPlayInfo && <div className='final-result'>
-      <div className="final-result__inner-container">
-        <div ref={exportRef} className="final-result__pink-background">
-          <div className="final-result__user-box">
-            <div className="final-result__avatar-container">
-              <img src={require('../util/icons/' + currentUser.imagePath + '.jpg')} alt="user icon" />
+    <>
+      {!showPlayInfo && <div className='final-result'>
+        <div className="final-result__inner-container">
+          <div ref={exportRef} className="final-result__pink-background">
+            <div className="final-result__user-box">
+              <div className="final-result__avatar-container">
+                <img src={require('../util/icons/' + currentUser.imagePath + '.jpg')} alt="user icon" />
+              </div>
+              <div className="final-result__text-container">
+                <span e2e-id="finalUsername">{currentUser.username}</span>
+                <span>{today}</span>
+                <span>{Constants.HUMANLAB}</span>
+              </div>
             </div>
-            <div className="final-result__text-container">
-              <span e2e-id="finalUsername">{currentUser.username}</span>
-              <span>{today}</span>
-              <span>HumanLab</span>
-            </div>
-          </div>
-          <div className="final-result__result-box"><div>{Constants.FINAL_RESULT_FIELD}</div>
+            <div className="final-result__result-box"><div>{Constants.FINAL_RESULT_FIELD}</div>
 
             {finalResults && finalResults.map((finalResult) => (
               <div key={finalResult.category.categoryId}>
@@ -62,10 +62,10 @@ const FinalResult = () => {
                 </div>
               </div>
             ))}
-               <div className='final-result__info-icon'><BsInfoCircle size={30} onClick={()=>setShowPlayInfo(true)} e2e-id="infoButton"/></div>
+               <div className='final-result__info-icon'><BsInfoCircle size={30} onClick={()=>setShowPlayInfo(true)}/></div>
           </div>   
         </div>
-        <div className="final-result__download" e2e-id="download" onClick={() => ExportAsImage(exportRef.current, `TRIC-${today}`)}>{Constants.DOWNLOAD}</div>
+        <div className="final-result__download" onClick={() => ExportAsImage(exportRef.current, `TRIC-${today}`)}>{Constants.DOWNLOAD}</div>
       </div>
     </div> }
     {showPlayInfo && <PlayInfo/>}

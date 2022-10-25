@@ -30,16 +30,16 @@ const Result = () => {
     const userName = useAppSelector((state: RootState) => state.user.username);
     const userIcon = useAppSelector((state: RootState) => state.user.imagePath);
     const userAnswer = useAppSelector((state: RootState) => state.answer);
-    const [response, setResponse] = useState<boolean>(false);
+    const [votedFirstResponse, setVotedFirstResponse] = useState<boolean>(false);
 
     useEffect(() => {
         UserApi.showResult(questionId)
             .then((response: any) => {
                 setResult(response.data);
                 if (userAnswer.answerText === response.data.firstAnswer.answerText) {
-                    setResponse(true);
+                    setVotedFirstResponse(true);
                 } else if (userAnswer.answerText === response.data.secondAnswer.answerText) {
-                    setResponse(false);
+                    setVotedFirstResponse(false);
                 }
             })
             .catch((e: Error) => {
@@ -68,7 +68,7 @@ const Result = () => {
                         <div className="result__answer-bar result__answer-bar--right"
                             style={{ "width": `${result.secondAnswerRate}%` }} e2e-id="resultBar1">{result.secondAnswer.answerText === userAnswer.answerText && `${result.secondAnswerRate}%`}</div>
                     </div>
-                    <div style={response ? { color: "#FFADCB" } : { color: "#E1E1DA" }} className="result__user-answer">
+                    <div style={votedFirstResponse ? { color: "#FFADCB" } : { color: "#E1E1DA" }} className="result__user-answer">
                         <BsFillSquareFill /> 
                         <div className='result__user-answer--text'>- {Constants.USER_RESPONSE}</div>
                     </div>

@@ -17,11 +17,6 @@ const initialState: AdminState = {
     username : ''
 };
 
-export function getAccessToken() {
-    return 
-}
-
-
 export const adminSlice = createSlice({
     name: 'admin',
     initialState,

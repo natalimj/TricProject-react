@@ -18,6 +18,10 @@
     margin-top: 23px;
 }
 
+.question__timer-text--seconds {
+    color: var(--color-pink);
+}
+
 .question__timer {
     width: 100%;
     height: 5%;
@@ -74,8 +78,8 @@
     max-width: 200px;
     background: none;
     background-color: var(--color-grey);
-    color: var(--color-off-white);
-    border: 3px solid var(--color-black);
+    color: var(--color-dark-grey);
+    border: 3px solid var(--color-dark-grey);
     padding: 15px 20px;
     font: inherit;
     font-size: var(--font-size-header);
