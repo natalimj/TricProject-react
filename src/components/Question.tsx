@@ -64,7 +64,7 @@ const Question = () => {
   }, [timer]);
 
   useEffect(() => {
-    if (timer === 0) {
+    if (timer === 0 && !voted) {
       vote(currentQuestion.answers[0]);
       setTimer(-1);
     }

@@ -100,9 +100,7 @@
     background-color: var(--color-pink);
     color: var(--color-dark-grey);
     font-size: var(--font-size-larger);
-    margin-top: 2%;
-    margin-left: 25%;
-    width: 50%;
+    margin-top: 20px;
     cursor: pointer;    
 }
 
@@ -123,7 +121,7 @@
 }
 
 .final-result__info-icon {
-    margin: 20px;
+    margin: 18px;
     display: flex;
     justify-content: flex-end;
     position: absolute;
