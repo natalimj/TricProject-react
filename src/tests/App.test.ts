@@ -186,46 +186,46 @@ describe("Feature 2 - Voting System", () => {
     await adminPage.click('[e2e-id="showQuestion"]');
   });
 
-  // it("Vote and view results 2", async () => {
-  //   await userPage.waitForSelector('[e2e-id="questionText"]');
-  //   await checkText("questionHeader","Question 2");
-  //   await checkText("questionText","Which genre is better?");
-  //   await checkText("questionAnswer0","Techno");
-  //   await checkText("questionAnswer1","Trance");
-  //   await userPage.click('[e2e-id="questionAnswer0"]');
-  //   await delay(1000);
-  //   await userPage.click('[e2e-id="questionConfirm"]');
-  //   await delay(1000);
-  //   await userPage.waitForSelector('[e2e-id="spinner"]');
-  //   await adminPage.waitForSelector('[e2e-id="showResults"]');
-  //   await adminPage.click('[e2e-id="showResults"]');
-  //   await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
-  //   await checkText("resultQuestionText","Which genre is better?");
-  //   await checkText("resultQuestionAnswer0","Techno");
-  //   await checkText("resultQuestionAnswer1","Trance");
-  //   await checkText("resultUsername","TrashPanda");
-  //   await checkText("resultBar0","100%");
-  //   await adminPage.waitForSelector('[e2e-id="timerField"]');
-  //   await adminPage.type('[e2e-id="timerField"]',"100");
-  //   await adminPage.waitForSelector('[e2e-id="showQuestion"]');
-  //   await adminPage.click('[e2e-id="showQuestion"]');
-  // });
+  it("Vote and view results 2", async () => {
+    await userPage.waitForSelector('[e2e-id="questionText"]');
+    await checkText("questionHeader","Question 2");
+    await checkText("questionText","Which genre is better?");
+    await checkText("questionAnswer0","Techno");
+    await checkText("questionAnswer1","Trance");
+    await userPage.click('[e2e-id="questionAnswer0"]');
+    await delay(1000);
+    await userPage.click('[e2e-id="questionConfirm"]');
+    await delay(1000);
+    await userPage.waitForSelector('[e2e-id="spinner"]');
+    await adminPage.waitForSelector('[e2e-id="showResults"]');
+    await adminPage.click('[e2e-id="showResults"]');
+    await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
+    await checkText("resultQuestionText","Which genre is better?");
+    await checkText("resultQuestionAnswer0","Techno");
+    await checkText("resultQuestionAnswer1","Trance");
+    await checkText("resultUsername","TrashPanda");
+    await checkText("resultBar0","100%");
+    await adminPage.waitForSelector('[e2e-id="timerField"]');
+    await adminPage.type('[e2e-id="timerField"]',"100");
+    await adminPage.waitForSelector('[e2e-id="showQuestion"]');
+    await adminPage.click('[e2e-id="showQuestion"]');
+  });
 
-  // it("Vote and view final results", async () => {
-  //   await userPage.waitForSelector('[e2e-id="questionText"]');
-  //   await checkText("questionHeader","Question 3");
-  //   await checkText("questionText","Which festival is better?");
-  //   await checkText("questionAnswer0","Electric Castle");
-  //   await checkText("questionAnswer1","Untold");
-  //   await userPage.click('[e2e-id="questionAnswer0"]');
-  //   await userPage.click('[e2e-id="questionConfirm"]');
-  //   await userPage.waitForSelector('[e2e-id="spinner"]');
-  //   await adminPage.waitForSelector('[e2e-id="showFinalResult"]');
-  //   await adminPage.click('[e2e-id="showFinalResult"]');
-  //   await userPage.waitForSelector('[e2e-id="finalUsername"]');
-  //   await userPage.waitForSelector('[e2e-id="download"]');
-  //   await userPage.waitForSelector('[e2e-id="infoButton"]');
-  // });
+  it("Vote and view final results", async () => {
+    await userPage.waitForSelector('[e2e-id="questionText"]');
+    await checkText("questionHeader","Question 3");
+    await checkText("questionText","Which festival is better?");
+    await checkText("questionAnswer0","Electric Castle");
+    await checkText("questionAnswer1","Untold");
+    await userPage.click('[e2e-id="questionAnswer0"]');
+    await userPage.click('[e2e-id="questionConfirm"]');
+    await userPage.waitForSelector('[e2e-id="spinner"]');
+    await adminPage.waitForSelector('[e2e-id="showFinalResult"]');
+    await adminPage.click('[e2e-id="showFinalResult"]');
+    await userPage.waitForSelector('[e2e-id="finalUsername"]');
+    await userPage.waitForSelector('[e2e-id="download"]');
+    await userPage.waitForSelector('[e2e-id="infoButton"]');
+  });
 
   afterAll(async () => {
     await AdminApi.deactivateApp(accessToken);
@@ -267,19 +267,19 @@ describe("Feature 3 - Voting Rounds", () => {
     await adminPage.click('[e2e-id="showQuestion"]');
   });
 
-  // it("Vote and view results after timer expires", async () => {
-  //   await userPage.waitForSelector('[e2e-id="questionText"]');
-  //   await checkText("questionHeader","Question 1");
-  //   await checkText("questionText","Which DJ is better?");
-  //   await checkText("questionAnswer0","Boris Brejcha");
-  //   await checkText("questionAnswer1","Ann Clue");
-  //   delay(1000);
-  //   await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
-  //   await checkText("resultQuestionText","Which DJ is better?");
-  //   await checkText("resultQuestionAnswer0","Boris Brejcha");
-  //   await checkText("resultQuestionAnswer1","Ann Clue");
-  //   await checkText("resultUsername","TrashPanda");
-  // });
+  it("Vote and view results after timer expires", async () => {
+    await userPage.waitForSelector('[e2e-id="questionText"]');
+    await checkText("questionHeader","Question 1");
+    await checkText("questionText","Which DJ is better?");
+    await checkText("questionAnswer0","Boris Brejcha");
+    await checkText("questionAnswer1","Ann Clue");
+    delay(1000);
+    await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
+    await checkText("resultQuestionText","Which DJ is better?");
+    await checkText("resultQuestionAnswer0","Boris Brejcha");
+    await checkText("resultQuestionAnswer1","Ann Clue");
+    await checkText("resultUsername","TrashPanda");
+  });
 
   afterAll(async () => {
     await AdminApi.deactivateApp(accessToken);
@@ -382,79 +382,79 @@ describe("Feature 8 - Downtime management and ending the play", () => {
     await adminPage.click('[e2e-id="showQuestion"]');
   });
 
-  // it("Vote and view results 1", async () => {
-  //   await userPage.waitForSelector('[e2e-id="questionText"]');
-  //   await checkText("questionHeader","Question 1");
-  //   await checkText("questionText","Which DJ is better?");
-  //   await checkText("questionAnswer0","Boris Brejcha");
-  //   await checkText("questionAnswer1","Ann Clue");
-  //   await userPage.click('[e2e-id="questionAnswer0"]');
-  //   await delay(1000);
-  //   await userPage.click('[e2e-id="questionConfirm"]');
-  //   await delay(1000);
-  //   await userPage.waitForSelector('[e2e-id="spinner"]');
-  //   await adminPage.waitForSelector('[e2e-id="showResults"]');
-  //   await adminPage.click('[e2e-id="showResults"]');
-  //   await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
-  //   await checkText("resultQuestionText","Which DJ is better?");
-  //   await checkText("resultQuestionAnswer0","Boris Brejcha");
-  //   await checkText("resultQuestionAnswer1","Ann Clue");
-  //   await checkText("resultUsername","TrashPanda");
-  //   await checkText("resultBar0","100%");
-  //   await adminPage.waitForSelector('[e2e-id="timerField"]');
-  //   await adminPage.click('[e2e-id="timerField"]', {clickCount: 3})
-  //   await adminPage.type('[e2e-id="timerField"]',"100");
-  //   await adminPage.waitForSelector('[e2e-id="showQuestion"]');
-  //   await adminPage.click('[e2e-id="showQuestion"]');
-  // });
+  it("Vote and view results 1", async () => {
+    await userPage.waitForSelector('[e2e-id="questionText"]');
+    await checkText("questionHeader","Question 1");
+    await checkText("questionText","Which DJ is better?");
+    await checkText("questionAnswer0","Boris Brejcha");
+    await checkText("questionAnswer1","Ann Clue");
+    await userPage.click('[e2e-id="questionAnswer0"]');
+    await delay(1000);
+    await userPage.click('[e2e-id="questionConfirm"]');
+    await delay(1000);
+    await userPage.waitForSelector('[e2e-id="spinner"]');
+    await adminPage.waitForSelector('[e2e-id="showResults"]');
+    await adminPage.click('[e2e-id="showResults"]');
+    await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
+    await checkText("resultQuestionText","Which DJ is better?");
+    await checkText("resultQuestionAnswer0","Boris Brejcha");
+    await checkText("resultQuestionAnswer1","Ann Clue");
+    await checkText("resultUsername","TrashPanda");
+    await checkText("resultBar0","100%");
+    await adminPage.waitForSelector('[e2e-id="timerField"]');
+    await adminPage.click('[e2e-id="timerField"]', {clickCount: 3})
+    await adminPage.type('[e2e-id="timerField"]',"100");
+    await adminPage.waitForSelector('[e2e-id="showQuestion"]');
+    await adminPage.click('[e2e-id="showQuestion"]');
+  });
 
-  // it("Vote and view results 2", async () => {
-  //   await userPage.waitForSelector('[e2e-id="questionText"]');
-  //   await checkText("questionHeader","Question 2");
-  //   await checkText("questionText","Which genre is better?");
-  //   await checkText("questionAnswer0","Techno");
-  //   await checkText("questionAnswer1","Trance");
-  //   await userPage.click('[e2e-id="questionAnswer0"]');
-  //   await delay(1000);
-  //   await userPage.click('[e2e-id="questionConfirm"]');
-  //   await delay(1000);
-  //   await userPage.waitForSelector('[e2e-id="spinner"]');
-  //   await adminPage.waitForSelector('[e2e-id="showResults"]');
-  //   await adminPage.click('[e2e-id="showResults"]');
-  //   await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
-  //   await checkText("resultQuestionText","Which genre is better?");
-  //   await checkText("resultQuestionAnswer0","Techno");
-  //   await checkText("resultQuestionAnswer1","Trance");
-  //   await checkText("resultUsername","TrashPanda");
-  //   await checkText("resultBar0","100%");
-  //   await adminPage.waitForSelector('[e2e-id="timerField"]');
-  //   await adminPage.type('[e2e-id="timerField"]',"100");
-  //   await adminPage.waitForSelector('[e2e-id="showQuestion"]');
-  //   await adminPage.click('[e2e-id="showQuestion"]');
-  // });
+  it("Vote and view results 2", async () => {
+    await userPage.waitForSelector('[e2e-id="questionText"]');
+    await checkText("questionHeader","Question 2");
+    await checkText("questionText","Which genre is better?");
+    await checkText("questionAnswer0","Techno");
+    await checkText("questionAnswer1","Trance");
+    await userPage.click('[e2e-id="questionAnswer0"]');
+    await delay(1000);
+    await userPage.click('[e2e-id="questionConfirm"]');
+    await delay(1000);
+    await userPage.waitForSelector('[e2e-id="spinner"]');
+    await adminPage.waitForSelector('[e2e-id="showResults"]');
+    await adminPage.click('[e2e-id="showResults"]');
+    await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
+    await checkText("resultQuestionText","Which genre is better?");
+    await checkText("resultQuestionAnswer0","Techno");
+    await checkText("resultQuestionAnswer1","Trance");
+    await checkText("resultUsername","TrashPanda");
+    await checkText("resultBar0","100%");
+    await adminPage.waitForSelector('[e2e-id="timerField"]');
+    await adminPage.type('[e2e-id="timerField"]',"100");
+    await adminPage.waitForSelector('[e2e-id="showQuestion"]');
+    await adminPage.click('[e2e-id="showQuestion"]');
+  });
 
-  // it("Vote and view final results", async () => {
-  //   await userPage.waitForSelector('[e2e-id="questionText"]');
-  //   await checkText("questionHeader","Question 3");
-  //   await checkText("questionText","Which festival is better?");
-  //   await checkText("questionAnswer0","Electric Castle");
-  //   await checkText("questionAnswer1","Untold");
-  //   await userPage.click('[e2e-id="questionAnswer0"]');
-  //   await userPage.click('[e2e-id="questionConfirm"]');
-  //   await userPage.waitForSelector('[e2e-id="spinner"]');
-  //   await adminPage.waitForSelector('[e2e-id="showFinalResult"]');
-  //   await adminPage.click('[e2e-id="showFinalResult"]');
-  //   await userPage.waitForSelector('[e2e-id="finalUsername"]');
-  //   await userPage.waitForSelector('[e2e-id="download"]');
-  //   await userPage.waitForSelector('[e2e-id="infoButton"]');
-  // });
+  it("Vote and view final results", async () => {
+    await userPage.waitForSelector('[e2e-id="questionText"]');
+    await checkText("questionHeader","Question 3");
+    await checkText("questionText","Which festival is better?");
+    await checkText("questionAnswer0","Electric Castle");
+    await checkText("questionAnswer1","Untold");
+    await userPage.click('[e2e-id="questionAnswer0"]');
+    await userPage.click('[e2e-id="questionConfirm"]');
+    await userPage.waitForSelector('[e2e-id="spinner"]');
+    await adminPage.waitForSelector('[e2e-id="showFinalResult"]');
+    await adminPage.click('[e2e-id="showFinalResult"]');
+    await userPage.waitForSelector('[e2e-id="finalUsername"]');
+    await userPage.waitForSelector('[e2e-id="download"]');
+    await userPage.waitForSelector('[e2e-id="infoButton"]');
+  });
   
-  // it("End Session", async () => {
-  //   await adminPage.waitForSelector('[e2e-id="endSession"]');
-  //   await adminPage.click('[e2e-id="endSession"]');
-  //   await adminPage.waitForSelector('[e2e-id="usernameAdmin"]');
-  //   await userPage.waitForSelector('[e2e-id="inactive"]');
-  // });
+  it("End Session", async () => {
+    await adminPage.waitForSelector('[e2e-id="endSession"]');
+    await adminPage.click('[e2e-id="endSession"]');
+    await adminPage.waitForSelector('[e2e-id="usernameAdmin"]');
+    await userPage.waitForSelector('[e2e-id="inactive"]');
+  });
 
   afterAll(async () => {
     await AdminApi.deactivateApp(accessToken);
