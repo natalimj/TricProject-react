@@ -14,6 +14,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import 'react-notifications/lib/notifications.css';
 import { NotificationContainer } from 'react-notifications';
 import PlayInfo from "./components/ManagePlayInfo";
+import DisplayResult from "./components/DisplayResult";
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
                 <Route path='/admin' element={<Admin />} />
               </Route>
               <Route path="/login" element={<Login />} />
+              <Route path="/admin/result" element={<DisplayResult />} />
               <Route path="*" element={<Page404 />} />
             </Routes>
           </BrowserRouter>

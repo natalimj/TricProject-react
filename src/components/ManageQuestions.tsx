@@ -90,7 +90,7 @@ const Questions = () => {
                                 onChange={(e) => setSecondAnswer(e.target.value)}
                                 maxLength={50} />
                         </div>
-                        <div className="questions__icon"
+                        <div className="questions__icon question__save-button"
                             onClick={addQuestion} >{Constants.SAVE_BUTTON.toUpperCase()}</div>
                     </div>
                 </div>

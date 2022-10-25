@@ -59,7 +59,6 @@
 
 .final-result__result-box>div:nth-of-type(1) {
     margin-top: 2vh;
-    margin-bottom: 2vh;
 }
 
 .final-result__slider {
@@ -95,7 +94,6 @@
 .final-result__pink-background {
     background-color: var(--color-pink);
     padding-top: 2%;
-    padding-bottom: 2%;
 }
 
 .final-result__download {
@@ -105,6 +103,11 @@
     margin-top: 2%;
     margin-left: 25%;
     width: 50%;
+    cursor: pointer;    
+}
+
+.final-result__download:active {
+    background-color: var(--color-pink-darker);
 }
 
 .final-result__title {
@@ -126,6 +129,11 @@
     position: absolute;
     bottom: 1vh;
     right: 8vw;
+    cursor: pointer;    
+}
+
+.final-result__info-icon :active{
+    color: var(--color-pink-darker);
 }
 
 @media (max-width: 800px) {
