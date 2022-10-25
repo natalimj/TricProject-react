@@ -5,5 +5,5 @@ module.exports = {
     "^.+\\.(ts|js)x?$": "ts-jest"
   },
   "transformIgnorePatterns": ["<rootDir>/node_modules/"],
-  testTimeout: 20000
+  testTimeout: 5000
 }
