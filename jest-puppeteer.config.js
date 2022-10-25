@@ -9,5 +9,5 @@ module.exports = {
     ]
   },
   browserContext: 'default',
-  testTimeout: 5000
+  testTimeout: 20000
 }
