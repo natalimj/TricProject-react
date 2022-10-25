@@ -63,13 +63,14 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
     }
 
     return (
-        <div key={question.questionId}>
+        <div key={question.questionId} e2e-id={"questionNr"+questions.indexOf(question)}>
             <div className="questions__box">
                 <div className="questions__line">
                     <div className="questions__input">
                         <input type="text"
                             onChange={handleChange}
                             className='questions__text'
+                            e2e-id={"question"+questions.indexOf(question)+"EditText"}
                             defaultValue={question.questionText}
                             name="questionText"
                             maxLength={75} />
@@ -80,22 +81,24 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                         <input type="text"
                             onChange={handleChange}
                             className='questions__text'
+                            e2e-id={"question"+questions.indexOf(question)+"EditAnswer1"}
                             defaultValue={question.answers[0].answerText}
                             name="firstAnswer"
                             maxLength={50} />
                     </div>
-                    <div className="questions__icon" onClick={() => editQuestion(question.questionId)} ><AiOutlineSave size={30}/><br></br><span className="questions__icon-hide">{Constants.EDIT_BUTTON.toUpperCase()}</span></div>
+                    <div className="questions__icon" e2e-id={"question"+questions.indexOf(question)+"EditSave"} onClick={() => editQuestion(question.questionId)} ><AiOutlineSave size={30}/><br></br><span className="questions__icon-hide">{Constants.EDIT_BUTTON.toUpperCase()}</span></div>
                 </div>
                 <div className="questions__line">
                     <div className="questions__input">
                         <input type="text"
                             className="questions__text"
                             onChange={handleChange}
+                            e2e-id={"question"+questions.indexOf(question)+"EditAnswer2"}
                             defaultValue={question.answers[1].answerText}
                             name="secondAnswer"
                             maxLength={50} />
                     </div>
-                    <div className="questions__icon" onClick={() => deleteQuestion(question.questionId)}><AiOutlineDelete size={30}/><br></br><span className="questions__icon-hide">{Constants.DELETE_BUTTON.toUpperCase()}</span></div>
+                    <div className="questions__icon" e2e-id={"question"+questions.indexOf(question)+"EditDelete"} onClick={() => deleteQuestion(question.questionId)}><AiOutlineDelete size={30}/><br></br><span className="questions__icon-hide">{Constants.DELETE_BUTTON.toUpperCase()}</span></div>
                 </div>
             </div>
         </div>

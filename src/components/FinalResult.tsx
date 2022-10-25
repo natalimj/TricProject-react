@@ -42,7 +42,7 @@ const FinalResult = () => {
                 <img src={require('../util/icons/' + currentUser.imagePath + '.jpg')} alt="user icon" />
               </div>
               <div className="final-result__text-container">
-                <span>{currentUser.username}</span>
+                <span e2e-id="finalUsername">{currentUser.username}</span>
                 <span>{today}</span>
                 <span>{Constants.HUMANLAB}</span>
               </div>

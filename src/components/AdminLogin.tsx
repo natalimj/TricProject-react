@@ -113,7 +113,7 @@ const Login = () => {
         <Form className="admin-login__form">
           <div className="admin-login__login-field">
             <label htmlFor="username" className="admin-login__login-label">{Constants.USERNAME_FIELD}</label>
-            <Field name="username" type="text" className="admin-login__field" />
+            <Field name="username" type="text" className="admin-login__field" e2e-id="usernameAdmin"/>
             <ErrorMessage
               name="username"
               component="div"
@@ -122,7 +122,7 @@ const Login = () => {
           </div>
           <div className="admin-login__login-field">
             <label htmlFor="password" className="admin-login__login-label">{Constants.PASSWORD_FIELD}</label>
-            <Field name="password" type="password" className="admin-login__field" />
+            <Field name="password" type="password" className="admin-login__field"  e2e-id="passwordAdmin"/>
             <ErrorMessage
               name="password"
               component="div"
@@ -130,7 +130,7 @@ const Login = () => {
             />
           </div>
           <div className="admin-login__login-field">
-            <button type="submit" className="admin-login__submit-button" disabled={loading}>
+            <button type="submit" className="admin-login__submit-button" disabled={loading} e2e-id="login">
               <span className="admin-login__submit__button--text">{Constants.SUBMIT_BUTTON}</span>
             </button>
           </div>
