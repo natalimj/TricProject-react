@@ -22,7 +22,6 @@ const FinalResult = () => {
   const exportRef = useRef<HTMLHeadingElement>(null);
   const today = moment().format('DD-MM-YYYY');
 
-
   useEffect(() => {
     UserApi.getFinalResult(currentUser.userId)
       .then((response: any) => {
@@ -48,8 +47,8 @@ const FinalResult = () => {
                 <span>{Constants.HUMANLAB}</span>
               </div>
             </div>
-            <div className="final-result__result-box"><div>{Constants.FINAL_RESULT_FIELD}</div>
-
+            <div className="final-result__result-box">
+              <div>{Constants.FINAL_RESULT_FIELD}</div>
               {finalResults && finalResults.map((finalResult) => (
                 <div key={finalResult.category.categoryId}>
                   <div className="final-result__title">
