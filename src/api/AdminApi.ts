@@ -35,6 +35,10 @@ const activateApp = (accessToken: string) => {
   return http.post<IStatusData>("adminApi/activate", "", { headers: authHeader(accessToken) });
 };
 
+const deactivateApp = (accessToken: string) => {
+  return http.post<IStatusData>("adminApi/deactivate", "", { headers: authHeader(accessToken) });
+};
+
 const getAllQuestions = (accessToken: string) => {
   return http.get<Array<IQuestionData>>("adminApi/questions", { headers: authHeader(accessToken) });
 };
@@ -71,7 +75,13 @@ const deleteQuestion = (questionId: number, accessToken: string) => {
   })
 }
 
-const editQuestion = (questionText: string, firstAnswer: string, secondAnswer: string, questionId: number, accessToken: string) => {
+const deleteAllQuestions = (accessToken: string) => {
+  return http.delete<number>("adminApi/deleteQuestions", {
+    headers: authHeader(accessToken)
+  })
+}
+
+const editQuestion = (questionText: string, firstAnswer: string, secondAnswer: string, questionId: number,accessToken: string) => {
   return http.patch<IQuestionData>("adminApi/editQuestion", {}, {
     params: {
       questionText: questionText,
@@ -116,9 +126,11 @@ const AdminApi = {
   endSession,
   getQuestionByNumber,
   activateApp,
+  deactivateApp,
   getAllQuestions,
   addQuestion,
   deleteQuestion,
+  deleteAllQuestions,
   editQuestion,
   showFinalResult,
   addQuestionTime,

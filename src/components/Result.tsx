@@ -54,19 +54,19 @@ const Result = () => {
                     {userIcon !== '' ? (<img src={require('../util/icons/' + userIcon + '.jpg')} alt="user icon" />)
                         : (<img src={require('../util/icons/imageMale1.jpg')} alt="user icon" />)}
                 </div>
-                <div className="result__text">{userName}</div>
+                <div className="result__text" e2e-id="resultUsername">{userName}</div>
                 <div className="result__text">{Constants.VOTE_RESULT_FIELD}</div>
-                <div className="result__question-text">{result?.question.questionText}</div>
+                <div className="result__question-text" e2e-id="resultQuestionText">{result?.question.questionText}</div>
                 <div className="result__box">
                     <div className="result__title">
-                        <span className="result__answer-text">{result.firstAnswer.answerText}</span>
-                        <span className="result__answer-text result__answer-text--right">{result.secondAnswer.answerText}</span>
+                        <span className="result__answer-text" e2e-id="resultQuestionAnswer0">{result.firstAnswer.answerText}</span>
+                        <span className="result__answer-text result__answer-text--right" e2e-id="resultQuestionAnswer1">{result.secondAnswer.answerText}</span>
                     </div>
                     <div className="result__slider">
                         <div className="result__answer-bar result__answer-bar--left"
-                            style={{ "width": `${result.firstAnswerRate}%` }}>{result.firstAnswer.answerText === userAnswer.answerText && `${result.firstAnswerRate}%`}</div>
+                            style={{ "width": `${result.firstAnswerRate}%` }} e2e-id="resultBar0">{result.firstAnswer.answerText === userAnswer.answerText && `${result.firstAnswerRate}%`}</div>
                         <div className="result__answer-bar result__answer-bar--right"
-                            style={{ "width": `${result.secondAnswerRate}%` }}>{result.secondAnswer.answerText === userAnswer.answerText && `${result.secondAnswerRate}%`}</div>
+                            style={{ "width": `${result.secondAnswerRate}%` }} e2e-id="resultBar1">{result.secondAnswer.answerText === userAnswer.answerText && `${result.secondAnswerRate}%`}</div>
                     </div>
                     <div style={votedFirstResponse ? { color: "#FFADCB" } : { color: "#E1E1DA" }} className="result__user-answer">
                         <BsFillSquareFill /> 
