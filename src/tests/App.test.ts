@@ -1,7 +1,5 @@
 import puppeteer from "puppeteer";
 import AdminApi from "../api/AdminApi";
-import { RootState, store } from "../app/store";
-import { useAppDispatch, useAppSelector } from '../app/hooks';
 
 const accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtb2QiLCJpYXQiOjE2NjY2ODQ4MzcsImV4cCI6MTY2Njk0NDAzN30._Lmt51H1VnuBFt_OvidJV5brZb-0vrXR7XvwV2lBqHAusEpIVajeb-BdbEHHB5gWmsUoFf3bRyvhFAdZqpCjZg";
 let browser;
