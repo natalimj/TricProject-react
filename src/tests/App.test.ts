@@ -99,9 +99,10 @@ describe("Feature 1 - Questions database and display", () => {
     await adminPage.type('[e2e-id="question1EditAnswer1"]',"Main Stage");
     await adminPage.click('[e2e-id="question1EditAnswer2"]', {clickCount: 3})
     await adminPage.type('[e2e-id="question1EditAnswer2"]',"Booha");
+    await delay(2000);
     await adminPage.waitForSelector('[e2e-id="question1EditSave"]');
     await adminPage.click('[e2e-id="question1EditSave"]');
-    await delay(1000);
+    await delay(2000);
     await checkQuestion(1,"What is your favorite stage?", "Main Stage", "Booha");
   });
 
@@ -172,6 +173,7 @@ describe("Feature 2 - Voting System", () => {
     await userPage.waitForSelector('[e2e-id="spinner"]');
     await adminPage.waitForSelector('[e2e-id="showResults"]');
     await adminPage.click('[e2e-id="showResults"]');
+    await delay(2000);
     await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
     await delay(2000);
     await checkText("resultQuestionText","Which DJ is better?");
@@ -199,7 +201,9 @@ describe("Feature 2 - Voting System", () => {
     await userPage.waitForSelector('[e2e-id="spinner"]');
     await adminPage.waitForSelector('[e2e-id="showResults"]');
     await adminPage.click('[e2e-id="showResults"]');
+    await delay(2000);
     await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
+    await delay(2000);
     await checkText("resultQuestionText","Which genre is better?");
     await checkText("resultQuestionAnswer0","Techno");
     await checkText("resultQuestionAnswer1","Trance");
@@ -213,18 +217,44 @@ describe("Feature 2 - Voting System", () => {
 
   it("Vote and view final results", async () => {
     await userPage.waitForSelector('[e2e-id="questionText"]');
+    await userPage.screenshot({
+      path: 'screenshots/feature2/finalvotebefore.jpg'
+    });
     await checkText("questionHeader","Question 3");
     await checkText("questionText","Which festival is better?");
     await checkText("questionAnswer0","Electric Castle");
     await checkText("questionAnswer1","Untold");
+    await userPage.screenshot({
+      path: 'screenshots/feature2/finalvoteaftercheck.jpg'
+    });
     await userPage.click('[e2e-id="questionAnswer0"]');
+    await delay(2000);
     await userPage.click('[e2e-id="questionConfirm"]');
+    await userPage.screenshot({
+      path: 'screenshots/feature2/afterclicking.jpg'
+    });
     await userPage.waitForSelector('[e2e-id="spinner"]');
+    await userPage.screenshot({
+      path: 'screenshots/feature2/spinnermaybe.jpg'
+    });
     await adminPage.waitForSelector('[e2e-id="showFinalResult"]');
+    await adminPage.screenshot({
+      path: 'screenshots/feature2/adminshowresult.jpg'
+    });
     await adminPage.click('[e2e-id="showFinalResult"]');
+    await delay(2000);
+    await adminPage.screenshot({
+      path: 'screenshots/feature2/showfinalresult.jpg'
+    });
+    await userPage.screenshot({
+      path: 'screenshots/feature2/userfinalpage.jpg'
+    });
     await userPage.waitForSelector('[e2e-id="finalUsername"]');
     await userPage.waitForSelector('[e2e-id="download"]');
     await userPage.waitForSelector('[e2e-id="infoButton"]');
+    await userPage.screenshot({
+      path: 'screenshots/feature2/userfinalpageaftercheck.jpg'
+    });
   });
 
   afterAll(async () => {

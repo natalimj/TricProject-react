@@ -63,8 +63,8 @@ const FinalResult = () => {
               ))}
             </div>
           </div>
-          <div className='final-result__info-icon'><BsInfoCircle size={30} onClick={() => setShowPlayInfo(true)} /></div>
-          <div className="final-result__download" onClick={() => ExportAsImage(exportRef.current, `TRIC-${today}`)}>{Constants.DOWNLOAD}</div>
+          <div className='final-result__info-icon' e2e-id="infoButton"><BsInfoCircle size={30} onClick={() => setShowPlayInfo(true)} /></div>
+          <div className="final-result__download" e2e-id="download" onClick={() => ExportAsImage(exportRef.current, `TRIC-${today}`)}>{Constants.DOWNLOAD}</div>
         </div>
       </div>}
       {showPlayInfo && <PlayInfo />}
