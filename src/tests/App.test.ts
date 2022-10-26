@@ -93,6 +93,9 @@ describe("Feature 1 - Questions database and display", () => {
   });
 
   it("Edit Question", async () => {
+    await adminPage.screenshot({
+      path: 'screenshots/feature1/beforeeditquestion.jpg'
+    });
     await adminPage.click('[e2e-id="question1EditText"]', {clickCount: 3})
     await adminPage.type('[e2e-id="question1EditText"]',"What is your favorite stage?");
     await adminPage.click('[e2e-id="question1EditAnswer1"]', {clickCount: 3})
@@ -100,17 +103,38 @@ describe("Feature 1 - Questions database and display", () => {
     await adminPage.click('[e2e-id="question1EditAnswer2"]', {clickCount: 3})
     await adminPage.type('[e2e-id="question1EditAnswer2"]',"Booha");
     await delay(2000);
+    await adminPage.screenshot({
+      path: 'screenshots/feature1/aftereditquestion.jpg'
+    });
     await adminPage.waitForSelector('[e2e-id="question1EditSave"]');
     await adminPage.click('[e2e-id="question1EditSave"]');
+    await adminPage.screenshot({
+      path: 'screenshots/feature1/clickedsave.jpg'
+    });
     await delay(2000);
+    await adminPage.screenshot({
+      path: 'screenshots/feature1/beforecheck.jpg'
+    });
     await checkQuestion(1,"What is your favorite stage?", "Main Stage", "Booha");
+    await adminPage.screenshot({
+      path: 'screenshots/feature1/aftercheck.jpg'
+    });
   });
 
   it("Delete Question", async () => {
+    await adminPage.screenshot({
+      path: 'screenshots/feature1/beforedeletequestion.jpg'
+    });
     await adminPage.waitForSelector('[e2e-id="question1EditDelete"]');
     await adminPage.click('[e2e-id="question1EditDelete"]');
     await delay(1000);
+    await adminPage.screenshot({
+      path: 'screenshots/feature1/afterdeletequestion.jpg'
+    });
     await checkQuestion(1,"Which genre is better?", "Techno", "Trance");
+    await adminPage.screenshot({
+      path: 'screenshots/feature1/aftercheck.jpg'
+    });
   });
 
   it("Go back", async () => {
@@ -167,7 +191,7 @@ describe("Feature 2 - Voting System", () => {
     await checkText("questionAnswer0","Boris Brejcha");
     await checkText("questionAnswer1","Ann Clue");
     await userPage.click('[e2e-id="questionAnswer0"]');
-    await delay(1000);
+    await delay(2000);
     await userPage.click('[e2e-id="questionConfirm"]');
     await delay(1000);
     await userPage.waitForSelector('[e2e-id="spinner"]');
@@ -419,13 +443,15 @@ describe("Feature 8 - Downtime management and ending the play", () => {
     await checkText("questionAnswer0","Boris Brejcha");
     await checkText("questionAnswer1","Ann Clue");
     await userPage.click('[e2e-id="questionAnswer0"]');
-    await delay(1000);
+    await delay(2000);
     await userPage.click('[e2e-id="questionConfirm"]');
     await delay(1000);
     await userPage.waitForSelector('[e2e-id="spinner"]');
     await adminPage.waitForSelector('[e2e-id="showResults"]');
     await adminPage.click('[e2e-id="showResults"]');
+    await delay(2000);
     await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
+    await delay(2000);
     await checkText("resultQuestionText","Which DJ is better?");
     await checkText("resultQuestionAnswer0","Boris Brejcha");
     await checkText("resultQuestionAnswer1","Ann Clue");
@@ -445,13 +471,15 @@ describe("Feature 8 - Downtime management and ending the play", () => {
     await checkText("questionAnswer0","Techno");
     await checkText("questionAnswer1","Trance");
     await userPage.click('[e2e-id="questionAnswer0"]');
-    await delay(1000);
+    await delay(2000);
     await userPage.click('[e2e-id="questionConfirm"]');
     await delay(1000);
     await userPage.waitForSelector('[e2e-id="spinner"]');
     await adminPage.waitForSelector('[e2e-id="showResults"]');
     await adminPage.click('[e2e-id="showResults"]');
+    await delay(2000);
     await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
+    await delay(2000);
     await checkText("resultQuestionText","Which genre is better?");
     await checkText("resultQuestionAnswer0","Techno");
     await checkText("resultQuestionAnswer1","Trance");
@@ -465,25 +493,63 @@ describe("Feature 8 - Downtime management and ending the play", () => {
 
   it("Vote and view final results", async () => {
     await userPage.waitForSelector('[e2e-id="questionText"]');
+    await userPage.screenshot({
+      path: 'screenshots/feature8/finalvotebefore.jpg'
+    });
     await checkText("questionHeader","Question 3");
     await checkText("questionText","Which festival is better?");
     await checkText("questionAnswer0","Electric Castle");
     await checkText("questionAnswer1","Untold");
+    await userPage.screenshot({
+      path: 'screenshots/feature8/finalvoteaftercheck.jpg'
+    });
     await userPage.click('[e2e-id="questionAnswer0"]');
+    await delay(2000);
     await userPage.click('[e2e-id="questionConfirm"]');
+    await userPage.screenshot({
+      path: 'screenshots/feature8/afterclicking.jpg'
+    });
     await userPage.waitForSelector('[e2e-id="spinner"]');
+    await userPage.screenshot({
+      path: 'screenshots/feature8/spinnermaybe.jpg'
+    });
     await adminPage.waitForSelector('[e2e-id="showFinalResult"]');
+    await adminPage.screenshot({
+      path: 'screenshots/feature8/adminshowresult.jpg'
+    });
     await adminPage.click('[e2e-id="showFinalResult"]');
+    await delay(2000);
+    await adminPage.screenshot({
+      path: 'screenshots/feature8/showfinalresult.jpg'
+    });
+    await userPage.screenshot({
+      path: 'screenshots/feature8/userfinalpage.jpg'
+    });
     await userPage.waitForSelector('[e2e-id="finalUsername"]');
     await userPage.waitForSelector('[e2e-id="download"]');
     await userPage.waitForSelector('[e2e-id="infoButton"]');
+    await userPage.screenshot({
+      path: 'screenshots/feature8/userfinalpageaftercheck.jpg'
+    });
   });
   
   it("End Session", async () => {
+    await adminPage.screenshot({
+      path: 'screenshots/feature8/beforeending.jpg'
+    });
     await adminPage.waitForSelector('[e2e-id="endSession"]');
     await adminPage.click('[e2e-id="endSession"]');
+    await adminPage.screenshot({
+      path: 'screenshots/feature8/endedSession.jpg'
+    });
     await adminPage.waitForSelector('[e2e-id="usernameAdmin"]');
+    await userPage.screenshot({
+      path: 'screenshots/feature8/inactive1.jpg'
+    });
     await userPage.waitForSelector('[e2e-id="inactive"]');
+    await userPage.screenshot({
+      path: 'screenshots/feature8/inactive2.jpg'
+    });
   });
 
   afterAll(async () => {
