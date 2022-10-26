@@ -1,11 +1,17 @@
 @import url("../styles.css");
 
 .admin-login {
-    margin-top: 5%;
+    height: 100%;
 }
 
 .admin-login__image {
-    margin-bottom: 5%;
+    background-color: var(--color-grey);
+    border: 2px solid var(--color-pink);
+    margin: 5vh 0;
+}
+
+.admin-login__image img {
+    height: 30vh;
 }
 
 .admin-login__login-field {

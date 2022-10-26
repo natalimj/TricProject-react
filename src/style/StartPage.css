@@ -7,6 +7,11 @@
     width: 90%;
 }
 
+.start-page-user,
+.start-page-question {
+    height: 100%;
+}
+
 .start-page-landing {
     display: flex;
     flex-direction: column;
@@ -16,12 +21,28 @@
 }
 
 .start-page-landing__title {
-    font-family: var(--title-font);
-    font-size: var(--font-size-header-large);
+    background-color: var(--color-grey);
+    border: 2px solid var(--color-pink);
+    margin-top: 5vh;
+}
+
+.start-page-landing__title img {
+    height: 30vh;
+}
+
+.start-page-landing-icon img {
+    height: 65vh;
+}
+
+.start-page-landing-icon {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
 }
 
 .submit-button {
-    max-width: 150px;
+    width: 150px;
     background: none;
     background-color: var(--color-pink);
     color: var(--color-black);

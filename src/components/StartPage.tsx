@@ -13,6 +13,7 @@ import { RootState } from "../app/store";
 import { addQuestion } from '../reducers/questionSlice';
 import { setQuestionComponent } from '../reducers/componentSlice';
 import { setStatus } from "../reducers/statusSlice";
+import TricLogo from '../util/icons/TRIC.svg';
 
 const StartPage = () => {
   const isActive = useAppSelector((state: RootState) => state.status.isActive);
@@ -35,7 +36,7 @@ const StartPage = () => {
     UserApi.getAppStatus()
       .then((response: any) => {
         dispatch(setStatus({ isActive: response.data }))
-        if(!isActive){
+        if (!isActive) {
           setPlayStarted(false);
         }
       })
@@ -57,7 +58,7 @@ const StartPage = () => {
           {sessionStarted ? (
             <div className="start-page-user">
               {userSubmitted ? (
-                <div className="start-page-question"> {playStarted ? (<MainPage />) : (<WaitingPage startScreen={true}/>)}</div>
+                <div className="start-page-question"> {playStarted ? (<MainPage />) : (<WaitingPage startScreen={true} />)}</div>
               ) : (
                 <UserLoginPage />
               )}
@@ -65,9 +66,12 @@ const StartPage = () => {
           ) : (
             <div className="start-page-landing">
               <div className="start-page-landing__title">
-                {Constants.APP_TITLE}
+                <img src={TricLogo} alt="TRIC icon" />
               </div>
-              <button onClick={() => setSessionStarted(true)} className="submit-button" e2e-id="join">
+              <div className="start-page-landing-icon">
+                <img src={require('../util/icons/imageMale1.png')} alt="Landing page icon" />
+              </div>
+              <button onClick={() => setSessionStarted(true)} className="start-page-landing-submit submit-button" e2e-id="join">
                 {Constants.JOIN_BUTTON}
               </button>
             </div>

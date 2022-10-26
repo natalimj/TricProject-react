@@ -51,10 +51,10 @@ const Result = () => {
         <div className='result'>
             <div className="result__inner-container">
                 <div className="result__avatar-container">
-                    {userIcon !== '' ? (<img src={require('../util/icons/' + userIcon + '.jpg')} alt="user icon" />)
-                        : (<img src={require('../util/icons/imageMale1.jpg')} alt="user icon" />)}
+                    {userIcon !== '' ? (<img src={require('../util/icons/' + userIcon + '.png')} alt="user icon" />)
+                        : (<img src={require('../util/icons/imageMale1.png')} alt="user icon" />)}
                 </div>
-                <div className="result__text" e2e-id="resultUsername">{userName}</div>
+                <div className="result__text result__text--username" e2e-id="resultUsername">{userName}</div>
                 <div className="result__text">{Constants.VOTE_RESULT_FIELD}</div>
                 <div className="result__question-text" e2e-id="resultQuestionText">{result?.question.questionText}</div>
                 <div className="result__box">

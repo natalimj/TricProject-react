@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import '../style/AdminMainPage.css';
 import AdminApi from '../api/AdminApi';
 import Constants from '../util/Constants';
@@ -9,6 +9,7 @@ import 'react-notifications/lib/notifications.css';
 import { NotificationManager } from 'react-notifications';
 import AdminConsole from './AdminConsole';
 import UserApi from '../api/UserApi';
+import TricLogo from '../util/icons/TRIC.svg';
 
 const Admin = () => {
   const isActive = useAppSelector((state: RootState) => state.status.isActive);
@@ -52,7 +53,9 @@ const Admin = () => {
         {!isActive ?
           (
             <div className='admin-console__body'>
-              <div className='admin-console__logo'></div>
+              <div className='admin-console__logo'>
+                <img src={TricLogo} alt="Tric logo" />
+              </div>
               <div className='admin-console__buttons'>
                 <button onClick={editContributors} className="admin-console__submit-button--secondary" e2e-id="editContributors">
                   {Constants.EDIT_CONTRIBUTORS}

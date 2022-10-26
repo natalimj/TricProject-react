@@ -60,6 +60,7 @@
 .user-form--avatar-image img {
     width: 100%;
     max-height: 280px;
+    min-height: 200px;
 }
 
 .user-form--user-arrow {
@@ -76,11 +77,6 @@
     .user-form__header,
     .user-form_avatar-header {
         font-size: var(--font-size-medium);
-    }
-
-    .user-form__header,
-    .user-form__avatar-container {
-        margin: 15px 0;
     }
 
     .user-form__form-control {
