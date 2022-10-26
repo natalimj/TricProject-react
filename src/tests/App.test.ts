@@ -56,7 +56,7 @@ async function checkText(e2eID : string, value : string) {
   await expect(text).toBe(value);
 }
 
-describe.only("Feature 1 - Questions database and display", () => {
+describe("Feature 1 - Questions database and display", () => {
   beforeAll(async () => {
     await resetApp();
   });
@@ -71,6 +71,14 @@ describe.only("Feature 1 - Questions database and display", () => {
     await adminPage.waitForSelector('[e2e-id="questionText"]');
   });
 
+  it("Add question", async () => {
+    await adminPage.type('[e2e-id="questionText"]',"Where would you like to go?");
+    await adminPage.type('[e2e-id="questionAnswer1"]',"Berlin");
+    await adminPage.type('[e2e-id="questionAnswer2"]',"Ibiza");
+    await adminPage.waitForSelector('[e2e-id="questionSave"]');
+    await adminPage.click('[e2e-id="questionSave"]');
+  });
+
   it("View Questions", async () => {
     await adminPage.waitForSelector('[e2e-id="questionAccordion"]');
     await adminPage.click('[e2e-id="questionAccordion"]');
@@ -81,19 +89,10 @@ describe.only("Feature 1 - Questions database and display", () => {
     await checkQuestion(1,"Which DJ is better?", "Boris Brejcha", "Ann Clue");
     await checkQuestion(2,"Which genre is better?", "Techno", "Trance");
     await checkQuestion(3,"Which festival is better?", "Electric Castle", "Untold");
-  });
-
-  it("Add question", async () => {
-    await adminPage.type('[e2e-id="questionText"]',"Where would you like to go?");
-    await adminPage.type('[e2e-id="questionAnswer1"]',"Berlin");
-    await adminPage.type('[e2e-id="questionAnswer2"]',"Ibiza");
-    await adminPage.waitForSelector('[e2e-id="questionSave"]');
-    await adminPage.click('[e2e-id="questionSave"]');
     await checkQuestion(4,"Where would you like to go?", "Berlin", "Ibiza");
   });
 
   it("Edit Question", async () => {
-    await adminPage.waitForSelector('[e2e-id="question1EditText"]');
     await adminPage.click('[e2e-id="question1EditText"]', {clickCount: 3})
     await adminPage.type('[e2e-id="question1EditText"]',"What is your favorite stage?");
     await adminPage.click('[e2e-id="question1EditAnswer1"]', {clickCount: 3})
@@ -462,4 +461,3 @@ describe("Feature 8 - Downtime management and ending the play", () => {
     await browser.close();
   });
 });
-
