@@ -64,3 +64,13 @@
         padding: 5px 5px;
     }
 }
+
+@media screen and (max-width: 315px) {
+    .start-page-landing__title img {
+        height: 20vh;
+    }
+
+    .start-page-landing-icon img {
+        height: 50vh;
+    }
+}

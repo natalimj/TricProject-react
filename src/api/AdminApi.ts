@@ -81,7 +81,7 @@ const deleteAllQuestions = (accessToken: string) => {
   })
 }
 
-const editQuestion = (questionText: string, firstAnswer: string, secondAnswer: string, questionId: number,accessToken: string) => {
+const editQuestion = (questionText: string, firstAnswer: string, secondAnswer: string, questionId: number, accessToken: string) => {
   return http.patch<IQuestionData>("adminApi/editQuestion", {}, {
     params: {
       questionText: questionText,
@@ -90,8 +90,7 @@ const editQuestion = (questionText: string, firstAnswer: string, secondAnswer: s
       questionId: questionId
     },
     headers: authHeader(accessToken)
-  }
-  )
+  })
 }
 
 const getNumberOfQuestions = (accessToken: string) => {
