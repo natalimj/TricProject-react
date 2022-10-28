@@ -1,8 +1,8 @@
 const Constants = {
-	BASE_URL : "https://tricproject.azurewebsites.net/",
-	SOCKET_URL: "https://tricproject.azurewebsites.net/ws-message",
-	//BASE_URL: "http://localhost:8080/",
-	//SOCKET_URL: "http://localhost:8080/ws-message",
+	//BASE_URL : "https://tricproject.azurewebsites.net/",
+	//SOCKET_URL: "https://tricproject.azurewebsites.net/ws-message",
+	BASE_URL: "http://localhost:8080/",
+	SOCKET_URL: "http://localhost:8080/ws-message",
 
 	/* LABELS */
 	APP_TITLE: "TRIC",
