@@ -45,9 +45,12 @@
 
 .admin-console__logo {
     background-color: var(--color-grey);
-    border: 3px solid var(--color-black);
-    height: 300px;
+    border: 2px solid var(--color-pink);
     width: 300px;
+}
+
+.admin-console__logo img{
+    height: 30vh;
 }
 
 .admin-console__submit-button,
