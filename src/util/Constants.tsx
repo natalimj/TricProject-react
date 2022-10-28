@@ -55,7 +55,8 @@ const Constants = {
 	NEXT_QUESTION_TEXT: "Next question is:",
 	SET_TIME_INFO: "*Time is expressed in SECONDS",
 	TIME_LENGTH_INFO: "*MAX time length is 36000s",
-	DEVELOPERS_TITLE: "Developers"
+	DEVELOPERS_TITLE: "Developers",
+	WHAT_IS_TRIC: "What is TRIC?",
 }
 
 export default Constants;
