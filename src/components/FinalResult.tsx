@@ -34,41 +34,42 @@ const FinalResult = () => {
 
   return (
     <>
-      {!showPlayInfo && <div className='final-result'>
-        <div className="final-result__inner-container">
-          <div ref={exportRef} className="final-result__pink-background">
-            <div className="final-result__user-box">
-              <div className="final-result__avatar-container">
-                <img src={require('../util/icons/' + currentUser.imagePath + '.png')} alt="user icon" />
-              </div>
-              <div className="final-result__text-container">
-                <span e2e-id="finalUsername">{currentUser.username}</span>
-                <span>{today}</span>
-                <span>{Constants.HUMANLAB}</span>
-              </div>
-            </div>
-            <div className="final-result__result-box">
-              <div>{Constants.FINAL_RESULT_FIELD}</div>
-              {finalResults && finalResults.map((finalResult) => (
-                <div key={finalResult.category.categoryId}>
-                  <div className="final-result__title">
-                    <span className="final-result__answer-text final-result__answer-text--left">{finalResult.category.categoryName}</span>
-                    <span className="final-result__answer-text">{finalResult.category.oppositeCategory.categoryName}</span>
-                  </div>
-                  <div className="final-result__slider">
-                    <div className="final-result__first-rate" style={{ "width": `${finalResult.rate}%` }}><span className='final-result__answer--text'>{finalResult.rate}%</span></div>
-                    <div className="final-result__second-rate" style={{ "width": `${100 - finalResult.rate}%` }}><span className='final-result__answer--text'>{100 - finalResult.rate}%</span></div>
-                  </div>
+      {!showPlayInfo &&
+        <div className='final-result'>
+          <div className="final-result__inner-container">
+            <div ref={exportRef} className="final-result__pink-background">
+              <div className="final-result__user-box">
+                <div className="final-result__avatar-container">
+                  <img src={require('../util/icons/' + currentUser.imagePath + '.png')} alt="user icon" />
                 </div>
-              ))}
+                <div className="final-result__text-container">
+                  <span e2e-id="finalUsername">{currentUser.username}</span>
+                  <span>{today}</span>
+                  <span>{Constants.HUMANLAB}</span>
+                </div>
+              </div>
+              <div className="final-result__result-box">
+                {finalResults && finalResults.map((finalResult) => (
+                  <div key={finalResult.category.categoryId}>
+                    <div className="final-result__title">
+                      <span className="final-result__answer-text final-result__answer-text--left">{finalResult.category.categoryName}</span>
+                      <span className="final-result__answer-text">{finalResult.category.oppositeCategory.categoryName}</span>
+                    </div>
+                    <div className="final-result__slider">
+                      <div className="final-result__first-rate" style={{ "width": `${finalResult.rate}%` }}><span className='final-result__answer--text'>{finalResult.rate}%</span></div>
+                      <div className="final-result__second-rate" style={{ "width": `${100 - finalResult.rate}%` }}><span className='final-result__answer--text'>{100 - finalResult.rate}%</span></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-          <div className='final-result__buttons'>
-            <div className="final-result__download" onClick={() => ExportAsImage(exportRef.current, `TRIC-${today}`)}>{Constants.DOWNLOAD}</div>
-            <div className='final-result__info-icon'><BsInfoCircle size={30} onClick={() => setShowPlayInfo(true)} /></div>
+            <div className='final-result__buttons'>
+              <div className="final-result__download" onClick={() => ExportAsImage(exportRef.current, `TRIC-${today}`)}>{Constants.DOWNLOAD}</div>
+              <div className='final-result__info-icon'><BsInfoCircle size={30} onClick={() => setShowPlayInfo(true)} /></div>
+            </div>
           </div>
         </div>
-      </div>}
+      }
       {showPlayInfo && <PlayInfo />}
     </>
   )
