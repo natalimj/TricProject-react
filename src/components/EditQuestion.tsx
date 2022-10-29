@@ -18,8 +18,11 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
         questionText: question.questionText,
         firstAnswer: question.answers[0].answerText,
         secondAnswer: question.answers[1].answerText,
+        theme: question.theme,
+        firstCategory: question.answers[0].category,
+        secondCategory: question.answers[1].category
     });
-    const { questionText, firstAnswer, secondAnswer } = formValue;
+    const { questionText, firstAnswer, secondAnswer, theme, firstCategory, secondCategory } = formValue;
     const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -50,7 +53,7 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
 
     const editQuestion = (questionId: any) => {
         if (questionText !== "" && firstAnswer !== "" && secondAnswer !== "") {
-            AdminApi.editQuestion(questionText, firstAnswer, secondAnswer, questionId, accessToken)
+            AdminApi.editQuestion(questionText, firstAnswer, secondAnswer, questionId,theme,firstCategory, secondCategory, accessToken)
                 .then((response: any) => {
                     NotificationManager.success('Question has been edited', 'Success!', 2000);
                 })

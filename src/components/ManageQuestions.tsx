@@ -14,6 +14,9 @@ const Questions = () => {
     const [questionText, setQuestionText] = useState("");
     const [firstAnswer, setFirstAnswer] = useState("");
     const [secondAnswer, setSecondAnswer] = useState("");
+    const [theme, setTheme] = useState("");
+    const [firstCategory, setFirstCategory] = useState("");
+    const [secondCategory, setSecondCategory] = useState("");
     const [showQuestions, setShowQuestions] = useState<boolean>(false);
     const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
 
@@ -30,12 +33,15 @@ const Questions = () => {
 
     const addQuestion = () => {
         if (questionText !== "" && firstAnswer !== "" && secondAnswer !== "") {
-            AdminApi.addQuestion(questionText, firstAnswer, secondAnswer, accessToken)
+            AdminApi.addQuestion(questionText, firstAnswer, secondAnswer, theme, firstCategory, secondCategory,accessToken)
                 .then((response: any) => {
                     setQuestions([...questions, response.data])
                     setQuestionText("")
                     setFirstAnswer("")
                     setSecondAnswer("")
+                    setTheme("")
+                    setFirstCategory("")
+                    setSecondCategory("")
                     NotificationManager.success('A new question has been added', 'Success!', 2000);
                 })
                 .catch((e: Error) => {
@@ -54,6 +60,9 @@ const Questions = () => {
         window.location.href = "/admin";
     };
 
+    const onChangeValue= (event: any) => {
+        console.log(event.target.value);
+    };
     return (
         <div className='questions'>
             <div className='questions__header'>
@@ -81,8 +90,14 @@ const Questions = () => {
                                 e2e-id="questionAnswer1"
                                 onChange={(e) => setFirstAnswer(e.target.value)}
                                 maxLength={50} />
+
+            <div onChange={onChangeValue}>
+        <input type="radio" value="Progressive" name="category" /> Progressive
+        <input type="radio" value="Conservative" name="category" /> Conservative
+      </div>
                         </div>
                     </div>
+
                     <div className="questions__line">
                         <div className="questions__input">
                             <input type="text"

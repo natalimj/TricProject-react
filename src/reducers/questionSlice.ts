@@ -6,7 +6,8 @@ const initialState: IQuestionData = {
     questionNumber: -1,
     questionText: '',
     answers: [],
-    time:0
+    time:0,
+    theme: "",
 };
 
 export const questionSlice = createSlice({
@@ -19,6 +20,7 @@ export const questionSlice = createSlice({
             state.questionText = action.payload.questionText;
             state.answers = [...action.payload.answers];
             state.time = action.payload.time;
+            state.theme = action.payload.theme;
         },
     },
 });

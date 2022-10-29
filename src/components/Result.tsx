@@ -14,15 +14,18 @@ const Result = () => {
             questionNumber: 0,
             questionText: '',
             answers: [],
-            time: 0
+            time: 0,
+            theme: ""
         },
         firstAnswerRate: 0.0,
         secondAnswerRate: 0.0,
         firstAnswer: {
-            answerText: ""
+            answerText: "",
+            category: ""
         },
         secondAnswer: {
-            answerText: ""
+            answerText: "",
+            category: ""
         }
     };
     const questionId = useAppSelector((state: RootState) => state.question.questionId);

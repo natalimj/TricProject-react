@@ -18,7 +18,8 @@ const AdminConsole = () => {
         questionNumber: 0,
         questionText: "",
         answers: [],
-        time: 30
+        time: 30, 
+        theme: "",
     };
 
     const [numberOfUsers, setNumberOfUsers] = useState<number>(0);
