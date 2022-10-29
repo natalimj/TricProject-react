@@ -177,7 +177,6 @@ describe("Feature 2 - Voting System", () => {
 
   test("Start the play", async () => {
     await adminPage.waitForSelector('[e2e-id="timerField"]');
-    await adminPage.click('[e2e-id="timerField"]', {clickCount: 3})
     await adminPage.type('[e2e-id="timerField"]',"100");
     await adminPage.waitForSelector('[e2e-id="showQuestion"]');
     await adminPage.click('[e2e-id="showQuestion"]');
@@ -218,7 +217,7 @@ describe("Feature 2 - Voting System", () => {
     await checkText("questionAnswer0","Techno");
     await checkText("questionAnswer1","Trance");
     await userPage.click('[e2e-id="questionAnswer0"]');
-    await delay(1000);
+    await delay(2000);
     await userPage.click('[e2e-id="questionConfirm"]');
     await delay(1000);
     await userPage.waitForSelector('[e2e-id="spinner"]');
