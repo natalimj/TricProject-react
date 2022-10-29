@@ -45,6 +45,7 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
             })
             .catch((e: Error) => {
                 NotificationManager.error(e.message, 'Error!', 5000);
+                console.log(e);
             });
     }
 
@@ -56,6 +57,7 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                 })
                 .catch((e: Error) => {
                     NotificationManager.error(e.message, 'Error!', 5000);
+                    console.log(e);
                 });
         } else {
             NotificationManager.warning('Please fill all required fields ', 'Warning!', 2000);
