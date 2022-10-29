@@ -57,7 +57,7 @@ const Constants = {
 	TIME_LENGTH_INFO: "*MAX time length is 36000s",
 	DEVELOPERS_TITLE: "Developers",
 	FINAL_RESULT_TEXT : "Final Result Text",
-	WHAT_IS_TRIC: "What is TRIC?",
+	WHAT_IS_TRIC: "What is TRIC?"
 }
 
 export default Constants;
