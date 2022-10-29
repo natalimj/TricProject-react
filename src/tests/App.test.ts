@@ -111,11 +111,11 @@ describe("Feature 1 - Questions database and display", () => {
     });
     await delay(2000);
     await adminPage.screenshot({
-      path: 'screenshots/feature1/beforecheck.jpg'
+      path: 'screenshots/feature1/beforecheckedit.jpg'
     });
     await checkQuestion(1,"What is your favorite stage?", "Main Stage", "Booha");
     await adminPage.screenshot({
-      path: 'screenshots/feature1/aftercheck.jpg'
+      path: 'screenshots/feature1/aftercheckedit.jpg'
     });
   });
 
@@ -129,9 +129,9 @@ describe("Feature 1 - Questions database and display", () => {
     await adminPage.screenshot({
       path: 'screenshots/feature1/afterdeletequestion.jpg'
     });
-    await checkQuestion(1,"Which genre is better?", "Techno", "Trance");
+    await checkQuestion(2,"Which genre is better?", "Techno", "Trance");
     await adminPage.screenshot({
-      path: 'screenshots/feature1/aftercheck.jpg'
+      path: 'screenshots/feature1/aftercheckelete.jpg'
     });
   });
 
