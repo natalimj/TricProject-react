@@ -1,7 +1,7 @@
 import puppeteer from "puppeteer";
 import AdminApi from "../api/AdminApi";
 
-const accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtb2QiLCJpYXQiOjE2NjY3OTM1NDQsImV4cCI6MTY2NzA1Mjc0NH0.wAN4JiZXN6RdoHBf7a_gIoZmsx3RpI6ADy1gUA8jGQGFLOf53Ymxj37mS_Hl3QO_BEZZfTGsQMlq_BqPkTdKcw";
+const accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtb2QiLCJpYXQiOjE2NjcwNTMyNzgsImV4cCI6MTY2NzMxMjQ3OH0.Xd7AlRYyEE5_7JH7ha0UQmu-an-yj1iX0U3kyckbH62DBV8cqf3RK9bacIUE1bSEAnde0sgmabYU-WwnpKJOzg";
 let browser;
 let adminPage;
 let userPage;
