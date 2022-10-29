@@ -39,7 +39,7 @@ const FinalResult = () => {
           <div ref={exportRef} className="final-result__pink-background">
             <div className="final-result__user-box">
               <div className="final-result__avatar-container">
-                <img src={require('../util/icons/' + currentUser.imagePath + '.jpg')} alt="user icon" />
+                <img src={require('../util/icons/' + currentUser.imagePath + '.png')} alt="user icon" />
               </div>
               <div className="final-result__text-container">
                 <span e2e-id="finalUsername">{currentUser.username}</span>
@@ -63,8 +63,11 @@ const FinalResult = () => {
               ))}
             </div>
           </div>
-          <div className='final-result__info-icon' e2e-id="infoButton"><BsInfoCircle size={30} onClick={() => setShowPlayInfo(true)} /></div>
-          <div className="final-result__download" e2e-id="download" onClick={() => ExportAsImage(exportRef.current, `TRIC-${today}`)}>{Constants.DOWNLOAD}</div>
+          <div className='final-result__buttons'>
+            <div className="final-result__download" e2e-id="download" onClick={() => ExportAsImage(exportRef.current, `TRIC-${today}`)}>{Constants.DOWNLOAD}</div>
+            <div className='final-result__info-icon' e2e-id="infoButton"><BsInfoCircle size={30} onClick={() => setShowPlayInfo(true)} /></div>
+          </div>
+
         </div>
       </div>}
       {showPlayInfo && <PlayInfo />}

@@ -18,7 +18,7 @@ const UserLoginPage = () => {
     const [user, setUser] = useState<IUserData>(currentUser);
     const dispatch = useAppDispatch();
     const [currentListIndex, setCurrentListIndex] = useState<number>(0);
-    const imageList = ['imageFemale1', 'imageFemale2', 'imageMale1', 'imageMale2', 'imageMale3', 'imageMale4'];
+    const imageList = ['imageFemale1', 'imageFemale2','imageFemale3', 'imageMale2', 'imageMale3', 'imageMale4'];
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -79,7 +79,7 @@ const UserLoginPage = () => {
                         : <div className='user-form__avatar-selector-item'></div>}
 
                     <div className='user-form__avatar-selector-item user-form--avatar-image'>
-                        <img src={require('../util/icons/' + imageList[currentListIndex] + '.jpg')} alt="user icon" />
+                        <img src={require('../util/icons/' + imageList[currentListIndex] + '.png')} alt="user icon" />
                     </div>
 
                     {(currentListIndex < (imageList.length - 1)) ?

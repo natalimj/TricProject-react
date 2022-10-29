@@ -1,5 +1,13 @@
 @import url("../styles.css");
 
+.waiting-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .waiting-container__text {
     margin-top: 2%;
 }
