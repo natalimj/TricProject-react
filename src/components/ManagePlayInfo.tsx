@@ -19,7 +19,8 @@ const PlayInfo = () => {
 
   const initialPlayInfo = {
     playInfoId: 1,
-    playInfoText: ""
+    playInfoText: "",
+    finalResultText :"",
   };
 
   const [contributors, setContributors] = useState<IContributorData[]>([]);
@@ -57,11 +58,11 @@ const PlayInfo = () => {
     });
   }
 
-  const handlePlayInfoChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    const value = event.target.value;
+  const handlePlayInfoChange = (event: ChangeEvent<HTMLTextAreaElement> | ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
     setPlayInfo({
       ...playInfo,
-      [event.target.name]: value
+      [name]: value
     });
   }
 
@@ -118,6 +119,26 @@ const PlayInfo = () => {
             onClick={() => editPlayInfo()} >{Constants.SAVE_BUTTON.toUpperCase()}</div>
         </div>
       </div>
+
+      <div className='questions__header'>
+        {Constants.FINAL_RESULT_TEXT}
+      </div>
+      <div className="questions__box-small">
+        <div className="questions__line">
+          <div className="questions__input">
+          <input type="text"
+              value={playInfo.finalResultText}
+              className="questions__text"
+              name="finalResultText"
+              maxLength={500}
+              onChange={handlePlayInfoChange} />
+          </div>
+          <div className="questions__icon question__save-button"
+            onClick={() => editPlayInfo()} >{Constants.SAVE_BUTTON.toUpperCase()}</div>
+        </div>
+      </div>
+
+
       <div className='questions__header'>
         {Constants.NEW_CAST_TITLE}
       </div>
