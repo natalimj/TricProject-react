@@ -223,7 +223,7 @@ const AdminConsole = () => {
                                         </button>
                                     ) : (
                                         <>
-                                            <div className='admin-console__text'>{Constants.FINAL_RESULT_FIELD} {Constants.ON_SCREEN_FIELD}</div>
+                                            <div className='admin-console__text'>{Constants.FINAL_VOTE_RESULT_FIELD} {Constants.ON_SCREEN_FIELD}</div>
                                             <button onClick={endSession} className="admin-console__submit-button" e2e-id="endSession">
                                                 {Constants.END_BUTTON}
                                             </button>

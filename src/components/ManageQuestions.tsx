@@ -9,7 +9,7 @@ import { NotificationManager } from 'react-notifications';
 import { useAppSelector } from '../app/hooks';
 import { RootState } from '../app/store';
 
-const Questions = () => {
+const ManageQuestions = () => {
     const [questions, setQuestions] = useState<IQuestionData[]>([]);
     const [questionText, setQuestionText] = useState("");
     const [firstAnswer, setFirstAnswer] = useState("");
@@ -114,4 +114,4 @@ const Questions = () => {
     )
 }
 
-export default Questions
+export default ManageQuestions
