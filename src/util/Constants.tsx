@@ -31,15 +31,17 @@ const Constants = {
 	SUBMIT_BUTTON: "Submit",
 	QUESTION_FIELD:	"Question",
 	VOTE_RESULT_FIELD: "Vote Result",
+	FINAL_VOTE_RESULT_FIELD: "Final Vote Result",
 	CONFIRM_BUTTON: "Confirm",
 	WAITING_PROMPT_RESULT: "Gathering votes...",
 	WAITING_PROMPT_BEGIN: "Waiting for the first question...",
 	DOWNLOAD :"DOWNLOAD",
 	DIGITAL_PROFILE_FIELD: "YOUR DIGITAL PROFILE" ,
 	USER_RESPONSE : "Your response",
-	FINAL_RESULT_BUTTON:" Show Final Result",
+	FINAL_RESULT_BUTTON:"Show Final Result",
 	RESULT_FIELD: "Result",
 	FINAL_RESULT_FIELD: "Your Profile",
+	FINAL_RESULT_PROFILE_BUTTON: "See Your Final Profile",
 	RESULT_BUTTON : "Show Result",
 	QUESTION_BUTTON: "Show Question",
 	START_BUTTON: "Start",
@@ -71,7 +73,10 @@ const Constants = {
 	TIME_LENGTH_INFO: "*MAX time length is 36000s",
 	DEVELOPERS_TITLE: "Developers",
 	CATEGORY1 :"Conservative",
-	CATEGORY2 :"Progressive"
+	CATEGORY2 :"Progressive",
+	FINAL_RESULT_TEXT : "Final Result Text",
+	WHAT_IS_TRIC: "What is TRIC?"
+
 }
 
 export default Constants;
