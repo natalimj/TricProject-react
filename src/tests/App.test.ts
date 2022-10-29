@@ -63,13 +63,13 @@ describe("Feature 1 - Questions database and display", () => {
     await userPage.waitForSelector('[e2e-id="inactive"]');
   });
 
-  it("Go to manage questions", async () => {
+  test("Go to manage questions", async () => {
     await adminPage.waitForSelector('[e2e-id="editQuestions"]');
     await adminPage.click('[e2e-id="editQuestions"]');
     await adminPage.waitForSelector('[e2e-id="questionText"]');
   });
 
-  it("Add question", async () => {
+  test("Add question", async () => {
     await adminPage.type('[e2e-id="questionText"]',"Where would you like to go?");
     await adminPage.type('[e2e-id="questionAnswer1"]',"Berlin");
     await adminPage.type('[e2e-id="questionAnswer2"]',"Ibiza");
@@ -77,20 +77,20 @@ describe("Feature 1 - Questions database and display", () => {
     await adminPage.click('[e2e-id="questionSave"]');
   });
 
-  it("View Questions", async () => {
+  test("View Questions", async () => {
     await adminPage.waitForSelector('[e2e-id="questionAccordion"]');
     await adminPage.click('[e2e-id="questionAccordion"]');
     await adminPage.waitForSelector('[e2e-id="questionNr1"]');
   });
 
-  it("Check Questions", async () => {
+  test("Check Questions", async () => {
     await checkQuestion(1,"Which DJ is better?", "Boris Brejcha", "Ann Clue");
     await checkQuestion(2,"Which genre is better?", "Techno", "Trance");
     await checkQuestion(3,"Which festival is better?", "Electric Castle", "Untold");
     await checkQuestion(4,"Where would you like to go?", "Berlin", "Ibiza");
   });
 
-  it("Edit Question", async () => {
+  test("Edit Question", async () => {
     await adminPage.screenshot({
       path: 'screenshots/feature1/beforeeditquestion.jpg'
     });
@@ -119,7 +119,7 @@ describe("Feature 1 - Questions database and display", () => {
     });
   });
 
-  it("Delete Question", async () => {
+  test("Delete Question", async () => {
     await adminPage.screenshot({
       path: 'screenshots/feature1/beforedeletequestion.jpg'
     });
@@ -135,7 +135,7 @@ describe("Feature 1 - Questions database and display", () => {
     });
   });
 
-  it("Go back", async () => {
+  test("Go back", async () => {
     await adminPage.waitForSelector('[e2e-id="back"]');
     await adminPage.click('[e2e-id="back"]');
     await adminPage.waitForSelector('[e2e-id="editQuestions"]');
@@ -156,25 +156,25 @@ describe("Feature 2 - Voting System", () => {
     await userPage.waitForSelector('[e2e-id="inactive"]');
   });
 
-  it("Activate app", async () => {
+  test("Activate app", async () => {
     await adminPage.waitForSelector('[e2e-id="start"]')
     await adminPage.click('[e2e-id="start"]')
   });
 
-  it("Join the app", async () => {
+  test("Join the app", async () => {
     await userPage.waitForSelector('[e2e-id="join"]');
     await userPage.click('[e2e-id="join"]');
     await userPage.waitForSelector('[e2e-id="create"]');
   });
 
-  it("Create user", async () => {
+  test("Create user", async () => {
     await userPage.waitForSelector('[e2e-id="usernameUser"]');
     await userPage.type('[e2e-id="usernameUser"]',"TrashPanda");
     await userPage.click('[e2e-id="create"]');
     await userPage.waitForSelector('[e2e-id="spinner"]');
   });
 
-  it("Start the play", async () => {
+  test("Start the play", async () => {
     await adminPage.waitForSelector('[e2e-id="timerField"]');
     await adminPage.click('[e2e-id="timerField"]', {clickCount: 3})
     await adminPage.type('[e2e-id="timerField"]',"100");
@@ -182,7 +182,7 @@ describe("Feature 2 - Voting System", () => {
     await adminPage.click('[e2e-id="showQuestion"]');
   });
 
-  it("Vote and view results 1", async () => {
+  test("Vote and view results 1", async () => {
     await userPage.waitForSelector('[e2e-id="questionText"]');
     await checkText("questionHeader","Question 1");
     await checkText("questionText","Which DJ is better?");
@@ -210,7 +210,7 @@ describe("Feature 2 - Voting System", () => {
     await adminPage.click('[e2e-id="showQuestion"]');
   });
 
-  it("Vote and view results 2", async () => {
+  test("Vote and view results 2", async () => {
     await userPage.waitForSelector('[e2e-id="questionText"]');
     await checkText("questionHeader","Question 2");
     await checkText("questionText","Which genre is better?");
@@ -237,7 +237,7 @@ describe("Feature 2 - Voting System", () => {
     await adminPage.click('[e2e-id="showQuestion"]');
   });
 
-  it("Vote and view final results", async () => {
+  test("Vote and view final results", async () => {
     await userPage.waitForSelector('[e2e-id="questionText"]');
     await userPage.screenshot({
       path: 'screenshots/feature2/finalvotebefore.jpg'
@@ -294,44 +294,44 @@ describe("Feature 3 - Voting Rounds", () => {
     await userPage.waitForSelector('[e2e-id="inactive"]');
   });
 
-  it("Activate app", async () => {
+  test("Activate app", async () => {
     await adminPage.waitForSelector('[e2e-id="start"]')
     await adminPage.click('[e2e-id="start"]')
   });
 
-  it("Join the app", async () => {
+  test("Join the app", async () => {
     await userPage.waitForSelector('[e2e-id="join"]');
     await userPage.click('[e2e-id="join"]');
     await userPage.waitForSelector('[e2e-id="create"]');
   });
 
-  it("Create user", async () => {
+  test("Create user", async () => {
     await userPage.waitForSelector('[e2e-id="usernameUser"]');
     await userPage.type('[e2e-id="usernameUser"]',"TrashPanda");
     await userPage.click('[e2e-id="create"]');
     await userPage.waitForSelector('[e2e-id="spinner"]');
   });
 
-  it("Start the play", async () => {
+  test("Start the play", async () => {
     await adminPage.waitForSelector('[e2e-id="timerField"]');
     await adminPage.type('[e2e-id="timerField"]',"5");
     await adminPage.waitForSelector('[e2e-id="showQuestion"]');
     await adminPage.click('[e2e-id="showQuestion"]');
   });
 
-  it("Vote and view results after timer expires", async () => {
-    await userPage.waitForSelector('[e2e-id="questionText"]');
-    await checkText("questionHeader","Question 1");
-    await checkText("questionText","Which DJ is better?");
-    await checkText("questionAnswer0","Boris Brejcha");
-    await checkText("questionAnswer1","Ann Clue");
-    delay(1000);
-    await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
-    await checkText("resultQuestionText","Which DJ is better?");
-    await checkText("resultQuestionAnswer0","Boris Brejcha");
-    await checkText("resultQuestionAnswer1","Ann Clue");
-    await checkText("resultUsername","TrashPanda");
-  });
+  // test("Vote and view results after timer expires", async () => {
+  //   await userPage.waitForSelector('[e2e-id="questionText"]');
+  //   await checkText("questionHeader","Question 1");
+  //   await checkText("questionText","Which DJ is better?");
+  //   await checkText("questionAnswer0","Boris Brejcha");
+  //   await checkText("questionAnswer1","Ann Clue");
+  //   delay(1000);
+  //   await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
+  //   await checkText("resultQuestionText","Which DJ is better?");
+  //   await checkText("resultQuestionAnswer0","Boris Brejcha");
+  //   await checkText("resultQuestionAnswer1","Ann Clue");
+  //   await checkText("resultUsername","TrashPanda");
+  // });
 
   afterAll(async () => {
     await AdminApi.deactivateApp(accessToken);
@@ -348,18 +348,18 @@ describe("Feature 4 - User Personalization", () => {
     await userPage.waitForSelector('[e2e-id="inactive"]');
   });
 
-  it("Activate app", async () => {
+  test("Activate app", async () => {
     await adminPage.waitForSelector('[e2e-id="start"]')
     await adminPage.click('[e2e-id="start"]')
   });
 
-  it("Join the app", async () => {
+  test("Join the app", async () => {
     await userPage.waitForSelector('[e2e-id="join"]');
     await userPage.click('[e2e-id="join"]');
     await userPage.waitForSelector('[e2e-id="create"]');
   });
 
-  it("Create user", async () => {
+  test("Create user", async () => {
     await userPage.waitForSelector('[e2e-id="usernameUser"]');
     await userPage.type('[e2e-id="usernameUser"]',"TrashPanda");
     await userPage.click('[e2e-id="create"]');
@@ -381,7 +381,7 @@ describe("Feature 5 - Contribututors Page", () => {
     await userPage.waitForSelector('[e2e-id="inactive"]');
   });
 
-  it("Go to manage questions", async () => {
+  test("Go to manage questions", async () => {
     await adminPage.waitForSelector('[e2e-id="editContributors"]');
     await adminPage.click('[e2e-id="editContributors"]');
   });
@@ -409,32 +409,32 @@ describe("Feature 8 - Downtime management and ending the play", () => {
     await userPage.waitForSelector('[e2e-id="inactive"]');
   });
 
-  it("Activate app", async () => {
+  test("Activate app", async () => {
     await adminPage.waitForSelector('[e2e-id="start"]')
     await adminPage.click('[e2e-id="start"]')
   });
 
-  it("Join the app", async () => {
+  test("Join the app", async () => {
     await userPage.waitForSelector('[e2e-id="join"]');
     await userPage.click('[e2e-id="join"]');
     await userPage.waitForSelector('[e2e-id="create"]');
   });
 
-  it("Create user", async () => {
+  test("Create user", async () => {
     await userPage.waitForSelector('[e2e-id="usernameUser"]');
     await userPage.type('[e2e-id="usernameUser"]',"TrashPanda");
     await userPage.click('[e2e-id="create"]');
     await userPage.waitForSelector('[e2e-id="spinner"]');
   });
 
-  it("Start the play", async () => {
+  test("Start the play", async () => {
     await adminPage.waitForSelector('[e2e-id="timerField"]');
     await adminPage.type('[e2e-id="timerField"]',"100");
     await adminPage.waitForSelector('[e2e-id="showQuestion"]');
     await adminPage.click('[e2e-id="showQuestion"]');
   });
 
-  it("Vote and view results 1", async () => {
+  test("Vote and view results 1", async () => {
     await userPage.waitForSelector('[e2e-id="questionText"]');
     await checkText("questionHeader","Question 1");
     await checkText("questionText","Which DJ is better?");
@@ -462,7 +462,7 @@ describe("Feature 8 - Downtime management and ending the play", () => {
     await adminPage.click('[e2e-id="showQuestion"]');
   });
 
-  it("Vote and view results 2", async () => {
+  test("Vote and view results 2", async () => {
     await userPage.waitForSelector('[e2e-id="questionText"]');
     await checkText("questionHeader","Question 2");
     await checkText("questionText","Which genre is better?");
@@ -489,7 +489,7 @@ describe("Feature 8 - Downtime management and ending the play", () => {
     await adminPage.click('[e2e-id="showQuestion"]');
   });
 
-  it("Vote and view final results", async () => {
+  test("Vote and view final results", async () => {
     await userPage.waitForSelector('[e2e-id="questionText"]');
     await userPage.screenshot({
       path: 'screenshots/feature8/finalvotebefore.jpg'
@@ -531,7 +531,7 @@ describe("Feature 8 - Downtime management and ending the play", () => {
     });
   });
   
-  it("End Session", async () => {
+  test("End Session", async () => {
     await adminPage.screenshot({
       path: 'screenshots/feature8/beforeending.jpg'
     });

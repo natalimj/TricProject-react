@@ -40,7 +40,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest -c jest-browser-tests.config.js --runInBand",
-    "test:integration": "jest -c jest-browser-tests.config.js",
+    "test:integration": "jest -c jest-browser-tests.config.js --runInBand",
     "ci:integration": "jest -c jest-browser-tests.config.js --runInBand",
     "eject": "react-scripts eject"
   },
