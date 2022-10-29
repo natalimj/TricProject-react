@@ -94,11 +94,12 @@ describe("Feature 1 - Questions database and display", () => {
     await adminPage.screenshot({
       path: 'screenshots/feature1/beforeeditquestion.jpg'
     });
-    await adminPage.click('[e2e-id="question1EditText"]', {clickCount: 3})
+    await adminPage.waitForSelector('[e2e-id="question1EditText"]');
+    await adminPage.click('[e2e-id="question1EditText"]', {clickCount: 3});
     await adminPage.type('[e2e-id="question1EditText"]',"What is your favorite stage?");
-    await adminPage.click('[e2e-id="question1EditAnswer1"]', {clickCount: 3})
+    await adminPage.click('[e2e-id="question1EditAnswer1"]', {clickCount: 3});
     await adminPage.type('[e2e-id="question1EditAnswer1"]',"Main Stage");
-    await adminPage.click('[e2e-id="question1EditAnswer2"]', {clickCount: 3})
+    await adminPage.click('[e2e-id="question1EditAnswer2"]', {clickCount: 3});
     await adminPage.type('[e2e-id="question1EditAnswer2"]',"Booha");
     await delay(2000);
     await adminPage.screenshot({
