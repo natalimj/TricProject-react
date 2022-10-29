@@ -3,6 +3,22 @@ const Constants = {
 	SOCKET_URL: "https://tricproject.azurewebsites.net/ws-message",
 	//BASE_URL: "http://localhost:8080/",
 	//SOCKET_URL: "http://localhost:8080/ws-message",
+	
+
+	themes : [
+        { value: 'Select theme', label: 'Select theme', disabled: true },
+        { value: 'Immigration', label: 'Immigration' },
+        { value: 'Climate change', label: 'Climate change' },
+        { value: 'Intensive Farming', label: 'Intensive Farming' },
+        { value: 'Mass breeding', label: 'Mass breeding' },
+        { value: 'Global population', label: 'Global population' }
+    ],
+
+	categories : [
+        { value: 'Select category', label: 'Select category', disabled: true },
+        { value: 'Conservative', label: 'Conservative' },
+        { value: 'Progressive', label: 'Progressive' }
+    ],
 
 	/* LABELS */
 	APP_TITLE: "TRIC",

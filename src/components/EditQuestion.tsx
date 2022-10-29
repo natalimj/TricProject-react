@@ -6,6 +6,7 @@ import { NotificationManager } from 'react-notifications';
 import { useAppSelector } from '../app/hooks';
 import { RootState } from '../app/store';
 import Constants from '../util/Constants';
+import answerSlice from '../reducers/answerSlice';
 
 type Props = {
     question: IQuestionData
@@ -53,7 +54,7 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
 
     const editQuestion = (questionId: any) => {
         if (questionText !== "" && firstAnswer !== "" && secondAnswer !== "") {
-            AdminApi.editQuestion(questionText, firstAnswer, secondAnswer, questionId,theme,firstCategory, secondCategory, accessToken)
+            AdminApi.editQuestion(questionText, firstAnswer, secondAnswer, questionId, theme, firstCategory, secondCategory, accessToken)
                 .then((response: any) => {
                     NotificationManager.success('Question has been edited', 'Success!', 2000);
                 })
@@ -65,43 +66,87 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
         }
     }
 
+    const handleThemeSelect = (event: any) => {
+        console.log(event.target.value)
+        setFormValue((prevState) => {
+            return {
+                ...prevState,
+                theme: event.target.value,
+            };
+        });
+    };
+
+    const handleCategorySelect = (event: any) => {
+        console.log(event.target.value);
+        if (event.target.value === Constants.CATEGORY1) {
+            setFormValue((prevState) => {
+                return {
+                    ...prevState,
+                    firstCategory: Constants.CATEGORY1,
+                    secondCategory: Constants.CATEGORY2
+                };
+            });
+        } else {
+            setFormValue((prevState) => {
+                return {
+                    ...prevState,
+                    firstCategory: Constants.CATEGORY2,
+                    secondCategory: Constants.CATEGORY1
+                };
+            });
+        }
+    };
+
+
     return (
-        <div key={question.questionId} e2e-id={"questionNr"+question.questionNumber}>
+        <div key={question.questionId} e2e-id={"questionNr" + question.questionNumber}>
             <div className="questions__box">
                 <div className="questions__line">
                     <div className="questions__input">
                         <input type="text"
                             onChange={handleChange}
                             className='questions__text'
-                            e2e-id={"question"+question.questionNumber+"EditText"}
+                            e2e-id={"question" + question.questionNumber + "EditText"}
                             defaultValue={question.questionText}
                             name="questionText"
-                            maxLength={75} />
+                            maxLength={150} />
                     </div>
                 </div>
                 <div className="questions__line">
-                    <div className="questions__input">
+                    <select className="questions__dropdown questions_w100" value={theme} onChange={handleThemeSelect}>
+                        {Constants.themes.map((option) => (
+                            <option value={option.value} disabled={option.disabled}>{option.label}</option>
+                        ))}
+                    </select>
+                </div>
+                <div className="questions__line">
+                    <div className="questions__input-medium">
                         <input type="text"
                             onChange={handleChange}
                             className='questions__text'
-                            e2e-id={"question"+question.questionNumber+"EditAnswer1"}
+                            e2e-id={"question" + question.questionNumber + "EditAnswer1"}
                             defaultValue={question.answers[0].answerText}
                             name="firstAnswer"
                             maxLength={50} />
                     </div>
-                    <div className="questions__icon" e2e-id={"question"+question.questionNumber+"EditSave"} onClick={() => editQuestion(question.questionId)} ><AiOutlineSave size={30}/><br></br><span className="questions__icon-hide">{Constants.EDIT_BUTTON.toUpperCase()}</span></div>
+                    <select className="questions__dropdown questions_w50" value={firstCategory} onChange={handleCategorySelect}>
+                        {Constants.categories.map((option) => (
+                            <option value={option.value} disabled={option.disabled}>{option.label}</option>
+                        ))}
+                    </select>
                 </div>
                 <div className="questions__line">
                     <div className="questions__input">
                         <input type="text"
                             className="questions__text"
                             onChange={handleChange}
-                            e2e-id={"question"+question.questionNumber+"EditAnswer2"}
+                            e2e-id={"question" + question.questionNumber + "EditAnswer2"}
                             defaultValue={question.answers[1].answerText}
                             name="secondAnswer"
                             maxLength={50} />
                     </div>
-                    <div className="questions__icon" e2e-id={"question"+question.questionNumber+"EditDelete"} onClick={() => deleteQuestion(question.questionId)}><AiOutlineDelete size={30}/><br></br><span className="questions__icon-hide">{Constants.DELETE_BUTTON.toUpperCase()}</span></div>
+                    <div className="questions__icon" e2e-id={"question" + question.questionNumber + "EditSave"} onClick={() => editQuestion(question.questionId)} ><AiOutlineSave size={30} /><br></br><span className="questions__icon-hide">{Constants.EDIT_BUTTON.toUpperCase()}</span></div>
+                    <div className="questions__icon" e2e-id={"question" + question.questionNumber + "EditDelete"} onClick={() => deleteQuestion(question.questionId)}><AiOutlineDelete size={30} /><br></br><span className="questions__icon-hide">{Constants.DELETE_BUTTON.toUpperCase()}</span></div>
                 </div>
             </div>
         </div>

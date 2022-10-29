@@ -14,8 +14,8 @@ const Questions = () => {
     const [questionText, setQuestionText] = useState("");
     const [firstAnswer, setFirstAnswer] = useState("");
     const [secondAnswer, setSecondAnswer] = useState("");
-    const [theme, setTheme] = useState("");
-    const [firstCategory, setFirstCategory] = useState("");
+    const [theme, setTheme] = useState("Select theme");
+    const [firstCategory, setFirstCategory] = useState("Select category");
     const [secondCategory, setSecondCategory] = useState("");
     const [showQuestions, setShowQuestions] = useState<boolean>(false);
     const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
@@ -32,15 +32,16 @@ const Questions = () => {
 
 
     const addQuestion = () => {
-        if (questionText !== "" && firstAnswer !== "" && secondAnswer !== "") {
-            AdminApi.addQuestion(questionText, firstAnswer, secondAnswer, theme, firstCategory, secondCategory,accessToken)
+        if (questionText !== "" && firstAnswer !== "" && secondAnswer !== "" 
+        && theme !=="" && firstCategory !== "" && secondCategory !=="") {
+            AdminApi.addQuestion(questionText, firstAnswer, secondAnswer, theme, firstCategory, secondCategory, accessToken)
                 .then((response: any) => {
                     setQuestions([...questions, response.data])
                     setQuestionText("")
                     setFirstAnswer("")
                     setSecondAnswer("")
-                    setTheme("")
-                    setFirstCategory("")
+                    setTheme("Select theme")
+                    setFirstCategory("Select Category")
                     setSecondCategory("")
                     NotificationManager.success('A new question has been added', 'Success!', 2000);
                 })
@@ -60,9 +61,22 @@ const Questions = () => {
         window.location.href = "/admin";
     };
 
-    const onChangeValue= (event: any) => {
-        console.log(event.target.value);
+    const handleThemeSelect = (event: any) => {
+        console.log(event.target.value)
+        setTheme(event.target.value);
     };
+
+    const handleCategorySelect = (event: any) => {
+        console.log(event.target.value);
+        if (event.target.value === Constants.CATEGORY1) {
+            setFirstCategory(Constants.CATEGORY1)
+            setSecondCategory(Constants.CATEGORY2)
+        } else {
+            setFirstCategory(Constants.CATEGORY2)
+            setSecondCategory(Constants.CATEGORY1)
+        }
+    };
+
     return (
         <div className='questions'>
             <div className='questions__header'>
@@ -78,11 +92,20 @@ const Questions = () => {
                                 placeholder="Enter question"
                                 e2e-id="questionText"
                                 onChange={(e) => setQuestionText(e.target.value)}
-                                maxLength={75} />
+                                maxLength={150} />
                         </div>
                     </div>
+
                     <div className="questions__line">
-                        <div className="questions__input">
+                            <select className="questions__dropdown questions_w100" value={theme} onChange={handleThemeSelect}>
+                                {Constants.themes.map((option) => (
+                                    <option value={option.value} disabled={option.disabled}>{option.label}</option>
+                                ))}
+                            </select>
+                    </div>
+
+                    <div className="questions__line">
+                        <div className="questions__input-shorter">
                             <input type="text"
                                 value={firstAnswer}
                                 className="questions__text"
@@ -90,14 +113,13 @@ const Questions = () => {
                                 e2e-id="questionAnswer1"
                                 onChange={(e) => setFirstAnswer(e.target.value)}
                                 maxLength={50} />
-
-            <div onChange={onChangeValue}>
-        <input type="radio" value="Progressive" name="category" /> Progressive
-        <input type="radio" value="Conservative" name="category" /> Conservative
-      </div>
                         </div>
+                            <select className="questions__dropdown questions_w50" value={firstCategory} onChange={handleCategorySelect}>
+                                {Constants.categories.map((option) => (
+                                    <option value={option.value} disabled={option.disabled}>{option.label}</option>
+                                ))}
+                            </select>
                     </div>
-
                     <div className="questions__line">
                         <div className="questions__input">
                             <input type="text"
