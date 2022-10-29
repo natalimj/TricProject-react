@@ -6,7 +6,6 @@ import { NotificationManager } from 'react-notifications';
 import { useAppSelector } from '../app/hooks';
 import { RootState } from '../app/store';
 import Constants from '../util/Constants';
-import answerSlice from '../reducers/answerSlice';
 
 type Props = {
     question: IQuestionData
