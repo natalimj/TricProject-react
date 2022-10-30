@@ -14,6 +14,7 @@ import UserApi from '../api/UserApi';
 import { RootState } from '../app/store';
 
 const AdminConsole = () => {
+
     const dispatch = useAppDispatch();
     const numberOfUsers: number = useAppSelector((state: RootState) => state.playData.numberOfUsers);
     const numberOfQuestions: number = useAppSelector((state: RootState) => state.playData.numberOfQuestions);

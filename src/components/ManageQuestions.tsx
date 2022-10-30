@@ -14,6 +14,9 @@ const ManageQuestions = () => {
     const [questionText, setQuestionText] = useState("");
     const [firstAnswer, setFirstAnswer] = useState("");
     const [secondAnswer, setSecondAnswer] = useState("");
+    const [theme, setTheme] = useState("Select theme");
+    const [firstCategory, setFirstCategory] = useState("Select category");
+    const [secondCategory, setSecondCategory] = useState("");
     const [showQuestions, setShowQuestions] = useState<boolean>(false);
     const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
 
@@ -29,13 +32,18 @@ const ManageQuestions = () => {
 
 
     const addQuestion = () => {
-        if (questionText !== "" && firstAnswer !== "" && secondAnswer !== "") {
-            AdminApi.addQuestion(questionText, firstAnswer, secondAnswer, accessToken)
+        if (questionText !== "" && firstAnswer !== "" && secondAnswer !== "" 
+        && (theme !=="" && theme !=='Select theme') && (firstCategory !== "" && firstCategory !=='Select category')
+         && secondCategory !=="") {
+            AdminApi.addQuestion(questionText, firstAnswer, secondAnswer, theme, firstCategory, secondCategory, accessToken)
                 .then((response: any) => {
                     setQuestions([...questions, response.data])
                     setQuestionText("")
                     setFirstAnswer("")
                     setSecondAnswer("")
+                    setTheme("Select theme")
+                    setFirstCategory("Select category")
+                    setSecondCategory("")
                     NotificationManager.success('A new question has been added', 'Success!', 2000);
                 })
                 .catch((e: Error) => {
@@ -54,6 +62,22 @@ const ManageQuestions = () => {
         window.location.href = "/admin";
     };
 
+    const handleThemeSelect = (event: any) => {
+        console.log(event.target.value)
+        setTheme(event.target.value);
+    };
+
+    const handleCategorySelect = (event: any) => {
+        console.log(event.target.value);
+        if (event.target.value === Constants.CATEGORY1) {
+            setFirstCategory(Constants.CATEGORY1)
+            setSecondCategory(Constants.CATEGORY2)
+        } else {
+            setFirstCategory(Constants.CATEGORY2)
+            setSecondCategory(Constants.CATEGORY1)
+        }
+    };
+
     return (
         <div className='questions'>
             <div className='questions__header'>
@@ -69,11 +93,20 @@ const ManageQuestions = () => {
                                 placeholder="Enter question"
                                 e2e-id="questionText"
                                 onChange={(e) => setQuestionText(e.target.value)}
-                                maxLength={75} />
+                                maxLength={150} />
                         </div>
                     </div>
+
                     <div className="questions__line">
-                        <div className="questions__input">
+                            <select className="questions__dropdown questions_w100" value={theme} onChange={handleThemeSelect}>
+                                {Constants.themes.map((option) => (
+                                    <option value={option.value} disabled={option.disabled}>{option.label}</option>
+                                ))}
+                            </select>
+                    </div>
+
+                    <div className="questions__line">
+                        <div className="questions__input-shorter">
                             <input type="text"
                                 value={firstAnswer}
                                 className="questions__text"
@@ -82,6 +115,11 @@ const ManageQuestions = () => {
                                 onChange={(e) => setFirstAnswer(e.target.value)}
                                 maxLength={50} />
                         </div>
+                            <select className="questions__dropdown questions_w50" value={firstCategory} onChange={handleCategorySelect}>
+                                {Constants.categories.map((option) => (
+                                    <option value={option.value} disabled={option.disabled}>{option.label}</option>
+                                ))}
+                            </select>
                     </div>
                     <div className="questions__line">
                         <div className="questions__input">

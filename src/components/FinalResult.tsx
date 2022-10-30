@@ -17,7 +17,7 @@ const FinalResult = () => {
     username: useAppSelector((state: RootState) => state.user.username),
     imagePath: useAppSelector((state: RootState) => state.user.imagePath)
   }
-  const [finalResults, setFinalResults] = useState<IFinalResultData[]>([]);
+  const [finalResult, setFinalResult] = useState<IFinalResultData>();
   const [showPlayInfo, setShowPlayInfo] = useState<boolean>(false)
   const exportRef = useRef<HTMLHeadingElement>(null);
   const today = moment().format('DD-MM-YYYY');
@@ -25,7 +25,8 @@ const FinalResult = () => {
   useEffect(() => {
     UserApi.getFinalResult(currentUser.userId)
       .then((response: any) => {
-        setFinalResults(response.data)
+        console.log(response.data)
+        setFinalResult(response.data)
       })
       .catch((e: Error) => {
         console.log(e);
@@ -49,18 +50,18 @@ const FinalResult = () => {
                 </div>
               </div>
               <div className="final-result__result-box">
-                {finalResults && finalResults.map((finalResult) => (
-                  <div key={finalResult.category.categoryId}>
+                <div>{Constants.FINAL_RESULT_FIELD}</div>
+                {finalResult &&
+                  <div key={finalResult.category}>
                     <div className="final-result__title">
-                      <span className="final-result__answer-text final-result__answer-text--left">{finalResult.category.categoryName}</span>
-                      <span className="final-result__answer-text">{finalResult.category.oppositeCategory.categoryName}</span>
+                      <span className="final-result__answer-text final-result__answer-text--left">{finalResult.category}</span>
+                      <span className="final-result__answer-text">{finalResult.secondCategory}</span>
                     </div>
                     <div className="final-result__slider">
                       <div className="final-result__first-rate" style={{ "width": `${finalResult.rate}%` }}><span className='final-result__answer--text'>{finalResult.rate}%</span></div>
                       <div className="final-result__second-rate" style={{ "width": `${100 - finalResult.rate}%` }}><span className='final-result__answer--text'>{100 - finalResult.rate}%</span></div>
                     </div>
-                  </div>
-                ))}
+                  </div>}
               </div>
             </div>
             <div className='final-result__buttons'>

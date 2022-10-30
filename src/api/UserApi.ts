@@ -31,7 +31,7 @@ const showResult = (questionId: any) => {
 };
 
 const getFinalResult = (userId: any) => {
-    return http.get<Array<FinalResult>>("userApi/finalResult", {
+    return http.get<FinalResult>("userApi/finalResult", {
         params: {
             userId: userId
         }

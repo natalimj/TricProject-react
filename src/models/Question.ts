@@ -6,4 +6,5 @@ export default interface IQuestionData {
     questionText: string;
     answers : IAnswerData[];
     time : number;
+    theme :string;
   }
