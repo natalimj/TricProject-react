@@ -52,20 +52,11 @@ const Login = () => {
 
   const handleLogin = (formValue: { username: string; password: string }) => {
     const { username, password } = formValue;
-
-    setState({
-      message: "",
-      loading: true,
-      username: state.username, password: state.password, overrider: state.overrider, redirect: state.redirect
-    });
-
+    
+    setState({ ...state, message: "", loading: true });
     login(username, password).then(
       () => {
-        setState({
-          redirect: "/admin",
-          overrider: true,
-          username: state.username, password: state.password, message: state.message, loading: state.loading,
-        });
+        setState({ ...state, redirect: "/admin", overrider: true });
       },
       error => {
         const resMessage =
@@ -74,21 +65,14 @@ const Login = () => {
             error.response.data.message) ||
           error.message ||
           error.toString();
-        setState({
-          loading: false,
-          message: resMessage,
-          username: state.username, password: state.password, overrider: state.overrider, redirect: state.redirect
-        });
+        setState({ ...state, loading: false, message: resMessage });
       }
     );
   }
 
   useEffect(() => {
     if (state.redirect && state.overrider) {
-      setState({
-        overrider: false,
-        username: state.username, password: state.password, redirect: state.redirect, message: state.message, loading: state.loading,
-      });
+      setState({ ...state, overrider: false });
       window.location.href = state.redirect ?? '/admin';
     }
   }, [state])

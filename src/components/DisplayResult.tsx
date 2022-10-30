@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import '../style/Result.css';
-import AdminApi from '../api/AdminApi';
-import { useAppSelector } from '../app/hooks';
-import { RootState } from '../app/store';
 import IResultData from '../models/Result';
 import Constants from '../util/Constants';
 import WebSocketComponent from './WebSocketComponent';
 
 const DisplayResult = () => {
-
     const initialResultState = {
         question: {
             questionNumber: 0,
@@ -28,31 +24,15 @@ const DisplayResult = () => {
 
     const [result, setResult] = useState<IResultData>(initialResultState);
     const [showResult, setShowResult] = useState<boolean>(false);
-    const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
-    const [numberOfQuestions, setNumberOfQuestions] = useState<number>(0);
 
     const onMessageReceived = (msg: IResultData) => {
-        setResult(msg)
-        setShowResult(true)
+        setResult(msg);
+        setShowResult(true);
     }
-    const onQuestionMessageReceived = () => {
-        setShowResult(false)
-    }
-
-    useEffect(() => {
-        AdminApi.getNumberOfQuestions(accessToken)
-            .then((response: any) => {
-                setNumberOfQuestions(response.data);
-            })
-            .catch((e: Error) => {
-            });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [numberOfQuestions, accessToken])
 
     return (<>
         <WebSocketComponent topics={['/topic/result']} onMessage={(msg: IResultData) => onMessageReceived(msg)} />
-        <WebSocketComponent topics={['/topic/question']} onMessage={() => onQuestionMessageReceived()} />
-        {showResult && result.question.questionNumber !== numberOfQuestions &&
+        {showResult &&
             <div className='admin-result'>
                 <div className="admin-result__inner-container">
                     <div className="result__box">
