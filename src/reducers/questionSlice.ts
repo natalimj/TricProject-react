@@ -6,7 +6,7 @@ const initialState: IQuestionData = {
     questionNumber: -1,
     questionText: '',
     answers: [],
-    time:0
+    time: 0
 };
 
 export const questionSlice = createSlice({
@@ -14,15 +14,24 @@ export const questionSlice = createSlice({
     initialState,
     reducers: {
         addQuestion: (state: IQuestionData, action: PayloadAction<IQuestionData>) => {
+            console.log("getting question data")
             state.questionId = action.payload.questionId;
             state.questionNumber = action.payload.questionNumber;
             state.questionText = action.payload.questionText;
             state.answers = [...action.payload.answers];
             state.time = action.payload.time;
         },
+        emptyQuestion: (state: IQuestionData) => {
+            console.log("empty question data")
+            state.questionId = '';
+            state.questionNumber = -1;
+            state.questionText = '';
+            state.answers = [];
+            state.time = 0;
+        }
     },
 });
 
-export const { addQuestion } = questionSlice.actions;
+export const { addQuestion, emptyQuestion } = questionSlice.actions;
 
 export default questionSlice.reducer;

@@ -1,41 +1,36 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import WebSocketComponent from './WebSocketComponent';
 import AdminApi from '../api/AdminApi';
 import IQuestionData from '../models/Question';
 import Constants from '../util/Constants';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { setStatus } from '../reducers/statusSlice';
+import { logoutAdmin } from '../reducers/adminSlice';
+import { addQuestion, emptyQuestion } from '../reducers/questionSlice';
+import { setNumberOfQuestions, setNumberOfUsers, setShowQuestionButton, setQuestionTimer } from '../reducers/playDataSlice';
 import 'react-notifications/lib/notifications.css';
 import { NotificationManager } from 'react-notifications';
 import UserApi from '../api/UserApi';
-import { logoutAdmin } from '../reducers/adminSlice';
 import { RootState } from '../app/store';
 
 const AdminConsole = () => {
-    const initialQuestionState = {
-        id: null,
-        questionNumber: 0,
-        questionText: "",
-        answers: [],
-        time: 30
-    };
-
-    const [numberOfUsers, setNumberOfUsers] = useState<number>(0);
-    const [numberOfQuestions, setNumberOfQuestions] = useState<number>(0);
-    const [question, setQuestion] = useState<IQuestionData>(initialQuestionState);
-    const [showQuestionButton, setShowQuestionButton] = useState<boolean>(false);
-    const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
-    const [timer, setTimer] = useState<number>(0);
-    const maxTimeValue: number = 36000;
-    const minTimeValue: number = 1;
     const dispatch = useAppDispatch();
+    const numberOfUsers: number = useAppSelector((state: RootState) => state.playData.numberOfUsers);
+    const numberOfQuestions: number = useAppSelector((state: RootState) => state.playData.numberOfQuestions);
+    const question: IQuestionData = useAppSelector((state: RootState) => state.question);
+    const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
+    const showQuestionButton = useAppSelector((state: RootState) => state.playData.showQuestionButton);
+    const questionTimer = useAppSelector((state: RootState) => state.playData.questionTimer);
+
+    const [showedFinalResult, setShowedFinalResult] = useState<boolean>(false);
+    const maxTimeValue: number = 1800;
+    const minTimeValue: number = 1;
 
     const getQuestion = (questionNo: number) => {
         AdminApi.getQuestionByNumber(questionNo, accessToken)
             .then((response: any) => {
-                setQuestion(response.data)
-                setShowQuestionButton(true)
+                dispatch(addQuestion(response.data));
+                dispatch(setShowQuestionButton(true));
             })
             .catch((e: Error) => {
                 NotificationManager.error(e.message, 'Error!', 5000);
@@ -43,19 +38,19 @@ const AdminConsole = () => {
     };
 
     const onMessageReceived = (msg: number) => {
-        setNumberOfUsers(msg);
+        dispatch(setNumberOfUsers(msg));
     }
 
     const showQuestion = () => {
         AdminApi.addQuestionTime(question.questionId, question.time ?? 30, accessToken)
             .then((response: any) => {
-                setQuestion(response.data)
+                dispatch(addQuestion(response.data));
             })
             .then(() => {
                 AdminApi.showQuestion(question.questionNumber, accessToken)
                     .then(() => {
-                        setTimer(question.time)
-                        setShowQuestionButton(false)
+                        dispatch(setQuestionTimer(question.time));
+                        dispatch(setShowQuestionButton(false));
                         NotificationManager.info('Question ' + question.questionNumber + ' on screen', 'Info!', 2000);
                     })
                     .catch((e: Error) => {
@@ -79,26 +74,14 @@ const AdminConsole = () => {
                 if (time < minTimeValue) {
                     time = minTimeValue;
                 }
-                setQuestion({ ...question, time: time });
+                dispatch(addQuestion({ ...question, time: time }));
             } else {
-                setQuestion({ ...question, time: NaN });
+                dispatch(addQuestion({ ...question, time: NaN }));
             }
         } else {
-            setQuestion({ ...question, time: NaN });
+            dispatch(addQuestion({ ...question, time: NaN }));
         }
     }
-
-    const showResult = () => {
-        UserApi.showResult(question.questionId)
-            .then((response: any) => {
-                setTimer(-1);
-                getQuestion(response.data.question.questionNumber + 1);
-                NotificationManager.info('Result ' + response.data.question.questionNumber + ' on screen', 'Info!', 2000);
-            })
-            .catch((e: Error) => {
-                NotificationManager.error(e.message, 'Error!', 5000);
-            });
-    };
 
     const endSession = () => {
         AdminApi.endSession(accessToken)
@@ -114,7 +97,22 @@ const AdminConsole = () => {
             }).then(() => {
                 dispatch(setStatus({ isActive: false }));
                 dispatch(logoutAdmin());
-                window.location.href = "/login";
+                dispatch(emptyQuestion());
+                dispatch(setNumberOfQuestions(0));
+                dispatch(setNumberOfUsers(0));
+                setShowedFinalResult(false);
+            })
+            .catch((e: Error) => {
+                NotificationManager.error(e.message, 'Error!', 5000);
+            });
+    };
+
+    const showResult = () => {
+        UserApi.showResult(question.questionId)
+            .then((response: any) => {
+                dispatch(setQuestionTimer(-1));
+                getQuestion(response.data.question.questionNumber + 1);
+                NotificationManager.info('Result ' + response.data.question.questionNumber + ' on screen', 'Info!', 2000);
             })
             .catch((e: Error) => {
                 NotificationManager.error(e.message, 'Error!', 5000);
@@ -126,7 +124,8 @@ const AdminConsole = () => {
             .then(() => {
                 if (question.questionNumber !== 0) {
                     NotificationManager.info('Final Result on screen', 'Info!', 2000);
-                    setTimer(0);
+                    dispatch(setQuestionTimer(-1));
+                    setShowedFinalResult(true);
                 }
             })
             .catch((e: Error) => {
@@ -135,27 +134,29 @@ const AdminConsole = () => {
     };
 
     useEffect(() => {
-        if (timer > 0) {
-            setTimeout(() => {
-                setTimer(timer => timer - 1)
-            }, 1000);
-        } else if (timer === 0 && numberOfQuestions !== 0) {
-            question.questionNumber !== numberOfQuestions ? showResult() : showFinalResult();
+        if (!showQuestionButton && !showedFinalResult) {
+            if (questionTimer > 0) {
+                setTimeout(() => {
+                    dispatch(setQuestionTimer(questionTimer - 1));
+                }, 1000);
+            } else if (questionTimer === 0 && numberOfQuestions !== 0) {
+                question.questionNumber !== numberOfQuestions ? showResult() : showFinalResult();
+            }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [timer]);
+    }, [questionTimer]);
 
     useEffect(() => {
-        AdminApi.getNumberOfQuestions(accessToken)
-            .then((response: any) => {
-                setNumberOfQuestions(response.data);
-                if (numberOfQuestions !== 0) {
+        if (numberOfQuestions === 0) {
+            AdminApi.getNumberOfQuestions(accessToken)
+                .then((response: any) => {
+                    dispatch(setNumberOfQuestions(response.data));
                     getQuestion(1);
-                }
-            })
-            .catch((e: Error) => {
-                NotificationManager.error(e.message, 'Error!', 5000);
-            });
+                })
+                .catch((e: Error) => {
+                    NotificationManager.error(e.message, 'Error!', 5000);
+                });
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [numberOfQuestions, accessToken])
 
@@ -205,10 +206,10 @@ const AdminConsole = () => {
                         </>
                     ) : (
                         <div className='admin-console__buttons admin-console__buttons--result'>
-                            {timer > 0 ? (
+                            {questionTimer > 0 && !showedFinalResult ? (
                                 <>
                                     <div className='admin-console__text'>{Constants.QUESTION_FIELD} {question.questionNumber} {Constants.ON_SCREEN_FIELD}</div>
-                                    <div className='admin-console__text'> {timer} {Constants.TIME_REMANING}</div>
+                                    <div className='admin-console__text'> {questionTimer} {Constants.TIME_REMANING}</div>
                                 </>
                             ) : null}
                             {question.questionNumber < numberOfQuestions ? (
@@ -217,7 +218,7 @@ const AdminConsole = () => {
                                 </button>
                             ) : (
                                 <>
-                                    {timer > 0 ? (
+                                    {questionTimer > 0 && !showedFinalResult ? (
                                         <button onClick={showFinalResult} className="admin-console__submit-button--secondary" e2e-id="showFinalResult">
                                             {Constants.FINAL_RESULT_BUTTON}
                                         </button>
