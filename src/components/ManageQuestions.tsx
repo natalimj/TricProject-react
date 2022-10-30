@@ -33,7 +33,8 @@ const ManageQuestions = () => {
 
     const addQuestion = () => {
         if (questionText !== "" && firstAnswer !== "" && secondAnswer !== "" 
-        && theme !=="" && firstCategory !== "" && secondCategory !=="") {
+        && (theme !=="" && theme !=='Select theme') && (firstCategory !== "" && firstCategory !=='Select category')
+         && secondCategory !=="") {
             AdminApi.addQuestion(questionText, firstAnswer, secondAnswer, theme, firstCategory, secondCategory, accessToken)
                 .then((response: any) => {
                     setQuestions([...questions, response.data])
@@ -41,7 +42,7 @@ const ManageQuestions = () => {
                     setFirstAnswer("")
                     setSecondAnswer("")
                     setTheme("Select theme")
-                    setFirstCategory("Select Category")
+                    setFirstCategory("Select category")
                     setSecondCategory("")
                     NotificationManager.success('A new question has been added', 'Success!', 2000);
                 })
