@@ -202,7 +202,7 @@ describe("Feature 2 - Voting System", () => {
       path: 'screenshots/feature2/isshowquestionloaded.jpg'
     });
     await adminPage.waitForSelector('[e2e-id="showQuestion"]');
-    await adminPage.click('[e2e-id="showQuestion"]');
+    await adminPage.click('[e2e-id="showQuestion"]', {clickCount: 2});
     await adminPage.screenshot({
       path: 'screenshots/feature2/hasthequestionbeenclicked.jpg'
     });
