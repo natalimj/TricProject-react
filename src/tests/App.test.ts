@@ -203,6 +203,9 @@ describe("Feature 2 - Voting System", () => {
     });
     await adminPage.waitForSelector('[e2e-id="showQuestion"]');
     await adminPage.click('[e2e-id="showQuestion"]');
+    await adminPage.screenshot({
+      path: 'screenshots/feature2/hasthequestionbeenclicked.jpg'
+    });
   });
 
   test("Vote and view results 1", async () => {
