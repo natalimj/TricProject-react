@@ -33,6 +33,16 @@ async function resetApp() {
   await AdminApi.addQuestion("Which festival is better?", "Electric Castle", "Untold","Energy","Progressive","Conservative",accessToken);
 }
 
+async function clickThis(selector: string, page)
+{
+  await Promise.all([
+    page.$eval(selector, element =>
+      element.click()
+    ),
+    await page.waitForNavigation(),
+  ]);
+}
+
 async function checkQuestion(questionNr : number, text : string, answer1 : string, answer2 : string) {
   let selector = '[e2e-id="question' + questionNr + 'EditText"]';
   let selectorAns1 = '[e2e-id="question' + questionNr + 'EditAnswer1"]';
@@ -203,7 +213,7 @@ describe("Feature 2 - Voting System", () => {
       path: 'screenshots/feature2/isshowquestionloaded.jpg'
     });
     await adminPage.waitForSelector('[e2e-id="showQuestion"]');
-    await adminPage.click('[e2e-id="showQuestion"]', {clickCount: 2});
+    await adminPage.clickThis('[e2e-id="showQuestion"]', adminPage);
     await adminPage.screenshot({
       path: 'screenshots/feature2/hasthequestionbeenclicked.jpg'
     });
