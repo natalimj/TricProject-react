@@ -77,4 +77,4 @@ jobs:
         if: failure()
         with:
          name: screenshots
-         path: screenshots
+         path: ${{ github.workspace }}/screenshots
