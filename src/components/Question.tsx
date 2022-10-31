@@ -136,16 +136,16 @@ const Question = () => {
                         left: 0,
                         right: 0,
                         bottom: 0,
-                        backgroundColor: 'rgba(255, 255, 255, 0.75)'
+                        backgroundColor: 'rgba(0, 0, 0, 0.6)'
                       },
                       content: {
                         position: 'absolute',
-                        top: '40px',
-                        left: '40px',
-                        right: '40px',
-                        bottom: '40px',
-                        border: '1px solid #ccc',
-                        background: '#fff',
+                        top: '15%',
+                        left: '10%',
+                        right: '10%',
+                        bottom: '15%',
+                        border: '5px solid #181818',
+                        background: '#3D3D3D',
                         overflow: 'auto',
                         WebkitOverflowScrolling: 'touch',
                         borderRadius: '4px',
@@ -153,10 +153,14 @@ const Question = () => {
                         padding: '20px'
                       }
                     }}isOpen={isOpen} onRequestClose={() => setIsOpen(false)}>
-                    <span>{PlayInfo?.finalResultText}</span>
-                    <button onClick={() => {setIsOpen(false) 
-                    vote(selectedAnswer)}  //TODO: change to PREDICTED ANSWER
-                  } >Understood</button>
+                    <span>
+                    {
+                      PlayInfo?.finalResultText // TODO: ADD PREDICTED ANSWER
+                    }
+                    </span>
+                    <button className={'question__submit-button question__active-button'} onClick={() => {setIsOpen(false) 
+                    vote(selectedAnswer)}  //TODO: CHANGE TO PREDICTED ANSWER
+                  }>Continue</button>
                   </Modal>
                 </>
               )}
