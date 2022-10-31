@@ -64,6 +64,13 @@ describe("Feature 1 - Questions database and display", () => {
     await userPage.waitForSelector('[e2e-id="inactive"]');
   });
 
+
+  test("TAKE A SCREENSHOT", async () => {
+    await adminPage.screenshot({
+      path: 'TAKEASCREENSHOT.jpg'
+    });
+  });
+
   test("Go to manage questions", async () => {
     await adminPage.waitForSelector('[e2e-id="editQuestions"]');
     await adminPage.click('[e2e-id="editQuestions"]');
