@@ -39,7 +39,7 @@ async function clickThis(selector: string, page)
     page.$eval(selector, element =>
       element.click()
     ),
-    await page.waitForNavigation(),
+    await page.waitForNavigation()
   ]);
 }
 
@@ -213,7 +213,7 @@ describe("Feature 2 - Voting System", () => {
       path: 'screenshots/feature2/isshowquestionloaded.jpg'
     });
     await adminPage.waitForSelector('[e2e-id="showQuestion"]');
-    await adminPage.clickThis('[e2e-id="showQuestion"]', adminPage);
+    await clickThis('[e2e-id="showQuestion"]', adminPage);
     await adminPage.screenshot({
       path: 'screenshots/feature2/hasthequestionbeenclicked.jpg'
     });
