@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import '../style/Question.css';
-import Popup from 'reactjs-popup';
 import Constants from '../util/Constants';
 import UserApi from '../api/UserApi';
 import IQuestionData from '../models/Question';
@@ -129,7 +128,31 @@ const Question = () => {
                <button onClick={() => { setIsOpen(true) }} className={firstAnswer || secondAnswer ? 'question__submit-button question__active-button' : 'question__submit-button'} disabled={!firstAnswer && !secondAnswer} e2e-id="questionConfirm">
                 {Constants.CONFIRM_BUTTON}
               </button>
-                    <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)}>
+                    <Modal 
+                    style={{
+                      overlay: {
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        backgroundColor: 'rgba(255, 255, 255, 0.75)'
+                      },
+                      content: {
+                        position: 'absolute',
+                        top: '40px',
+                        left: '40px',
+                        right: '40px',
+                        bottom: '40px',
+                        border: '1px solid #ccc',
+                        background: '#fff',
+                        overflow: 'auto',
+                        WebkitOverflowScrolling: 'touch',
+                        borderRadius: '4px',
+                        outline: 'none',
+                        padding: '20px'
+                      }
+                    }}isOpen={isOpen} onRequestClose={() => setIsOpen(false)}>
                     <span>{PlayInfo?.finalResultText}</span>
                     <button onClick={() => {setIsOpen(false) 
                     vote(selectedAnswer)}  //TODO: change to PREDICTED ANSWER
