@@ -198,6 +198,9 @@ describe("Feature 2 - Voting System", () => {
   test("Start the play", async () => {
     await adminPage.waitForSelector('[e2e-id="timerField"]');
     await adminPage.type('[e2e-id="timerField"]',"100");
+    await userPage.screenshot({
+      path: 'screenshots/feature2/isshowquestionloaded.jpg'
+    });
     await adminPage.waitForSelector('[e2e-id="showQuestion"]');
     await adminPage.click('[e2e-id="showQuestion"]');
   });
