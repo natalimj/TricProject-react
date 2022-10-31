@@ -9,6 +9,7 @@ import { RootState } from '../app/store';
 import IAnswerData from '../models/Answer';
 import { addAnswer } from '../reducers/answerSlice';
 import { setUserVoted } from '../reducers/componentSlice';
+import { setUserResults} from '../reducers/userResultSlice';
 import React from 'react';
 
 const Question = () => {
@@ -39,6 +40,10 @@ const Question = () => {
       .then(() => {
         dispatch(addAnswer(answer));
         dispatch(setUserVoted(voteData.questionId));
+        dispatch(setUserResults( {
+        question: currentQuestion,
+        answer :answer
+        }))
       })
       .catch((e: Error) => {
         console.log(e);

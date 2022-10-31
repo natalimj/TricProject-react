@@ -17,6 +17,7 @@ const FinalResult = () => {
     username: useAppSelector((state: RootState) => state.user.username),
     imagePath: useAppSelector((state: RootState) => state.user.imagePath)
   }
+  const userResults= useAppSelector((state: RootState) => state.userResults);
   const [finalResult, setFinalResult] = useState<IFinalResultData>();
   const [showPlayInfo, setShowPlayInfo] = useState<boolean>(false)
   const exportRef = useRef<HTMLHeadingElement>(null);
@@ -58,10 +59,16 @@ const FinalResult = () => {
                       <span className="final-result__answer-text">{finalResult.secondCategory}</span>
                     </div>
                     <div className="final-result__slider">
-                      <div className="final-result__first-rate" style={{ "width": `${finalResult.rate}%` }}><span className='final-result__answer--text'>{finalResult.rate}%</span></div>
-                      <div className="final-result__second-rate" style={{ "width": `${100 - finalResult.rate}%` }}><span className='final-result__answer--text'>{100 - finalResult.rate}%</span></div>
+                      <div className="final-result__first-rate" style={{ "width": `${finalResult.rate}%` }}><span className='final-result__answer--text'>
+                        {finalResult.rate !== 0 && `${finalResult.rate}%`}</span></div>          
+                      <div className="final-result__second-rate" style={{ "width": `${100 - finalResult.rate}%` }}><span className='final-result__answer--text'>
+                        {(100 - finalResult.rate) !== 0 && `${100 - finalResult.rate}%`}</span></div>
                     </div>
                   </div>}
+
+                  {userResults.results && userResults.results.map((userResult) => (
+                    <p>{userResult.question.theme} - {userResult.answer.category}</p>
+                ))}
               </div>
             </div>
             <div className='final-result__buttons'>
@@ -70,6 +77,8 @@ const FinalResult = () => {
             </div>
           </div>
         </div>
+        
+        
       }
       {showPlayInfo && <PlayInfo />}
     </>
