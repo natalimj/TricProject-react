@@ -43,12 +43,16 @@ const getAllQuestions = (accessToken: string) => {
   return http.get<Array<IQuestionData>>("adminApi/questions", { headers: authHeader(accessToken) });
 };
 
-const addQuestion = (questionText: string, firstAnswer: string, secondAnswer: string, accessToken: string) => {
+const addQuestion = (questionText: string, firstAnswer: string, secondAnswer: string, 
+  theme: string, firstCategory: string, secondCategory: string, accessToken: string) => {
   return http.post<IQuestionData>("adminApi/addQuestion", {}, {
     params: {
       questionText: questionText,
       firstAnswer: firstAnswer,
-      secondAnswer: secondAnswer
+      secondAnswer: secondAnswer,
+      theme: theme,
+      firstCategory: firstCategory,
+      secondCategory:secondCategory
     },
     headers: authHeader(accessToken)
   }
@@ -81,13 +85,17 @@ const deleteAllQuestions = (accessToken: string) => {
   })
 }
 
-const editQuestion = (questionText: string, firstAnswer: string, secondAnswer: string, questionId: number, accessToken: string) => {
+const editQuestion = (questionText: string, firstAnswer: string, secondAnswer: string, questionId: number,
+  theme: string, firstCategory: string, secondCategory: string, accessToken: string) => {
   return http.patch<IQuestionData>("adminApi/editQuestion", {}, {
     params: {
       questionText: questionText,
       firstAnswer: firstAnswer,
       secondAnswer: secondAnswer,
-      questionId: questionId
+      questionId: questionId,
+      theme: theme,
+      firstCategory: firstCategory,
+      secondCategory:secondCategory
     },
     headers: authHeader(accessToken)
   })

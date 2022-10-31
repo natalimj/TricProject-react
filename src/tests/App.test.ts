@@ -27,9 +27,10 @@ async function resetApp() {
   await adminPage.type('[e2e-id="passwordAdmin"]',"12345678");
   await adminPage.click('[e2e-id="login"]');
   await AdminApi.deleteAllQuestions(accessToken);
-  await AdminApi.addQuestion("Which DJ is better?", "Boris Brejcha", "Ann Clue",accessToken);
-  await AdminApi.addQuestion("Which genre is better?", "Techno", "Trance",accessToken);
-  await AdminApi.addQuestion("Which festival is better?", "Electric Castle", "Untold",accessToken);
+  await AdminApi.deactivateApp(accessToken);
+  await AdminApi.addQuestion("Which DJ is better?", "Boris Brejcha", "Ann Clue","Energy","Progressive","Conservative",accessToken);
+  await AdminApi.addQuestion("Which genre is better?", "Techno", "Trance","Energy","Progressive","Conservative",accessToken);
+  await AdminApi.addQuestion("Which festival is better?", "Electric Castle", "Untold","Energy","Progressive","Conservative",accessToken);
 }
 
 async function checkQuestion(questionNr : number, text : string, answer1 : string, answer2 : string) {

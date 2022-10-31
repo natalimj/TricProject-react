@@ -1,6 +1,5 @@
-import ICategoryData from "./Category";
-
 export default interface IFinalResultData {
-    category: ICategoryData;
+    category: string;
+    secondCategory: string;
     rate: number;
 }

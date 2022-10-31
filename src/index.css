@@ -15,6 +15,7 @@ body {
   font-family: var(--default-font);
   color: var(--color-off-white);
   font-size: var(--font-size-default);
+  font-weight: var(--font-weight-default)
 }
 
 code {

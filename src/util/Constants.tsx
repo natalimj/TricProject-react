@@ -3,6 +3,22 @@ const Constants = {
 	SOCKET_URL: "https://tricproject.azurewebsites.net/ws-message",
 	//BASE_URL: "http://localhost:8080/",
 	//SOCKET_URL: "http://localhost:8080/ws-message",
+	
+
+	themes : [
+        { value: 'Select theme', label: 'Select theme', disabled: true },
+        { value: 'Immigration', label: 'Immigration' },
+        { value: 'Climate change', label: 'Climate change' },
+        { value: 'Intensive Farming', label: 'Intensive Farming' },
+        { value: 'Mass breeding', label: 'Mass breeding' },
+        { value: 'Global population', label: 'Global population' }
+    ],
+
+	categories : [
+        { value: 'Select category', label: 'Select category', disabled: true },
+        { value: 'Conservative', label: 'Conservative' },
+        { value: 'Progressive', label: 'Progressive' }
+    ],
 
 	/* LABELS */
 	APP_TITLE: "TRIC",
@@ -15,15 +31,17 @@ const Constants = {
 	SUBMIT_BUTTON: "Submit",
 	QUESTION_FIELD:	"Question",
 	VOTE_RESULT_FIELD: "Vote Result",
+	FINAL_VOTE_RESULT_FIELD: "Final Vote Result",
 	CONFIRM_BUTTON: "Confirm",
 	WAITING_PROMPT_RESULT: "Gathering votes...",
 	WAITING_PROMPT_BEGIN: "Waiting for the first question...",
 	DOWNLOAD :"DOWNLOAD",
 	DIGITAL_PROFILE_FIELD: "YOUR DIGITAL PROFILE" ,
 	USER_RESPONSE : "Your response",
-	FINAL_RESULT_BUTTON:" Show Final Result",
+	FINAL_RESULT_BUTTON:"Show Final Result",
 	RESULT_FIELD: "Result",
 	FINAL_RESULT_FIELD: "Your Profile",
+	FINAL_RESULT_PROFILE_BUTTON: "See Your Final Profile",
 	RESULT_BUTTON : "Show Result",
 	QUESTION_BUTTON: "Show Question",
 	START_BUTTON: "Start",
@@ -53,7 +71,12 @@ const Constants = {
 	NEXT_QUESTION_TEXT: "Next question is:",
 	SET_TIME_INFO: "*Time is expressed in SECONDS",
 	TIME_LENGTH_INFO: "*MAX time length is 36000s",
-	DEVELOPERS_TITLE: "Developers"
+	DEVELOPERS_TITLE: "Developers",
+	CATEGORY1 :"Conservative",
+	CATEGORY2 :"Progressive",
+	FINAL_RESULT_TEXT : "Final Result Text",
+	WHAT_IS_TRIC: "What is TRIC?"
+
 }
 
 export default Constants;
