@@ -196,6 +196,9 @@ describe("Feature 2 - Voting System", () => {
   });
 
   test("Vote and view results 1", async () => {
+    await userPage.screenshot({
+      path: 'screenshots/feature2/waitingtoloadvoting1.jpg'
+    });
     ////await userPage.waitForSelector('[e2e-id="questionText"]');
     // await checkText("questionHeader","Question 1");
     // await checkText("questionText","Which DJ is better?");
@@ -224,6 +227,9 @@ describe("Feature 2 - Voting System", () => {
   });
 
   test("Vote and view results 2", async () => {
+    await userPage.screenshot({
+      path: 'screenshots/feature2/waitingtoloadvoting2.jpg'
+    });
     ////await userPage.waitForSelector('[e2e-id="questionText"]');
     // await checkText("questionHeader","Question 2");
     // await checkText("questionText","Which genre is better?");
