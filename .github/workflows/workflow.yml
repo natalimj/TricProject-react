@@ -72,3 +72,8 @@ jobs:
       # run the tests
       - name: test
         run: npm test
+
+      - uses: actions/upload-artifact@v3
+        with:
+         name: screenshots
+         path: screenshots

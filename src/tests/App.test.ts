@@ -67,7 +67,7 @@ describe("Feature 1 - Questions database and display", () => {
 
   test("TAKE A SCREENSHOT", async () => {
     await adminPage.screenshot({
-      path: 'TAKEASCREENSHOT.jpg'
+      path: 'screenshots/TAKEASCREENSHOT.jpg'
     });
   });
 
