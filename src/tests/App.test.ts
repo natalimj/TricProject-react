@@ -1,7 +1,7 @@
 import puppeteer from "puppeteer";
 import AdminApi from "../api/AdminApi";
 
-const accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtb2QiLCJpYXQiOjE2NjcwNTMyNzgsImV4cCI6MTY2NzMxMjQ3OH0.Xd7AlRYyEE5_7JH7ha0UQmu-an-yj1iX0U3kyckbH62DBV8cqf3RK9bacIUE1bSEAnde0sgmabYU-WwnpKJOzg";
+const accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtb2QiLCJpYXQiOjE2NjcyNDQ0NTIsImV4cCI6MTY2NzUwMzY1Mn0.tPt-iZLn1NYJVVgZvmoxqRb8HtVLF78FP3UoQoEW9wCIX1HYrkQMez5WIo6tTSIHH_ViyqX2v3P7Und8UmOHbQ";
 let browser;
 let adminPage;
 let userPage;
@@ -28,11 +28,11 @@ async function resetApp() {
   await adminPage.click('[e2e-id="login"]');
   await AdminApi.deleteAllQuestions(accessToken);
   await AdminApi.deactivateApp(accessToken);
-  await AdminApi.addQuestion("Would you welcome permanently people in mortal danger in your own home, sharing therefore with them your own food, water and salary?","Yes","No","Immigration","","",accessToken);
-  await AdminApi.addQuestion("You work one hour by car far from home. If you travel by train you pollute less, but it takes two hours. Would you still travel by train?","Yes","No","Climate Change","","",accessToken);
-  await AdminApi.addQuestion("In order to be healthy your doctor prescribed a fish-based diet. Your fish is mass-bred and savagely slaughtered while it’s still alive. Would you stop eating fish risking your own health?","Yes","No","Mass Breeding","","",accessToken);
-  await AdminApi.addQuestion("In your country a retirement home with 20 old people needs a high amount of heating in order to keep them healthy. It’s proven that high heating consumption rises the CO2 level, which can end in floods that put at risk the life of an entire village in the other part of the world. Would you close the heating?","Yes","No","Energy Consumption","","",accessToken);
-  await AdminApi.addQuestion("You are in a hole with another person, and both of you are too weak to come out. There is just a piece of bread. If you both eat the bread you will endure a bit longer, but you both are eventually going to die. If you only eat the bread, you will save yourself, but the other person will die. Would you eat the whole piece of bread?","Yes","No","Global Population","","",accessToken);
+  await AdminApi.addQuestion("Would you permanently  welcome the people in your own home?","Yes","No","Immigration","","",accessToken);
+  await AdminApi.addQuestion("Would you still travel by train?","Yes","No","Climate Change","","",accessToken);
+  await AdminApi.addQuestion("Would you stop eating fish risking your own health?","Yes","No","Mass Breeding","","",accessToken);
+  await AdminApi.addQuestion("Would you close the heating?","Yes","No","Energy Consumption","","",accessToken);
+  await AdminApi.addQuestion("Would you eat the whole piece of bread?","Yes","No","Global Population","","",accessToken);
 }
 
 // async function checkQuestion(questionNr : number, text : string, answer1 : string, answer2 : string) {
