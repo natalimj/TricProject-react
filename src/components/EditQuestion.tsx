@@ -111,24 +111,24 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                             maxLength={150} />
                     </div>
                 </div>
-                <div className="questions__line">
-                    <select className="questions__dropdown questions_w100" value={theme} onChange={handleThemeSelect}>
+                <div className="questions__line questions__text-thin">
+                    <select className="questions__dropdown questions_w100  questions__text-thin" value={theme} onChange={handleThemeSelect}>
                         {Constants.themes.map((option) => (
                             <option value={option.value} disabled={option.disabled}>{option.label}</option>
                         ))}
                     </select>
                 </div>
-                <div className="questions__line">
+                <div className="questions__line questions__text-thin">
                     <div className="questions__input-medium">
                         <input type="text"
                             onChange={handleChange}
-                            className='questions__text'
+                            className='questions__text questions__text-thin'
                             e2e-id={"question" + question.questionNumber + "EditAnswer1"}
                             defaultValue={question.answers[0].answerText}
                             name="firstAnswer"
                             maxLength={50} />
                     </div>
-                    <select className="questions__dropdown questions_w50" value={firstCategory} onChange={handleCategorySelect}>
+                    <select className="questions__dropdown questions_w50 questions__text-thin" value={firstCategory} onChange={handleCategorySelect}>
                         {Constants.categories.map((option) => (
                             <option value={option.value} disabled={option.disabled}>{option.label}</option>
                         ))}
@@ -137,7 +137,7 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                 <div className="questions__line">
                     <div className="questions__input">
                         <input type="text"
-                            className="questions__text"
+                            className="questions__text  questions__text-thin"
                             onChange={handleChange}
                             e2e-id={"question" + question.questionNumber + "EditAnswer2"}
                             defaultValue={question.answers[1].answerText}
