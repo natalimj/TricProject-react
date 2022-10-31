@@ -74,6 +74,7 @@ jobs:
         run: npm test
 
       - uses: actions/upload-artifact@v3
+        if: failure()
         with:
          name: screenshots
          path: screenshots
