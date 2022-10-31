@@ -196,7 +196,7 @@ describe("Feature 2 - Voting System", () => {
   });
 
   test("Vote and view results 1", async () => {
-    await userPage.waitForSelector('[e2e-id="questionText"]');
+    ////await userPage.waitForSelector('[e2e-id="questionText"]');
     // await checkText("questionHeader","Question 1");
     // await checkText("questionText","Which DJ is better?");
     // await checkText("questionAnswer0","Boris Brejcha");
@@ -224,7 +224,7 @@ describe("Feature 2 - Voting System", () => {
   });
 
   test("Vote and view results 2", async () => {
-    await userPage.waitForSelector('[e2e-id="questionText"]');
+    ////await userPage.waitForSelector('[e2e-id="questionText"]');
     // await checkText("questionHeader","Question 2");
     // await checkText("questionText","Which genre is better?");
     // await checkText("questionAnswer0","Techno");
@@ -251,7 +251,7 @@ describe("Feature 2 - Voting System", () => {
   });
 
   test("Vote and view final results", async () => {
-    await userPage.waitForSelector('[e2e-id="questionText"]');
+    ////await userPage.waitForSelector('[e2e-id="questionText"]');
     await userPage.screenshot({
       path: 'screenshots/feature2/finalvotebefore.jpg'
     });
@@ -469,7 +469,7 @@ describe("Feature 8 - Downtime management and ending the play", () => {
   });
 
   test("Vote and view results 1", async () => {
-    await userPage.waitForSelector('[e2e-id="questionText"]');
+    ////await userPage.waitForSelector('[e2e-id="questionText"]');
     // await checkText("questionHeader","Question 1");
     // await checkText("questionText","Which DJ is better?");
     // await checkText("questionAnswer0","Boris Brejcha");
@@ -497,7 +497,7 @@ describe("Feature 8 - Downtime management and ending the play", () => {
   });
 
   test("Vote and view results 2", async () => {
-    await userPage.waitForSelector('[e2e-id="questionText"]');
+    ////await userPage.waitForSelector('[e2e-id="questionText"]');
     // await checkText("questionHeader","Question 2");
     // await checkText("questionText","Which genre is better?");
     // await checkText("questionAnswer0","Techno");
@@ -524,7 +524,7 @@ describe("Feature 8 - Downtime management and ending the play", () => {
   });
 
   test("Vote and view final results", async () => {
-    await userPage.waitForSelector('[e2e-id="questionText"]');
+    ////await userPage.waitForSelector('[e2e-id="questionText"]');
     await userPage.screenshot({
       path: 'screenshots/feature8/finalvotebefore.jpg'
     });
