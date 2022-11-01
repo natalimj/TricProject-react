@@ -9,7 +9,7 @@ import { RootState } from '../app/store';
 import IAnswerData from '../models/Answer';
 import { addAnswer } from '../reducers/answerSlice';
 import { setUserVoted } from '../reducers/componentSlice';
-import { setUserResults} from '../reducers/userResultSlice';
+import { setUserResults } from '../reducers/userResultSlice';
 import React from 'react';
 
 const Question = () => {
@@ -24,7 +24,7 @@ const Question = () => {
     time: useAppSelector((state: RootState) => state.question.time),
     theme: useAppSelector((state: RootState) => state.question.theme),
   }
-  const [selectedAnswer, setSelectedAnswer] = useState<IAnswerData>({ answerText: '' , category:''});
+  const [selectedAnswer, setSelectedAnswer] = useState<IAnswerData>({ answerText: '', category: '' });
   const [firstAnswer, setFirstAnswer] = useState<boolean>(false);
   const [secondAnswer, setSecondAnswer] = useState<boolean>(false);
   const [timer, setTimer] = useState<number>(currentQuestion.time);
@@ -40,10 +40,10 @@ const Question = () => {
       .then(() => {
         dispatch(addAnswer(answer));
         dispatch(setUserVoted(voteData.questionId));
-        dispatch(setUserResults( {
-        question: currentQuestion,
-        answer :answer
-        }))
+        dispatch(setUserResults({
+          question: currentQuestion,
+          answer: answer
+        }));
       })
       .catch((e: Error) => {
         console.log(e);
@@ -96,7 +96,7 @@ const Question = () => {
               </div>
               <div className='question__answer-group'>
                 {currentQuestion.answers && currentQuestion.answers.map((answer, index) => (
-                  <button onClick={() => chooseAnswer(answer, index)} className={(firstAnswer && index === 0) || (secondAnswer && index === 1) ? 'question__answer-button question__active-button' : 'question__answer-button'} e2e-id={"questionAnswer"+index}>
+                  <button key={index} onClick={() => chooseAnswer(answer, index)} className={(firstAnswer && index === 0) || (secondAnswer && index === 1) ? 'question__answer-button question__active-button' : 'question__answer-button'} e2e-id={"questionAnswer" + index}>
                     <div className="question__answer-text">
                       {answer.answerText.toString()}
                     </div>

@@ -115,8 +115,8 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                 </div>
                 <div className="questions__line questions__text-thin">
                     <select className="questions__dropdown questions_w100  questions__text-thin" value={theme} onChange={handleThemeSelect}>
-                        {Constants.themes.map((option) => (
-                            <option value={option.value} disabled={option.disabled}>{option.label}</option>
+                        {Constants.themes.map((option, index) => (
+                            <option key={option.value+index} value={option.value} disabled={option.disabled}>{option.label}</option>
                         ))}
                     </select>
                 </div>
@@ -131,8 +131,8 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                             maxLength={50} />
                     </div>
                     <select className="questions__dropdown questions_w50 questions__text-thin" value={firstCategory} onChange={handleCategorySelect}>
-                        {Constants.categories.map((option) => (
-                            <option value={option.value} disabled={option.disabled}>{option.label}</option>
+                        {Constants.categories.map((option, index) => (
+                            <option key={option.value+index} value={option.value} disabled={option.disabled}>{option.label}</option>
                         ))}
                     </select>
                 </div>

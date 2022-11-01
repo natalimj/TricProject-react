@@ -32,9 +32,9 @@ const ManageQuestions = () => {
 
 
     const addQuestion = () => {
-        if (questionText !== "" && firstAnswer !== "" && secondAnswer !== "" 
-        && (theme !=="" && theme !=='Select theme') && (firstCategory !== "" && firstCategory !=='Select category')
-         && secondCategory !=="") {
+        if (questionText !== "" && firstAnswer !== "" && secondAnswer !== ""
+            && (theme !== "" && theme !== 'Select theme') && (firstCategory !== "" && firstCategory !== 'Select category')
+            && secondCategory !== "") {
             AdminApi.addQuestion(questionText, firstAnswer, secondAnswer, theme, firstCategory, secondCategory, accessToken)
                 .then((response: any) => {
                     setQuestions([...questions, response.data])
@@ -63,18 +63,16 @@ const ManageQuestions = () => {
     };
 
     const handleThemeSelect = (event: any) => {
-        console.log(event.target.value)
         setTheme(event.target.value);
     };
 
     const handleCategorySelect = (event: any) => {
-        console.log(event.target.value);
         if (event.target.value === Constants.CATEGORY1) {
-            setFirstCategory(Constants.CATEGORY1)
-            setSecondCategory(Constants.CATEGORY2)
+            setFirstCategory(Constants.CATEGORY1);
+            setSecondCategory(Constants.CATEGORY2);
         } else {
-            setFirstCategory(Constants.CATEGORY2)
-            setSecondCategory(Constants.CATEGORY1)
+            setFirstCategory(Constants.CATEGORY2);
+            setSecondCategory(Constants.CATEGORY1);
         }
     };
 
@@ -98,11 +96,11 @@ const ManageQuestions = () => {
                     </div>
 
                     <div className="questions__line">
-                            <select className="questions__dropdown questions_w100" value={theme} onChange={handleThemeSelect}>
-                                {Constants.themes.map((option) => (
-                                    <option value={option.value} disabled={option.disabled}>{option.label}</option>
-                                ))}
-                            </select>
+                        <select className="questions__dropdown questions_w100" value={theme} onChange={handleThemeSelect}>
+                            {Constants.themes.map((option, index) => (
+                                <option key={option.value+index} value={option.value} disabled={option.disabled}>{option.label}</option>
+                            ))}
+                        </select>
                     </div>
 
                     <div className="questions__line">
@@ -115,11 +113,11 @@ const ManageQuestions = () => {
                                 onChange={(e) => setFirstAnswer(e.target.value)}
                                 maxLength={50} />
                         </div>
-                            <select className="questions__dropdown questions_w50" value={firstCategory} onChange={handleCategorySelect}>
-                                {Constants.categories.map((option) => (
-                                    <option value={option.value} disabled={option.disabled}>{option.label}</option>
-                                ))}
-                            </select>
+                        <select className="questions__dropdown questions_w50" value={firstCategory} onChange={handleCategorySelect}>
+                            {Constants.categories.map((option, index) => (
+                                <option key={option.value+index} value={option.value} disabled={option.disabled}>{option.label}</option>
+                            ))}
+                        </select>
                     </div>
                     <div className="questions__line">
                         <div className="questions__input">

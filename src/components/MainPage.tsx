@@ -8,8 +8,10 @@ import { RootState } from '../app/store';
 import { setQuestionComponent } from '../reducers/componentSlice';
 import { setUserVoted } from '../reducers/componentSlice';
 import { addAnswer } from '../reducers/answerSlice';
+import { setUserResults } from '../reducers/userResultSlice';
 import UserApi from '../api/UserApi';
 import IResultData from '../models/Result';
+import IQuestionData from '../models/Question';
 
 const MainPage = () => {
 
@@ -26,7 +28,7 @@ const MainPage = () => {
     firstAnswer: {
       answerText: "",
       category: ""
-      
+
     },
     secondAnswer: {
       answerText: "",
@@ -38,22 +40,34 @@ const MainPage = () => {
   const showQuestion: boolean = useAppSelector((state: RootState) => state.component.questionComponentValue);
   const voted: number = useAppSelector((state: RootState) => state.component.userVotedValue);
   const userId: any = useAppSelector((state: RootState) => state.user.userId);
-  const currentQuestionId = useAppSelector((state: RootState) => state.question.questionId);
+  const currentQuestion: IQuestionData = {
+    questionId: useAppSelector((state: RootState) => state.question.questionId),
+    questionNumber: useAppSelector((state: RootState) => state.question.questionNumber),
+    questionText: useAppSelector((state: RootState) => state.question.questionText),
+    answers: useAppSelector((state: RootState) => [...state.question.answers]),
+    time: useAppSelector((state: RootState) => state.question.time),
+    theme: useAppSelector((state: RootState) => state.question.theme),
+  }
   const answers = useAppSelector((state: RootState) => [...state.question.answers]);
   const [showFinalResult, setShowFinalResult] = useState<boolean>(false);
   const [resultMessage, setResultMessage] = useState<IResultData>(initialResultState);
 
   const onMessageReceived = (msg: IResultData) => {
-    if (voted !== currentQuestionId) {
+    if (voted !== currentQuestion.questionId) {
+      console.log('not voted')
       UserApi.saveVote({
         userId: userId,
-        questionId: currentQuestionId,
+        questionId: currentQuestion.questionId,
         answerId: answers[0].answerId
       }).then(() => {
         dispatch(addAnswer(answers[0]));
-        dispatch(setUserVoted(currentQuestionId));
+        dispatch(setUserVoted(currentQuestion.questionId));
+        dispatch(setUserResults({
+          question: currentQuestion,
+          answer: answers[0]
+        }));
       }).then(() => {
-        UserApi.showResult(currentQuestionId).then((newResult: any) => {
+        UserApi.showResult(currentQuestion.questionId).then((newResult: any) => {
           setResultMessage(newResult.data);
           if (newResult.data.question.questionNumber === 1) {
             setShowFinalResult(false);
