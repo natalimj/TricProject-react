@@ -152,8 +152,8 @@ const Question = () => {
                         outline: 'none',
                         padding: '20px'
                       }
-                    }}isOpen={isOpen} onRequestClose={() => setIsOpen(false)}>
-                    <span>
+                    }}isOpen={isOpen}>
+                    <span className='question__header'>
                     {
                       PlayInfo?.finalResultText // TODO: ADD PREDICTED ANSWER
                     }
