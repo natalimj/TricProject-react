@@ -106,7 +106,7 @@ const ManageQuestions = () => {
                     </div>
 
                     <div className="questions__line">
-                        <div className="questions__input-shorter">
+                        <div className="questions__input">
                             <input type="text"
                                 value={firstAnswer}
                                 className="questions__text"
@@ -115,12 +115,22 @@ const ManageQuestions = () => {
                                 onChange={(e) => setFirstAnswer(e.target.value)}
                                 maxLength={50} />
                         </div>
+                    </div>
+
+                    <div className="questions__line">
+                            <select className="questions__dropdown questions_w50" value={firstCategory} onChange={handleCategorySelect}>
+                                {Constants.categories.map((option) => (
+                                    <option value={option.value} disabled={option.disabled}>{option.label}</option>
+                                ))}
+                            </select>
                             <select className="questions__dropdown questions_w50" value={firstCategory} onChange={handleCategorySelect}>
                                 {Constants.categories.map((option) => (
                                     <option value={option.value} disabled={option.disabled}>{option.label}</option>
                                 ))}
                             </select>
                     </div>
+
+
                     <div className="questions__line">
                         <div className="questions__input">
                             <input type="text"

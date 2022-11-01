@@ -128,12 +128,19 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                             name="firstAnswer"
                             maxLength={50} />
                     </div>
-                    <select className="questions__dropdown questions_w50 questions__text-thin" value={firstCategory} onChange={handleCategorySelect}>
-                        {Constants.categories.map((option) => (
-                            <option value={option.value} disabled={option.disabled}>{option.label}</option>
-                        ))}
-                    </select>
                 </div>
+                <div className="questions__line">
+                            <select className="questions__dropdown questions_w50 questions__text-thin" value={firstCategory} onChange={handleCategorySelect}>
+                                {Constants.categories.map((option) => (
+                                    <option value={option.value} disabled={option.disabled}>{option.label}</option>
+                                ))}
+                            </select>
+                            <select className="questions__dropdown questions_w50 questions__text-thin" value={firstCategory} onChange={handleCategorySelect}>
+                                {Constants.categories.map((option) => (
+                                    <option value={option.value} disabled={option.disabled}>{option.label}</option>
+                                ))}
+                            </select>
+                    </div>
                 <div className="questions__line">
                     <div className="questions__input">
                         <input type="text"
