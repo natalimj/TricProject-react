@@ -29,6 +29,7 @@ const ManageQuestions = () => {
                 console.log(response.data)
             })
             .catch((e: Error) => {
+                console.log(e)
                 NotificationManager.error(e.message, 'Error!', 5000);
             });
     }, [accessToken])
