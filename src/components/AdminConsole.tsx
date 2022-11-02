@@ -229,6 +229,9 @@ const AdminConsole = () => {
                                 <button onClick={() => showResult()} className="admin-console__submit-button--secondary" e2e-id="showResults">
                                     {Constants.RESULT_BUTTON} {question.questionNumber}
                                 </button>
+                                <button onClick={sendEmail} className="admin-console__submit-button" e2e-id="sendEmail">
+                                                Send Email
+                                            </button>
                                 </>
                                 
                             ) : (
