@@ -8,7 +8,7 @@ import componentReducer from '../reducers/componentSlice';
 import statusReducer from '../reducers/statusSlice';
 import adminReducer from '../reducers/adminSlice';
 import playDataReducer from '../reducers/playDataSlice';
-import userResultReducer from '../reducers/userResultSlice';
+
 
 const persistConfig = {
   key: "primary",
@@ -23,7 +23,6 @@ const rootReducer = combineReducers({
   status: statusReducer,
   admin: adminReducer,
   playData: playDataReducer,
-  userResults: userResultReducer
 })
 
 const persistedRootReducer = persistReducer(persistConfig, rootReducer);

@@ -4,7 +4,7 @@ import Constants from '../util/Constants';
 import { useAppDispatch } from '../app/hooks';
 import { setQuestionComponent, setUserJoined } from '../reducers/componentSlice';
 import { removeUser } from "../reducers/userSlice";
-import { removeUserResults } from "../reducers/userResultSlice";
+
 
 const InactiveHomepage = () => {
   const dispatch = useAppDispatch();
@@ -13,7 +13,6 @@ const InactiveHomepage = () => {
     dispatch(setUserJoined(false));
     dispatch(setQuestionComponent(false));
     dispatch(removeUser());
-    dispatch(removeUserResults())
   }, [dispatch])
 
 return (
