@@ -12,6 +12,7 @@ import 'react-notifications/lib/notifications.css';
 import { NotificationManager } from 'react-notifications';
 import UserApi from '../api/UserApi';
 import { RootState } from '../app/store';
+import * as MailComposer from 'expo-mail-composer';
 
 const AdminConsole = () => {
 
@@ -108,6 +109,15 @@ const AdminConsole = () => {
             });
     };
 
+    const sendEmail = () => {  
+        MailComposer.composeAsync({
+            subject: "Play Vote Data",
+            body: "Here is the vote data after the play:",
+            recipients: ["bogdan.mezei@gmail.com"],
+            attachments: []
+        })
+    };
+
     const showResult = () => {
         UserApi.showResult(question.questionId)
             .then((response: any) => {
@@ -197,6 +207,7 @@ const AdminConsole = () => {
                                 <button onClick={() => showQuestion()} className="admin-console__submit-button--secondary" e2e-id="showQuestion">
                                     {Constants.QUESTION_BUTTON} {question.questionNumber}
                                 </button>
+                                
                             </div>
                             <div className='admin-console__text admin-console__text--helper'>
                                 {Constants.SET_TIME_INFO}
@@ -214,9 +225,12 @@ const AdminConsole = () => {
                                 </>
                             ) : null}
                             {question.questionNumber < numberOfQuestions ? (
+                                <>
                                 <button onClick={() => showResult()} className="admin-console__submit-button--secondary" e2e-id="showResults">
                                     {Constants.RESULT_BUTTON} {question.questionNumber}
                                 </button>
+                                </>
+                                
                             ) : (
                                 <>
                                     {questionTimer > 0 && !showedFinalResult ? (
@@ -228,6 +242,9 @@ const AdminConsole = () => {
                                             <div className='admin-console__text'>{Constants.FINAL_VOTE_RESULT_FIELD} {Constants.ON_SCREEN_FIELD}</div>
                                             <button onClick={endSession} className="admin-console__submit-button" e2e-id="endSession">
                                                 {Constants.END_BUTTON}
+                                            </button>
+                                            <button onClick={sendEmail} className="admin-console__submit-button" e2e-id="sendEmail">
+                                                Send Email
                                             </button>
                                         </>
                                     )}

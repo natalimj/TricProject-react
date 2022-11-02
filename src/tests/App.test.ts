@@ -1,5 +1,6 @@
 import puppeteer from "puppeteer";
 import AdminApi from "../api/AdminApi";
+import Question from "../components/Question";
 
 const accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtb2QiLCJpYXQiOjE2NjcyNDQ0NTIsImV4cCI6MTY2NzUwMzY1Mn0.tPt-iZLn1NYJVVgZvmoxqRb8HtVLF78FP3UoQoEW9wCIX1HYrkQMez5WIo6tTSIHH_ViyqX2v3P7Und8UmOHbQ";
 let browser;
@@ -26,13 +27,13 @@ async function resetApp() {
   await adminPage.type('[e2e-id="usernameAdmin"]',"mod");
   await adminPage.type('[e2e-id="passwordAdmin"]',"12345678");
   await adminPage.click('[e2e-id="login"]');
-  await AdminApi.deleteAllQuestions(accessToken);
+  //await AdminApi.deleteAllQuestions(accessToken);
   await AdminApi.deactivateApp(accessToken);
-  await AdminApi.addQuestion("Would you permanently  welcome the people in your own home?","Yes","No","Immigration","","",accessToken);
-  await AdminApi.addQuestion("Would you still travel by train?","Yes","No","Climate Change","","",accessToken);
-  await AdminApi.addQuestion("Would you stop eating fish risking your own health?","Yes","No","Mass Breeding","","",accessToken);
-  await AdminApi.addQuestion("Would you close the heating?","Yes","No","Energy Consumption","","",accessToken);
-  await AdminApi.addQuestion("Would you eat the whole piece of bread?","Yes","No","Global Population","","",accessToken);
+  // await AdminApi.addQuestion("Would you permanently  welcome the people in your own home?","Yes","No","Immigration","","",accessToken);
+  // await AdminApi.addQuestion("Would you still travel by train?","Yes","No","Climate Change","","",accessToken);
+  // await AdminApi.addQuestion("Would you stop eating fish risking your own health?","Yes","No","Mass Breeding","","",accessToken);
+  // await AdminApi.addQuestion("Would you close the heating?","Yes","No","Energy Consumption","","",accessToken);
+  // await AdminApi.addQuestion("Would you eat the whole piece of bread?","Yes","No","Global Population","","",accessToken);
 }
 
 // async function checkQuestion(questionNr : number, text : string, answer1 : string, answer2 : string) {
