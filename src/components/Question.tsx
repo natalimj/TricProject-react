@@ -159,7 +159,7 @@ const Question = () => {
                         padding: '20px'
                       }
                     }}isOpen={isOpen}>
-                    <span className='question__header'>
+                    <span className='question__timer-text'>
                     {
                       PlayInfo?.finalResultText // TODO: ADD PREDICTED ANSWER
                     }
