@@ -5,22 +5,22 @@ const Constants = {
 	//SOCKET_URL: "http://localhost:8080/ws-message",
 	
 
-	themes : [
-        { value: 'Select theme', label: 'Select theme', disabled: true },
-        { value: 'Immigration', label: 'Immigration' },
-        { value: 'Climate change', label: 'Climate change' },
-        { value: 'Energy consumption', label: 'Energy consumption' },
-        { value: 'Mass breeding', label: 'Mass breeding' },
-        { value: 'Global population', label: 'Global population' }
-    ],
+	themes: [
+		{ value: 'Select theme', label: 'Select theme', disabled: true },
+		{ value: 'Immigration', label: 'Immigration' },
+		{ value: 'Climate change', label: 'Climate change' },
+		{ value: 'Energy consumption', label: 'Energy consumption' },
+		{ value: 'Mass breeding', label: 'Mass breeding' },
+		{ value: 'Global population', label: 'Global population' }
+	],
 
-	categories : [
-        { value: 'Select category', label: 'Select category', disabled: true },
-        { value: 'Conservative', label: 'Conservative' },
-        { value: 'Progressive', label: 'Progressive' },
+	categories: [
+		{ value: 'Select category', label: 'Select category', disabled: true },
+		{ value: 'Conservative', label: 'Conservative' },
+		{ value: 'Progressive', label: 'Progressive' },
 		{ value: 'Pragmatic', label: 'Pragmatic' },
-        { value: 'Idealist', label: 'Idealist' }
-    ],
+		{ value: 'Idealist', label: 'Idealist' }
+	],
 
 	/* LABELS */
 	APP_TITLE: "TRIC",
