@@ -135,7 +135,7 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                                     <option value={option.value} disabled={option.disabled}>{option.label}</option>
                                 ))}
                             </select>
-                            <select className="questions__dropdown questions_w50 questions__text-thin" value={firstCategory} onChange={handleCategorySelect}>
+                            <select className="questions__dropdown questions_w50 questions__text-thin" value={secondCategory} onChange={handleCategorySelect}>
                                 {Constants.categories.map((option) => (
                                     <option value={option.value} disabled={option.disabled}>{option.label}</option>
                                 ))}

@@ -5,6 +5,7 @@ const initialState: IAnswerData = {
     answerId: '',
     answerText: '',
     category :'',
+    secondCategory :''
 };
 
 export const answerSlice = createSlice({
@@ -15,6 +16,7 @@ export const answerSlice = createSlice({
             state.answerId = action.payload.answerId;
             state.answerText = action.payload.answerText;
             state.category =action.payload.category;
+            state.secondCategory = action.payload.secondCategory;
         },
     },
 });
