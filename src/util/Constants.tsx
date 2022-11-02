@@ -17,7 +17,9 @@ const Constants = {
 	categories : [
         { value: 'Select category', label: 'Select category', disabled: true },
         { value: 'Conservative', label: 'Conservative' },
-        { value: 'Progressive', label: 'Progressive' }
+        { value: 'Progressive', label: 'Progressive' },
+		{ value: 'Pragmatic', label: 'Pragmatic' },
+        { value: 'Idealist', label: 'Idealist' }
     ],
 
 	/* LABELS */
@@ -74,6 +76,8 @@ const Constants = {
 	DEVELOPERS_TITLE: "Developers",
 	CATEGORY1 :"Conservative",
 	CATEGORY2 :"Progressive",
+	CATEGORY3 :"Pragmatic",
+	CATEGORY4 :"Idealist",
 	FINAL_RESULT_TEXT : "Final Result Text",
 	WHAT_IS_TRIC: "What is TRIC?"
 

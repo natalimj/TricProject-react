@@ -4,7 +4,7 @@ import IAnswerData from '../models/Answer';
 const initialState: IAnswerData = {
     answerId: '',
     answerText: '',
-    category :'',
+    firstCategory :'',
     secondCategory :''
 };
 
@@ -15,7 +15,7 @@ export const answerSlice = createSlice({
         addAnswer: (state: IAnswerData, action: PayloadAction<IAnswerData>) => {
             state.answerId = action.payload.answerId;
             state.answerText = action.payload.answerText;
-            state.category =action.payload.category;
+            state.firstCategory =action.payload.firstCategory;
             state.secondCategory = action.payload.secondCategory;
         },
     },

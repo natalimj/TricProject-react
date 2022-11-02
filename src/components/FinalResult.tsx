@@ -67,7 +67,7 @@ const FinalResult = () => {
                   </div>}
 
                   {userResults.results && userResults.results.map((userResult) => (
-                    <p>{userResult.question.theme} - {userResult.answer.category}</p>
+                    <p>{userResult.question.theme} - {userResult.answer.firstCategory}</p>
                 ))}
               </div>
             </div>

@@ -19,11 +19,13 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
         firstAnswer: question.answers[0].answerText,
         secondAnswer: question.answers[1].answerText,
         theme: question.theme,
-        firstCategory: question.answers[0].category,
-        secondCategory: question.answers[1].category
+        firstCategory: question.answers[0].firstCategory,
+        secondCategory: question.answers[0].secondCategory
     });
     const { questionText, firstAnswer, secondAnswer, theme, firstCategory, secondCategory } = formValue;
     const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
+    const [dropdownCategories, setDropdownCategories] = useState(Constants.categories)
+    const [disableDropdown,setDisableDropdown]= useState<boolean>(true)
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -40,6 +42,21 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
         });
     };
 
+    const getOppositeCategory = (category:string) => {
+        switch (category) {
+            case Constants.CATEGORY1:
+                return Constants.CATEGORY2
+            case Constants.CATEGORY2:
+                return Constants.CATEGORY1
+            case Constants.CATEGORY3:
+                return Constants.CATEGORY4
+            case Constants.CATEGORY4:
+                return Constants.CATEGORY3
+            default:
+                return ""
+        }
+    }
+
     const deleteQuestion = (questionId: any) => {
         AdminApi.deleteQuestion(questionId, accessToken)
             .then((response: any) => {
@@ -52,12 +69,35 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
     }
 
     const editQuestion = (questionId: any) => {
-        if (questionText !== "" && firstAnswer !== "" && secondAnswer !== "") {
-            AdminApi.editQuestion(questionText, firstAnswer, secondAnswer, questionId, theme, firstCategory, secondCategory, accessToken)
+        if (questionText !== "" && firstAnswer !== "" && secondAnswer !== ""
+            && (theme !== "" && theme !== 'Select theme') && (firstCategory !== "" && firstCategory !== 'Select category')
+            && secondCategory !== "") {
+                const questionToEdit: IQuestionData = {
+                    questionText: questionText,
+                    questionId: question.questionId,
+                    questionNumber: question.questionNumber,
+                    time: 10,
+                    theme: theme,
+                    answers: [{
+                        answerId: question.answers[0].answerId,
+                        answerText: firstAnswer,
+                        firstCategory: firstCategory,
+                        secondCategory: secondCategory
+                    }, {
+                        answerId: question.answers[1].answerId,
+                        answerText: secondAnswer,
+                        firstCategory: getOppositeCategory(firstCategory),
+                        secondCategory: getOppositeCategory(secondCategory)
+                    }],
+                };
+
+                console.log(questionToEdit)
+            AdminApi.editQuestion(questionToEdit, accessToken)
                 .then((response: any) => {
                     NotificationManager.success('Question has been edited', 'Success!', 2000);
                 })
                 .catch((e: Error) => {
+                    console.log(e)
                     NotificationManager.error(e.message, 'Error!', 5000);
                 });
         } else {
@@ -75,27 +115,29 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
         });
     };
 
-    const handleCategorySelect = (event: any) => {
-        console.log(event.target.value);
-        if (event.target.value === Constants.CATEGORY1) {
-            setFormValue((prevState) => {
-                return {
-                    ...prevState,
-                    firstCategory: Constants.CATEGORY1,
-                    secondCategory: Constants.CATEGORY2
-                };
-            });
-        } else {
-            setFormValue((prevState) => {
-                return {
-                    ...prevState,
-                    firstCategory: Constants.CATEGORY2,
-                    secondCategory: Constants.CATEGORY1
-                };
-            });
-        }
-    };
+    const setSecondDropdown = (selectedCategory: string) => {
+        setDropdownCategories(Constants.categories.filter(c => (c.value !== selectedCategory
+            && c.value !== getOppositeCategory(selectedCategory))))
+        setDisableDropdown(false)
+    }
+    const handleFirstCategorySelect = (event: any) => {
+        setSecondDropdown(event.target.value)
+        setFormValue((prevState) => {
+            return {
+                ...prevState,
+                firstCategory: event.target.value,
+            };
+        });
 
+    };
+    const handleSecondCategorySelect = (event: any) => {
+        setFormValue((prevState) => {
+            return {
+                ...prevState,
+                secondCategory: event.target.value
+            };
+        });
+    };
 
     return (
         <div key={question.questionId} e2e-id={"questionNr" + question.questionNumber}>
@@ -108,7 +150,7 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                             e2e-id={"question" + question.questionNumber + "EditText"}
                             defaultValue={question.questionText}
                             name="questionText"
-                            maxLength={150} />
+                            maxLength={500} />
                     </div>
                 </div>
                 <div className="questions__line questions__text-thin">
@@ -130,17 +172,20 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                     </div>
                 </div>
                 <div className="questions__line">
-                            <select className="questions__dropdown questions_w50 questions__text-thin" value={firstCategory} onChange={handleCategorySelect}>
-                                {Constants.categories.map((option) => (
-                                    <option value={option.value} disabled={option.disabled}>{option.label}</option>
-                                ))}
-                            </select>
-                            <select className="questions__dropdown questions_w50 questions__text-thin" value={secondCategory} onChange={handleCategorySelect}>
-                                {Constants.categories.map((option) => (
-                                    <option value={option.value} disabled={option.disabled}>{option.label}</option>
-                                ))}
-                            </select>
-                    </div>
+                    <select className="questions__dropdown questions_w50 questions__text-thin" value={(firstCategory !== null || firstCategory !== "") ? firstCategory : "Select category"} onChange={handleFirstCategorySelect}>
+                        {Constants.categories.map((option) => (
+                            <option value={option.value} disabled={option.disabled}>{option.label}</option>
+                        ))}
+                    </select>
+                    <select className="questions__dropdown questions_w50 questions__text-thin" 
+                    value={(secondCategory !== null || secondCategory !== "") ? secondCategory : "Select category"} 
+                    onChange={handleSecondCategorySelect}
+                    disabled={disableDropdown}>
+                        {dropdownCategories.map((option) => (
+                            <option value={option.value} disabled={option.disabled}>{option.label}</option>
+                        ))}
+                    </select>
+                </div>
                 <div className="questions__line">
                     <div className="questions__input">
                         <input type="text"

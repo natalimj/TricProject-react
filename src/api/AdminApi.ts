@@ -43,20 +43,10 @@ const getAllQuestions = (accessToken: string) => {
   return http.get<Array<IQuestionData>>("adminApi/questions", { headers: authHeader(accessToken) });
 };
 
-const addQuestion = (questionText: string, firstAnswer: string, secondAnswer: string, 
-  theme: string, firstCategory: string, secondCategory: string, accessToken: string) => {
-  return http.post<IQuestionData>("adminApi/addQuestion", {}, {
-    params: {
-      questionText: questionText,
-      firstAnswer: firstAnswer,
-      secondAnswer: secondAnswer,
-      theme: theme,
-      firstCategory: firstCategory,
-      secondCategory:secondCategory
-    },
-    headers: authHeader(accessToken)
-  }
-  )
+const addQuestion = (question: IQuestionData, accessToken: string) => {
+  console.log("in admin api")
+  console.log(question)
+  return http.post<IQuestionData>("adminApi/addQuestion", question, { headers: authHeader(accessToken) });
 };
 
 const addQuestionTime = (questionId: any, time: number, accessToken: string) => {
@@ -85,21 +75,9 @@ const deleteAllQuestions = (accessToken: string) => {
   })
 }
 
-const editQuestion = (questionText: string, firstAnswer: string, secondAnswer: string, questionId: number,
-  theme: string, firstCategory: string, secondCategory: string, accessToken: string) => {
-  return http.patch<IQuestionData>("adminApi/editQuestion", {}, {
-    params: {
-      questionText: questionText,
-      firstAnswer: firstAnswer,
-      secondAnswer: secondAnswer,
-      questionId: questionId,
-      theme: theme,
-      firstCategory: firstCategory,
-      secondCategory:secondCategory
-    },
-    headers: authHeader(accessToken)
-  })
-}
+const editQuestion = (question: IQuestionData, accessToken: string) => {
+    return http.patch<IQuestionData>("adminApi/editQuestion", question, { headers: authHeader(accessToken) });
+};
 
 const getNumberOfQuestions = (accessToken: string) => {
   return http.get<number>("adminApi/numberOfQuestions", { headers: authHeader(accessToken) });
