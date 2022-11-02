@@ -92,6 +92,12 @@ const Question = () => {
       });
   }, [])
 
+  useEffect(() => {
+    setTimeout(() => {
+      setIsOpen(true)
+    }, 5000);
+  }, [])
+
 
   return (
     <div className='question-container'>
@@ -128,7 +134,7 @@ const Question = () => {
                <button onClick={() => { setIsOpen(true) }} className={firstAnswer || secondAnswer ? 'question__submit-button question__active-button' : 'question__submit-button'} disabled={!firstAnswer && !secondAnswer} e2e-id="questionConfirm">
                 {Constants.CONFIRM_BUTTON}
               </button>
-                    <Modal 
+                    <Modal
                     style={{
                       overlay: {
                         position: 'fixed',
