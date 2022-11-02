@@ -11,7 +11,7 @@ const initialState: PlayData = {
     numberOfUsers: 0,
     numberOfQuestions: 0,
     showQuestionButton: true,
-    questionTimer: 0
+    questionTimer: -1
 };
 
 export const playDataSlice = createSlice({
