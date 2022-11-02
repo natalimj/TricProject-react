@@ -44,8 +44,6 @@ const getAllQuestions = (accessToken: string) => {
 };
 
 const addQuestion = (question: IQuestionData, accessToken: string) => {
-  console.log("in admin api")
-  console.log(question)
   return http.post<IQuestionData>("adminApi/addQuestion", question, { headers: authHeader(accessToken) });
 };
 
