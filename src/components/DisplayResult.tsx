@@ -17,11 +17,13 @@ const DisplayResult = () => {
         secondAnswerRate: 0.0,
         firstAnswer: {
             answerText: "",
-            category:""
+            firstCategory:"",
+            secondCategory :""
         },
         secondAnswer: {
             answerText: "",
-            category:""
+            firstCategory:"",
+            secondCategory :""
         }
     };
 
