@@ -74,7 +74,7 @@ const StartPage = () => {
                 <img src={require('../util/icons/imageMale1.png')} alt="Landing page icon" />
               </div>
               <>
-               <button onClick={() => { setIsOpen(true) }} className='question__submit-button question__active-button' e2e-id="questionConfirm">
+               <button onClick={() => { setIsOpen(true) }} className='question__submit-button question__active-button' e2e-id="join">
                 {Constants.JOIN_BUTTON}
               </button>
                     <Modal onRequestClose={() => setIsOpen(false)}
@@ -105,7 +105,7 @@ const StartPage = () => {
                     <span className='question__timer-text'>         
                       Do you agree to selling your soul to HumanLab for eternity? Therby becoming a slave in this and all future lives.
                     </span>
-                    <button className={'question__submit-button question__active-button'} onClick={() => {setIsOpen(false) 
+                    <button e2e-id="agree" className={'question__submit-button question__active-button'} onClick={() => {setIsOpen(false) 
                     setSessionStarted(true)}  
                   }>Agree</button>
                                       <button className={'question__submit-button question__active-button'} onClick={() => {setIsOpen(false)}  

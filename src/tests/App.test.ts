@@ -221,6 +221,9 @@ describe("Feature 2 - Voting System", () => {
   test("Join the app", async () => {
     await userPage.waitForSelector('[e2e-id="join"]');
     await userPage.click('[e2e-id="join"]');
+    await userPage.waitForSelector('[e2e-id="agree"]');
+    await userPage.click('[e2e-id="agree"]');
+    console.log("HHDHDHHDHDHD4");
     await userPage.waitForSelector('[e2e-id="create"]');
   });
 
@@ -381,6 +384,8 @@ describe("Feature 3 - Voting Rounds", () => {
   test("Join the app", async () => {
     await userPage.waitForSelector('[e2e-id="join"]');
     await userPage.click('[e2e-id="join"]');
+    await userPage.waitForSelector('[e2e-id="agree"]');
+    await userPage.click('[e2e-id="agree"]');
     await userPage.waitForSelector('[e2e-id="create"]');
   });
 
@@ -444,6 +449,8 @@ describe("Feature 4 - User Personalization", () => {
   test("Join the app", async () => {
     await userPage.waitForSelector('[e2e-id="join"]');
     await userPage.click('[e2e-id="join"]');
+    await userPage.waitForSelector('[e2e-id="agree"]');
+    await userPage.click('[e2e-id="agree"]');
     await userPage.waitForSelector('[e2e-id="create"]');
   });
 
@@ -517,6 +524,8 @@ describe("Feature 8 - Downtime management and ending the play", () => {
   test("Join the app", async () => {
     await userPage.waitForSelector('[e2e-id="join"]');
     await userPage.click('[e2e-id="join"]');
+    await userPage.waitForSelector('[e2e-id="agree"]');
+    await userPage.click('[e2e-id="agree"]');
     await userPage.waitForSelector('[e2e-id="create"]');
   });
 
