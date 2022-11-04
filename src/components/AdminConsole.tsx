@@ -95,6 +95,11 @@ const AdminConsole = () => {
                 link.href = jsonString;
                 link.download = "ResultData.json";
                 link.click();
+                MailComposer.composeAsync({
+                    subject: "Play Vote Data",
+                    body: "Please attach the downloaded data called ResultData.json",
+                    recipients: ["lorem_ipsum@gmail.com"]
+                })
                 NotificationManager.info('User data has been deleted', 'Info!', 2000);
             }).then(() => {
                 dispatch(setStatus({ isActive: false }));
@@ -107,15 +112,6 @@ const AdminConsole = () => {
             .catch((e: Error) => {
                 NotificationManager.error(e.message, 'Error!', 5000);
             });
-    };
-
-    const sendEmail = () => {  
-        MailComposer.composeAsync({
-            subject: "Play Vote Data",
-            body: "Here is the vote data after the play:",
-            recipients: ["bogdan.mezei@gmail.com"],
-            attachments: []
-        })
     };
 
     const showResult = () => {
@@ -229,9 +225,6 @@ const AdminConsole = () => {
                                 <button onClick={() => showResult()} className="admin-console__submit-button--secondary" e2e-id="showResults">
                                     {Constants.RESULT_BUTTON} {question.questionNumber}
                                 </button>
-                                <button onClick={sendEmail} className="admin-console__submit-button" e2e-id="sendEmail">
-                                                Send Email
-                                            </button>
                                 </>
                                 
                             ) : (
@@ -245,9 +238,6 @@ const AdminConsole = () => {
                                             <div className='admin-console__text'>{Constants.FINAL_VOTE_RESULT_FIELD} {Constants.ON_SCREEN_FIELD}</div>
                                             <button onClick={endSession} className="admin-console__submit-button" e2e-id="endSession">
                                                 {Constants.END_BUTTON}
-                                            </button>
-                                            <button onClick={sendEmail} className="admin-console__submit-button" e2e-id="sendEmail">
-                                                Send Email
                                             </button>
                                         </>
                                     )}
