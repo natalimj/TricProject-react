@@ -1,16 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import IStatusData from '../models/Status';
 
-const initialState: IStatusData = {
-    isActive :false
+export interface StatusData {
+    isActive: boolean
+}
+
+const initialState: StatusData = {
+    isActive: false
 };
 
 export const statusSlice = createSlice({
     name: 'status',
     initialState,
     reducers: {
-        setStatus: (state:IStatusData, action: PayloadAction<IStatusData>) => {
-            state.isActive = action.payload.isActive;
+        setStatus: (state: StatusData, action: PayloadAction<boolean>) => {
+            state.isActive = action.payload;
         },
     },
 });

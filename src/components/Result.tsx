@@ -21,12 +21,14 @@ const Result = ({ finalResult, result }: Props) => {
     const [votedFirstResponse, setVotedFirstResponse] = useState<boolean>(false);
 
     useEffect(() => {
+        console.log(result)
+        console.log(userAnswer)
         if (userAnswer.answerText === result.firstAnswer.answerText) {
             setVotedFirstResponse(true);
         } else if (userAnswer.answerText === result.secondAnswer.answerText) {
             setVotedFirstResponse(false);
         }
-    }, [userAnswer.answerText, result]);
+    }, [userAnswer, result]);
 
     return (
         <>
