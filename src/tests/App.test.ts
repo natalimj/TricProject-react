@@ -29,7 +29,7 @@ async function resetApp() {
   await adminPage.type('[e2e-id="usernameAdmin"]',"mod");
   await adminPage.type('[e2e-id="passwordAdmin"]',"12345678");
   await adminPage.click('[e2e-id="login"]');
-  //await AdminApi.deleteAllQuestions(accessToken);
+  await AdminApi.deleteAllQuestions(accessToken);
   await AdminApi.deactivateApp(accessToken);
   const answer1: IAnswerData = {
     answerId: null,
