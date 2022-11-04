@@ -8,14 +8,16 @@ describe('admin reducer', () => {
     const initialState: IAnswerData = {
         answerId: '234',
         answerText: 'No',
-        category: 'Conservative',
+        firstCategory: 'Conservative',
+        secondCategory: 'Pragmatic'
     };
 
     it('should handle initial state', () => {
         expect(answerReducer(undefined, { type: 'unknown' })).toEqual({
             answerId: '',
             answerText: '',
-            category: '',
+            firstCategory: '',
+            secondCategory: ''
         });
     });
 
@@ -23,12 +25,14 @@ describe('admin reducer', () => {
         const actual = answerReducer(initialState, addAnswer({
             answerId: '1',
             answerText: 'Yes',
-            category: 'Pragmatic',
+            firstCategory: 'Progressive',
+            secondCategory: 'Idealist'
         }));
         expect(actual).toEqual({
             answerId: '1',
             answerText: 'Yes',
-            category: 'Pragmatic',
+            firstCategory: 'Progressive',
+            secondCategory: 'Idealist'
         });
     });
 });
