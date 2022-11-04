@@ -5,20 +5,22 @@ const Constants = {
 	//SOCKET_URL: "http://localhost:8080/ws-message",
 	
 
-	themes : [
-        { value: 'Select theme', label: 'Select theme', disabled: true },
-        { value: 'Immigration', label: 'Immigration' },
-        { value: 'Climate change', label: 'Climate change' },
-        { value: 'Energy consumption', label: 'Energy consumption' },
-        { value: 'Mass breeding', label: 'Mass breeding' },
-        { value: 'Global population', label: 'Global population' }
-    ],
+	themes: [
+		{ value: 'Select theme', label: 'Select theme', disabled: true },
+		{ value: 'Immigration', label: 'Immigration' },
+		{ value: 'Climate change', label: 'Climate change' },
+		{ value: 'Energy consumption', label: 'Energy consumption' },
+		{ value: 'Mass breeding', label: 'Mass breeding' },
+		{ value: 'Global population', label: 'Global population' }
+	],
 
-	categories : [
-        { value: 'Select category', label: 'Select category', disabled: true },
-        { value: 'Conservative', label: 'Conservative' },
-        { value: 'Progressive', label: 'Progressive' }
-    ],
+	categories: [
+		{ value: 'Select category', label: 'Select category', disabled: true },
+		{ value: 'Conservative', label: 'Conservative' },
+		{ value: 'Progressive', label: 'Progressive' },
+		{ value: 'Pragmatic', label: 'Pragmatic' },
+		{ value: 'Idealist', label: 'Idealist' }
+	],
 
 	/* LABELS */
 	APP_TITLE: "TRIC",
@@ -51,7 +53,7 @@ const Constants = {
 	NO_ACTIVE_PLAY: "No ongoing play right now.",
 	MORE_INFO_TEXT: "Find more about us and when the next play will be here: ",
 	MORE_INFO_LINK: "https://www.humanlab.studio/index.html",
-	EDIT_CONTRIBUTORS: "Edit Contributors",
+	EDIT_PLAY_INFO: "Edit Play Info",
 	EDIT_QUESTIONS: "Edit Questions",
 	NEW_QUESTION_TITLE: "New Question",
 	SAVE_BUTTON: "Save",
@@ -74,6 +76,8 @@ const Constants = {
 	DEVELOPERS_TITLE: "Developers",
 	CATEGORY1 :"Conservative",
 	CATEGORY2 :"Progressive",
+	CATEGORY3 :"Pragmatic",
+	CATEGORY4 :"Idealist",
 	FINAL_RESULT_TEXT : "Final Result Text",
 	WHAT_IS_TRIC: "What is TRIC?"
 

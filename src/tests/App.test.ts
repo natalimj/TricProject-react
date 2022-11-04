@@ -1,7 +1,10 @@
 import puppeteer from "puppeteer";
 import AdminApi from "../api/AdminApi";
+import Question from "../components/Question";
+import IQuestionData from "../models/Question";
+import IAnswerData from "../models/Answer";
 
-const accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtb2QiLCJpYXQiOjE2NjcyNDQ0NTIsImV4cCI6MTY2NzUwMzY1Mn0.tPt-iZLn1NYJVVgZvmoxqRb8HtVLF78FP3UoQoEW9wCIX1HYrkQMez5WIo6tTSIHH_ViyqX2v3P7Und8UmOHbQ";
+const accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtb2QiLCJpYXQiOjE2Njc1NTY4OTAsImV4cCI6MTY2NzgxNjA5MH0.w2HYPV7M7U0cMmwemdFwpwP_Iv_cRRu4Z-KSWsDWaIxtvwcYntaVI4nnHiNapXiE5SdaI6ryybnT_vSIQdxXMQ";
 let browser;
 let adminPage;
 let userPage;
@@ -28,11 +31,58 @@ async function resetApp() {
   await adminPage.click('[e2e-id="login"]');
   await AdminApi.deleteAllQuestions(accessToken);
   await AdminApi.deactivateApp(accessToken);
-  await AdminApi.addQuestion("Would you permanently  welcome the people in your own home?","Yes","No","Immigration","","",accessToken);
-  await AdminApi.addQuestion("Would you still travel by train?","Yes","No","Climate Change","","",accessToken);
-  await AdminApi.addQuestion("Would you stop eating fish risking your own health?","Yes","No","Mass Breeding","","",accessToken);
-  await AdminApi.addQuestion("Would you close the heating?","Yes","No","Energy Consumption","","",accessToken);
-  await AdminApi.addQuestion("Would you eat the whole piece of bread?","Yes","No","Global Population","","",accessToken);
+  const answer1: IAnswerData = {
+    answerId: null,
+    answerText: "Yes",
+    firstCategory : "",
+    secondCategory : ""
+  }
+  const answer2: IAnswerData = {
+    answerId: null,
+    answerText: "No",
+    firstCategory : "",
+    secondCategory : ""
+  }
+  const question1: IQuestionData = {
+    questionNumber: 1,
+    questionText: 'Would you permanently  welcome the people in your own home?',
+    answers: [answer1,answer2],
+    time: 30,
+    theme: "Immigration"
+  }
+  const question2: IQuestionData = {
+    questionNumber: 2,
+    questionText: 'Would you still travel by train?',
+    answers: [answer1,answer2],
+    time: 30,
+    theme: "Climate Change"
+  }
+  const question3: IQuestionData = {
+    questionNumber: 3,
+    questionText: 'Would you stop eating fish risking your own health?',
+    answers: [answer1,answer2],
+    time: 30,
+    theme: "Mass Breeding"
+  }
+  const question4: IQuestionData = {
+    questionNumber: 4,
+    questionText: 'Would you close the heating?',
+    answers: [answer1,answer2],
+    time: 30,
+    theme: "Energy Consumption"
+  }
+  const question5: IQuestionData = {
+    questionNumber: 5,
+    questionText: 'Would you eat the whole piece of bread?',
+    answers: [answer1,answer2],
+    time: 30,
+    theme: "Global Population"
+  }
+  await AdminApi.addQuestion(question1,accessToken);
+  await AdminApi.addQuestion(question2,accessToken);
+  await AdminApi.addQuestion(question3,accessToken);
+  await AdminApi.addQuestion(question4,accessToken);
+  await AdminApi.addQuestion(question5,accessToken);
 }
 
 // async function checkQuestion(questionNr : number, text : string, answer1 : string, answer2 : string) {
@@ -171,6 +221,9 @@ describe("Feature 2 - Voting System", () => {
   test("Join the app", async () => {
     await userPage.waitForSelector('[e2e-id="join"]');
     await userPage.click('[e2e-id="join"]');
+    await userPage.waitForSelector('[e2e-id="agree"]');
+    await userPage.click('[e2e-id="agree"]');
+    console.log("HHDHDHHDHDHD4");
     await userPage.waitForSelector('[e2e-id="create"]');
   });
 
@@ -331,6 +384,8 @@ describe("Feature 3 - Voting Rounds", () => {
   test("Join the app", async () => {
     await userPage.waitForSelector('[e2e-id="join"]');
     await userPage.click('[e2e-id="join"]');
+    await userPage.waitForSelector('[e2e-id="agree"]');
+    await userPage.click('[e2e-id="agree"]');
     await userPage.waitForSelector('[e2e-id="create"]');
   });
 
@@ -394,6 +449,8 @@ describe("Feature 4 - User Personalization", () => {
   test("Join the app", async () => {
     await userPage.waitForSelector('[e2e-id="join"]');
     await userPage.click('[e2e-id="join"]');
+    await userPage.waitForSelector('[e2e-id="agree"]');
+    await userPage.click('[e2e-id="agree"]');
     await userPage.waitForSelector('[e2e-id="create"]');
   });
 
@@ -467,6 +524,8 @@ describe("Feature 8 - Downtime management and ending the play", () => {
   test("Join the app", async () => {
     await userPage.waitForSelector('[e2e-id="join"]');
     await userPage.click('[e2e-id="join"]');
+    await userPage.waitForSelector('[e2e-id="agree"]');
+    await userPage.click('[e2e-id="agree"]');
     await userPage.waitForSelector('[e2e-id="create"]');
   });
 

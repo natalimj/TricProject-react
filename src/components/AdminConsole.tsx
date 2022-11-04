@@ -12,6 +12,7 @@ import 'react-notifications/lib/notifications.css';
 import { NotificationManager } from 'react-notifications';
 import UserApi from '../api/UserApi';
 import { RootState } from '../app/store';
+import * as MailComposer from 'expo-mail-composer';
 
 const AdminConsole = () => {
 
@@ -94,6 +95,11 @@ const AdminConsole = () => {
                 link.href = jsonString;
                 link.download = "ResultData.json";
                 link.click();
+                MailComposer.composeAsync({
+                    subject: "Play Vote Data",
+                    body: "Please attach the downloaded data called ResultData.json",
+                    recipients: ["lorem_ipsum@gmail.com"]
+                })
                 NotificationManager.info('User data has been deleted', 'Info!', 2000);
             }).then(() => {
                 dispatch(setStatus({ isActive: false }));
@@ -221,7 +227,7 @@ const AdminConsole = () => {
                                     </button>
                                 ) : (
                                     <>
-                                        {questionTimer > 0 && !showedFinalResult ? (
+                                        {(questionTimer > 0 && !showedFinalResult) ? (
                                             <button onClick={showFinalResult} className="admin-console__submit-button--secondary" e2e-id="showFinalResult">
                                                 {Constants.FINAL_RESULT_BUTTON}
                                             </button>

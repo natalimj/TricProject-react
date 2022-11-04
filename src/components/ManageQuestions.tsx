@@ -16,26 +16,61 @@ const ManageQuestions = () => {
     const [secondAnswer, setSecondAnswer] = useState("");
     const [theme, setTheme] = useState("Select theme");
     const [firstCategory, setFirstCategory] = useState("Select category");
-    const [secondCategory, setSecondCategory] = useState("");
+    const [secondCategory, setSecondCategory] = useState("Select category");
     const [showQuestions, setShowQuestions] = useState<boolean>(false);
     const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
+    const [dropdownCategories, setDropdownCategories] = useState(Constants.categories)
+    const [disableDropdown,setDisableDropdown]= useState<boolean>(true)
 
     useEffect(() => {
         AdminApi.getAllQuestions(accessToken)
             .then((response: any) => {
                 setQuestions(response.data)
+                console.log(response.data)
             })
             .catch((e: Error) => {
+                console.log(e)
                 NotificationManager.error(e.message, 'Error!', 5000);
             });
     }, [accessToken])
 
 
+    const getOppositeCategory = (category: string) => {
+        switch (category) {
+            case Constants.CATEGORY1:
+                return Constants.CATEGORY2
+            case Constants.CATEGORY2:
+                return Constants.CATEGORY1
+            case Constants.CATEGORY3:
+                return Constants.CATEGORY4
+            case Constants.CATEGORY4:
+                return Constants.CATEGORY3
+            default:
+                return ""
+        }
+    }
+
     const addQuestion = () => {
         if (questionText !== "" && firstAnswer !== "" && secondAnswer !== ""
             && (theme !== "" && theme !== 'Select theme') && (firstCategory !== "" && firstCategory !== 'Select category')
             && secondCategory !== "") {
-            AdminApi.addQuestion(questionText, firstAnswer, secondAnswer, theme, firstCategory, secondCategory, accessToken)
+            const questionToCreate: IQuestionData = {
+                questionText: questionText,
+                questionNumber: -1,
+                time: 10,
+                theme: theme,
+                answers: [{
+                    answerText: firstAnswer,
+                    firstCategory: firstCategory,
+                    secondCategory: secondCategory
+                }, {
+                    answerText: secondAnswer,
+                    firstCategory: getOppositeCategory(firstCategory),
+                    secondCategory: getOppositeCategory(secondCategory)
+                }],
+            };
+
+            AdminApi.addQuestion(questionToCreate, accessToken)
                 .then((response: any) => {
                     setQuestions([...questions, response.data])
                     setQuestionText("")
@@ -43,7 +78,7 @@ const ManageQuestions = () => {
                     setSecondAnswer("")
                     setTheme("Select theme")
                     setFirstCategory("Select category")
-                    setSecondCategory("")
+                    setSecondCategory("Select category")
                     NotificationManager.success('A new question has been added', 'Success!', 2000);
                 })
                 .catch((e: Error) => {
@@ -52,6 +87,7 @@ const ManageQuestions = () => {
         } else {
             NotificationManager.warning('Please fill all required fields ', 'Warning!', 2000);
         }
+
     }
 
     const showEditQuestions = () => {
@@ -66,14 +102,20 @@ const ManageQuestions = () => {
         setTheme(event.target.value);
     };
 
-    const handleCategorySelect = (event: any) => {
-        if (event.target.value === Constants.CATEGORY1) {
-            setFirstCategory(Constants.CATEGORY1);
-            setSecondCategory(Constants.CATEGORY2);
-        } else {
-            setFirstCategory(Constants.CATEGORY2);
-            setSecondCategory(Constants.CATEGORY1);
-        }
+    const setSecondDropdown = (selectedCategory: string) => {
+        setDropdownCategories(Constants.categories.filter(c => (c.value !== selectedCategory
+            && c.value !== getOppositeCategory(selectedCategory))))
+        setDisableDropdown(false)
+    }
+    const handleFirstCategorySelect = (event: any) => {
+        setSecondDropdown(event.target.value)
+        setFirstCategory(event.target.value)
+        setSecondCategory("Select category")
+
+    };
+
+    const handleSecondCategorySelect = (event: any) => {
+        setSecondCategory(event.target.value)
     };
 
     return (
@@ -91,7 +133,7 @@ const ManageQuestions = () => {
                                 placeholder="Enter question"
                                 e2e-id="questionText"
                                 onChange={(e) => setQuestionText(e.target.value)}
-                                maxLength={150} />
+                                maxLength={500} />
                         </div>
                     </div>
 
@@ -104,7 +146,7 @@ const ManageQuestions = () => {
                     </div>
 
                     <div className="questions__line">
-                        <div className="questions__input-shorter">
+                        <div className="questions__input">
                             <input type="text"
                                 value={firstAnswer}
                                 className="questions__text"
@@ -113,12 +155,23 @@ const ManageQuestions = () => {
                                 onChange={(e) => setFirstAnswer(e.target.value)}
                                 maxLength={50} />
                         </div>
-                        <select className="questions__dropdown questions_w50" value={firstCategory} onChange={handleCategorySelect}>
-                            {Constants.categories.map((option, index) => (
-                                <option key={option.value+index} value={option.value} disabled={option.disabled}>{option.label}</option>
+                    </div>
+
+                    <div className="questions__line">
+                        <select className="questions__dropdown questions_w50" value={firstCategory} onChange={handleFirstCategorySelect}>
+                            {Constants.categories.map((option) => (
+                                <option value={option.value} disabled={option.disabled}>{option.label}</option>
+                            ))}
+                        </select>
+                        <select className="questions__dropdown questions_w50" value={secondCategory} onChange={handleSecondCategorySelect} 
+                        disabled={disableDropdown}>
+                            {dropdownCategories.map((option) => (
+                                <option value={option.value} disabled={option.disabled}>{option.label}</option>
                             ))}
                         </select>
                     </div>
+
+
                     <div className="questions__line">
                         <div className="questions__input">
                             <input type="text"

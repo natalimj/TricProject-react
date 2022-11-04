@@ -58,7 +58,7 @@ const Admin = () => {
               </div>
               <div className='admin-console__buttons'>
                 <button onClick={editContributors} className="admin-console__submit-button--secondary" e2e-id="editContributors">
-                  {Constants.EDIT_CONTRIBUTORS}
+                  {Constants.EDIT_PLAY_INFO}
                 </button>
                 <button onClick={editQuestions} className="admin-console__submit-button--secondary" e2e-id="editQuestions">
                   {Constants.EDIT_QUESTIONS}
