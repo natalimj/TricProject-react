@@ -67,7 +67,7 @@ const FinalResult = () => {
                 ))}
                 {finalResult?.finalCategoryList && finalResult?.finalCategoryList.map((finalCategory) => (
 
-                  <p>{finalCategory.questionTheme} - {finalCategory.answerFirstCategory} / {finalCategory.answerSecondCategory}</p>
+                  <p>{finalCategory.questionTheme} - {finalCategory.answerFirstCategory} and {finalCategory.answerSecondCategory}</p>
                 ))}
               </div>
             </div>
