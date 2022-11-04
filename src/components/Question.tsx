@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../style/Question.css';
 import Constants from '../util/Constants';
 import UserApi from '../api/UserApi';
@@ -12,8 +12,6 @@ import { setUserVoted } from '../reducers/componentSlice';
 import { setUserResults} from '../reducers/userResultSlice';
 import { NotificationManager } from 'react-notifications';
 import IPlayInfoData from '../models/PlayInfo';
-
-import React from 'react';
 import Modal from 'react-modal';
 
 const Question = () => {
