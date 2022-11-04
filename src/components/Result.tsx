@@ -20,6 +20,28 @@ const Result = ({ finalResult, result }: Props) => {
     const [showFinalResult, setShowFinalResult] = useState<boolean>(false);
     const [votedFirstResponse, setVotedFirstResponse] = useState<boolean>(false);
 
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    const cacheImages = async (srcArray) => {
+        const promises = await srcArray.map((src) => {
+            return new Promise(function (resolve, reject) {
+                const img = new Image();
+                img.src = src;
+
+            });
+        });
+        await Promise.all(promises);
+        setIsLoading(false);
+    };
+
+    useEffect(() => {
+        const imgs = [
+            '../util/icons/' + userIcon + '.png'
+        ]
+
+        cacheImages(imgs);
+    }, []);
+
     useEffect(() => {
         if (userAnswer.answerText === result.firstAnswer.answerText) {
             setVotedFirstResponse(true);
@@ -34,8 +56,8 @@ const Result = ({ finalResult, result }: Props) => {
                 <div className='result'>
                     <div className="result__inner-container">
                         <div className="result__avatar-container">
-                            {userIcon !== '' ? (<img src={require('../util/icons/' + userIcon + '.png')} alt="user icon" />)
-                                : (<img src={require('../util/icons/imageMale1.png')} alt="user icon" />)}
+                            {!isLoading ? (<img src={require('../util/icons/' + userIcon + '.png')} alt="user icon" />)
+                                : (<></>)}
                         </div>
                         <div className="result__text result__text--username" e2e-id="resultUsername">{userName}</div>
                         <div className="result__text">{finalResult ? Constants.FINAL_VOTE_RESULT_FIELD : Constants.VOTE_RESULT_FIELD}</div>

@@ -69,6 +69,20 @@ const Login = () => {
       }
     );
   }
+  
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const cacheImages = async (srcArray) => {
+    const promises = await srcArray.map((src) => {
+      return new Promise(function (resolve, reject) {
+        const img = new Image();
+        img.src = src;
+
+      });
+    });
+    await Promise.all(promises);
+    setIsLoading(false);
+  };
 
   useEffect(() => {
     if (state.redirect && state.overrider) {
@@ -76,6 +90,14 @@ const Login = () => {
       window.location.href = state.redirect ?? '/admin';
     }
   }, [state])
+
+  useEffect(() => {
+    const imgs = [
+      TricLogo
+    ]
+
+    cacheImages(imgs);
+  }, []);
 
   const { loading, message } = state;
   const initialValues = {
@@ -86,9 +108,11 @@ const Login = () => {
   return (
     <div className="admin-login">
       <div className="admin-login__image">
-        <img
+        {isLoading ? (<></> ) : 
+        (<img
           src={TricLogo}
-          alt="Tric logo" />
+          alt="Tric logo" />)
+          }
       </div>
       <Formik
         initialValues={initialValues}

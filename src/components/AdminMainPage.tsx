@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../style/AdminMainPage.css';
 import AdminApi from '../api/AdminApi';
 import Constants from '../util/Constants';
@@ -15,6 +15,7 @@ const Admin = () => {
   const isActive = useAppSelector((state: RootState) => state.status.isActive);
   const dispatch = useAppDispatch();
   const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
+
 
   const activateApp = () => {
     AdminApi.activateApp(accessToken)
@@ -33,6 +34,29 @@ const Admin = () => {
   const editContributors = () => {
     window.location.href = "/admin/playInfo";
   };
+
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const cacheImages = async (srcArray) => {
+    const promises = await srcArray.map((src) => {
+      return new Promise(function (resolve, reject) {
+        const img = new Image();
+        img.src = src;
+
+      });
+    });
+    await Promise.all(promises);
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    const imgs = [
+      TricLogo
+    ]
+
+    cacheImages(imgs);
+  }, []);
 
   useEffect(() => {
     UserApi.getAppStatus()
@@ -54,7 +78,11 @@ const Admin = () => {
           (
             <div className='admin-console__body'>
               <div className='admin-console__logo'>
-                <img src={TricLogo} alt="Tric logo" />
+                {isLoading ? (<></>) :
+                  (<img
+                    src={TricLogo}
+                    alt="Tric logo" />)
+                }
               </div>
               <div className='admin-console__buttons'>
                 <button onClick={editContributors} className="admin-console__submit-button--secondary" e2e-id="editContributors">
