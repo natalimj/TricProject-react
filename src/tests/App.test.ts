@@ -29,11 +29,46 @@ async function resetApp() {
   await adminPage.click('[e2e-id="login"]');
   //await AdminApi.deleteAllQuestions(accessToken);
   await AdminApi.deactivateApp(accessToken);
-  // await AdminApi.addQuestion("Would you permanently  welcome the people in your own home?","Yes","No","Immigration","","",accessToken);
-  // await AdminApi.addQuestion("Would you still travel by train?","Yes","No","Climate Change","","",accessToken);
-  // await AdminApi.addQuestion("Would you stop eating fish risking your own health?","Yes","No","Mass Breeding","","",accessToken);
-  // await AdminApi.addQuestion("Would you close the heating?","Yes","No","Energy Consumption","","",accessToken);
-  // await AdminApi.addQuestion("Would you eat the whole piece of bread?","Yes","No","Global Population","","",accessToken);
+  const question1 = {
+    questionNumber: 1,
+    questionText: 'Would you permanently  welcome the people in your own home?',
+    answers: ["Yes","No"],
+    time: 30,
+    theme: "Immigration"
+  }
+  const question2 = {
+    questionNumber: 2,
+    questionText: 'Would you still travel by train?',
+    answers: ["Yes","No"],
+    time: 30,
+    theme: "Climate Change"
+  }
+  const question3 = {
+    questionNumber: 3,
+    questionText: 'Would you stop eating fish risking your own health?',
+    answers: ["Yes","No"],
+    time: 30,
+    theme: "Mass Breeding"
+  }
+  const question4 = {
+    questionNumber: 4,
+    questionText: 'Would you close the heating?',
+    answers: ["Yes","No"],
+    time: 30,
+    theme: "Energy Consumption"
+  }
+  const question5 = {
+    questionNumber: 5,
+    questionText: 'Would you eat the whole piece of bread?',
+    answers: ["Yes","No"],
+    time: 30,
+    theme: "Global Population"
+  }
+  await AdminApi.addQuestion(question1,accessToken);
+  await AdminApi.addQuestion(question2,accessToken);
+  await AdminApi.addQuestion(question3,accessToken);
+  await AdminApi.addQuestion(question4,accessToken);
+  await AdminApi.addQuestion(question5,accessToken);
 }
 
 // async function checkQuestion(questionNr : number, text : string, answer1 : string, answer2 : string) {
