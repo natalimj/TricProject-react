@@ -1,6 +1,5 @@
 import puppeteer from "puppeteer";
 import AdminApi from "../api/AdminApi";
-import Question from "../components/Question";
 import IQuestionData from "../models/Question";
 import IAnswerData from "../models/Answer";
 
@@ -34,14 +33,14 @@ async function resetApp() {
   const answer1: IAnswerData = {
     answerId: null,
     answerText: "Yes",
-    firstCategory : "",
-    secondCategory : ""
+    firstCategory : "Pragmatic",
+    secondCategory : "Conservative"
   }
   const answer2: IAnswerData = {
     answerId: null,
     answerText: "No",
-    firstCategory : "",
-    secondCategory : ""
+    firstCategory : "Idealist",
+    secondCategory : "Progressive"
   }
   const question1: IQuestionData = {
     questionNumber: 1,
@@ -223,7 +222,6 @@ describe("Feature 2 - Voting System", () => {
     await userPage.click('[e2e-id="join"]');
     await userPage.waitForSelector('[e2e-id="agree"]');
     await userPage.click('[e2e-id="agree"]');
-    console.log("HHDHDHHDHDHD4");
     await userPage.waitForSelector('[e2e-id="create"]');
   });
 
