@@ -1,5 +1,29 @@
 @import url("../styles.css");
 
+.modalContent  {
+    position: 'fixed';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backgroundColor: 'rgba(0, 0, 0, 0.6)';
+}
+
+.modalOverlay {
+    position: 'absolute';
+    top: '15%';
+    left: '10%';
+    right: '10%';
+    bottom: '15%';
+    border: '5px solid #181818';
+    background: '#3D3D3D';
+    overflow: 'auto';
+    WebkitOverflowScrolling: 'touch';
+    borderRadius: '4px';
+    outline: 'none';
+    padding: '20px'
+}
+
 .question-container {
     display: flex;
     justify-content: center;

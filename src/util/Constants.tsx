@@ -53,7 +53,7 @@ const Constants = {
 	NO_ACTIVE_PLAY: "No ongoing play right now.",
 	MORE_INFO_TEXT: "Find more about us and when the next play will be here: ",
 	MORE_INFO_LINK: "https://www.humanlab.studio/index.html",
-	EDIT_CONTRIBUTORS: "Edit Contributors",
+	EDIT_PLAY_INFO: "Edit Play Info",
 	EDIT_QUESTIONS: "Edit Questions",
 	NEW_QUESTION_TITLE: "New Question",
 	SAVE_BUTTON: "Save",

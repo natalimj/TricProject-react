@@ -12,6 +12,7 @@ import 'react-notifications/lib/notifications.css';
 import { NotificationManager } from 'react-notifications';
 import UserApi from '../api/UserApi';
 import { RootState } from '../app/store';
+import * as MailComposer from 'expo-mail-composer';
 
 const AdminConsole = () => {
 
@@ -94,6 +95,11 @@ const AdminConsole = () => {
                 link.href = jsonString;
                 link.download = "ResultData.json";
                 link.click();
+                MailComposer.composeAsync({
+                    subject: "Play Vote Data",
+                    body: "Please attach the downloaded data called ResultData.json",
+                    recipients: ["lorem_ipsum@gmail.com"]
+                })
                 NotificationManager.info('User data has been deleted', 'Info!', 2000);
             }).then(() => {
                 dispatch(setStatus({ isActive: false }));
@@ -197,6 +203,7 @@ const AdminConsole = () => {
                                 <button onClick={() => showQuestion()} className="admin-console__submit-button--secondary" e2e-id="showQuestion">
                                     {Constants.QUESTION_BUTTON} {question.questionNumber}
                                 </button>
+                                
                             </div>
                             <div className='admin-console__text admin-console__text--helper'>
                                 {Constants.SET_TIME_INFO}
@@ -214,9 +221,12 @@ const AdminConsole = () => {
                                 </>
                             ) : null}
                             {question.questionNumber < numberOfQuestions ? (
+                                <>
                                 <button onClick={() => showResult()} className="admin-console__submit-button--secondary" e2e-id="showResults">
                                     {Constants.RESULT_BUTTON} {question.questionNumber}
                                 </button>
+                                </>
+                                
                             ) : (
                                 <>
                                     {questionTimer > 0 && !showedFinalResult ? (

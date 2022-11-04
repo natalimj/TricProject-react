@@ -10,7 +10,11 @@ import IAnswerData from '../models/Answer';
 import { addAnswer } from '../reducers/answerSlice';
 import { setUserVoted } from '../reducers/componentSlice';
 import { setUserResults} from '../reducers/userResultSlice';
+import { NotificationManager } from 'react-notifications';
+import IPlayInfoData from '../models/PlayInfo';
+
 import React from 'react';
+import Modal from 'react-modal';
 
 const Question = () => {
   const dispatch = useAppDispatch();
@@ -28,6 +32,8 @@ const Question = () => {
   const [firstAnswer, setFirstAnswer] = useState<boolean>(false);
   const [secondAnswer, setSecondAnswer] = useState<boolean>(false);
   const [timer, setTimer] = useState<number>(currentQuestion.time);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [PlayInfo, setPlayInfo] = useState<IPlayInfoData>();
 
   const vote = (answer: IAnswerData) => {
     const voteData = {
@@ -77,6 +83,21 @@ const Question = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentQuestion.answers]);
 
+  useEffect(() => {
+    UserApi.getPlayInfo()
+      .then((response: any) => {
+        setPlayInfo(response.data)
+      }).catch((e: Error) => {
+        NotificationManager.error(e.message, 'Error!', 5000);
+      });
+  }, [])
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsOpen(true)
+    }, 5000);
+  }, [])
+
 
   return (
     <div className='question-container'>
@@ -103,9 +124,52 @@ const Question = () => {
                   </button>
                 ))}
               </div>
+              {(currentQuestion.questionNumber !== 5) ? ((
+              <>
               <button onClick={() => { vote(selectedAnswer) }} className={firstAnswer || secondAnswer ? 'question__submit-button question__active-button' : 'question__submit-button'} disabled={!firstAnswer && !secondAnswer} e2e-id="questionConfirm">
                 {Constants.CONFIRM_BUTTON}
               </button>
+              </>)) : (
+                <>
+               <button onClick={() => { setIsOpen(true) }} className={firstAnswer || secondAnswer ? 'question__submit-button question__active-button' : 'question__submit-button'} disabled={!firstAnswer && !secondAnswer} e2e-id="questionConfirm">
+                {Constants.CONFIRM_BUTTON}
+              </button>
+                    <Modal
+                    style={{
+                      overlay: {
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        backgroundColor: 'rgba(0, 0, 0, 0.6)'
+                      },
+                      content: {
+                        position: 'absolute',
+                        top: '15%',
+                        left: '10%',
+                        right: '10%',
+                        bottom: '15%',
+                        border: '5px solid #181818',
+                        background: '#3D3D3D',
+                        overflow: 'auto',
+                        WebkitOverflowScrolling: 'touch',
+                        borderRadius: '4px',
+                        outline: 'none',
+                        padding: '20px'
+                      }
+                    }}isOpen={isOpen}>
+                    <span className='question__timer-text'>
+                    {
+                      PlayInfo?.finalResultText // TODO: ADD PREDICTED ANSWER
+                    }
+                    </span>
+                    <button className={'question__submit-button question__active-button'} onClick={() => {setIsOpen(false) 
+                    vote(selectedAnswer)}  //TODO: CHANGE TO PREDICTED ANSWER
+                  }>Continue</button>
+                  </Modal>
+                </>
+              )}
             </div>
           </>
         )}
