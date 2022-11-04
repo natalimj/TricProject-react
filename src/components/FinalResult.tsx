@@ -43,7 +43,7 @@ const FinalResult = () => {
     ]
 
     cacheImages(imgs);
-  }, []);
+  }, [currentUser.imagePath]);
 
 
   useEffect(() => {

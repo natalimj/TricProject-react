@@ -40,7 +40,7 @@ const Result = ({ finalResult, result }: Props) => {
         ]
 
         cacheImages(imgs);
-    }, []);
+    }, [userIcon]);
 
     useEffect(() => {
         if (userAnswer.answerText === result.firstAnswer.answerText) {
