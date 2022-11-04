@@ -4,7 +4,7 @@ import Question from "../components/Question";
 import IQuestionData from "../models/Question";
 import IAnswerData from "../models/Answer";
 
-const accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtb2QiLCJpYXQiOjE2NjcyNDQ0NTIsImV4cCI6MTY2NzUwMzY1Mn0.tPt-iZLn1NYJVVgZvmoxqRb8HtVLF78FP3UoQoEW9wCIX1HYrkQMez5WIo6tTSIHH_ViyqX2v3P7Und8UmOHbQ";
+const accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtb2QiLCJpYXQiOjE2Njc1NTY4OTAsImV4cCI6MTY2NzgxNjA5MH0.w2HYPV7M7U0cMmwemdFwpwP_Iv_cRRu4Z-KSWsDWaIxtvwcYntaVI4nnHiNapXiE5SdaI6ryybnT_vSIQdxXMQ";
 let browser;
 let adminPage;
 let userPage;
