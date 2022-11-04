@@ -65,8 +65,8 @@ const FinalResult = () => {
                     </div>
                   </div>}
 
-                {userResults.results && userResults.results.map((userResult) => (
-                  <p key={userResult.answer.answerId}>{userResult.question.theme} - {userResult.answer.category}</p>
+                  {userResults.results && userResults.results.map((userResult) => (
+                    <p key={userResult.answer.answerId}>{userResult.question.theme} - {userResult.answer.firstCategory}</p>
                 ))}
               </div>
             </div>

@@ -24,7 +24,7 @@ const Question = () => {
     time: useAppSelector((state: RootState) => state.question.time),
     theme: useAppSelector((state: RootState) => state.question.theme),
   }
-  const [selectedAnswer, setSelectedAnswer] = useState<IAnswerData>({ answerText: '', category: '' });
+  const [selectedAnswer, setSelectedAnswer] = useState<IAnswerData>({ answerText: '' , firstCategory:'', secondCategory:''});
   const [firstAnswer, setFirstAnswer] = useState<boolean>(false);
   const [secondAnswer, setSecondAnswer] = useState<boolean>(false);
   const [timer, setTimer] = useState<number>(currentQuestion.time);

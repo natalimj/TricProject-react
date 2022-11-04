@@ -28,7 +28,6 @@
 .questions__box {
     background-color: var(--color-off-white);
     color: var(--color-black);
-    height: 283px;
     width: 80%;
     margin: auto;
     margin-bottom: 30px;
