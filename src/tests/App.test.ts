@@ -1,6 +1,7 @@
 import puppeteer from "puppeteer";
 import AdminApi from "../api/AdminApi";
 import Question from "../components/Question";
+import IQuestionData from "../models/Question";
 
 const accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtb2QiLCJpYXQiOjE2NjcyNDQ0NTIsImV4cCI6MTY2NzUwMzY1Mn0.tPt-iZLn1NYJVVgZvmoxqRb8HtVLF78FP3UoQoEW9wCIX1HYrkQMez5WIo6tTSIHH_ViyqX2v3P7Und8UmOHbQ";
 let browser;
@@ -29,38 +30,50 @@ async function resetApp() {
   await adminPage.click('[e2e-id="login"]');
   //await AdminApi.deleteAllQuestions(accessToken);
   await AdminApi.deactivateApp(accessToken);
-  const question1 = {
+  const answer1: IAnswerData = {
+    answerId: null,
+    answerText: "Yes",
+    firstCategory : "",
+    secondCategory : ""
+  }
+  const answer2: IAnswerData = {
+    answerId: null,
+    answerText: "No",
+    firstCategory : "",
+    secondCategory : ""
+  }
+  const question1: IQuestionData = {
     questionNumber: 1,
     questionText: 'Would you permanently  welcome the people in your own home?',
-    answers: ["Yes","No"],
+    answers: [answer1,answer2],
     time: 30,
     theme: "Immigration"
   }
-  const question2 = {
+  const question2: IQuestionData = {
     questionNumber: 2,
     questionText: 'Would you still travel by train?',
-    answers: ["Yes","No"],
+    answers: [answer1,answer2],
     time: 30,
     theme: "Climate Change"
   }
-  const question3 = {
+  const question3: IQuestionData = {
     questionNumber: 3,
     questionText: 'Would you stop eating fish risking your own health?',
-    answers: ["Yes","No"],
+    answers: [answer1,answer2],
     time: 30,
     theme: "Mass Breeding"
   }
-  const question4 = {
+  const question4: IQuestionData = {
     questionNumber: 4,
     questionText: 'Would you close the heating?',
-    answers: ["Yes","No"],
+    answers: [answer1,answer2],
     time: 30,
     theme: "Energy Consumption"
   }
-  const question5 = {
+  const question5: IQuestionData = {
     questionNumber: 5,
     questionText: 'Would you eat the whole piece of bread?',
-    answers: ["Yes","No"],
+    answers: [answer1,answer2],
     time: 30,
     theme: "Global Population"
   }
