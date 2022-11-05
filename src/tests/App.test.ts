@@ -30,6 +30,7 @@ async function resetApp() {
   await adminPage.click('[e2e-id="login"]');
   await AdminApi.deleteAllQuestions(accessToken);
   await AdminApi.deactivateApp(accessToken);
+
   const answer1: IAnswerData = {
     answerId: null,
     answerText: "Yes",

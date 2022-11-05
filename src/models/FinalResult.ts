@@ -1,5 +1,16 @@
+export interface FinalCategory {
+    questionTheme : string,
+    answerFirstCategory : string,
+    answerSecondCategory : string
+}
+
+export interface CategoryRate {
+    category :string,
+    oppositeCategory : string,
+    rate : number
+}
+
 export default interface IFinalResultData {
-    category: string;
-    secondCategory: string;
-    rate: number;
+    categoryRateList : CategoryRate[],
+    finalCategoryList : FinalCategory[]
 }

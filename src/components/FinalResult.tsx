@@ -17,7 +17,6 @@ const FinalResult = () => {
     username: useAppSelector((state: RootState) => state.user.username),
     imagePath: useAppSelector((state: RootState) => state.user.imagePath)
   }
-  const userResults = useAppSelector((state: RootState) => state.userResults);
   const [finalResult, setFinalResult] = useState<IFinalResultData>();
   const [showPlayInfo, setShowPlayInfo] = useState<boolean>(false)
   const exportRef = useRef<HTMLHeadingElement>(null);
@@ -51,22 +50,22 @@ const FinalResult = () => {
               </div>
               <div className="final-result__result-box">
                 <div>{Constants.FINAL_RESULT_FIELD}</div>
-                {finalResult &&
-                  <div key={finalResult.category}>
+                {finalResult?.categoryRateList && finalResult?.categoryRateList.map((categoryRate) => (
+                  <div>
                     <div className="final-result__title">
-                      <span className="final-result__answer-text final-result__answer-text--left">{finalResult.category}</span>
-                      <span className="final-result__answer-text">{finalResult.secondCategory}</span>
+                      <span className="final-result__answer-text final-result__answer-text--left">{categoryRate.category}</span>
+                      <span className="final-result__answer-text">{categoryRate.oppositeCategory}</span>
                     </div>
                     <div className="final-result__slider">
-                      <div className="final-result__first-rate" style={{ "width": `${finalResult.rate}%` }}><span className='final-result__answer--text'>
-                        {finalResult.rate !== 0 && `${finalResult.rate}%`}</span></div>
-                      <div className="final-result__second-rate" style={{ "width": `${100 - finalResult.rate}%` }}><span className='final-result__answer--text'>
-                        {(100 - finalResult.rate) !== 0 && `${100 - finalResult.rate}%`}</span></div>
+                      <div className="final-result__first-rate" style={{ "width": `${categoryRate.rate}%` }}><span className='final-result__answer--text'>
+                        {categoryRate.rate !== 0 && `${categoryRate.rate}%`}</span></div>
+                      <div className="final-result__second-rate" style={{ "width": `${100 - categoryRate.rate}%` }}><span className='final-result__answer--text'>
+                        {(100 - categoryRate.rate) !== 0 && `${100 - categoryRate.rate}%`}</span></div>
                     </div>
-                  </div>}
-
-                  {userResults.results && userResults.results.map((userResult) => (
-                    <p key={userResult.answer.answerId}>{userResult.question.theme} - {userResult.answer.firstCategory}</p>
+                  </div>
+                ))}
+                {finalResult?.finalCategoryList && finalResult?.finalCategoryList.map((finalCategory) => (
+                  <p>{finalCategory.questionTheme} - {finalCategory.answerFirstCategory} and {finalCategory.answerSecondCategory}</p>
                 ))}
               </div>
             </div>
