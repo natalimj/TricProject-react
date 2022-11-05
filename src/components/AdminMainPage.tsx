@@ -12,8 +12,8 @@ import UserApi from '../api/UserApi';
 import TricLogo from '../util/icons/TRIC.svg';
 
 const Admin = () => {
-  const isActive = useAppSelector((state: RootState) => state.status.isActive);
   const dispatch = useAppDispatch();
+  const isActive = useAppSelector((state: RootState) => state.status.isActive);
   const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
 
   const activateApp = () => {

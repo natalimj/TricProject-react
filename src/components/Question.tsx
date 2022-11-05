@@ -17,14 +17,7 @@ const Question = () => {
   const dispatch = useAppDispatch();
   const voted: number = useAppSelector((state: RootState) => state.component.userVotedValue);
   const userId: any = useAppSelector((state: RootState) => state.user.userId);
-  const currentQuestion: IQuestionData = {
-    questionId: useAppSelector((state: RootState) => state.question.questionId),
-    questionNumber: useAppSelector((state: RootState) => state.question.questionNumber),
-    questionText: useAppSelector((state: RootState) => state.question.questionText),
-    answers: useAppSelector((state: RootState) => [...state.question.answers]),
-    time: useAppSelector((state: RootState) => state.question.time),
-    theme: useAppSelector((state: RootState) => state.question.theme),
-  }
+  const currentQuestion: IQuestionData = useAppSelector((state: RootState) => state.question);
   const [selectedAnswer, setSelectedAnswer] = useState<IAnswerData>({ answerText: '', firstCategory: '', secondCategory: '' });
   const [firstAnswer, setFirstAnswer] = useState<boolean>(false);
   const [secondAnswer, setSecondAnswer] = useState<boolean>(false);

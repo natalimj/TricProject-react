@@ -12,11 +12,7 @@ import { BsInfoCircle } from 'react-icons/bs';
 import PlayInfo from './PlayInfo';
 
 const FinalResult = () => {
-  const currentUser: IUserData = {
-    userId: useAppSelector((state: RootState) => state.user.userId),
-    username: useAppSelector((state: RootState) => state.user.username),
-    imagePath: useAppSelector((state: RootState) => state.user.imagePath)
-  }
+  const currentUser: IUserData = useAppSelector((state: RootState) => state.user);
   const [finalResult, setFinalResult] = useState<IFinalResultData>();
   const [showPlayInfo, setShowPlayInfo] = useState<boolean>(false)
   const exportRef = useRef<HTMLHeadingElement>(null);

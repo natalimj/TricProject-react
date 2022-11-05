@@ -5,29 +5,7 @@ import Constants from '../util/Constants';
 import WebSocketComponent from './WebSocketComponent';
 
 const DisplayResult = () => {
-    const initialResultState = {
-        question: {
-            questionNumber: 0,
-            questionText: '',
-            answers: [],
-            time: 0,
-            theme:""
-        },
-        firstAnswerRate: 0.0,
-        secondAnswerRate: 0.0,
-        firstAnswer: {
-            answerText: "",
-            firstCategory:"",
-            secondCategory :""
-        },
-        secondAnswer: {
-            answerText: "",
-            firstCategory:"",
-            secondCategory :""
-        }
-    };
-
-    const [result, setResult] = useState<IResultData>(initialResultState);
+    const [result, setResult] = useState<IResultData>(Constants.initialResultState);
     const [showResult, setShowResult] = useState<boolean>(false);
 
     const onMessageReceived = (msg: IResultData) => {

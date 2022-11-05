@@ -1,9 +1,9 @@
 import questionReducer, {
     addQuestion,
     emptyQuestion
-} from './questionSlice';
+} from '../../reducers/questionSlice';
 import { describe, it, expect } from '@jest/globals'
-import IQuestionData from '../models/Question';
+import IQuestionData from '../../models/Question';
 
 describe('question reducer', () => {
     const initialState: IQuestionData = {

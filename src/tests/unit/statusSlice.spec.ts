@@ -1,6 +1,6 @@
 import statusReducer, {
     setStatus, StatusData
-} from './statusSlice';
+} from '../../reducers/statusSlice';
 import { describe, it, expect } from '@jest/globals'
 
 describe('status reducer', () => {

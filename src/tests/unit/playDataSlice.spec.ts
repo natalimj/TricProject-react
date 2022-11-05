@@ -4,7 +4,7 @@ import playDataReducer, {
     setShowQuestionButton,
     setQuestionTimer,
     PlayData
-} from './playDataSlice';
+} from '../../reducers/playDataSlice';
 import { describe, it, expect } from '@jest/globals'
 
 describe('playData reducer', () => {

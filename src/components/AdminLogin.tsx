@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import Constants from "../util/Constants";
 import axios from "axios";
 import { useAppDispatch } from '../app/hooks';
-import { logAdmin } from '../reducers/adminSlice';
+import { loginAdmin } from '../reducers/adminSlice';
 import TricLogo from '../util/icons/TRIC.svg';
 
 type State = {
@@ -44,7 +44,7 @@ const Login = () => {
       })
       .then(response => {
         if (response.data.accessToken) {
-          dispatch(logAdmin(response.data))
+          dispatch(loginAdmin(response.data))
         }
         return response.data;
       });
@@ -52,7 +52,7 @@ const Login = () => {
 
   const handleLogin = (formValue: { username: string; password: string }) => {
     const { username, password } = formValue;
-    
+
     setState({ ...state, message: "", loading: true });
     login(username, password).then(
       () => {

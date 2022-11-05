@@ -1,8 +1,8 @@
 import answerReducer, {
     addAnswer
-} from './answerSlice';
+} from '../../reducers/answerSlice';
 import { describe, it, expect } from '@jest/globals'
-import IAnswerData from '../models/Answer';
+import IAnswerData from '../../models/Answer';
 
 describe('answer reducer', () => {
     const initialState: IAnswerData = {

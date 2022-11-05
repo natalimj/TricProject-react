@@ -1,8 +1,8 @@
 import userReducer, {
-    addUser, removeUser
-} from './userSlice';
+    loginUser, logoutUser
+} from '../../reducers/userSlice';
 import { describe, it, expect } from '@jest/globals'
-import IUserData from '../models/User';
+import IUserData from '../../models/User';
 
 describe('status reducer', () => {
     const initialState: IUserData = {
@@ -20,7 +20,7 @@ describe('status reducer', () => {
     });
 
     it('should handle add user', () => {
-        const actual = userReducer(initialState, addUser({
+        const actual = userReducer(initialState, loginUser({
             userId: 224,
             username: 'john',
             imagePath: 'john.png',
@@ -33,7 +33,7 @@ describe('status reducer', () => {
     });
 
     it('should handle remove user', () => {
-        const actual = userReducer(initialState, removeUser());
+        const actual = userReducer(initialState, logoutUser());
         expect(actual).toEqual({
             userId: '',
             username: '',

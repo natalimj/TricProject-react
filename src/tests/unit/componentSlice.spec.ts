@@ -3,7 +3,7 @@ import componentReducer, {
     setUserJoined,
     setUserVoted,
     ComponentState
-} from './componentSlice';
+} from '../../reducers/componentSlice';
 import { describe, it, expect } from '@jest/globals'
 
 describe('component reducer', () => {

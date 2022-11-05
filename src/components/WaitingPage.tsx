@@ -7,7 +7,7 @@ interface Props {
   startScreen: boolean;
 }
 
-const WaitingPage: React.FC<Props> = ({startScreen}) => {
+const WaitingPage: React.FC<Props> = ({ startScreen }) => {
   return (
     <div e2e-id="spinner" className='waiting-container'>
       <BeatLoader color="#FFADCB" size={100} speedMultiplier={1} />

@@ -25,7 +25,7 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
     const { questionText, firstAnswer, secondAnswer, theme, firstCategory, secondCategory } = formValue;
     const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
     const [dropdownCategories, setDropdownCategories] = useState(Constants.categories)
-    const [disableDropdown,setDisableDropdown]= useState<boolean>(true)
+    const [disableDropdown, setDisableDropdown] = useState<boolean>(true)
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -42,7 +42,7 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
         });
     };
 
-    const getOppositeCategory = (category:string) => {
+    const getOppositeCategory = (category: string) => {
         switch (category) {
             case Constants.CATEGORY1:
                 return Constants.CATEGORY2
@@ -59,7 +59,7 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
 
     const deleteQuestion = (questionId: any) => {
         AdminApi.deleteQuestion(questionId, accessToken)
-            .then((response: any) => {
+            .then(() => {
                 setQuestions(questions.filter(question => question.questionId !== questionId))
                 NotificationManager.success('Question has been deleted', 'Success!', 2000);
             })
@@ -69,30 +69,30 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
             });
     }
 
-    const editQuestion = (questionId: any) => {
+    const editQuestion = () => {
         if (questionText !== "" && firstAnswer !== "" && secondAnswer !== ""
             && (theme !== "" && theme !== 'Select theme') && (firstCategory !== "" && firstCategory !== 'Select category')
             && secondCategory !== "") {
-                const questionToEdit: IQuestionData = {
-                    questionText: questionText,
-                    questionId: question.questionId,
-                    questionNumber: question.questionNumber,
-                    time: 10,
-                    theme: theme,
-                    answers: [{
-                        answerId: question.answers[0].answerId,
-                        answerText: firstAnswer,
-                        firstCategory: firstCategory,
-                        secondCategory: secondCategory
-                    }, {
-                        answerId: question.answers[1].answerId,
-                        answerText: secondAnswer,
-                        firstCategory: getOppositeCategory(firstCategory),
-                        secondCategory: getOppositeCategory(secondCategory)
-                    }],
-                };
+            const questionToEdit: IQuestionData = {
+                questionText: questionText,
+                questionId: question.questionId,
+                questionNumber: question.questionNumber,
+                time: 10,
+                theme: theme,
+                answers: [{
+                    answerId: question.answers[0].answerId,
+                    answerText: firstAnswer,
+                    firstCategory: firstCategory,
+                    secondCategory: secondCategory
+                }, {
+                    answerId: question.answers[1].answerId,
+                    answerText: secondAnswer,
+                    firstCategory: getOppositeCategory(firstCategory),
+                    secondCategory: getOppositeCategory(secondCategory)
+                }],
+            };
 
-                console.log(questionToEdit)
+            console.log(questionToEdit)
             AdminApi.editQuestion(questionToEdit, accessToken)
                 .then((response: any) => {
                     NotificationManager.success('Question has been edited', 'Success!', 2000);
@@ -158,7 +158,7 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                 <div className="questions__line questions__text-thin">
                     <select className="questions__dropdown questions_w100  questions__text-thin" value={theme} onChange={handleThemeSelect}>
                         {Constants.themes.map((option, index) => (
-                            <option key={option.value+index} value={option.value} disabled={option.disabled}>{option.label}</option>
+                            <option key={option.value + index} value={option.value} disabled={option.disabled}>{option.label}</option>
                         ))}
                     </select>
                 </div>
@@ -176,15 +176,15 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                 <div className="questions__line">
                     <select className="questions__dropdown questions_w50 questions__text-thin" value={(firstCategory !== null || firstCategory !== "") ? firstCategory : "Select category"} onChange={handleFirstCategorySelect}>
                         {Constants.categories.map((option, index) => (
-                            <option key={option.value+index} value={option.value} disabled={option.disabled}>{option.label}</option>
+                            <option key={option.value + index} value={option.value} disabled={option.disabled}>{option.label}</option>
                         ))}
                     </select>
-                    <select className="questions__dropdown questions_w50 questions__text-thin" 
-                    value={(secondCategory !== null || secondCategory !== "") ? secondCategory : "Select category"} 
-                    onChange={handleSecondCategorySelect}
-                    disabled={disableDropdown}>
+                    <select className="questions__dropdown questions_w50 questions__text-thin"
+                        value={(secondCategory !== null || secondCategory !== "") ? secondCategory : "Select category"}
+                        onChange={handleSecondCategorySelect}
+                        disabled={disableDropdown}>
                         {dropdownCategories.map((option, index) => (
-                            <option key={option.value+index} value={option.value} disabled={option.disabled}>{option.label}</option>
+                            <option key={option.value + index} value={option.value} disabled={option.disabled}>{option.label}</option>
                         ))}
                     </select>
                 </div>
@@ -198,7 +198,7 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                             name="secondAnswer"
                             maxLength={50} />
                     </div>
-                    <div className="questions__icon" e2e-id={"question" + question.questionNumber + "EditSave"} onClick={() => editQuestion(question.questionId)} ><AiOutlineSave size={30} /><br></br><span className="questions__icon-hide">{Constants.EDIT_BUTTON.toUpperCase()}</span></div>
+                    <div className="questions__icon" e2e-id={"question" + question.questionNumber + "EditSave"} onClick={() => editQuestion()} ><AiOutlineSave size={30} /><br></br><span className="questions__icon-hide">{Constants.EDIT_BUTTON.toUpperCase()}</span></div>
                     <div className="questions__icon" e2e-id={"question" + question.questionNumber + "EditDelete"} onClick={() => deleteQuestion(question.questionId)}><AiOutlineDelete size={30} /><br></br><span className="questions__icon-hide">{Constants.DELETE_BUTTON.toUpperCase()}</span></div>
                 </div>
             </div>
