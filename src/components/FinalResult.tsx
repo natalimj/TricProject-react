@@ -50,8 +50,8 @@ const FinalResult = () => {
               </div>
               <div className="final-result__result-box">
                 <div>{Constants.FINAL_RESULT_FIELD}</div>
-                {finalResult?.categoryRateList && finalResult?.categoryRateList.map((categoryRate) => (
-                  <div>
+                {finalResult?.categoryRateList && finalResult?.categoryRateList.map((categoryRate, index) => (
+                  <div key={index}>
                     <div className="final-result__title">
                       <span className="final-result__answer-text final-result__answer-text--left">{categoryRate.category}</span>
                       <span className="final-result__answer-text">{categoryRate.oppositeCategory}</span>
@@ -64,8 +64,8 @@ const FinalResult = () => {
                     </div>
                   </div>
                 ))}
-                {finalResult?.finalCategoryList && finalResult?.finalCategoryList.map((finalCategory) => (
-                  <p>{finalCategory.questionTheme} - {finalCategory.answerFirstCategory} and {finalCategory.answerSecondCategory}</p>
+                {finalResult?.finalCategoryList && finalResult?.finalCategoryList.map((finalCategory, index) => (
+                  <p key={finalCategory.questionTheme + index}>{finalCategory.questionTheme} - {finalCategory.answerFirstCategory} and {finalCategory.answerSecondCategory}</p>
                 ))}
               </div>
             </div>
