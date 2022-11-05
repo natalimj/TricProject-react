@@ -1,11 +1,11 @@
 import React, { ChangeEvent, useState } from 'react'
 import { AiOutlineDelete, AiOutlineSave } from "react-icons/ai";
-import AdminApi from '../api/AdminApi';
-import IQuestionData from '../models/Question'
+import AdminApi from '../../api/AdminApi';
+import IQuestionData from '../../models/Question'
 import { NotificationManager } from 'react-notifications';
-import { useAppSelector } from '../app/hooks';
-import { RootState } from '../app/store';
-import Constants from '../util/Constants';
+import { useAppSelector } from '../../app/hooks';
+import { RootState } from '../../app/store';
+import Constants from '../../util/Constants';
 
 type Props = {
     question: IQuestionData

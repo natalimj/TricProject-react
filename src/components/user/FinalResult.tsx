@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
-import '../style/FinalResult.css';
-import Constants from '../util/Constants';
-import UserApi from '../api/UserApi';
-import IUserData from '../models/User';
-import IFinalResultData from '../models/FinalResult';
-import ExportAsImage from '../util/ExportAsImage';
+import '../../style/FinalResult.css';
+import Constants from '../../util/Constants';
+import UserApi from '../../api/UserApi';
+import IUserData from '../../models/User';
+import IFinalResultData from '../../models/FinalResult';
+import ExportAsImage from '../../util/ExportAsImage';
 import moment from 'moment';
-import { useAppSelector } from '../app/hooks';
-import { RootState } from '../app/store';
+import { useAppSelector } from '../../app/hooks';
+import { RootState } from '../../app/store';
 import { BsInfoCircle } from 'react-icons/bs';
 import PlayInfo from './PlayInfo';
 
@@ -36,7 +36,7 @@ const FinalResult = () => {
             <div ref={exportRef} className="final-result__pink-background">
               <div className="final-result__user-box">
                 <div className="final-result__avatar-container">
-                  <img src={require('../util/icons/' + currentUser.imagePath + '.png')} alt="user icon" />
+                  <img src={require('../../util/icons/' + currentUser.imagePath + '.png')} alt="user icon" />
                 </div>
                 <div className="final-result__text-container">
                   <span e2e-id="finalUsername">{currentUser.username}</span>

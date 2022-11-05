@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import WebSocketComponent from "./WebSocketComponent";
-import '../style/MainPage.css';
+import WebSocketComponent from "../WebSocketComponent";
+import '../../style/MainPage.css';
 import Question from "./Question";
 import Result from "./Result";
-import { useAppSelector, useAppDispatch } from '../app/hooks';
-import { RootState } from '../app/store';
-import { setQuestionComponent, setUserVoted } from '../reducers/componentSlice';
-import { addAnswer } from '../reducers/answerSlice';
-import UserApi from '../api/UserApi';
-import IResultData from '../models/Result';
-import Constants from '../util/Constants';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { RootState } from '../../app/store';
+import { setQuestionComponent, setUserVoted } from '../../reducers/componentSlice';
+import { addAnswer } from '../../reducers/answerSlice';
+import UserApi from '../../api/UserApi';
+import IResultData from '../../models/Result';
+import Constants from '../../util/Constants';
 
 const MainPage = () => {
   const dispatch = useAppDispatch();
@@ -18,11 +18,12 @@ const MainPage = () => {
   const userId: any = useAppSelector((state: RootState) => state.user.userId);
   const currentQuestionId: number = useAppSelector((state: RootState) => state.question.questionId);
   const answers = useAppSelector((state: RootState) => [...state.question.answers]);
-  
+
   const [showFinalResult, setShowFinalResult] = useState<boolean>(false);
   const [resultMessage, setResultMessage] = useState<IResultData>(Constants.initialResultState);
 
   const onMessageReceived = (msg: IResultData) => {
+    console.log('saw result received');
     if (voted !== currentQuestionId) {
       UserApi.saveVote({
         userId: userId,
@@ -51,6 +52,7 @@ const MainPage = () => {
   }
 
   const onFinalResultMessageReceived = () => {
+    console.log('saw final result received');
     dispatch(setQuestionComponent(false));
     setShowFinalResult(true);
   }

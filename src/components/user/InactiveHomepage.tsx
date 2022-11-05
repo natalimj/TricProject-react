@@ -1,17 +1,20 @@
 import React, { useEffect } from 'react';
-import '../style/InactiveHomepage.css';
-import Constants from '../util/Constants';
-import { useAppDispatch } from '../app/hooks';
-import { setQuestionComponent, setUserJoined } from '../reducers/componentSlice';
-import { logoutUser } from "../reducers/userSlice";
+import '../../style/InactiveHomepage.css';
+import Constants from '../../util/Constants';
+import { useAppDispatch } from '../../app/hooks';
+import { logoutUser } from "../../reducers/userSlice";
+import { clearAnswer } from "../../reducers/answerSlice";
+import { clearComponentState } from "../../reducers/componentSlice";
+import { clearQuestion } from "../../reducers/questionSlice";
 
 const InactiveHomepage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(setUserJoined(false));
-    dispatch(setQuestionComponent(false));
     dispatch(logoutUser());
+    dispatch(clearAnswer());
+    dispatch(clearComponentState());
+    dispatch(clearQuestion());
   }, [dispatch])
 
   return (

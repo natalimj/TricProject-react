@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import '../style/AdminLogin.css';
+import '../../style/AdminLogin.css';
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import Constants from "../util/Constants";
+import Constants from "../../util/Constants";
 import axios from "axios";
-import { useAppDispatch } from '../app/hooks';
-import { loginAdmin } from '../reducers/adminSlice';
-import TricLogo from '../util/icons/TRIC.svg';
+import { useAppDispatch } from '../../app/hooks';
+import { loginAdmin } from '../../reducers/adminSlice';
+import TricLogo from '../../util/icons/TRIC.svg';
 
 type State = {
   redirect: string | null,

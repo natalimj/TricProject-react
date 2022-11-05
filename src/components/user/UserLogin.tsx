@@ -1,13 +1,13 @@
 import React, { useState, ChangeEvent } from 'react';
-import '../style/UserLogin.css'
-import UserApi from '../api/UserApi';
-import Constants from '../util/Constants';
-import IUserData from '../models/User';
+import '../../style/UserLogin.css'
+import UserApi from '../../api/UserApi';
+import Constants from '../../util/Constants';
+import IUserData from '../../models/User';
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import { useAppSelector, useAppDispatch } from '../app/hooks';
-import { RootState } from '../app/store';
-import { loginUser } from '../reducers/userSlice';
-import { setUserJoined } from '../reducers/componentSlice';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { RootState } from '../../app/store';
+import { loginUser } from '../../reducers/userSlice';
+import { setUserJoined } from '../../reducers/componentSlice';
 
 const UserLoginPage = () => {
     const dispatch = useAppDispatch();
@@ -75,7 +75,7 @@ const UserLoginPage = () => {
                         : <div className='user-form__avatar-selector-item'></div>}
 
                     <div className='user-form__avatar-selector-item user-form--avatar-image'>
-                        <img src={require('../util/icons/' + imageList[currentListIndex] + '.png')} alt="user icon" />
+                        <img src={require('../../util/icons/' + imageList[currentListIndex] + '.png')} alt="user icon" />
                     </div>
 
                     {(currentListIndex < (imageList.length - 1)) ?

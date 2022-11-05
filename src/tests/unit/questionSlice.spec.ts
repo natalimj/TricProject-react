@@ -1,6 +1,6 @@
 import questionReducer, {
     addQuestion,
-    emptyQuestion
+    clearQuestion
 } from '../../reducers/questionSlice';
 import { describe, it, expect } from '@jest/globals'
 import IQuestionData from '../../models/Question';
@@ -66,7 +66,7 @@ describe('question reducer', () => {
     });
 
     it('should handle delete question', () => {
-        const actual = questionReducer(initialState, emptyQuestion());
+        const actual = questionReducer(initialState, clearQuestion());
         expect(actual).toEqual({
             questionId: '',
             questionNumber: -1,

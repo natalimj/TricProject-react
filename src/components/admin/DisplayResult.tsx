@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import '../style/Result.css';
-import IResultData from '../models/Result';
-import Constants from '../util/Constants';
-import WebSocketComponent from './WebSocketComponent';
+import '../../style/Result.css';
+import IResultData from '../../models/Result';
+import Constants from '../../util/Constants';
+import WebSocketComponent from '../WebSocketComponent';
 
 const DisplayResult = () => {
     const [result, setResult] = useState<IResultData>(Constants.initialResultState);

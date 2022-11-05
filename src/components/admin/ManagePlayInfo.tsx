@@ -1,14 +1,14 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
-import UserApi from '../api/UserApi';
-import IContributorData from '../models/Contributor';
+import UserApi from '../../api/UserApi';
+import IContributorData from '../../models/Contributor';
 import { NotificationManager } from 'react-notifications';
-import Constants from '../util/Constants';
+import Constants from '../../util/Constants';
 import EditContributor from './EditContributor';
-import AdminApi from '../api/AdminApi';
-import IPlayInfoData from '../models/PlayInfo';
+import AdminApi from '../../api/AdminApi';
+import IPlayInfoData from '../../models/PlayInfo';
 import { BiDownArrow, BiLeftArrowAlt, BiUpArrow } from 'react-icons/bi';
-import { useAppSelector } from '../app/hooks';
-import { RootState } from '../app/store';
+import { useAppSelector } from '../../app/hooks';
+import { RootState } from '../../app/store';
 
 const PlayInfo = () => {
   const initialContributor = {

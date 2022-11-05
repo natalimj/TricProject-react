@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
-import '../style/StartPage.css';
-import UserApi from "../api/UserApi";
-import IQuestionData from '../models/Question';
-import Constants from "../util/Constants";
-import WaitingPage from "./WaitingPage";
+import '../../style/StartPage.css';
+import UserApi from "../../api/UserApi";
+import IQuestionData from '../../models/Question';
+import Constants from "../../util/Constants";
+import WaitingPage from "../WaitingPage";
 import InactiveHomepage from "./InactiveHomepage";
-import WebSocketComponent from "./WebSocketComponent";
+import WebSocketComponent from "../WebSocketComponent";
 import MainPage from "./MainPage";
 import UserLoginPage from "./UserLogin";
-import { useAppSelector, useAppDispatch } from '../app/hooks';
-import { RootState } from "../app/store";
-import { addQuestion } from '../reducers/questionSlice';
-import { setQuestionComponent } from '../reducers/componentSlice';
-import { setStatus } from "../reducers/statusSlice";
-import TricLogo from '../util/icons/TRIC.svg';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { RootState } from "../../app/store";
+import { addQuestion } from '../../reducers/questionSlice';
+import { setQuestionComponent } from '../../reducers/componentSlice';
+import { setStatus } from "../../reducers/statusSlice";
+import TricLogo from '../../util/icons/TRIC.svg';
 import Modal from 'react-modal';
 
 const StartPage = () => {
@@ -71,7 +71,7 @@ const StartPage = () => {
                 <img src={TricLogo} alt="TRIC icon" />
               </div>
               <div className="start-page-landing-icon">
-                <img src={require('../util/icons/imageMale1.png')} alt="Landing page icon" />
+                <img src={require('../../util/icons/imageMale1.png')} alt="Landing page icon" />
               </div>
               <>
                 <button onClick={() => { setIsOpen(true) }} className='question__submit-button question__active-button' e2e-id="join">

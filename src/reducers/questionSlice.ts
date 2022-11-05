@@ -18,13 +18,13 @@ export const questionSlice = createSlice({
             state = { ...action.payload };
             return state;
         },
-        emptyQuestion: (state: IQuestionData) => {
+        clearQuestion: (state: IQuestionData) => {
             state = { ...initialState };
             return state;
         }
     },
 });
 
-export const { addQuestion, emptyQuestion } = questionSlice.actions;
+export const { addQuestion, clearQuestion } = questionSlice.actions;
 
 export default questionSlice.reducer;

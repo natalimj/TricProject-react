@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import '../style/Question.css';
-import Constants from '../util/Constants';
-import UserApi from '../api/UserApi';
-import IQuestionData from '../models/Question';
-import WaitingPage from './WaitingPage';
-import { useAppSelector, useAppDispatch } from '../app/hooks';
-import { RootState } from '../app/store';
-import IAnswerData from '../models/Answer';
-import { addAnswer } from '../reducers/answerSlice';
-import { setUserVoted } from '../reducers/componentSlice';
+import '../../style/Question.css';
+import Constants from '../../util/Constants';
+import UserApi from '../../api/UserApi';
+import IQuestionData from '../../models/Question';
+import WaitingPage from '../WaitingPage';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { RootState } from '../../app/store';
+import IAnswerData from '../../models/Answer';
+import { addAnswer } from '../../reducers/answerSlice';
+import { setUserVoted } from '../../reducers/componentSlice';
 import { NotificationManager } from 'react-notifications';
-import IPlayInfoData from '../models/PlayInfo';
+import IPlayInfoData from '../../models/PlayInfo';
 import Modal from 'react-modal';
 
 const Question = () => {

@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { BsArrowLeftCircle, BsArrowRightCircle } from 'react-icons/bs';
 import { NotificationManager } from 'react-notifications';
-import UserApi from '../api/UserApi';
-import IContributorData from '../models/Contributor';
-import IPlayInfoData from '../models/PlayInfo';
-import '../style/PlayInfo.css';
-import Constants from '../util/Constants';
+import UserApi from '../../api/UserApi';
+import IContributorData from '../../models/Contributor';
+import IPlayInfoData from '../../models/PlayInfo';
+import '../../style/PlayInfo.css';
+import Constants from '../../util/Constants';
 import FinalResult from './FinalResult';
 
 const PlayInfo = () => {

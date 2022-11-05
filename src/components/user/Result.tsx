@@ -1,11 +1,11 @@
 import React from 'react';
 import { useEffect, useState } from 'react'
-import '../style/Result.css';
-import IResultData from '../models/Result';
-import { useAppSelector } from '../app/hooks';
-import { RootState } from '../app/store';
+import '../../style/Result.css';
+import IResultData from '../../models/Result';
+import { useAppSelector } from '../../app/hooks';
+import { RootState } from '../../app/store';
 import { BsFillSquareFill } from "react-icons/bs";
-import Constants from "../util/Constants";
+import Constants from "../../util/Constants";
 import FinalResult from './FinalResult';
 
 type Props = {
@@ -21,8 +21,6 @@ const Result = ({ finalResult, result }: Props) => {
     const [votedFirstResponse, setVotedFirstResponse] = useState<boolean>(false);
 
     useEffect(() => {
-        console.log(result)
-        console.log(userAnswer)
         if (userAnswer.answerText === result.firstAnswer.answerText) {
             setVotedFirstResponse(true);
         } else if (userAnswer.answerText === result.secondAnswer.answerText) {
@@ -36,8 +34,8 @@ const Result = ({ finalResult, result }: Props) => {
                 <div className='result'>
                     <div className="result__inner-container">
                         <div className="result__avatar-container">
-                            {userIcon !== '' ? (<img src={require('../util/icons/' + userIcon + '.png')} alt="user icon" />)
-                                : (<img src={require('../util/icons/imageMale1.png')} alt="user icon" />)}
+                            {userIcon !== '' ? (<img src={require('../../util/icons/' + userIcon + '.png')} alt="user icon" />)
+                                : (<img src={require('../../util/icons/imageMale1.png')} alt="user icon" />)}
                         </div>
                         <div className="result__text result__text--username" e2e-id="resultUsername">{userName}</div>
                         <div className="result__text">{finalResult ? Constants.FINAL_VOTE_RESULT_FIELD : Constants.VOTE_RESULT_FIELD}</div>

@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import WebSocketComponent from './WebSocketComponent';
-import AdminApi from '../api/AdminApi';
-import IQuestionData from '../models/Question';
-import Constants from '../util/Constants';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { setStatus } from '../reducers/statusSlice';
-import { logoutAdmin } from '../reducers/adminSlice';
-import { addQuestion, emptyQuestion } from '../reducers/questionSlice';
-import { setNumberOfQuestions, setNumberOfUsers, setShowQuestionButton, setQuestionTimer, PlayData } from '../reducers/playDataSlice';
+import WebSocketComponent from '../WebSocketComponent';
+import AdminApi from '../../api/AdminApi';
+import IQuestionData from '../../models/Question';
+import Constants from '../../util/Constants';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { setStatus } from '../../reducers/statusSlice';
+import { logoutAdmin } from '../../reducers/adminSlice';
+import { addQuestion, clearQuestion } from '../../reducers/questionSlice';
+import { setNumberOfQuestions, setNumberOfUsers, setShowQuestionButton, setQuestionTimer, clearPlayData, PlayData } from '../../reducers/playDataSlice';
 import 'react-notifications/lib/notifications.css';
 import { NotificationManager } from 'react-notifications';
-import UserApi from '../api/UserApi';
-import { RootState } from '../app/store';
+import UserApi from '../../api/UserApi';
+import { RootState } from '../../app/store';
 import * as MailComposer from 'expo-mail-composer';
 
 const AdminConsole = () => {
@@ -82,6 +82,36 @@ const AdminConsole = () => {
         }
     }
 
+    const showResult = () => {
+        UserApi.showResult(question.questionId)
+            .then((response: any) => {
+                dispatch(setQuestionTimer(-1));
+                getQuestion(response.data.question.questionNumber + 1);
+                NotificationManager.info('Result ' + response.data.question.questionNumber + ' on screen', 'Info!', 2000);
+            })
+            .catch((e: Error) => {
+                NotificationManager.error(e.message, 'Error!', 5000);
+            });
+    };
+
+    const showFinalResult = () => {
+        UserApi.showResult(question.questionId)
+            .then(() => AdminApi.showFinalResult(accessToken)
+                .then(() => {
+                    if (question.questionNumber !== 0) {
+                        NotificationManager.info('Final Result on screen', 'Info!', 2000);
+                        dispatch(setQuestionTimer(-1));
+                        setShowedFinalResult(true);
+                    }
+                })
+                .catch((e: Error) => {
+                    NotificationManager.error(e.message, 'Error!', 5000);
+                })
+            ).catch((e: Error) => {
+                NotificationManager.error(e.message, 'Error!', 5000);
+            });
+    };
+
     const endSession = () => {
         AdminApi.endSession(accessToken)
             .then((response: any) => {
@@ -101,37 +131,9 @@ const AdminConsole = () => {
             }).then(() => {
                 dispatch(setStatus(false));
                 dispatch(logoutAdmin());
-                dispatch(emptyQuestion());
-                dispatch(setNumberOfQuestions(0));
-                dispatch(setNumberOfUsers(0));
-                dispatch(setQuestionTimer(-1));
+                dispatch(clearQuestion());
+                dispatch(clearPlayData());
                 setShowedFinalResult(false);
-            })
-            .catch((e: Error) => {
-                NotificationManager.error(e.message, 'Error!', 5000);
-            });
-    };
-
-    const showResult = () => {
-        UserApi.showResult(question.questionId)
-            .then((response: any) => {
-                dispatch(setQuestionTimer(-1));
-                getQuestion(response.data.question.questionNumber + 1);
-                NotificationManager.info('Result ' + response.data.question.questionNumber + ' on screen', 'Info!', 2000);
-            })
-            .catch((e: Error) => {
-                NotificationManager.error(e.message, 'Error!', 5000);
-            });
-    };
-
-    const showFinalResult = () => {
-        AdminApi.showFinalResult(accessToken)
-            .then(() => {
-                if (question.questionNumber !== 0) {
-                    NotificationManager.info('Final Result on screen', 'Info!', 2000);
-                    dispatch(setQuestionTimer(-1));
-                    setShowedFinalResult(true);
-                }
             })
             .catch((e: Error) => {
                 NotificationManager.error(e.message, 'Error!', 5000);

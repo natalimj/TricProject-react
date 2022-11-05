@@ -1,10 +1,10 @@
 import React, { ChangeEvent, useState } from 'react'
-import IContributorData from '../models/Contributor'
+import IContributorData from '../../models/Contributor'
 import { NotificationManager } from 'react-notifications';
-import AdminApi from '../api/AdminApi';
-import Constants from '../util/Constants';
-import { useAppSelector } from '../app/hooks';
-import { RootState } from '../app/store';
+import AdminApi from '../../api/AdminApi';
+import Constants from '../../util/Constants';
+import { useAppSelector } from '../../app/hooks';
+import { RootState } from '../../app/store';
 import { AiOutlineDelete, AiOutlineSave } from 'react-icons/ai';
 
 type Props = {
