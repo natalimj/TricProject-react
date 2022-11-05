@@ -31,13 +31,13 @@ const StartPage = () => {
   }
 
   const onStatusMessageReceived = (msg: boolean) => {
-    dispatch(setStatus({ isActive: msg }))
+    dispatch(setStatus(msg))
   }
 
   useEffect(() => {
     UserApi.getAppStatus()
       .then((response: any) => {
-        dispatch(setStatus({ isActive: response.data }))
+        dispatch(setStatus(response.data))
         if (!isActive) {
           setPlayStarted(false);
         }

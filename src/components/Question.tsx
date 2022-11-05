@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../style/Question.css';
 import Constants from '../util/Constants';
 import UserApi from '../api/UserApi';
@@ -9,11 +9,8 @@ import { RootState } from '../app/store';
 import IAnswerData from '../models/Answer';
 import { addAnswer } from '../reducers/answerSlice';
 import { setUserVoted } from '../reducers/componentSlice';
-import { setUserResults} from '../reducers/userResultSlice';
 import { NotificationManager } from 'react-notifications';
 import IPlayInfoData from '../models/PlayInfo';
-
-import React from 'react';
 import Modal from 'react-modal';
 
 const Question = () => {
@@ -28,7 +25,7 @@ const Question = () => {
     time: useAppSelector((state: RootState) => state.question.time),
     theme: useAppSelector((state: RootState) => state.question.theme),
   }
-  const [selectedAnswer, setSelectedAnswer] = useState<IAnswerData>({ answerText: '' , firstCategory:'', secondCategory:''});
+  const [selectedAnswer, setSelectedAnswer] = useState<IAnswerData>({ answerText: '', firstCategory: '', secondCategory: '' });
   const [firstAnswer, setFirstAnswer] = useState<boolean>(false);
   const [secondAnswer, setSecondAnswer] = useState<boolean>(false);
   const [timer, setTimer] = useState<number>(currentQuestion.time);
@@ -46,10 +43,6 @@ const Question = () => {
       .then(() => {
         dispatch(addAnswer(answer));
         dispatch(setUserVoted(voteData.questionId));
-        dispatch(setUserResults({
-          question: currentQuestion,
-          answer: answer
-        }));
       })
       .catch((e: Error) => {
         console.log(e);
@@ -124,17 +117,16 @@ const Question = () => {
                   </button>
                 ))}
               </div>
-              {(currentQuestion.questionNumber !== 5) ? ((
-              <>
-              <button onClick={() => { vote(selectedAnswer) }} className={firstAnswer || secondAnswer ? 'question__submit-button question__active-button' : 'question__submit-button'} disabled={!firstAnswer && !secondAnswer} e2e-id="questionConfirm">
-                {Constants.CONFIRM_BUTTON}
-              </button>
-              </>)) : (
+              {(currentQuestion.questionNumber !== 5) ? (
+                <button onClick={() => { vote(selectedAnswer) }} className={firstAnswer || secondAnswer ? 'question__submit-button question__active-button' : 'question__submit-button'} disabled={!firstAnswer && !secondAnswer} e2e-id="questionConfirm">
+                  {Constants.CONFIRM_BUTTON}
+                </button>
+              ) : (
                 <>
-               <button onClick={() => { setIsOpen(true) }} className={firstAnswer || secondAnswer ? 'question__submit-button question__active-button' : 'question__submit-button'} disabled={!firstAnswer && !secondAnswer} e2e-id="questionConfirm">
-                {Constants.CONFIRM_BUTTON}
-              </button>
-                    <Modal
+                  <button onClick={() => { setIsOpen(true) }} className={firstAnswer || secondAnswer ? 'question__submit-button question__active-button' : 'question__submit-button'} disabled={!firstAnswer && !secondAnswer} e2e-id="questionConfirm">
+                    {Constants.CONFIRM_BUTTON}
+                  </button>
+                  <Modal
                     style={{
                       overlay: {
                         position: 'fixed',
@@ -158,15 +150,17 @@ const Question = () => {
                         outline: 'none',
                         padding: '20px'
                       }
-                    }}isOpen={isOpen}>
+                    }} isOpen={isOpen}>
                     <span className='question__timer-text'>
-                    {
-                      PlayInfo?.finalResultText // TODO: ADD PREDICTED ANSWER
-                    }
+                      {
+                        PlayInfo?.finalResultText // TODO: ADD PREDICTED ANSWER
+                      }
                     </span>
-                    <button className={'question__submit-button question__active-button'} onClick={() => {setIsOpen(false) 
-                    vote(selectedAnswer)}  //TODO: CHANGE TO PREDICTED ANSWER
-                  }>Continue</button>
+                    <button className={'question__submit-button question__active-button'} onClick={() => {
+                      setIsOpen(false)
+                      vote(selectedAnswer) //TODO: CHANGE TO PREDICTED ANSWER
+                    }}>{Constants.CONFIRM_BUTTON}
+                    </button>
                   </Modal>
                 </>
               )}

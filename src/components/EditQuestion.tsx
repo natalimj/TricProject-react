@@ -175,16 +175,16 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                 </div>
                 <div className="questions__line">
                     <select className="questions__dropdown questions_w50 questions__text-thin" value={(firstCategory !== null || firstCategory !== "") ? firstCategory : "Select category"} onChange={handleFirstCategorySelect}>
-                        {Constants.categories.map((option) => (
-                            <option value={option.value} disabled={option.disabled}>{option.label}</option>
+                        {Constants.categories.map((option, index) => (
+                            <option key={option.value+index} value={option.value} disabled={option.disabled}>{option.label}</option>
                         ))}
                     </select>
                     <select className="questions__dropdown questions_w50 questions__text-thin" 
                     value={(secondCategory !== null || secondCategory !== "") ? secondCategory : "Select category"} 
                     onChange={handleSecondCategorySelect}
                     disabled={disableDropdown}>
-                        {dropdownCategories.map((option) => (
-                            <option value={option.value} disabled={option.disabled}>{option.label}</option>
+                        {dropdownCategories.map((option, index) => (
+                            <option key={option.value+index} value={option.value} disabled={option.disabled}>{option.label}</option>
                         ))}
                     </select>
                 </div>

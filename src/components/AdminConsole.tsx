@@ -102,7 +102,7 @@ const AdminConsole = () => {
                 })
                 NotificationManager.info('User data has been deleted', 'Info!', 2000);
             }).then(() => {
-                dispatch(setStatus({ isActive: false }));
+                dispatch(setStatus(false));
                 dispatch(logoutAdmin());
                 dispatch(emptyQuestion());
                 dispatch(setNumberOfQuestions(0));
