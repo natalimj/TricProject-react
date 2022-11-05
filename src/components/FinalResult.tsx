@@ -25,7 +25,6 @@ const FinalResult = () => {
   useEffect(() => {
     UserApi.getFinalResult(currentUser.userId)
       .then((response: any) => {
-        console.log(response.data)
         setFinalResult(response.data)
       })
       .catch((e: Error) => {
@@ -66,7 +65,6 @@ const FinalResult = () => {
                   </div>
                 ))}
                 {finalResult?.finalCategoryList && finalResult?.finalCategoryList.map((finalCategory) => (
-
                   <p>{finalCategory.questionTheme} - {finalCategory.answerFirstCategory} and {finalCategory.answerSecondCategory}</p>
                 ))}
               </div>

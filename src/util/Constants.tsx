@@ -79,8 +79,7 @@ const Constants = {
 	CATEGORY3 :"Pragmatic",
 	CATEGORY4 :"Idealist",
 	FINAL_RESULT_TEXT : "Final Result Text",
-	WHAT_IS_TRIC: "What is TRIC?"
-
+	WHAT_IS_TRIC: "What is TRIC?",
 }
 
 export default Constants;

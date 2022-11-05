@@ -99,7 +99,6 @@ const ManageQuestions = () => {
     };
 
     const handleThemeSelect = (event: any) => {
-        console.log(event.target.value)
         setTheme(event.target.value);
     };
 
@@ -140,8 +139,8 @@ const ManageQuestions = () => {
 
                     <div className="questions__line">
                         <select className="questions__dropdown questions_w100" value={theme} onChange={handleThemeSelect}>
-                            {Constants.themes.map((option) => (
-                                <option value={option.value} disabled={option.disabled}>{option.label}</option>
+                            {Constants.themes.map((option, index) => (
+                                <option key={option.value+index} value={option.value} disabled={option.disabled}>{option.label}</option>
                             ))}
                         </select>
                     </div>
@@ -160,18 +159,17 @@ const ManageQuestions = () => {
 
                     <div className="questions__line">
                         <select className="questions__dropdown questions_w50" value={firstCategory} onChange={handleFirstCategorySelect}>
-                            {Constants.categories.map((option) => (
-                                <option value={option.value} disabled={option.disabled}>{option.label}</option>
+                            {Constants.categories.map((option, index) => (
+                                <option key={option.value+index} value={option.value} disabled={option.disabled}>{option.label}</option>
                             ))}
                         </select>
                         <select className="questions__dropdown questions_w50" value={secondCategory} onChange={handleSecondCategorySelect} 
                         disabled={disableDropdown}>
-                            {dropdownCategories.map((option) => (
-                                <option value={option.value} disabled={option.disabled}>{option.label}</option>
+                            {dropdownCategories.map((option, index) => (
+                                <option key={option.value+index} value={option.value} disabled={option.disabled}>{option.label}</option>
                             ))}
                         </select>
                     </div>
-
 
                     <div className="questions__line">
                         <div className="questions__input">

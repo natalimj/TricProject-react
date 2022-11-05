@@ -19,7 +19,7 @@ const Admin = () => {
   const activateApp = () => {
     AdminApi.activateApp(accessToken)
       .then(() => {
-        dispatch(setStatus({ isActive: true }))
+        dispatch(setStatus(true))
       })
       .catch((e: Error) => {
         NotificationManager.error(e.message, 'Error!', 5000);
@@ -37,7 +37,7 @@ const Admin = () => {
   useEffect(() => {
     UserApi.getAppStatus()
       .then((response: any) => {
-        dispatch(setStatus({ isActive: response.data }))
+        dispatch(setStatus(response.data))
       })
       .catch((e: Error) => {
         console.log(e);

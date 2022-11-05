@@ -12,14 +12,12 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         addUser: (state: IUserData, action: PayloadAction<IUserData>) => {
-            state.userId = action.payload.userId;
-            state.username = action.payload.username;
-            state.imagePath = action.payload.imagePath;
+            state = { ...action.payload };
+            return state;
         },
         removeUser: (state: IUserData) => {
-            state.userId = '';
-            state.username = '';
-            state.imagePath = '';
+            state = { ...initialState };
+            return state;
         },
     },
 });

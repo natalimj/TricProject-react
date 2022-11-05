@@ -40,7 +40,7 @@ const MainPage = () => {
   const showQuestion: boolean = useAppSelector((state: RootState) => state.component.questionComponentValue);
   const voted: number = useAppSelector((state: RootState) => state.component.userVotedValue);
   const userId: any = useAppSelector((state: RootState) => state.user.userId);
-  const currentQuestionId = useAppSelector((state: RootState) => state.question.questionId);
+  const currentQuestionId: number = useAppSelector((state: RootState) => state.question.questionId);
   const answers = useAppSelector((state: RootState) => [...state.question.answers]);
   const [showFinalResult, setShowFinalResult] = useState<boolean>(false);
   const [resultMessage, setResultMessage] = useState<IResultData>(initialResultState);

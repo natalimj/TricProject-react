@@ -1,9 +1,9 @@
 import http from "../util/Http-common";
 import IQuestionData from "../models/Question";
-import IStatusData from "../models/Status";
 import authHeader from "../services/auth-header";
 import IContributorData from "../models/Contributor";
 import IPlayInfoData from "../models/PlayInfo";
+import { StatusData } from "../reducers/statusSlice";
 
 const endSession = (accessToken: string) => {
   return http.get("adminApi/endSession", { headers: authHeader(accessToken) });
@@ -32,11 +32,11 @@ const showQuestion = (questionNumber: number, accessToken: string) => {
 };
 
 const activateApp = (accessToken: string) => {
-  return http.post<IStatusData>("adminApi/activate", "", { headers: authHeader(accessToken) });
+  return http.post<StatusData>("adminApi/activate", "", { headers: authHeader(accessToken) });
 };
 
 const deactivateApp = (accessToken: string) => {
-  return http.post<IStatusData>("adminApi/deactivate", "", { headers: authHeader(accessToken) });
+  return http.post<StatusData>("adminApi/deactivate", "", { headers: authHeader(accessToken) });
 };
 
 const getAllQuestions = (accessToken: string) => {

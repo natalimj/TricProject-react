@@ -102,11 +102,12 @@ const AdminConsole = () => {
                 })
                 NotificationManager.info('User data has been deleted', 'Info!', 2000);
             }).then(() => {
-                dispatch(setStatus({ isActive: false }));
+                dispatch(setStatus(false));
                 dispatch(logoutAdmin());
                 dispatch(emptyQuestion());
                 dispatch(setNumberOfQuestions(0));
                 dispatch(setNumberOfUsers(0));
+                dispatch(setQuestionTimer(-1));
                 setShowedFinalResult(false);
             })
             .catch((e: Error) => {
@@ -170,83 +171,81 @@ const AdminConsole = () => {
     return (
         <>
             <WebSocketComponent topics={['/topic/message']} onMessage={(msg: number) => onMessageReceived(msg)} />
-            <div className='admin-console__body admin-console__body--active' id={showQuestionButton ? '' : 'admin-console__body--result'}>
-                <div className='admin-console__text'>
-                    {Constants.ONLINE_USERS} {numberOfUsers}
-                    {question.questionNumber !== 1 && showQuestionButton ? (
-                        <div className='admin-console__text'>{Constants.RESULT_FIELD} {question.questionNumber - 1} {Constants.ON_SCREEN_FIELD}</div>
-                    ) : null}
-                </div>
-                {showQuestionButton ?
-                    (
-                        <>
-                            <div className='admin-console__buttons'>
-                                <div className='admin-console__next-question-text'>
-                                    <div className='admin-console__text admin-console__text--medium'>
-                                        {Constants.NEXT_QUESTION_TEXT}
+            {(question.questionNumber > 0) ? (
+                <div className='admin-console__body admin-console__body--active' id={showQuestionButton ? '' : 'admin-console__body--result'}>
+                    <div className='admin-console__text'>
+                        {Constants.ONLINE_USERS} {numberOfUsers}
+                        {question.questionNumber !== 1 && showQuestionButton ? (
+                            <div className='admin-console__text'>{Constants.RESULT_FIELD} {question.questionNumber - 1} {Constants.ON_SCREEN_FIELD}</div>
+                        ) : null}
+                    </div>
+                    {showQuestionButton ?
+                        (
+                            <>
+                                <div className='admin-console__buttons'>
+                                    <div className='admin-console__next-question-text'>
+                                        <div className='admin-console__text admin-console__text--medium'>
+                                            {Constants.NEXT_QUESTION_TEXT}
+                                        </div>
+                                        {question.questionNumber}. {question.questionText}
                                     </div>
-                                    {question.questionNumber}. {question.questionText}
-                                </div>
-                                <div className='admin-console__edit-time'>
-                                    <div className='admin-console__text admin-console__text--medium'>
-                                        {Constants.TIME_FOR} {question.questionNumber}:
+                                    <div className='admin-console__edit-time'>
+                                        <div className='admin-console__text admin-console__text--medium'>
+                                            {Constants.TIME_FOR} {question.questionNumber}:
+                                        </div>
+                                        <input type="text"
+                                            pattern='[0-9]{2}'
+                                            name="time"
+                                            value={question.time || ''}
+                                            e2e-id="timerField"
+                                            onChange={(e) => handleTimeChange(e)}
+                                            className="admin-console__input"
+                                            maxLength={5} />
                                     </div>
-                                    <input type="text"
-                                        pattern='[0-9]{2}'
-                                        name="time"
-                                        value={question.time || ''}
-                                        e2e-id="timerField"
-                                        onChange={(e) => handleTimeChange(e)}
-                                        className="admin-console__input"
-                                        maxLength={5} />
+                                    <button onClick={() => showQuestion()} className="admin-console__submit-button--secondary" e2e-id="showQuestion">
+                                        {Constants.QUESTION_BUTTON} {question.questionNumber}
+                                    </button>
                                 </div>
-                                <button onClick={() => showQuestion()} className="admin-console__submit-button--secondary" e2e-id="showQuestion">
-                                    {Constants.QUESTION_BUTTON} {question.questionNumber}
-                                </button>
-                                
-                            </div>
-                            <div className='admin-console__text admin-console__text--helper'>
-                                {Constants.SET_TIME_INFO}
-                                <div>
-                                    {Constants.TIME_LENGTH_INFO}
+                                <div className='admin-console__text admin-console__text--helper'>
+                                    {Constants.SET_TIME_INFO}
+                                    <div>
+                                        {Constants.TIME_LENGTH_INFO}
+                                    </div>
                                 </div>
-                            </div>
-                        </>
-                    ) : (
-                        <div className='admin-console__buttons admin-console__buttons--result'>
-                            {questionTimer > 0 && !showedFinalResult ? (
-                                <>
-                                    <div className='admin-console__text'>{Constants.QUESTION_FIELD} {question.questionNumber} {Constants.ON_SCREEN_FIELD}</div>
-                                    <div className='admin-console__text'> {questionTimer} {Constants.TIME_REMANING}</div>
-                                </>
-                            ) : null}
-                            {question.questionNumber < numberOfQuestions ? (
-                                <>
-                                <button onClick={() => showResult()} className="admin-console__submit-button--secondary" e2e-id="showResults">
-                                    {Constants.RESULT_BUTTON} {question.questionNumber}
-                                </button>
-                                </>
-                                
-                            ) : (
-                                <>
-                                    {questionTimer > 0 && !showedFinalResult ? (
-                                        <button onClick={showFinalResult} className="admin-console__submit-button--secondary" e2e-id="showFinalResult">
-                                            {Constants.FINAL_RESULT_BUTTON}
-                                        </button>
-                                    ) : (
-                                        <>
-                                            <div className='admin-console__text'>{Constants.FINAL_VOTE_RESULT_FIELD} {Constants.ON_SCREEN_FIELD}</div>
-                                            <button onClick={endSession} className="admin-console__submit-button" e2e-id="endSession">
-                                                {Constants.END_BUTTON}
+                            </>
+                        ) : (
+                            <div className='admin-console__buttons admin-console__buttons--result'>
+                                {(questionTimer > 0 && !showedFinalResult) ? (
+                                    <>
+                                        <div className='admin-console__text'>{Constants.QUESTION_FIELD} {question.questionNumber} {Constants.ON_SCREEN_FIELD}</div>
+                                        <div className='admin-console__text'> {questionTimer} {Constants.TIME_REMANING}</div>
+                                    </>
+                                ) : null}
+                                {question.questionNumber < numberOfQuestions ? (
+                                    <button onClick={() => showResult()} className="admin-console__submit-button--secondary" e2e-id="showResults">
+                                        {Constants.RESULT_BUTTON} {question.questionNumber}
+                                    </button>
+                                ) : (
+                                    <>
+                                        {(questionTimer > 0 && !showedFinalResult) ? (
+                                            <button onClick={showFinalResult} className="admin-console__submit-button--secondary" e2e-id="showFinalResult">
+                                                {Constants.FINAL_RESULT_BUTTON}
                                             </button>
-                                        </>
-                                    )}
-                                </>
-                            )}
-                        </div>
-                    )
-                }
-            </div>
+                                        ) : (
+                                            <>
+                                                <div className='admin-console__text'>{Constants.FINAL_VOTE_RESULT_FIELD} {Constants.ON_SCREEN_FIELD}</div>
+                                                <button onClick={endSession} className="admin-console__submit-button" e2e-id="endSession">
+                                                    {Constants.END_BUTTON}
+                                                </button>
+                                            </>
+                                        )}
+                                    </>
+                                )}
+                            </div>
+                        )
+                    }
+                </div>
+            ) : null}
         </>
     )
 }

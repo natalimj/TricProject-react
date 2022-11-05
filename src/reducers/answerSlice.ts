@@ -4,8 +4,8 @@ import IAnswerData from '../models/Answer';
 const initialState: IAnswerData = {
     answerId: '',
     answerText: '',
-    firstCategory :'',
-    secondCategory :''
+    firstCategory: '',
+    secondCategory: ''
 };
 
 export const answerSlice = createSlice({
@@ -13,10 +13,8 @@ export const answerSlice = createSlice({
     initialState,
     reducers: {
         addAnswer: (state: IAnswerData, action: PayloadAction<IAnswerData>) => {
-            state.answerId = action.payload.answerId;
-            state.answerText = action.payload.answerText;
-            state.firstCategory =action.payload.firstCategory;
-            state.secondCategory = action.payload.secondCategory;
+            state = { ...action.payload };
+            return state;
         },
     },
 });
