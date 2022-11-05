@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react';
-import '../style/AdminMainPage.css';
-import AdminApi from '../api/AdminApi';
-import Constants from '../util/Constants';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { setStatus } from '../reducers/statusSlice';
-import { RootState } from '../app/store';
+import '../../style/AdminMainPage.css';
+import AdminApi from '../../api/AdminApi';
+import Constants from '../../util/Constants';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { setStatus } from '../../reducers/statusSlice';
+import { RootState } from '../../app/store';
 import 'react-notifications/lib/notifications.css';
 import { NotificationManager } from 'react-notifications';
 import AdminConsole from './AdminConsole';
-import UserApi from '../api/UserApi';
-import TricLogo from '../util/icons/TRIC.svg';
+import UserApi from '../../api/UserApi';
+import TricLogo from '../../util/icons/TRIC.svg';
 
 const Admin = () => {
-  const isActive = useAppSelector((state: RootState) => state.status.isActive);
   const dispatch = useAppDispatch();
+  const isActive = useAppSelector((state: RootState) => state.status.isActive);
   const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
 
   const activateApp = () => {

@@ -1,8 +1,8 @@
 import answerReducer, {
-    addAnswer
-} from './answerSlice';
+    addAnswer, clearAnswer
+} from '../../reducers/answerSlice';
 import { describe, it, expect } from '@jest/globals'
-import IAnswerData from '../models/Answer';
+import IAnswerData from '../../models/Answer';
 
 describe('answer reducer', () => {
     const initialState: IAnswerData = {
@@ -33,6 +33,16 @@ describe('answer reducer', () => {
             answerText: 'Yes',
             firstCategory: 'Progressive',
             secondCategory: 'Idealist'
+        });
+    });
+
+    it('should handle clearing answer data', () => {
+        const actual = answerReducer(initialState, clearAnswer());
+        expect(actual).toEqual({
+            answerId: '',
+            answerText: '',
+            firstCategory: '',
+            secondCategory: ''
         });
     });
 });

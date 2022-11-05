@@ -21,7 +21,7 @@ export const adminSlice = createSlice({
     name: 'admin',
     initialState,
     reducers: {
-        logAdmin: (state: AdminState, action: PayloadAction<AdminState>) => {
+        loginAdmin: (state: AdminState, action: PayloadAction<AdminState>) => {
             state = { ...action.payload };
             return state;
         },
@@ -32,6 +32,6 @@ export const adminSlice = createSlice({
     },
 });
 
-export const { logAdmin, logoutAdmin } = adminSlice.actions;
+export const { loginAdmin, logoutAdmin } = adminSlice.actions;
 
 export default adminSlice.reducer;

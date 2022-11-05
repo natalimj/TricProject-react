@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { BsArrowLeftCircle, BsArrowRightCircle } from 'react-icons/bs';
 import { NotificationManager } from 'react-notifications';
-import UserApi from '../api/UserApi';
-import IContributorData from '../models/Contributor';
-import IPlayInfoData from '../models/PlayInfo';
-import '../style/PlayInfo.css';
-import Constants from '../util/Constants';
+import UserApi from '../../api/UserApi';
+import IContributorData from '../../models/Contributor';
+import IPlayInfoData from '../../models/PlayInfo';
+import '../../style/PlayInfo.css';
+import Constants from '../../util/Constants';
 import FinalResult from './FinalResult';
 
 const PlayInfo = () => {
@@ -42,7 +42,7 @@ const PlayInfo = () => {
     <>
       {showPlayInfo && <div className="play-info">
         <div className='play-info_close-icon'>
-        <AiOutlineCloseCircle size={30} onClick={() => { setShowPlayInfo(false) }} />
+          <AiOutlineCloseCircle size={30} onClick={() => { setShowPlayInfo(false) }} />
         </div>
         <div className="play-info__inner-container">
           {showFirstPage &&
@@ -51,11 +51,11 @@ const PlayInfo = () => {
               </div>
               {cast && cast.map((c) => (
                 <div key={c.contributorId}>
-                <div className={cast.length>7 ? 'play-info__name-smaller-text' : 'play-info_name'}>{c.name}</div>
-                <div className='play-info_description'>{c.description}</div>
+                  <div className={cast.length > 7 ? 'play-info__name-smaller-text' : 'play-info_name'}>{c.name}</div>
+                  <div className='play-info_description'>{c.description}</div>
                 </div>
-             ))}
-              <BsArrowRightCircle size={30} className= 'play-info_arrow-icon' onClick={() => { setShowFirstPage(false) }} />
+              ))}
+              <BsArrowRightCircle size={30} className='play-info_arrow-icon' onClick={() => { setShowFirstPage(false) }} />
             </div>}
 
           {!showFirstPage &&
@@ -65,7 +65,7 @@ const PlayInfo = () => {
               <div className="play-info__header">{Constants.DEVELOPERS_TITLE.toUpperCase()}</div>
               {developers && developers.map((c) => (
                 <div key={c.contributorId} className='play-info_description'>{c.name}</div>))}
-              <BsArrowLeftCircle className= 'play-info_arrow-icon' size={30} onClick={() => { setShowFirstPage(true) }} />
+              <BsArrowLeftCircle className='play-info_arrow-icon' size={30} onClick={() => { setShowFirstPage(true) }} />
             </div>}
         </div>
       </div>

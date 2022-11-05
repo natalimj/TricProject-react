@@ -1,15 +1,16 @@
-import '../style/ManageQuestions.css';
-import IQuestionData from '../models/Question';
+import '../../style/ManageQuestions.css';
+import IQuestionData from '../../models/Question';
 import { useEffect, useState } from 'react';
-import AdminApi from '../api/AdminApi';
+import AdminApi from '../../api/AdminApi';
 import { BiDownArrow, BiUpArrow, BiLeftArrowAlt } from "react-icons/bi";
 import EditQuestion from './EditQuestion';
-import Constants from '../util/Constants';
+import Constants from '../../util/Constants';
 import { NotificationManager } from 'react-notifications';
-import { useAppSelector } from '../app/hooks';
-import { RootState } from '../app/store';
+import { useAppSelector } from '../../app/hooks';
+import { RootState } from '../../app/store';
 
 const ManageQuestions = () => {
+    const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
     const [questions, setQuestions] = useState<IQuestionData[]>([]);
     const [questionText, setQuestionText] = useState("");
     const [firstAnswer, setFirstAnswer] = useState("");
@@ -18,7 +19,6 @@ const ManageQuestions = () => {
     const [firstCategory, setFirstCategory] = useState("Select category");
     const [secondCategory, setSecondCategory] = useState("Select category");
     const [showQuestions, setShowQuestions] = useState<boolean>(false);
-    const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
     const [dropdownCategories, setDropdownCategories] = useState(Constants.categories)
     const [disableDropdown,setDisableDropdown]= useState<boolean>(true)
 

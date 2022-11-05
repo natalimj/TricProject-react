@@ -16,9 +16,13 @@ export const answerSlice = createSlice({
             state = { ...action.payload };
             return state;
         },
+        clearAnswer: (state: IAnswerData) => {
+            state = { ...initialState };
+            return state;
+        },
     },
 });
 
-export const { addAnswer } = answerSlice.actions;
+export const { addAnswer, clearAnswer } = answerSlice.actions;
 
 export default answerSlice.reducer;

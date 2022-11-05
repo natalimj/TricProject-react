@@ -1,30 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import '../style/Question.css';
-import Constants from '../util/Constants';
-import UserApi from '../api/UserApi';
-import IQuestionData from '../models/Question';
-import WaitingPage from './WaitingPage';
-import { useAppSelector, useAppDispatch } from '../app/hooks';
-import { RootState } from '../app/store';
-import IAnswerData from '../models/Answer';
-import { addAnswer } from '../reducers/answerSlice';
-import { setUserVoted } from '../reducers/componentSlice';
+import '../../style/Question.css';
+import Constants from '../../util/Constants';
+import UserApi from '../../api/UserApi';
+import IQuestionData from '../../models/Question';
+import WaitingPage from '../WaitingPage';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { RootState } from '../../app/store';
+import IAnswerData from '../../models/Answer';
+import { addAnswer } from '../../reducers/answerSlice';
+import { setUserVoted } from '../../reducers/componentSlice';
 import { NotificationManager } from 'react-notifications';
-import IPlayInfoData from '../models/PlayInfo';
+import IPlayInfoData from '../../models/PlayInfo';
 import Modal from 'react-modal';
 
 const Question = () => {
   const dispatch = useAppDispatch();
   const voted: number = useAppSelector((state: RootState) => state.component.userVotedValue);
   const userId: any = useAppSelector((state: RootState) => state.user.userId);
-  const currentQuestion: IQuestionData = {
-    questionId: useAppSelector((state: RootState) => state.question.questionId),
-    questionNumber: useAppSelector((state: RootState) => state.question.questionNumber),
-    questionText: useAppSelector((state: RootState) => state.question.questionText),
-    answers: useAppSelector((state: RootState) => [...state.question.answers]),
-    time: useAppSelector((state: RootState) => state.question.time),
-    theme: useAppSelector((state: RootState) => state.question.theme),
-  }
+  const currentQuestion: IQuestionData = useAppSelector((state: RootState) => state.question);
   const [selectedAnswer, setSelectedAnswer] = useState<IAnswerData>({ answerText: '', firstCategory: '', secondCategory: '' });
   const [firstAnswer, setFirstAnswer] = useState<boolean>(false);
   const [secondAnswer, setSecondAnswer] = useState<boolean>(false);

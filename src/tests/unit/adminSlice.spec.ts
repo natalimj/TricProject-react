@@ -1,8 +1,8 @@
 import adminReducer, {
     AdminState,
-    logAdmin,
+    loginAdmin,
     logoutAdmin
-} from './adminSlice';
+} from '../../reducers/adminSlice';
 import { describe, it, expect } from '@jest/globals'
 
 describe('admin reducer', () => {
@@ -25,7 +25,7 @@ describe('admin reducer', () => {
     });
 
     it('should login admin', () => {
-        const actual = adminReducer(initialState, logAdmin({
+        const actual = adminReducer(initialState, loginAdmin({
             accessToken: 'token',
             email: 'email',
             roles: ['role1', 'role2'],

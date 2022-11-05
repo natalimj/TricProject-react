@@ -25,9 +25,13 @@ export const componentSlice = createSlice({
         setUserVoted: (state: ComponentState, action: PayloadAction<number>) => {
             state.userVotedValue = action.payload;
         },
+        clearComponentState: (state: ComponentState) => {
+            state = { ...initialState };
+            return state;
+        },
     },
 });
 
-export const { setQuestionComponent, setUserJoined, setUserVoted } = componentSlice.actions;
+export const { setQuestionComponent, setUserJoined, setUserVoted, clearComponentState } = componentSlice.actions;
 
 export default componentSlice.reducer;

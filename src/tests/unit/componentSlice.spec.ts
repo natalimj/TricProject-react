@@ -2,8 +2,9 @@ import componentReducer, {
     setQuestionComponent,
     setUserJoined,
     setUserVoted,
+    clearComponentState,
     ComponentState
-} from './componentSlice';
+} from '../../reducers/componentSlice';
 import { describe, it, expect } from '@jest/globals'
 
 describe('component reducer', () => {
@@ -34,5 +35,14 @@ describe('component reducer', () => {
     it('should handle set userVoted', () => {
         const actual = componentReducer(initialState, setUserVoted(2));
         expect(actual.userVotedValue).toEqual(2);
+    });
+
+    it('should handle clearing component state', () => {
+        const actual = componentReducer(initialState, clearComponentState());
+        expect(actual).toEqual({
+            questionComponentValue: false,
+            userJoinedValue: false,
+            userVotedValue: -1,
+        });
     });
 });

@@ -1,14 +1,14 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
-import UserApi from '../api/UserApi';
-import IContributorData from '../models/Contributor';
+import UserApi from '../../api/UserApi';
+import IContributorData from '../../models/Contributor';
 import { NotificationManager } from 'react-notifications';
-import Constants from '../util/Constants';
+import Constants from '../../util/Constants';
 import EditContributor from './EditContributor';
-import AdminApi from '../api/AdminApi';
-import IPlayInfoData from '../models/PlayInfo';
+import AdminApi from '../../api/AdminApi';
+import IPlayInfoData from '../../models/PlayInfo';
 import { BiDownArrow, BiLeftArrowAlt, BiUpArrow } from 'react-icons/bi';
-import { useAppSelector } from '../app/hooks';
-import { RootState } from '../app/store';
+import { useAppSelector } from '../../app/hooks';
+import { RootState } from '../../app/store';
 
 const PlayInfo = () => {
   const initialContributor = {
@@ -23,11 +23,11 @@ const PlayInfo = () => {
     finalResultText :"",
   };
 
+  const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
   const [contributors, setContributors] = useState<IContributorData[]>([]);
   const [contributor, setContributor] = useState(initialContributor);
   const [playInfo, setPlayInfo] = useState<IPlayInfoData>(initialPlayInfo);
   const [showCast, setShowCast] = useState<boolean>(false);
-  const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
 
   useEffect(() => {
     UserApi.getCast()
@@ -68,7 +68,7 @@ const PlayInfo = () => {
 
   const editPlayInfo = () => {
     AdminApi.editPlayInfo(playInfo, accessToken)
-      .then((response: any) => {
+      .then(() => {
         NotificationManager.success('Play Info has been saved', 'Success!', 2000);
       }).catch((e: Error) => {
         NotificationManager.error(e.message, 'Error!', 5000);
