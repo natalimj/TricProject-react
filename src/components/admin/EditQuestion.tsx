@@ -92,15 +92,12 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                 }],
             };
 
-            console.log(questionToEdit)
             AdminApi.editQuestion(questionToEdit, accessToken)
-                .then((response: any) => {
+                .then(() => {
                     NotificationManager.success('Question has been edited', 'Success!', 2000);
                 })
                 .catch((e: Error) => {
-                    console.log(e)
                     NotificationManager.error(e.message, 'Error!', 5000);
-                    console.log(e);
                 });
         } else {
             NotificationManager.warning('Please fill all required fields ', 'Warning!', 2000);

@@ -19,6 +19,8 @@ const Question = () => {
   const userId: any = useAppSelector((state: RootState) => state.user.userId);
   const currentQuestion: IQuestionData = useAppSelector((state: RootState) => state.question);
   const [selectedAnswer, setSelectedAnswer] = useState<IAnswerData>({ answerText: '', firstCategory: '', secondCategory: '' });
+  const [predictedAnswer, setPredictedAnswer] = useState<IAnswerData>({ answerText: '', firstCategory: '', secondCategory: '' });
+  const [numberOfQuestions, setNumberOfQuestions] = useState<number>(0);
   const [firstAnswer, setFirstAnswer] = useState<boolean>(false);
   const [secondAnswer, setSecondAnswer] = useState<boolean>(false);
   const [timer, setTimer] = useState<number>(currentQuestion.time);
@@ -63,27 +65,43 @@ const Question = () => {
 
   useEffect(() => {
     if (timer === 0 && !voted) {
-      vote(currentQuestion.answers[0]);
+      currentQuestion.questionNumber === numberOfQuestions ? vote(predictedAnswer) : vote(currentQuestion.answers[0]); //TODO: check if last question, then predictedVote() instead of vote
       setTimer(-1);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentQuestion.answers]);
 
   useEffect(() => {
-    UserApi.getPlayInfo()
+    UserApi.getNumberOfQuestions()
       .then((response: any) => {
-        setPlayInfo(response.data)
-      }).catch((e: Error) => {
+        setNumberOfQuestions(response.data);
+      }).then(() => {
+        if (currentQuestion.questionNumber === numberOfQuestions) {
+          UserApi.getPlayInfo()
+            .then((response: any) => {
+              setPlayInfo(response.data)
+            }).catch((e: Error) => {
+              NotificationManager.error(e.message, 'Error!', 5000);
+            });
+
+          UserApi.getPredictedAnswer(userId)
+            .then((response: any) => {
+              dispatch(addAnswer(currentQuestion.answers[response.data]));
+              setPredictedAnswer(currentQuestion.answers[response.data]); //TODO: check if needed
+            }).then(() => {
+              setTimeout(() => {
+                setIsOpen(true)
+              }, 5000)
+            })
+            .catch((e: Error) => {
+              NotificationManager.error(e.message, 'Error!', 5000);
+            });
+        }
+      })
+      .catch((e: Error) => {
         NotificationManager.error(e.message, 'Error!', 5000);
       });
-  }, [])
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsOpen(true)
-    }, 5000);
-  }, [])
-
+  }, [currentQuestion.answers, currentQuestion.questionNumber, dispatch, numberOfQuestions, userId])
 
   return (
     <div className='question-container'>
@@ -110,7 +128,7 @@ const Question = () => {
                   </button>
                 ))}
               </div>
-              {(currentQuestion.questionNumber !== 5) ? (
+              {(currentQuestion.questionNumber !== numberOfQuestions) ? (
                 <button onClick={() => { vote(selectedAnswer) }} className={firstAnswer || secondAnswer ? 'question__submit-button question__active-button' : 'question__submit-button'} disabled={!firstAnswer && !secondAnswer} e2e-id="questionConfirm">
                   {Constants.CONFIRM_BUTTON}
                 </button>
@@ -144,14 +162,11 @@ const Question = () => {
                         padding: '20px'
                       }
                     }} isOpen={isOpen}>
-                    <span className='question__timer-text'>
-                      {
-                        PlayInfo?.finalResultText // TODO: ADD PREDICTED ANSWER
-                      }
-                    </span>
+                    <div className='question__timer-text'>{PlayInfo?.finalResultText}</div>
+                    <div className='question__timer-text'>We chose: {predictedAnswer.answerText}</div>
                     <button className={'question__submit-button question__active-button'} onClick={() => {
                       setIsOpen(false)
-                      vote(selectedAnswer) //TODO: CHANGE TO PREDICTED ANSWER
+                      vote(predictedAnswer) //TODO: check this
                     }}>{Constants.CONFIRM_BUTTON}
                     </button>
                   </Modal>

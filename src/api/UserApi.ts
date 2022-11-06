@@ -7,7 +7,7 @@ import IContributorData from "../models/Contributor";
 import IPlayInfoData from "../models/PlayInfo";
 
 const getAllUsers = () => {
-    return http.get<Array<IUserData>>("userApi/users");
+    return http.get<Array<IUserData>>("userApi/users"); //this is a pretty dangerous endpoint to have not secured, TODO: remove or move to admin
 };
 
 const createUser = (data: IUserData) => {
@@ -21,6 +21,18 @@ const saveVote = (data: IVoteData) => {
 const getAppStatus = () => {
     return http.get<boolean>("userApi/getAppStatus");
 }
+
+const getNumberOfQuestions = () => {
+    return http.get<number>("userApi/numberOfQuestions");
+};
+
+const getPredictedAnswer = (userId: any) => {
+    return http.get<number>("userApi/predictedAnswer", {
+        params: {
+            userId: userId
+        }
+    });
+};
 
 const showResult = (questionId: any) => {
     return http.get<IResultData>("userApi/result", {
@@ -49,7 +61,7 @@ const getDevTeam = () => {
 
 const getPlayInfo = () => {
     return http.get<IPlayInfoData>("userApi/getPlayInfo");
-  };
+};
 
 const UserApi = {
     getAllUsers,
@@ -60,6 +72,8 @@ const UserApi = {
     getFinalResult,
     getCast,
     getDevTeam,
-    getPlayInfo
+    getPlayInfo,
+    getNumberOfQuestions,
+    getPredictedAnswer
 };
 export default UserApi;
