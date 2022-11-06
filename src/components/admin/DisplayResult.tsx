@@ -3,18 +3,64 @@ import '../../style/Result.css';
 import IResultData from '../../models/Result';
 import Constants from '../../util/Constants';
 import WebSocketComponent from '../WebSocketComponent';
+import IQuestionData from '../../models/Question';
 
 const DisplayResult = () => {
-    const [result, setResult] = useState<IResultData>(Constants.initialResultState);
+
+    const initialQuestionState = {
+        questionNumber: 0,
+        questionText: '',
+        answers: [],
+        time: 0,
+        theme: ""
+    }
+    const initialResultState = {
+        question: initialQuestionState,
+        firstAnswerRate: 0.0,
+        secondAnswerRate: 0.0,
+        firstAnswer: {
+            answerText: "",
+            firstCategory: "",
+            secondCategory: ""
+        },
+        secondAnswer: {
+            answerText: "",
+            firstCategory: "",
+            secondCategory: ""
+        }
+    };
+
+    const [result, setResult] = useState<IResultData>(initialResultState);
+    const [question, setQuestion] = useState<IQuestionData>(initialQuestionState);
+    const [showQuestion, setShowQuestion] = useState<boolean>(false);
     const [showResult, setShowResult] = useState<boolean>(false);
 
-    const onMessageReceived = (msg: IResultData) => {
+
+    const onResultMessageReceived = (msg: IResultData) => {
         setResult(msg);
         setShowResult(true);
+        setShowQuestion(false);
+    }
+
+    const onQuestionMessageReceived = (msg: IQuestionData) => {
+        setQuestion(msg);
+        setShowQuestion(true);
+        setShowResult(false);
     }
 
     return (<>
-        <WebSocketComponent topics={['/topic/result']} onMessage={(msg: IResultData) => onMessageReceived(msg)} />
+        <WebSocketComponent topics={['/topic/result']} onMessage={(msg: IResultData) => onResultMessageReceived(msg)} />
+        <WebSocketComponent topics={['/topic/adminQuestion']} onMessage={(msg: IQuestionData) => onQuestionMessageReceived(msg)} />
+
+        {showQuestion &&
+            <div className='admin-result'>
+                <div className="admin-result__inner-container">
+                    <div className="result__box">
+                        <div className="result__question-text result__text--larger">{question.questionText}</div>
+                    </div>
+                </div>
+            </div>
+        }
         {showResult &&
             <div className='admin-result'>
                 <div className="admin-result__inner-container">
