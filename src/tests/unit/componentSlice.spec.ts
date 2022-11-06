@@ -2,6 +2,7 @@ import componentReducer, {
     setQuestionComponent,
     setUserJoined,
     setUserVoted,
+    setFinalResultShowed,
     clearComponentState,
     ComponentState
 } from '../../reducers/componentSlice';
@@ -12,6 +13,7 @@ describe('component reducer', () => {
         questionComponentValue: true,
         userJoinedValue: true,
         userVotedValue: 3,
+        finalResultShowed: true
     };
 
     it('should handle initial state', () => {
@@ -19,6 +21,7 @@ describe('component reducer', () => {
             questionComponentValue: false,
             userJoinedValue: false,
             userVotedValue: -1,
+            finalResultShowed: false
         });
     });
 
@@ -37,12 +40,18 @@ describe('component reducer', () => {
         expect(actual.userVotedValue).toEqual(2);
     });
 
+    it('should handle set finalResultShowed', () => {
+        const actual = componentReducer(initialState, setFinalResultShowed(true));
+        expect(actual.finalResultShowed).toEqual(true);
+    });
+
     it('should handle clearing component state', () => {
         const actual = componentReducer(initialState, clearComponentState());
         expect(actual).toEqual({
             questionComponentValue: false,
             userJoinedValue: false,
             userVotedValue: -1,
+            finalResultShowed: false
         });
     });
 });

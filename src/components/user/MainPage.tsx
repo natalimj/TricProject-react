@@ -5,7 +5,7 @@ import Question from "./Question";
 import Result from "./Result";
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { RootState } from '../../app/store';
-import { setQuestionComponent, setUserVoted } from '../../reducers/componentSlice';
+import { ComponentState, setQuestionComponent, setUserVoted, setFinalResultShowed } from '../../reducers/componentSlice';
 import { addAnswer } from '../../reducers/answerSlice';
 import UserApi from '../../api/UserApi';
 import IResultData from '../../models/Result';
@@ -13,8 +13,7 @@ import Constants from '../../util/Constants';
 
 const MainPage = () => {
   const dispatch = useAppDispatch();
-  const showQuestion: boolean = useAppSelector((state: RootState) => state.component.questionComponentValue);
-  const voted: number = useAppSelector((state: RootState) => state.component.userVotedValue);
+  const componentData: ComponentState = useAppSelector((state: RootState) => state.component);
   const userId: any = useAppSelector((state: RootState) => state.user.userId);
   const currentQuestionId: number = useAppSelector((state: RootState) => state.question.questionId);
   const answers = useAppSelector((state: RootState) => [...state.question.answers]);
@@ -23,8 +22,7 @@ const MainPage = () => {
   const [resultMessage, setResultMessage] = useState<IResultData>(Constants.initialResultState);
 
   const onMessageReceived = (msg: IResultData) => {
-    console.log('saw result received');
-    if (voted !== currentQuestionId) {
+    if (componentData.userVotedValue !== currentQuestionId) {
       UserApi.saveVote({
         userId: userId,
         questionId: currentQuestionId,
@@ -52,8 +50,8 @@ const MainPage = () => {
   }
 
   const onFinalResultMessageReceived = () => {
-    console.log('saw final result received');
     dispatch(setQuestionComponent(false));
+    dispatch(setFinalResultShowed(true));
     setShowFinalResult(true);
   }
 
@@ -61,7 +59,7 @@ const MainPage = () => {
     <div className="main-page">
       <WebSocketComponent topics={['/topic/result']} onMessage={(msg: IResultData) => onMessageReceived(msg)} />
       <WebSocketComponent topics={['/topic/finalResult']} onMessage={() => onFinalResultMessageReceived()} />
-      {showQuestion ? (
+      {componentData.questionComponentValue ? (
         <div className="main-page-question"><Question /></div>
       ) : (
         <div className="main-page-result">
