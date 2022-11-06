@@ -60,6 +60,8 @@ const Constants = {
 	CONFIRM_BUTTON: "Confirm",
 	WAITING_PROMPT_RESULT: "Gathering votes...",
 	WAITING_PROMPT_BEGIN: "Waiting for the first question...",
+	WAITING_DEFAULT : "Waiting...",
+	WAITING_PROMPT_VOTE :"Waiting for new voting period",
 	DOWNLOAD: "DOWNLOAD",
 	DIGITAL_PROFILE_FIELD: "YOUR DIGITAL PROFILE",
 	USER_RESPONSE: "Your response",
