@@ -65,7 +65,7 @@ const StartPage = () => {
               {sessionStarted ? (
                 <div className="start-page-user">
                   {userSubmitted ? (
-                    <div className="start-page-question"> {playStarted ? (<MainPage />) : (<WaitingPage startScreen={true} />)}</div>
+                    <div className="start-page-question"> {playStarted ? (<MainPage />) : (<WaitingPage message ={Constants.WAITING_PROMPT_BEGIN} />)}</div>
                   ) : (
                     <UserLoginPage />
                   )}

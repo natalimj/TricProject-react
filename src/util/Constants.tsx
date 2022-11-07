@@ -60,6 +60,8 @@ const Constants = {
 	CONFIRM_BUTTON: "Confirm",
 	WAITING_PROMPT_RESULT: "Gathering votes...",
 	WAITING_PROMPT_BEGIN: "Waiting for the first question...",
+	WAITING_DEFAULT : "Waiting...",
+	WAITING_PROMPT_VOTE :"Waiting for new voting period",
 	DOWNLOAD: "DOWNLOAD",
 	DIGITAL_PROFILE_FIELD: "YOUR DIGITAL PROFILE",
 	USER_RESPONSE: "Your response",
@@ -103,6 +105,7 @@ const Constants = {
 	CATEGORY4: "Idealist",
 	FINAL_RESULT_TEXT: "Final Result Text",
 	WHAT_IS_TRIC: "What is TRIC?",
+	DISPLAY_QUESTION : "Display question on admin screen",
 }
 
 export default Constants;

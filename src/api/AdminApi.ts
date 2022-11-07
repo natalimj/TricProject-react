@@ -104,6 +104,15 @@ const editPlayInfo = (playInfo: IPlayInfoData, accessToken: string) => {
   return http.patch<IPlayInfoData>("adminApi/playInfo", playInfo, { headers: authHeader(accessToken) });
 };
 
+const displayQuestionForAdmin = (questionNumber: number, accessToken: string) => {
+  return http.get<IQuestionData>("adminApi/displayQuestion", {
+      params: {
+        questionNumber: questionNumber
+      },
+      headers: authHeader(accessToken)
+  })
+};
+
 
 const AdminApi = {
   endSession,
@@ -122,6 +131,7 @@ const AdminApi = {
   addContributor,
   editContributor,
   deleteContributor,
-  editPlayInfo
+  editPlayInfo,
+  displayQuestionForAdmin
 };
 export default AdminApi;

@@ -22,6 +22,8 @@ const AdminConsole = () => {
     const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
 
     const [showedFinalResult, setShowedFinalResult] = useState<boolean>(false);
+    const [questionOnScreen, setQuestionOnScreen] = useState<boolean>(true)
+
     const maxTimeValue: number = 1800;
     const minTimeValue: number = 1;
 
@@ -61,6 +63,17 @@ const AdminConsole = () => {
             });
     }
 
+    const displayQuestionForAdmin = () => {
+        AdminApi.displayQuestionForAdmin(question.questionNumber, accessToken)
+            .then((response: any) => {
+                NotificationManager.info('Question ' + question.questionNumber + ' on admin screen', 'Info!', 2000);
+                setQuestionOnScreen(false)
+            })
+            .catch((e: Error) => {
+                NotificationManager.error(e.message, 'Error!', 5000);
+            });
+    }
+
     const handleTimeChange = (e: React.FormEvent<HTMLInputElement>) => {
         e.preventDefault()
         let time: number;
@@ -87,6 +100,7 @@ const AdminConsole = () => {
             .then((response: any) => {
                 dispatch(setQuestionTimer(-1));
                 getQuestion(response.data.question.questionNumber + 1);
+                setQuestionOnScreen(true)
                 NotificationManager.info('Result ' + response.data.question.questionNumber + ' on screen', 'Info!', 2000);
             })
             .catch((e: Error) => {
@@ -174,7 +188,7 @@ const AdminConsole = () => {
                 <div className='admin-console__body admin-console__body--active' id={playData.showQuestionButton ? '' : 'admin-console__body--result'}>
                     <div className='admin-console__text'>
                         {Constants.ONLINE_USERS} {playData.numberOfUsers}
-                        {question.questionNumber !== 1 && playData.showQuestionButton ? (
+                        {question.questionNumber !== 1 && playData.showQuestionButton && questionOnScreen ? (
                             <div className='admin-console__text'>{Constants.RESULT_FIELD} {question.questionNumber - 1} {Constants.ON_SCREEN_FIELD}</div>
                         ) : null}
                     </div>
@@ -188,6 +202,11 @@ const AdminConsole = () => {
                                         </div>
                                         {question.questionNumber}. {question.questionText}
                                     </div>
+                                    {questionOnScreen &&
+                                        <button onClick={() => displayQuestionForAdmin()} className="admin-console__submit-button--secondary" e2e-id="showQuestion">
+                                            {Constants.DISPLAY_QUESTION}
+                                        </button>
+                                    }
                                     <div className='admin-console__edit-time'>
                                         <div className='admin-console__text admin-console__text--medium'>
                                             {Constants.TIME_FOR} {question.questionNumber}:
