@@ -3,7 +3,7 @@ import AdminApi from "../api/AdminApi";
 import IQuestionData from "../models/Question";
 import IAnswerData from "../models/Answer";
 
-const accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtb2QiLCJpYXQiOjE2Njc1NTY4OTAsImV4cCI6MTY2NzgxNjA5MH0.w2HYPV7M7U0cMmwemdFwpwP_Iv_cRRu4Z-KSWsDWaIxtvwcYntaVI4nnHiNapXiE5SdaI6ryybnT_vSIQdxXMQ";
+const accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtb2QiLCJpYXQiOjE2Njc4MzI5MjcsImV4cCI6MTY2ODA5MjEyN30.fOsRAUAzLdrZp0zbK_tufDJwKBM8lMAmH7oNmfgnpzqt3NyII2t_PtmNSAYKhDwEC9AE6ifTCcS-I6Ft7qIDgQ";
 let browser;
 let adminPage;
 let userPage;

@@ -17,6 +17,7 @@ const MainPage = () => {
   const userId: any = useAppSelector((state: RootState) => state.user.userId);
   const currentQuestionId: number = useAppSelector((state: RootState) => state.question.questionId);
   const answers = useAppSelector((state: RootState) => [...state.question.answers]);
+  const userAnswer = useAppSelector((state: RootState) => state.answer);
 
   const [showFinalResult, setShowFinalResult] = useState<boolean>(false);
   const [resultMessage, setResultMessage] = useState<IResultData>(Constants.initialResultState);
@@ -26,9 +27,9 @@ const MainPage = () => {
       UserApi.saveVote({
         userId: userId,
         questionId: currentQuestionId,
-        answerId: answers[0].answerId
+        answerId: (answers[0].answerId === userAnswer.answerId || answers[1].answerId === userAnswer.answerId)  ? userAnswer.answerId : answers[0].answerId //TODO: check if this works as intended
       }).then(() => {
-        dispatch(addAnswer(answers[0]));
+        dispatch(addAnswer((answers[0].answerId === userAnswer.answerId || answers[1].answerId === userAnswer.answerId) ? userAnswer : answers[0])); //TODO: same here
         dispatch(setUserVoted(currentQuestionId));
       }).then(() => {
         UserApi.showResult(currentQuestionId).then((newResult: any) => {

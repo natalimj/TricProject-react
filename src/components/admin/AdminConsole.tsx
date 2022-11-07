@@ -43,7 +43,7 @@ const AdminConsole = () => {
     }
 
     const showQuestion = () => {
-        AdminApi.addQuestionTime(question.questionId, question.time ?? 30, accessToken)
+        AdminApi.addQuestionTime(question.questionId, question.time ?? 10, accessToken)
             .then((response: any) => {
                 dispatch(addQuestion(response.data));
             })
