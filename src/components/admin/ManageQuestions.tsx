@@ -8,6 +8,7 @@ import Constants from '../../util/Constants';
 import { NotificationManager } from 'react-notifications';
 import { useAppSelector } from '../../app/hooks';
 import { RootState } from '../../app/store';
+import { AiOutlineSave } from 'react-icons/ai';
 
 const ManageQuestions = () => {
     const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
@@ -20,7 +21,7 @@ const ManageQuestions = () => {
     const [secondCategory, setSecondCategory] = useState("Select category");
     const [showQuestions, setShowQuestions] = useState<boolean>(false);
     const [dropdownCategories, setDropdownCategories] = useState(Constants.categories)
-    const [disableDropdown,setDisableDropdown]= useState<boolean>(true)
+    const [disableDropdown, setDisableDropdown] = useState<boolean>(true)
 
     useEffect(() => {
         AdminApi.getAllQuestions(accessToken)
@@ -137,10 +138,10 @@ const ManageQuestions = () => {
                         </div>
                     </div>
 
-                    <div className="questions__line">
+                    <div className="questions__line question__select-line">
                         <select className="questions__dropdown questions_w100" value={theme} onChange={handleThemeSelect}>
                             {Constants.themes.map((option, index) => (
-                                <option key={option.value+index} value={option.value} disabled={option.disabled}>{option.label}</option>
+                                <option key={option.value + index} value={option.value} disabled={option.disabled}>{option.label}</option>
                             ))}
                         </select>
                     </div>
@@ -157,16 +158,16 @@ const ManageQuestions = () => {
                         </div>
                     </div>
 
-                    <div className="questions__line">
+                    <div className="questions__line question__select-line">
                         <select className="questions__dropdown questions_w50" value={firstCategory} onChange={handleFirstCategorySelect}>
                             {Constants.categories.map((option, index) => (
-                                <option key={option.value+index} value={option.value} disabled={option.disabled}>{option.label}</option>
+                                <option key={option.value + index} value={option.value} disabled={option.disabled}>{option.label}</option>
                             ))}
                         </select>
-                        <select className="questions__dropdown questions_w50" value={secondCategory} onChange={handleSecondCategorySelect} 
-                        disabled={disableDropdown}>
+                        <select className="questions__dropdown questions_w50" value={secondCategory} onChange={handleSecondCategorySelect}
+                            disabled={disableDropdown}>
                             {dropdownCategories.map((option, index) => (
-                                <option key={option.value+index} value={option.value} disabled={option.disabled}>{option.label}</option>
+                                <option key={option.value + index} value={option.value} disabled={option.disabled}>{option.label}</option>
                             ))}
                         </select>
                     </div>
@@ -182,7 +183,9 @@ const ManageQuestions = () => {
                                 maxLength={50} />
                         </div>
                         <div className="questions__icon" e2e-id="questionSave"
-                            onClick={addQuestion} >{Constants.SAVE_BUTTON.toUpperCase()}</div>
+                            onClick={addQuestion} >
+                            <AiOutlineSave size={30} /><br></br>
+                            {Constants.SAVE_BUTTON.toUpperCase()}</div>
                     </div>
                 </div>
             </div>
