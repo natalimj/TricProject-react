@@ -34,7 +34,7 @@ const FinalResult = () => {
 
   useEffect(() => {
     const imgs = [
-      '../util/icons/' + currentUser.imagePath + '.png'
+      '../../util/icons/' + currentUser.imagePath + '.png'
     ]
 
     cacheImages(imgs);
