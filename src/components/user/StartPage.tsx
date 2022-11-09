@@ -21,7 +21,6 @@ const StartPage = () => {
   const dispatch = useAppDispatch();
   const isActive: boolean = useAppSelector((state: RootState) => state.status.isActive);
   const userSubmitted: boolean = useAppSelector((state: RootState) => state.component.userJoinedValue);
-  const finalResultShowed: boolean = useAppSelector((state: RootState) => state.component.finalResultShowed);
   const [sessionStarted, setSessionStarted] = useState<boolean>(false);
   const [playStarted, setPlayStarted] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
