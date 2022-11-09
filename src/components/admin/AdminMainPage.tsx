@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../style/AdminMainPage.css';
+import '../../style/AdminMainPage.css';
 import AdminApi from '../../api/AdminApi';
 import Constants from '../../util/Constants';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
