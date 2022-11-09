@@ -103,7 +103,7 @@ const UserLoginPage = () => {
                         : <div className='user-form__avatar-selector-item'></div>}
                     {!isLoading ?
                         (<div className='user-form__avatar-selector-item user-form--avatar-image'>
-                            <img src={require('../util/icons/' + imageList[currentListIndex] + '.png')} alt="user icon" />
+                            <img src={require('../../util/icons/' + imageList[currentListIndex] + '.png')} alt="user icon" />
                         </div>) : (
                             <></>
                         )

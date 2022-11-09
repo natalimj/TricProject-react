@@ -67,7 +67,7 @@ const Result = ({ finalResult, result }: Props) => {
                 <div className='result'>
                     <div className="result__inner-container">
                         <div className="result__avatar-container">
-                            {!isLoading ? (<img src={require('../util/icons/' + userIcon + '.png')} alt="user icon" />)
+                            {!isLoading ? (<img src={require('../../util/icons/' + userIcon + '.png')} alt="user icon" />)
                                 : (<></>)}
                         </div>
                         <div className="result__text result__text--username" e2e-id="resultUsername">{userName}</div>
