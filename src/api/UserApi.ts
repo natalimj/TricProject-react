@@ -6,9 +6,6 @@ import IResultData from "../models/Result";
 import IContributorData from "../models/Contributor";
 import IPlayInfoData from "../models/PlayInfo";
 
-const getAllUsers = () => {
-    return http.get<Array<IUserData>>("userApi/users"); //this is a pretty dangerous endpoint to have not secured, TODO: remove or move to admin
-};
 
 const createUser = (data: IUserData) => {
     return http.post<IUserData>("userApi/user", data);
@@ -64,7 +61,6 @@ const getPlayInfo = () => {
 };
 
 const UserApi = {
-    getAllUsers,
     createUser,
     saveVote,
     getAppStatus,

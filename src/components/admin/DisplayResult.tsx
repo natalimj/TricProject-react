@@ -50,6 +50,7 @@ const DisplayResult = () => {
 
     return (<>
         <WebSocketComponent topics={['/topic/result']} onMessage={(msg: IResultData) => onResultMessageReceived(msg)} />
+        <WebSocketComponent topics={['/topic/question']} onMessage={(msg: IQuestionData) => onQuestionMessageReceived(msg)} />
         <WebSocketComponent topics={['/topic/adminQuestion']} onMessage={(msg: IQuestionData) => onQuestionMessageReceived(msg)} />
 
         {showQuestion &&
