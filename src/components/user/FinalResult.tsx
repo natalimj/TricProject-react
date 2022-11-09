@@ -12,12 +12,7 @@ import { BsInfoCircle } from 'react-icons/bs';
 import PlayInfo from './PlayInfo';
 
 const FinalResult = () => {
-  const currentUser: IUserData = {
-    userId: useAppSelector((state: RootState) => state.user.userId),
-    username: useAppSelector((state: RootState) => state.user.username),
-    imagePath: useAppSelector((state: RootState) => state.user.imagePath)
-  }
-  const userResults = useAppSelector((state: RootState) => state.userResults);
+  const currentUser: IUserData = useAppSelector((state: RootState) => state.user);
   const [finalResult, setFinalResult] = useState<IFinalResultData>();
   const [showPlayInfo, setShowPlayInfo] = useState<boolean>(false)
   const exportRef = useRef<HTMLHeadingElement>(null);
@@ -63,10 +58,9 @@ const FinalResult = () => {
           <div className="final-result__inner-container">
             <div ref={exportRef} className="final-result__pink-background">
               <div className="final-result__user-box">
-                <div className="final-result__avatar-container">
-                  {!isLoading ? (<img src={require('../util/icons/' + currentUser.imagePath + '.png')} alt="user icon" />)
-                    : (<></>)}
-                </div>
+                {isLoading ? (<></>) : (<><div className="final-result__avatar-container">
+                  <img src={require('../../util/icons/' + currentUser.imagePath + '.png')} alt="user icon" />
+                </div></>)}
                 <div className="final-result__text-container">
                   <span e2e-id="finalUsername">{currentUser.username}</span>
                   <span>{today}</span>
@@ -82,15 +76,15 @@ const FinalResult = () => {
                       <span className="final-result__answer-text">{categoryRate.oppositeCategory}</span>
                     </div>
                     <div className="final-result__slider">
-                      <div className="final-result__first-rate" style={{ "width": `${finalResult.rate}%` }}><span className='final-result__answer--text'>
-                        {finalResult.rate !== 0 && `${finalResult.rate}%`}</span></div>
-                      <div className="final-result__second-rate" style={{ "width": `${100 - finalResult.rate}%` }}><span className='final-result__answer--text'>
-                        {(100 - finalResult.rate) !== 0 && `${100 - finalResult.rate}%`}</span></div>
+                      <div className="final-result__first-rate" style={{ "width": `${categoryRate.rate}%` }}><span className='final-result__answer--text'>
+                        {categoryRate.rate !== 0 && `${categoryRate.rate}%`}</span></div>
+                      <div className="final-result__second-rate" style={{ "width": `${100 - categoryRate.rate}%` }}><span className='final-result__answer--text'>
+                        {(100 - categoryRate.rate) !== 0 && `${100 - categoryRate.rate}%`}</span></div>
                     </div>
-                  </div>}
-
-                {userResults.results && userResults.results.map((userResult) => (
-                  <p>{userResult.question.theme} - {userResult.answer.firstCategory}</p>
+                  </div>
+                ))}
+                {finalResult?.finalCategoryList && finalResult?.finalCategoryList.map((finalCategory, index) => (
+                  <p key={finalCategory.questionTheme + index}>{finalCategory.questionTheme} - {finalCategory.answerFirstCategory} and {finalCategory.answerSecondCategory}</p>
                 ))}
               </div>
             </div>
@@ -100,8 +94,6 @@ const FinalResult = () => {
             </div>
           </div>
         </div>
-
-
       }
       {showPlayInfo && <PlayInfo />}
     </>
