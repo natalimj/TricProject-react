@@ -40,29 +40,7 @@ const Result = ({ finalResult, result }: Props) => {
 
     useEffect(() => {
         const imgs = [
-            '../util/icons/' + userIcon + '.png'
-        ]
-
-        cacheImages(imgs);
-    }, [userIcon]);
-
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-
-    const cacheImages = async (srcArray) => {
-        const promises = await srcArray.map((src) => {
-            return new Promise(function (resolve, reject) {
-                const img = new Image();
-                img.src = src;
-
-            });
-        });
-        await Promise.all(promises);
-        setIsLoading(false);
-    };
-
-    useEffect(() => {
-        const imgs = [
-            '../util/icons/' + userIcon + '.png'
+            '../../util/icons/' + userIcon + '.png'
         ]
 
         cacheImages(imgs);
