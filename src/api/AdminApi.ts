@@ -4,6 +4,11 @@ import authHeader from "../services/auth-header";
 import IContributorData from "../models/Contributor";
 import IPlayInfoData from "../models/PlayInfo";
 import { StatusData } from "../reducers/statusSlice";
+import IUserData from "../models/User";
+
+const getAllUsers = () => {
+  return http.get<Array<IUserData>>("adminApi/users");
+};
 
 const endSession = (accessToken: string) => {
   return http.get("adminApi/endSession", { headers: authHeader(accessToken) });
@@ -115,6 +120,7 @@ const displayQuestionForAdmin = (questionNumber: number, accessToken: string) =>
 
 
 const AdminApi = {
+  getAllUsers,
   endSession,
   getQuestionByNumber,
   activateApp,
