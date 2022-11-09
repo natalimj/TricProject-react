@@ -100,7 +100,7 @@ const StartPage = () => {
                         <img src={TricLogo} alt="TRIC icon" />
                       </div>
                       <div className="start-page-landing-icon">
-                        <img src={require('../util/icons/imageMale1.png')} alt="Landing page icon" />
+                        <img src={require('../../util/icons/imageMale1.png')} alt="Landing page icon" />
                       </div>
                       <>
                         <button onClick={() => { setIsOpen(true) }} className='question__submit-button question__active-button' e2e-id="join">
