@@ -53,7 +53,7 @@ const StartPage = () => {
   useEffect(() => {
     const imgs = [
       TricLogo,
-      '../util/icons/imageMale1.png'
+      '../../util/icons/imageMale1.png'
     ]
 
     cacheImages(imgs);

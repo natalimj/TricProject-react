@@ -32,12 +32,12 @@ const UserLoginPage = () => {
 
     useEffect(() => {
         const imgs = [
-            '../util/icons/imageFemale1.png',
-            '../util/icons/imageFemale2.png',
-            '../util/icons/imageFemale3.png',
-            '../util/icons/imageMale2.png',
-            '../util/icons/imageMale3.png',
-            '../util/icons/imageMale4.png'
+            '../../util/icons/imageFemale1.png',
+            '../../util/icons/imageFemale2.png',
+            '../../util/icons/imageFemale3.png',
+            '../../util/icons/imageMale2.png',
+            '../../util/icons/imageMale3.png',
+            '../../util/icons/imageMale4.png'
         ]
 
         cacheImages(imgs);
