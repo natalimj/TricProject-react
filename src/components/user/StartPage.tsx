@@ -5,7 +5,6 @@ import IQuestionData from '../../models/Question';
 import Constants from "../../util/Constants";
 import WaitingPage from "../WaitingPage";
 import InactiveHomepage from "./InactiveHomepage";
-import FinalResult from "./FinalResult";
 import WebSocketComponent from "../WebSocketComponent";
 import MainPage from "./MainPage";
 import UserLoginPage from "./UserLogin";
