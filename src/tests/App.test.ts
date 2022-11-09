@@ -1,10 +1,9 @@
 import puppeteer from "puppeteer";
 import AdminApi from "../api/AdminApi";
-import Question from "../components/Question";
 import IQuestionData from "../models/Question";
 import IAnswerData from "../models/Answer";
 
-const accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtb2QiLCJpYXQiOjE2Njc1NTY4OTAsImV4cCI6MTY2NzgxNjA5MH0.w2HYPV7M7U0cMmwemdFwpwP_Iv_cRRu4Z-KSWsDWaIxtvwcYntaVI4nnHiNapXiE5SdaI6ryybnT_vSIQdxXMQ";
+const accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtb2QiLCJpYXQiOjE2Njc4MzI5MjcsImV4cCI6MTY2ODA5MjEyN30.fOsRAUAzLdrZp0zbK_tufDJwKBM8lMAmH7oNmfgnpzqt3NyII2t_PtmNSAYKhDwEC9AE6ifTCcS-I6Ft7qIDgQ";
 let browser;
 let adminPage;
 let userPage;
@@ -31,17 +30,18 @@ async function resetApp() {
   await adminPage.click('[e2e-id="login"]');
   await AdminApi.deleteAllQuestions(accessToken);
   await AdminApi.deactivateApp(accessToken);
+
   const answer1: IAnswerData = {
     answerId: null,
     answerText: "Yes",
-    firstCategory : "",
-    secondCategory : ""
+    firstCategory : "Pragmatic",
+    secondCategory : "Conservative"
   }
   const answer2: IAnswerData = {
     answerId: null,
     answerText: "No",
-    firstCategory : "",
-    secondCategory : ""
+    firstCategory : "Idealist",
+    secondCategory : "Progressive"
   }
   const question1: IQuestionData = {
     questionNumber: 1,
@@ -223,7 +223,6 @@ describe("Feature 2 - Voting System", () => {
     await userPage.click('[e2e-id="join"]');
     await userPage.waitForSelector('[e2e-id="agree"]');
     await userPage.click('[e2e-id="agree"]');
-    console.log("HHDHDHHDHDHD4");
     await userPage.waitForSelector('[e2e-id="create"]');
   });
 
@@ -367,50 +366,50 @@ describe("Feature 2 - Voting System", () => {
   });
 });
 
-describe("Feature 3 - Voting Rounds", () => {
-  beforeAll(async () => {
-    await resetApp();
-  });
+// describe("Feature 3 - Voting Rounds", () => {
+//   beforeAll(async () => {
+//     await resetApp();
+//   });
 
-  test("App is inactive", async () => {
-    await userPage.waitForSelector('[e2e-id="inactive"]');
-  });
+//   test("App is inactive", async () => {
+//     await userPage.waitForSelector('[e2e-id="inactive"]');
+//   });
 
-  test("Activate app", async () => {
-    await adminPage.waitForSelector('[e2e-id="start"]')
-    await adminPage.click('[e2e-id="start"]')
-  });
+//   test("Activate app", async () => {
+//     await adminPage.waitForSelector('[e2e-id="start"]')
+//     await adminPage.click('[e2e-id="start"]')
+//   });
 
-  test("Join the app", async () => {
-    await userPage.waitForSelector('[e2e-id="join"]');
-    await userPage.click('[e2e-id="join"]');
-    await userPage.waitForSelector('[e2e-id="agree"]');
-    await userPage.click('[e2e-id="agree"]');
-    await userPage.waitForSelector('[e2e-id="create"]');
-  });
+//   test("Join the app", async () => {
+//     await userPage.waitForSelector('[e2e-id="join"]');
+//     await userPage.click('[e2e-id="join"]');
+//     await userPage.waitForSelector('[e2e-id="agree"]');
+//     await userPage.click('[e2e-id="agree"]');
+//     await userPage.waitForSelector('[e2e-id="create"]');
+//   });
 
-  test("Create user", async () => {
-    await userPage.screenshot({
-      path: 'screenshots/feature3/beforecreateuser.jpg'
-    });
-    await userPage.waitForSelector('[e2e-id="usernameUser"]');
-    await userPage.type('[e2e-id="usernameUser"]',"TrashPanda");
-    await userPage.screenshot({
-      path: 'screenshots/feature3/afterinputuserdata.jpg'
-    });
-    await userPage.click('[e2e-id="create"]');
-    await userPage.waitForSelector('[e2e-id="spinner"]');
-    await userPage.screenshot({
-      path: 'screenshots/feature3/spinneraftercreateuser.jpg'
-    });
-  });
+//   test("Create user", async () => {
+//     await userPage.screenshot({
+//       path: 'screenshots/feature3/beforecreateuser.jpg'
+//     });
+//     await userPage.waitForSelector('[e2e-id="usernameUser"]');
+//     await userPage.type('[e2e-id="usernameUser"]',"TrashPanda");
+//     await userPage.screenshot({
+//       path: 'screenshots/feature3/afterinputuserdata.jpg'
+//     });
+//     await userPage.click('[e2e-id="create"]');
+//     await userPage.waitForSelector('[e2e-id="spinner"]');
+//     await userPage.screenshot({
+//       path: 'screenshots/feature3/spinneraftercreateuser.jpg'
+//     });
+//   });
 
-  test("Start the play", async () => {
-    await adminPage.waitForSelector('[e2e-id="timerField"]');
-    await adminPage.type('[e2e-id="timerField"]',"5");
-    await adminPage.waitForSelector('[e2e-id="showQuestion"]');
-    await adminPage.click('[e2e-id="showQuestion"]');
-  });
+//   test("Start the play", async () => {
+//     await adminPage.waitForSelector('[e2e-id="timerField"]');
+//     await adminPage.type('[e2e-id="timerField"]',"5");
+//     await adminPage.waitForSelector('[e2e-id="showQuestion"]');
+//     await adminPage.click('[e2e-id="showQuestion"]');
+//   });
 
   // test("Vote and view results after timer expires", async () => {
   //   await userPage.waitForSelector('[e2e-id="questionText"]');
@@ -426,55 +425,55 @@ describe("Feature 3 - Voting Rounds", () => {
   //   await checkText("resultUsername","TrashPanda");
   // });
 
-  afterAll(async () => {
-    await AdminApi.deactivateApp(accessToken);
-    await browser.close();
-  });
-});
+//   afterAll(async () => {
+//     await AdminApi.deactivateApp(accessToken);
+//     await browser.close();
+//   });
+// });
 
-describe("Feature 4 - User Personalization", () => {
-  beforeAll(async () => {
-    await resetApp();
-  });
+// describe("Feature 4 - User Personalization", () => {
+//   beforeAll(async () => {
+//     await resetApp();
+//   });
 
-  test("App is inactive", async () => {
-    await userPage.waitForSelector('[e2e-id="inactive"]');
-  });
+//   test("App is inactive", async () => {
+//     await userPage.waitForSelector('[e2e-id="inactive"]');
+//   });
 
-  test("Activate app", async () => {
-    await adminPage.waitForSelector('[e2e-id="start"]')
-    await adminPage.click('[e2e-id="start"]')
-  });
+//   test("Activate app", async () => {
+//     await adminPage.waitForSelector('[e2e-id="start"]')
+//     await adminPage.click('[e2e-id="start"]')
+//   });
 
-  test("Join the app", async () => {
-    await userPage.waitForSelector('[e2e-id="join"]');
-    await userPage.click('[e2e-id="join"]');
-    await userPage.waitForSelector('[e2e-id="agree"]');
-    await userPage.click('[e2e-id="agree"]');
-    await userPage.waitForSelector('[e2e-id="create"]');
-  });
+//   test("Join the app", async () => {
+//     await userPage.waitForSelector('[e2e-id="join"]');
+//     await userPage.click('[e2e-id="join"]');
+//     await userPage.waitForSelector('[e2e-id="agree"]');
+//     await userPage.click('[e2e-id="agree"]');
+//     await userPage.waitForSelector('[e2e-id="create"]');
+//   });
 
-  test("Create user", async () => {
-    await userPage.screenshot({
-      path: 'screenshots/feature4/beforecreateuser.jpg'
-    });
-    await userPage.waitForSelector('[e2e-id="usernameUser"]');
-    await userPage.type('[e2e-id="usernameUser"]',"TrashPanda");
-    await userPage.screenshot({
-      path: 'screenshots/feature4/afterinputuserdata.jpg'
-    });
-    await userPage.click('[e2e-id="create"]');
-    await userPage.waitForSelector('[e2e-id="spinner"]');
-    await userPage.screenshot({
-      path: 'screenshots/feature4/spinneraftercreateuser.jpg'
-    });
-  });
+//   test("Create user", async () => {
+//     await userPage.screenshot({
+//       path: 'screenshots/feature4/beforecreateuser.jpg'
+//     });
+//     await userPage.waitForSelector('[e2e-id="usernameUser"]');
+//     await userPage.type('[e2e-id="usernameUser"]',"TrashPanda");
+//     await userPage.screenshot({
+//       path: 'screenshots/feature4/afterinputuserdata.jpg'
+//     });
+//     await userPage.click('[e2e-id="create"]');
+//     await userPage.waitForSelector('[e2e-id="spinner"]');
+//     await userPage.screenshot({
+//       path: 'screenshots/feature4/spinneraftercreateuser.jpg'
+//     });
+//   });
 
-  afterAll(async () => {
-    await AdminApi.deactivateApp(accessToken);
-    await browser.close();
-  });
-});
+//   afterAll(async () => {
+//     await AdminApi.deactivateApp(accessToken);
+//     await browser.close();
+//   });
+// });
 
 describe("Feature 5 - Contribututors Page", () => {
   beforeAll(async () => {
@@ -504,44 +503,44 @@ describe("Feature 5 - Contribututors Page", () => {
 
 // });
 
-describe("Feature 8 - Downtime management and ending the play", () => {
-  beforeAll(async () => {
-    await resetApp();
-  });
+// describe("Feature 8 - Downtime management and ending the play", () => {
+//   beforeAll(async () => {
+//     await resetApp();
+//   });
 
-  test("App is inactive", async () => {
-    await userPage.waitForSelector('[e2e-id="inactive"]');
-  });
+//   test("App is inactive", async () => {
+//     await userPage.waitForSelector('[e2e-id="inactive"]');
+//   });
 
-  test("Activate app", async () => {
-    await adminPage.screenshot({
-      path: 'screenshots/feature8/activateappbefore.jpg'
-    });
-    await adminPage.waitForSelector('[e2e-id="start"]')
-    await adminPage.click('[e2e-id="start"]')
-  });
+//   test("Activate app", async () => {
+//     await adminPage.screenshot({
+//       path: 'screenshots/feature8/activateappbefore.jpg'
+//     });
+//     await adminPage.waitForSelector('[e2e-id="start"]')
+//     await adminPage.click('[e2e-id="start"]')
+//   });
 
-  test("Join the app", async () => {
-    await userPage.waitForSelector('[e2e-id="join"]');
-    await userPage.click('[e2e-id="join"]');
-    await userPage.waitForSelector('[e2e-id="agree"]');
-    await userPage.click('[e2e-id="agree"]');
-    await userPage.waitForSelector('[e2e-id="create"]');
-  });
+//   test("Join the app", async () => {
+//     await userPage.waitForSelector('[e2e-id="join"]');
+//     await userPage.click('[e2e-id="join"]');
+//     await userPage.waitForSelector('[e2e-id="agree"]');
+//     await userPage.click('[e2e-id="agree"]');
+//     await userPage.waitForSelector('[e2e-id="create"]');
+//   });
 
-  test("Create user", async () => {
-    await userPage.waitForSelector('[e2e-id="usernameUser"]');
-    await userPage.type('[e2e-id="usernameUser"]',"TrashPanda");
-    await userPage.click('[e2e-id="create"]');
-    await userPage.waitForSelector('[e2e-id="spinner"]');
-  });
+//   test("Create user", async () => {
+//     await userPage.waitForSelector('[e2e-id="usernameUser"]');
+//     await userPage.type('[e2e-id="usernameUser"]',"TrashPanda");
+//     await userPage.click('[e2e-id="create"]');
+//     await userPage.waitForSelector('[e2e-id="spinner"]');
+//   });
 
-  test("Start the play", async () => {
-    await adminPage.waitForSelector('[e2e-id="timerField"]');
-    await adminPage.type('[e2e-id="timerField"]',"100");
-    await adminPage.waitForSelector('[e2e-id="showQuestion"]');
-    await adminPage.click('[e2e-id="showQuestion"]');
-  });
+//   test("Start the play", async () => {
+//     await adminPage.waitForSelector('[e2e-id="timerField"]');
+//     await adminPage.type('[e2e-id="timerField"]',"100");
+//     await adminPage.waitForSelector('[e2e-id="showQuestion"]');
+//     await adminPage.click('[e2e-id="showQuestion"]');
+//   });
 
   // test("Vote and view results 1", async () => {
   //   ////await userPage.waitForSelector('[e2e-id="questionText"]');
@@ -675,8 +674,8 @@ describe("Feature 8 - Downtime management and ending the play", () => {
   //   });
   // });
 
-  afterAll(async () => {
-    await AdminApi.deactivateApp(accessToken);
-    await browser.close();
-  });
-});
+  // afterAll(async () => {
+  //   await AdminApi.deactivateApp(accessToken);
+  //   await browser.close();
+  // });
+// });

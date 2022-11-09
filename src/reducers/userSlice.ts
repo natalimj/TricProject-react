@@ -11,19 +11,17 @@ export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        addUser: (state: IUserData, action: PayloadAction<IUserData>) => {
-            state.userId = action.payload.userId;
-            state.username = action.payload.username;
-            state.imagePath = action.payload.imagePath;
+        loginUser: (state: IUserData, action: PayloadAction<IUserData>) => {
+            state = { ...action.payload };
+            return state;
         },
-        removeUser: (state: IUserData) => {
-            state.userId = '';
-            state.username = '';
-            state.imagePath = '';
+        logoutUser: (state: IUserData) => {
+            state = { ...initialState };
+            return state;
         },
     },
 });
 
-export const { addUser, removeUser } = userSlice.actions;
+export const { loginUser, logoutUser } = userSlice.actions;
 
 export default userSlice.reducer;

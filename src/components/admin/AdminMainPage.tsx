@@ -8,19 +8,19 @@ import { RootState } from '../app/store';
 import 'react-notifications/lib/notifications.css';
 import { NotificationManager } from 'react-notifications';
 import AdminConsole from './AdminConsole';
-import UserApi from '../api/UserApi';
-import TricLogo from '../util/icons/TRIC.svg';
+import UserApi from '../../api/UserApi';
+import TricLogo from '../../util/icons/TRIC.svg';
 
 const Admin = () => {
-  const isActive = useAppSelector((state: RootState) => state.status.isActive);
   const dispatch = useAppDispatch();
+  const isActive = useAppSelector((state: RootState) => state.status.isActive);
   const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
 
 
   const activateApp = () => {
     AdminApi.activateApp(accessToken)
       .then(() => {
-        dispatch(setStatus({ isActive: true }))
+        dispatch(setStatus(true))
       })
       .catch((e: Error) => {
         NotificationManager.error(e.message, 'Error!', 5000);
@@ -61,7 +61,7 @@ const Admin = () => {
   useEffect(() => {
     UserApi.getAppStatus()
       .then((response: any) => {
-        dispatch(setStatus({ isActive: response.data }))
+        dispatch(setStatus(response.data))
       })
       .catch((e: Error) => {
         console.log(e);

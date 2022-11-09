@@ -6,7 +6,7 @@ const initialState: IQuestionData = {
     questionNumber: -1,
     questionText: '',
     answers: [],
-    time:0,
+    time: 0,
     theme: "",
 };
 
@@ -15,25 +15,16 @@ export const questionSlice = createSlice({
     initialState,
     reducers: {
         addQuestion: (state: IQuestionData, action: PayloadAction<IQuestionData>) => {
-            console.log("getting question data")
-            state.questionId = action.payload.questionId;
-            state.questionNumber = action.payload.questionNumber;
-            state.questionText = action.payload.questionText;
-            state.answers = [...action.payload.answers];
-            state.time = action.payload.time;
-            state.theme = action.payload.theme;
+            state = { ...action.payload };
+            return state;
         },
-        emptyQuestion: (state: IQuestionData) => {
-            console.log("empty question data")
-            state.questionId = '';
-            state.questionNumber = -1;
-            state.questionText = '';
-            state.answers = [];
-            state.time = 0;
+        clearQuestion: (state: IQuestionData) => {
+            state = { ...initialState };
+            return state;
         }
     },
 });
 
-export const { addQuestion, emptyQuestion } = questionSlice.actions;
+export const { addQuestion, clearQuestion } = questionSlice.actions;
 
 export default questionSlice.reducer;

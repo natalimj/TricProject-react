@@ -1,10 +1,10 @@
 import React, { ChangeEvent, useState } from 'react'
-import IContributorData from '../models/Contributor'
+import IContributorData from '../../models/Contributor'
 import { NotificationManager } from 'react-notifications';
-import AdminApi from '../api/AdminApi';
-import Constants from '../util/Constants';
-import { useAppSelector } from '../app/hooks';
-import { RootState } from '../app/store';
+import AdminApi from '../../api/AdminApi';
+import Constants from '../../util/Constants';
+import { useAppSelector } from '../../app/hooks';
+import { RootState } from '../../app/store';
 import { AiOutlineDelete, AiOutlineSave } from 'react-icons/ai';
 
 type Props = {
@@ -15,8 +15,8 @@ type Props = {
 
 const EditContributor = ({ contributorToEdit, contributors, setContributors }: Props) => {
 
-    const [contributor, setContributor] = useState(contributorToEdit);
     const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
+    const [contributor, setContributor] = useState(contributorToEdit);
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
@@ -35,7 +35,7 @@ const EditContributor = ({ contributorToEdit, contributors, setContributors }: P
     const editContributor = () => {
         if (contributor.name !== "" && contributor.description !== "") {
             AdminApi.editContributor(contributor, accessToken)
-                .then((response: any) => {
+                .then(() => {
                     NotificationManager.success('Contributor has been edited', 'Success!', 2000);
                 })
                 .catch((e: Error) => {
@@ -49,7 +49,7 @@ const EditContributor = ({ contributorToEdit, contributors, setContributors }: P
 
     const deleteContributor = () => {
         AdminApi.deleteContributor(contributor.contributorId, accessToken)
-            .then((response: any) => {
+            .then(() => {
                 setContributors(contributors.filter(contr => contr.contributorId !== contributor.contributorId))
                 NotificationManager.success('Contributor has been deleted', 'Success!', 2000);
             })
@@ -67,11 +67,11 @@ const EditContributor = ({ contributorToEdit, contributors, setContributors }: P
                         onChange={handleChange}
                         className='questions__text'
                         value={contributor.name}
-                        maxLength={30} 
+                        maxLength={30}
                         name="name" />
                 </div>
                 <div className="questions__icon"
-                    onClick={() => editContributor()} ><AiOutlineSave size={30}/><br></br><span className="questions__icon-hide">{Constants.EDIT_BUTTON.toUpperCase()}</span></div>
+                    onClick={() => editContributor()} ><AiOutlineSave size={30} /><br></br><span className="questions__icon-hide">{Constants.EDIT_BUTTON.toUpperCase()}</span></div>
             </div>
             <div className="questions__line">
                 <div className="questions__input">
@@ -79,11 +79,11 @@ const EditContributor = ({ contributorToEdit, contributors, setContributors }: P
                         onChange={handleChange}
                         className='questions__text'
                         value={contributor.description}
-                        maxLength={40} 
+                        maxLength={40}
                         name="description" />
                 </div>
                 <div className="questions__icon"
-                    onClick={() => deleteContributor()}><AiOutlineDelete size={30}/><br></br><span className="questions__icon-hide">{Constants.DELETE_BUTTON.toUpperCase()}</span></div>
+                    onClick={() => deleteContributor()}><AiOutlineDelete size={30} /><br></br><span className="questions__icon-hide">{Constants.DELETE_BUTTON.toUpperCase()}</span></div>
             </div>
         </div>
     )

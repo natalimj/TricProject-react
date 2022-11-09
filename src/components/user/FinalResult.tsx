@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
-import '../style/FinalResult.css';
-import Constants from '../util/Constants';
-import UserApi from '../api/UserApi';
-import IUserData from '../models/User';
-import IFinalResultData from '../models/FinalResult';
-import ExportAsImage from '../util/ExportAsImage';
+import '../../style/FinalResult.css';
+import Constants from '../../util/Constants';
+import UserApi from '../../api/UserApi';
+import IUserData from '../../models/User';
+import IFinalResultData from '../../models/FinalResult';
+import ExportAsImage from '../../util/ExportAsImage';
 import moment from 'moment';
-import { useAppSelector } from '../app/hooks';
-import { RootState } from '../app/store';
+import { useAppSelector } from '../../app/hooks';
+import { RootState } from '../../app/store';
 import { BsInfoCircle } from 'react-icons/bs';
 import PlayInfo from './PlayInfo';
 
@@ -49,7 +49,6 @@ const FinalResult = () => {
   useEffect(() => {
     UserApi.getFinalResult(currentUser.userId)
       .then((response: any) => {
-        console.log(response.data)
         setFinalResult(response.data)
       })
       .catch((e: Error) => {
@@ -76,11 +75,11 @@ const FinalResult = () => {
               </div>
               <div className="final-result__result-box">
                 <div>{Constants.FINAL_RESULT_FIELD}</div>
-                {finalResult &&
-                  <div key={finalResult.category}>
+                {finalResult?.categoryRateList && finalResult?.categoryRateList.map((categoryRate, index) => (
+                  <div key={index}>
                     <div className="final-result__title">
-                      <span className="final-result__answer-text final-result__answer-text--left">{finalResult.category}</span>
-                      <span className="final-result__answer-text">{finalResult.secondCategory}</span>
+                      <span className="final-result__answer-text final-result__answer-text--left">{categoryRate.category}</span>
+                      <span className="final-result__answer-text">{categoryRate.oppositeCategory}</span>
                     </div>
                     <div className="final-result__slider">
                       <div className="final-result__first-rate" style={{ "width": `${finalResult.rate}%` }}><span className='final-result__answer--text'>

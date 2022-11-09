@@ -11,7 +11,7 @@ const initialState: PlayData = {
     numberOfUsers: 0,
     numberOfQuestions: 0,
     showQuestionButton: true,
-    questionTimer: 0
+    questionTimer: -1
 };
 
 export const playDataSlice = createSlice({
@@ -29,10 +29,14 @@ export const playDataSlice = createSlice({
         },
         setQuestionTimer: (state: PlayData, action: PayloadAction<number>) => {
             state.questionTimer = action.payload;
+        },
+        clearPlayData: (state: PlayData) => {
+            state = { ...initialState };
+            return state;
         }
     },
 });
 
-export const { setNumberOfUsers, setNumberOfQuestions, setShowQuestionButton, setQuestionTimer } = playDataSlice.actions;
+export const { setNumberOfUsers, setNumberOfQuestions, setShowQuestionButton, setQuestionTimer, clearPlayData } = playDataSlice.actions;
 
 export default playDataSlice.reducer;

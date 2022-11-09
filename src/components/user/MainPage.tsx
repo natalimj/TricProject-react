@@ -1,58 +1,35 @@
 import React, { useState } from 'react';
-import WebSocketComponent from "./WebSocketComponent";
-import '../style/MainPage.css';
+import WebSocketComponent from "../WebSocketComponent";
+import '../../style/MainPage.css';
 import Question from "./Question";
 import Result from "./Result";
-import { useAppSelector, useAppDispatch } from '../app/hooks';
-import { RootState } from '../app/store';
-import { setQuestionComponent } from '../reducers/componentSlice';
-import { setUserVoted } from '../reducers/componentSlice';
-import { addAnswer } from '../reducers/answerSlice';
-import UserApi from '../api/UserApi';
-import IResultData from '../models/Result';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { RootState } from '../../app/store';
+import { ComponentState, setQuestionComponent, setUserVoted, setFinalResultShowed } from '../../reducers/componentSlice';
+import { addAnswer } from '../../reducers/answerSlice';
+import UserApi from '../../api/UserApi';
+import IResultData from '../../models/Result';
+import Constants from '../../util/Constants';
 
 const MainPage = () => {
-
-  const initialResultState = {
-    question: {
-      questionNumber: 0,
-      questionText: '',
-      answers: [],
-      time: 0,
-      theme: ""
-    },
-    firstAnswerRate: 0.0,
-    secondAnswerRate: 0.0,
-    firstAnswer: {
-      answerText: "",
-      firstCategory: "",
-      secondCategory :""
-      
-    },
-    secondAnswer: {
-      answerText: "",
-      firstCategory: "",
-      secondCategory :""
-    }
-  };
-
   const dispatch = useAppDispatch();
-  const showQuestion: boolean = useAppSelector((state: RootState) => state.component.questionComponentValue);
-  const voted: number = useAppSelector((state: RootState) => state.component.userVotedValue);
+  const componentData: ComponentState = useAppSelector((state: RootState) => state.component);
   const userId: any = useAppSelector((state: RootState) => state.user.userId);
-  const currentQuestionId = useAppSelector((state: RootState) => state.question.questionId);
+  const currentQuestionId: number = useAppSelector((state: RootState) => state.question.questionId);
   const answers = useAppSelector((state: RootState) => [...state.question.answers]);
+  const userAnswer = useAppSelector((state: RootState) => state.answer);
+
   const [showFinalResult, setShowFinalResult] = useState<boolean>(false);
-  const [resultMessage, setResultMessage] = useState<IResultData>(initialResultState);
+  const [resultMessage, setResultMessage] = useState<IResultData>(Constants.initialResultState);
 
   const onMessageReceived = (msg: IResultData) => {
-    if (voted !== currentQuestionId) {
+    if (componentData.userVotedValue !== currentQuestionId) {
       UserApi.saveVote({
         userId: userId,
         questionId: currentQuestionId,
-        answerId: answers[0].answerId
+        answerId: (answers[0].answerId === userAnswer.answerId || answers[1].answerId === userAnswer.answerId)  ? userAnswer.answerId : answers[0].answerId //TODO: check if this works as intended
       }).then(() => {
-        dispatch(addAnswer(answers[0]));
+        dispatch(addAnswer((answers[0].answerId === userAnswer.answerId || answers[1].answerId === userAnswer.answerId) ? userAnswer : answers[0])); //TODO: same here
         dispatch(setUserVoted(currentQuestionId));
       }).then(() => {
         UserApi.showResult(currentQuestionId).then((newResult: any) => {
@@ -75,6 +52,7 @@ const MainPage = () => {
 
   const onFinalResultMessageReceived = () => {
     dispatch(setQuestionComponent(false));
+    dispatch(setFinalResultShowed(true));
     setShowFinalResult(true);
   }
 
@@ -82,7 +60,7 @@ const MainPage = () => {
     <div className="main-page">
       <WebSocketComponent topics={['/topic/result']} onMessage={(msg: IResultData) => onMessageReceived(msg)} />
       <WebSocketComponent topics={['/topic/finalResult']} onMessage={() => onFinalResultMessageReceived()} />
-      {showQuestion ? (
+      {componentData.questionComponentValue ? (
         <div className="main-page-question"><Question /></div>
       ) : (
         <div className="main-page-result">

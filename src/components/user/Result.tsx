@@ -1,12 +1,15 @@
 import React from 'react';
 import { useEffect, useState } from 'react'
-import '../style/Result.css';
-import IResultData from '../models/Result';
-import { useAppSelector } from '../app/hooks';
-import { RootState } from '../app/store';
+import '../../style/Result.css';
+import IResultData from '../../models/Result';
+import { useAppSelector } from '../../app/hooks';
+import { RootState } from '../../app/store';
 import { BsFillSquareFill } from "react-icons/bs";
-import Constants from "../util/Constants";
+import Constants from "../../util/Constants";
 import FinalResult from './FinalResult';
+import WebSocketComponent from '../WebSocketComponent';
+import IQuestionData from '../../models/Question';
+import WaitingPage from '../WaitingPage';
 
 type Props = {
     finalResult: boolean;
@@ -19,6 +22,29 @@ const Result = ({ finalResult, result }: Props) => {
     const userAnswer = useAppSelector((state: RootState) => state.answer);
     const [showFinalResult, setShowFinalResult] = useState<boolean>(false);
     const [votedFirstResponse, setVotedFirstResponse] = useState<boolean>(false);
+    const [waitForVoting, setWaitForVoting] = useState<boolean>(false);
+
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    const cacheImages = async (srcArray) => {
+        const promises = await srcArray.map((src) => {
+            return new Promise(function (resolve, reject) {
+                const img = new Image();
+                img.src = src;
+
+            });
+        });
+        await Promise.all(promises);
+        setIsLoading(false);
+    };
+
+    useEffect(() => {
+        const imgs = [
+            '../util/icons/' + userIcon + '.png'
+        ]
+
+        cacheImages(imgs);
+    }, [userIcon]);
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -43,16 +69,23 @@ const Result = ({ finalResult, result }: Props) => {
     }, [userIcon]);
 
     useEffect(() => {
+        setWaitForVoting(false)
         if (userAnswer.answerText === result.firstAnswer.answerText) {
             setVotedFirstResponse(true);
         } else if (userAnswer.answerText === result.secondAnswer.answerText) {
             setVotedFirstResponse(false);
         }
-    }, [userAnswer.answerText, result]);
+    }, [userAnswer, result]);
+
+    const onQuestionMessageReceived = (msg: IQuestionData) => {
+        setWaitForVoting(true)
+    }
 
     return (
         <>
-            {(!showFinalResult) ? (
+         <WebSocketComponent topics={['/topic/adminQuestion']} onMessage={(msg: IQuestionData) => onQuestionMessageReceived(msg)} />
+         {waitForVoting ?  (<div className="result"><WaitingPage message ={Constants.WAITING_PROMPT_VOTE} /></div>) : 
+            (!showFinalResult) ? (
                 <div className='result'>
                     <div className="result__inner-container">
                         <div className="result__avatar-container">

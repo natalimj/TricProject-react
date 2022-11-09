@@ -1,5 +1,5 @@
-import '../style/VideoPage.css';
-import Constants from '../util/Constants';
+import '../../style/VideoPage.css';
+import Constants from '../../util/Constants';
 
 const VideoPage = () => {
     return (

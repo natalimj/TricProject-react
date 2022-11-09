@@ -4,19 +4,15 @@ import UserApi from '../api/UserApi';
 import Constants from '../util/Constants';
 import IUserData from '../models/User';
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import { useAppSelector, useAppDispatch } from '../app/hooks';
-import { RootState } from '../app/store';
-import { addUser } from '../reducers/userSlice';
-import { setUserJoined } from '../reducers/componentSlice';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { RootState } from '../../app/store';
+import { loginUser } from '../../reducers/userSlice';
+import { setUserJoined } from '../../reducers/componentSlice';
 
 const UserLoginPage = () => {
-    const currentUser: IUserData = {
-        userId: useAppSelector((state: RootState) => state.user.userId),
-        username: useAppSelector((state: RootState) => state.user.username),
-        imagePath: useAppSelector((state: RootState) => state.user.imagePath)
-    }
-    const [user, setUser] = useState<IUserData>(currentUser);
     const dispatch = useAppDispatch();
+    const currentUser: IUserData = useAppSelector((state: RootState) => state.user);
+    const [user, setUser] = useState<IUserData>(currentUser);
     const [currentListIndex, setCurrentListIndex] = useState<number>(0);
     const imageList = ['imageFemale1', 'imageFemale2', 'imageFemale3', 'imageMale2', 'imageMale3', 'imageMale4'];
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -59,7 +55,7 @@ const UserLoginPage = () => {
             UserApi.createUser(user)
                 .then((response: any) => {
                     dispatch(setUserJoined(true));  // hide user page - show waiting page
-                    dispatch(addUser(response.data));
+                    dispatch(loginUser(response.data));
                 })
                 .catch((e: Error) => {
                     console.log(e);
