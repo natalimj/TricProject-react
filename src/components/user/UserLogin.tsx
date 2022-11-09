@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent, useEffect } from 'react';
 import '../../style/UserLogin.css'
 import UserApi from '../../api/UserApi';
 import Constants from '../../util/Constants';
@@ -15,6 +15,34 @@ const UserLoginPage = () => {
     const [user, setUser] = useState<IUserData>(currentUser);
     const [currentListIndex, setCurrentListIndex] = useState<number>(0);
     const imageList = ['imageFemale1', 'imageFemale2', 'imageFemale3', 'imageMale2', 'imageMale3', 'imageMale4'];
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    const cacheImages = async (srcArray) => {
+        const promises = await srcArray.map((src) => {
+            return new Promise(function (resolve, reject) {
+                const img = new Image();
+                img.src = src;
+
+            });
+        });
+        await Promise.all(promises);
+        setIsLoading(false);
+    };
+
+
+    useEffect(() => {
+        const imgs = [
+            '../../util/icons/imageFemale1.png',
+            '../../util/icons/imageFemale2.png',
+            '../../util/icons/imageFemale3.png',
+            '../../util/icons/imageMale2.png',
+            '../../util/icons/imageMale3.png',
+            '../../util/icons/imageMale4.png'
+        ]
+
+        cacheImages(imgs);
+    }, []);
+
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -73,10 +101,13 @@ const UserLoginPage = () => {
                         (<div className='user-form__avatar-selector-item'>
                             <div className='user-form--user-arrow' onClick={goLeft}><FaArrowLeft size={30} /></div></div>)
                         : <div className='user-form__avatar-selector-item'></div>}
-
-                    <div className='user-form__avatar-selector-item user-form--avatar-image'>
-                        <img src={require('../../util/icons/' + imageList[currentListIndex] + '.png')} alt="user icon" />
-                    </div>
+                    {!isLoading ?
+                        (<div className='user-form__avatar-selector-item user-form--avatar-image'>
+                            <img src={require('../../util/icons/' + imageList[currentListIndex] + '.png')} alt="user icon" />
+                        </div>) : (
+                            <></>
+                        )
+                    }
 
                     {(currentListIndex < (imageList.length - 1)) ?
                         (<div className='user-form__avatar-selector-item'>

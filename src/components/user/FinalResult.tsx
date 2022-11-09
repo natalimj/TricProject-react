@@ -18,6 +18,29 @@ const FinalResult = () => {
   const exportRef = useRef<HTMLHeadingElement>(null);
   const today = moment().format('DD-MM-YYYY');
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const cacheImages = async (srcArray) => {
+    const promises = await srcArray.map((src) => {
+      return new Promise(function (resolve, reject) {
+        const img = new Image();
+        img.src = src;
+
+      });
+    });
+    await Promise.all(promises);
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    const imgs = [
+      '../../util/icons/' + currentUser.imagePath + '.png'
+    ]
+
+    cacheImages(imgs);
+  }, [currentUser.imagePath]);
+
+
   useEffect(() => {
     UserApi.getFinalResult(currentUser.userId)
       .then((response: any) => {
@@ -35,9 +58,9 @@ const FinalResult = () => {
           <div className="final-result__inner-container">
             <div ref={exportRef} className="final-result__pink-background">
               <div className="final-result__user-box">
-                <div className="final-result__avatar-container">
+                {isLoading ? (<></>) : (<><div className="final-result__avatar-container">
                   <img src={require('../../util/icons/' + currentUser.imagePath + '.png')} alt="user icon" />
-                </div>
+                </div></>)}
                 <div className="final-result__text-container">
                   <span e2e-id="finalUsername">{currentUser.username}</span>
                   <span>{today}</span>
