@@ -14,8 +14,8 @@ const ManageQuestions = () => {
     const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
     const [questions, setQuestions] = useState<IQuestionData[]>([]);
     const [questionText, setQuestionText] = useState("");
-    const [firstAnswer, setFirstAnswer] = useState("");
-    const [secondAnswer, setSecondAnswer] = useState("");
+    const [firstAnswer, setFirstAnswer] = useState("Yes");
+    const [secondAnswer, setSecondAnswer] = useState("No");
     const [theme, setTheme] = useState("Select theme");
     const [firstCategory, setFirstCategory] = useState("Select category");
     const [secondCategory, setSecondCategory] = useState("Select category");
