@@ -106,7 +106,7 @@ const Question = () => {
 
   return (
     <div className='question-container'>
-      {(voted === currentQuestion.questionId) ? ((<WaitingPage message={Constants.WAITING_PROMPT_RESULT} />))
+      {(voted === currentQuestion.questionId) ? ((<WaitingPage message={Constants.WAITING_PROMPT_RESULT} onAdmin={false}/>))
         : (
           <>
             <div className='question'>

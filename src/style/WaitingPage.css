@@ -8,6 +8,14 @@
     justify-content: center;
 }
 
+.waiting-container-small {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
 .waiting-container__text {
     margin-top: 2%;
 }
