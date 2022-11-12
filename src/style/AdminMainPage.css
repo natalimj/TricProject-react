@@ -80,8 +80,12 @@
     font-size: var(--font-size-larger);
 }
 
-.admin-console__submit-button--secondary:active {
+.admin-console__submit-button--secondary:hover {
     background-color: var(--color-off-white-darker);
+}
+
+.admin-console__submit-button--secondary:active {
+    color: var(--color-pink);
 }
 
 .admin-console__input {

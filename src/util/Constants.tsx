@@ -110,6 +110,7 @@ const Constants = {
 	PERSONAL_INFORMATION_AGREEMENT: "Do you agree to selling your soul to HumanLab for eternity? Therby becoming a slave in this and all future lives.",
 	AGREE_BUTTON: "Agree",
 	DISAGREE_BUTTON: "Disagree",
+	COUNTDOWN : "Countdown"
 }
 
 export default Constants;

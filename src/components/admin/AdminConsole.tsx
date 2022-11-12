@@ -23,6 +23,7 @@ const AdminConsole = () => {
 
     const [showedFinalResult, setShowedFinalResult] = useState<boolean>(false);
     const [questionOnScreen, setQuestionOnScreen] = useState<boolean>(true)
+    const [timer, setTimer] = useState<number>(30);
 
     const maxTimeValue: number = 1800;
     const minTimeValue: number = 1;
@@ -95,6 +96,17 @@ const AdminConsole = () => {
         }
     }
 
+    const handleTimerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault()
+        let time: number;
+        if (e.currentTarget.value !== "") {
+            time = parseInt(e.currentTarget.value)
+            setTimer(time)
+        } else {
+            setTimer(0)
+        }
+    }
+
     const showResult = () => {
         UserApi.showResult(question.questionId)
             .then((response: any) => {
@@ -124,6 +136,18 @@ const AdminConsole = () => {
             ).catch((e: Error) => {
                 NotificationManager.error(e.message, 'Error!', 5000);
             });
+    };
+
+    const startCountdown = () => {
+        AdminApi.startCountdown(timer, accessToken)
+            .then((response: any) => {
+                NotificationManager.info('Countdown on screen', 'Info!', 2000);
+            })
+            .catch((e: Error) => {
+                NotificationManager.error(e.message, 'Error!', 5000);
+            });
+
+
     };
 
     const endSession = () => {
@@ -201,6 +225,21 @@ const AdminConsole = () => {
                                             {Constants.NEXT_QUESTION_TEXT}
                                         </div>
                                         {question.questionNumber}. {question.questionText}
+                                    </div>
+                                    <div>
+                                        <input type="text"
+                                            pattern='[0-9]{2}'
+                                            name="time"
+                                            value={timer}
+                                            e2e-id="timerField"
+                                            onChange={(e) => handleTimerChange(e)}
+                                            className="admin-console__input"
+                                            maxLength={5} />
+                                        <div>
+                                            <button className='admin-console__submit-button--secondary' onClick={() => startCountdown()}>
+                                                {Constants.COUNTDOWN}
+                                            </button>
+                                        </div>
                                     </div>
                                     {questionOnScreen &&
                                         <button onClick={() => displayQuestionForAdmin()} className="admin-console__submit-button--secondary" e2e-id="showQuestion">

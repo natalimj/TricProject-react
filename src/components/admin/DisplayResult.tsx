@@ -4,6 +4,7 @@ import IResultData from '../../models/Result';
 import Constants from '../../util/Constants';
 import WebSocketComponent from '../WebSocketComponent';
 import IQuestionData from '../../models/Question';
+import Timer from './Timer';
 
 const DisplayResult = () => {
 
@@ -34,6 +35,8 @@ const DisplayResult = () => {
     const [question, setQuestion] = useState<IQuestionData>(initialQuestionState);
     const [showQuestion, setShowQuestion] = useState<boolean>(false);
     const [showResult, setShowResult] = useState<boolean>(false);
+    const [timer, setTimer] = useState<number>(100);
+    const [showTimer, setShowTimer] = useState<boolean>(false);
 
 
     const onResultMessageReceived = (msg: IResultData) => {
@@ -48,12 +51,20 @@ const DisplayResult = () => {
         setShowResult(false);
     }
 
+    const onTimerMessageReceived = (msg: number) => {
+        setShowTimer(true)
+        setTimer(msg)
+    }
+
+
+
     return (<>
         <WebSocketComponent topics={['/topic/result']} onMessage={(msg: IResultData) => onResultMessageReceived(msg)} />
         <WebSocketComponent topics={['/topic/question']} onMessage={(msg: IQuestionData) => onQuestionMessageReceived(msg)} />
         <WebSocketComponent topics={['/topic/adminQuestion']} onMessage={(msg: IQuestionData) => onQuestionMessageReceived(msg)} />
-
-        {showQuestion &&
+        <WebSocketComponent topics={['/topic/timer']} onMessage={(msg: number) => onTimerMessageReceived(msg)} />
+        {showTimer && <Timer count={timer} setShowTimer={setShowTimer}/>} 
+        {!showTimer && showQuestion &&
             <div className='admin-result'>
                 <div className="admin-result__inner-container">
                     <div className="result__box">
@@ -62,7 +73,7 @@ const DisplayResult = () => {
                 </div>
             </div>
         }
-        {showResult &&
+        {!showTimer && showResult &&
             <div className='admin-result'>
                 <div className="admin-result__inner-container">
                     <div className="result__box">
