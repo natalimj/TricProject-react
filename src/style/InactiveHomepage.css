@@ -8,3 +8,8 @@
     font-size: var(--font-size-larger);
     color: var(--color-pink);
 }
+
+.innactive-container__link a:hover {
+    text-decoration: none;
+    color: var(--color-pink);
+}

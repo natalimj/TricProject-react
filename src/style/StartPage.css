@@ -59,13 +59,13 @@
     background-color: var(--color-pink-darker);
 }
 
-@media screen and (max-height: 650px) {
+@media (max-height: 650px), (max-width: 300px){
     .submit-button {
         padding: 5px 5px;
     }
 }
 
-@media screen and (max-width: 315px) {
+@media (max-width: 315px) {
     .start-page-landing__title img {
         height: 20vh;
     }

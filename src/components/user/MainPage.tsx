@@ -27,9 +27,9 @@ const MainPage = () => {
       UserApi.saveVote({
         userId: userId,
         questionId: currentQuestionId,
-        answerId: (answers[0].answerId === userAnswer.answerId || answers[1].answerId === userAnswer.answerId)  ? userAnswer.answerId : answers[0].answerId //TODO: check if this works as intended
+        answerId: (answers[0].answerId === userAnswer.answerId || answers[1].answerId === userAnswer.answerId) ? userAnswer.answerId : answers[0].answerId
       }).then(() => {
-        dispatch(addAnswer((answers[0].answerId === userAnswer.answerId || answers[1].answerId === userAnswer.answerId) ? userAnswer : answers[0])); //TODO: same here
+        dispatch(addAnswer((answers[0].answerId === userAnswer.answerId || answers[1].answerId === userAnswer.answerId) ? userAnswer : answers[0]));
         dispatch(setUserVoted(currentQuestionId));
       }).then(() => {
         UserApi.showResult(currentQuestionId).then((newResult: any) => {

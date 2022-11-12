@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import '../../style/Question.css';
+import '../../style/Modal.css';
 import Constants from '../../util/Constants';
 import UserApi from '../../api/UserApi';
 import IQuestionData from '../../models/Question';
@@ -65,7 +66,7 @@ const Question = () => {
 
   useEffect(() => {
     if (timer === 0 && !voted) {
-      currentQuestion.questionNumber === numberOfQuestions ? vote(predictedAnswer) : vote(currentQuestion.answers[0]); //TODO: check if last question, then predictedVote() instead of vote
+      currentQuestion.questionNumber === numberOfQuestions ? vote(predictedAnswer) : vote(currentQuestion.answers[0]);
       setTimer(-1);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -87,7 +88,7 @@ const Question = () => {
           UserApi.getPredictedAnswer(userId)
             .then((response: any) => {
               dispatch(addAnswer(currentQuestion.answers[response.data]));
-              setPredictedAnswer(currentQuestion.answers[response.data]); //TODO: check if needed
+              setPredictedAnswer(currentQuestion.answers[response.data]);
             }).then(() => {
               setTimeout(() => {
                 setIsOpen(true)
@@ -137,36 +138,12 @@ const Question = () => {
                   <button onClick={() => { setIsOpen(true) }} className={firstAnswer || secondAnswer ? 'question__submit-button question__active-button' : 'question__submit-button'} disabled={!firstAnswer && !secondAnswer} e2e-id="questionConfirm">
                     {Constants.CONFIRM_BUTTON}
                   </button>
-                  <Modal
-                    style={{
-                      overlay: {
-                        position: 'fixed',
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        backgroundColor: 'rgba(0, 0, 0, 0.6)'
-                      },
-                      content: {
-                        position: 'absolute',
-                        top: '15%',
-                        left: '10%',
-                        right: '10%',
-                        bottom: '15%',
-                        border: '5px solid #181818',
-                        background: '#3D3D3D',
-                        overflow: 'auto',
-                        WebkitOverflowScrolling: 'touch',
-                        borderRadius: '4px',
-                        outline: 'none',
-                        padding: '20px'
-                      }
-                    }} isOpen={isOpen}>
-                    <div className='question__timer-text'>{PlayInfo?.finalResultText}</div>
-                    <div className='question__timer-text'>We chose: {predictedAnswer.answerText}</div>
-                    <button className={'question__submit-button question__active-button'} onClick={() => {
+                  <Modal isOpen={isOpen} className='modal__content' overlayClassName='modal__overlay modal__overlay--invert'>
+                    <div className='modal__text'>{PlayInfo?.finalResultText}</div>
+                    <div className='modal__text'>{Constants.WE_CHOSE_TEXT} <span className='modal__text--selection'>{predictedAnswer.answerText}</span></div>
+                    <button className={'modal__button'} onClick={() => {
                       setIsOpen(false)
-                      vote(predictedAnswer) //TODO: check this
+                      vote(predictedAnswer)
                     }}>{Constants.CONFIRM_BUTTON}
                     </button>
                   </Modal>
