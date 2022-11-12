@@ -118,6 +118,14 @@ const displayQuestionForAdmin = (questionNumber: number, accessToken: string) =>
   })
 };
 
+const startCountdown = (timer: number, accessToken: string) => {
+  return http.get<number>("adminApi/startCountdown", {
+    params: {
+      timer: timer
+    },
+    headers: authHeader(accessToken)
+  })
+};
 
 const AdminApi = {
   getAllUsers,
@@ -138,6 +146,7 @@ const AdminApi = {
   editContributor,
   deleteContributor,
   editPlayInfo,
-  displayQuestionForAdmin
+  displayQuestionForAdmin,
+  startCountdown
 };
 export default AdminApi;
