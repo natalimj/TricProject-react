@@ -93,7 +93,7 @@ const UserLoginPage = () => {
                 </div>
             </div>
             <div className="user-form__avatar-container">
-                <div className='user-form_avatar-header'>
+                <div className='user-form__avatar-header'>
                     {Constants.AVATAR_FIELD}
                 </div>
                 <div className='user-form__avatar-selector'>

@@ -108,7 +108,7 @@ select:focus{
     height: 175px;
     overflow: auto;
     resize: none;
-    font-weight: var(--font-weight-default)
+    font-weight: var(--font-weight-default);
 }
 
 .scroll::-webkit-scrollbar {

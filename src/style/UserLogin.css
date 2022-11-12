@@ -1,12 +1,25 @@
 @import url("../styles.css");
 
+.user-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
 .user-form__header,
 .user-form__avatar-container {
     font-size: var(--font-size-header);
     background-color: var(--color-grey);
     border: 3px solid var(--color-black);
     padding: 5px 0;
-    margin: 23px 0;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.user-form__form-group {
+    width: 100%;
 }
 
 .user-form--username {
@@ -59,7 +72,7 @@
 
 .user-form--avatar-image img {
     width: 100%;
-    max-height: 280px;
+    max-height: 200px;
     min-height: 200px;
 }
 
@@ -72,10 +85,11 @@
     color: var(--color-pink);
 }
 
-@media screen and (max-height: 650px) {
+@media (max-height: 650px),
+(max-width: 300px) {
 
     .user-form__header,
-    .user-form_avatar-header {
+    .user-form__avatar-header {
         font-size: var(--font-size-medium);
     }
 

@@ -1,0 +1,67 @@
+@import url("../styles.css");
+
+.modal__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(1px);
+}
+
+.modal__overlay--invert {
+    backdrop-filter: invert(1);
+}
+
+.modal__content {
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    right: 10%;
+    bottom: 15%;
+    border: 5px solid var(--color-black);
+    background: var(--color-dark-grey);
+    overflow: auto;
+    border-radius: 4px;
+    outline: none;
+    padding: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.modal__content span {
+    text-align: center;
+}
+
+.modal__button {
+    min-width: 200px;
+    background: none;
+    background-color: var(--color-pink);
+    color: var(--color-black);
+    border: 3px solid var(--color-black);
+    padding: 15px 15px;
+    font: inherit;
+    font-size: var(--font-size-header);
+    cursor: pointer;
+    outline: inherit;
+    margin-bottom: 2%;
+}
+
+.modal__button--secondary {
+    background-color: var(--color-off-white);
+}
+
+.modal__text {
+    font-size: var(--font-size-medium);
+}
+
+@media screen and (max-width: 300px) {
+    .modal__button {
+        font-size: var(--font-size-default);
+        min-width: 150px;
+    }
+}

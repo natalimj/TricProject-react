@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import '../../style/StartPage.css';
+import '../../style/Modal.css';
 import UserApi from "../../api/UserApi";
 import IQuestionData from '../../models/Question';
 import Constants from "../../util/Constants";
@@ -104,51 +105,24 @@ const StartPage = () => {
                         <button onClick={() => { setIsOpen(true) }} className='question__submit-button question__active-button' e2e-id="join">
                           {Constants.JOIN_BUTTON}
                         </button>
-                        <Modal onRequestClose={() => setIsOpen(false)}
-                          style={{
-                            overlay: {
-                              position: 'fixed',
-                              top: 0,
-                              left: 0,
-                              right: 0,
-                              bottom: 0,
-                              backgroundColor: 'rgba(0, 0, 0, 0.6)'
-                            },
-                            content: {
-                              position: 'absolute',
-                              top: '15%',
-                              left: '10%',
-                              right: '10%',
-                              bottom: '15%',
-                              border: '5px solid #181818',
-                              background: '#3D3D3D',
-                              overflow: 'auto',
-                              WebkitOverflowScrolling: 'touch',
-                              borderRadius: '4px',
-                              outline: 'none',
-                              padding: '20px'
-                            }
-                          }} isOpen={isOpen}>
-                          <span className='question__timer-text'>
+                        <Modal onRequestClose={() => setIsOpen(false)} isOpen={isOpen} className='modal__content' overlayClassName='modal__overlay'>
+                          <span className='modal__text'>
                             Do you agree to selling your soul to HumanLab for eternity? Therby becoming a slave in this and all future lives.
                           </span>
-                          <button e2e-id="agree" className={'question__submit-button question__active-button'} onClick={() => {
+                          <button e2e-id="agree" className='modal__button' onClick={() => {
                             setIsOpen(false)
                             setSessionStarted(true)
-                          }
-                          }>Agree</button>
-                          <button className={'question__submit-button question__active-button'} onClick={() => { setIsOpen(false) }
-                          }>Disagree</button>
+                          }}>Agree</button>
+                          <button className='modal__button modal__button--secondary' onClick={() => { setIsOpen(false) }}>Disagree</button>
                         </Modal>
                       </>
                     </div>
                   )}
                 </div>
-              </>) : (<></>)}</>
-
-      )
-
-      }
+              </>
+            ) : null}
+        </>
+      )}
     </>
   );
 }
