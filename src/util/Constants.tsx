@@ -106,6 +106,10 @@ const Constants = {
 	FINAL_RESULT_TEXT: "Final Result Text",
 	WHAT_IS_TRIC: "What is TRIC?",
 	DISPLAY_QUESTION : "Display question on admin screen",
+	WE_CHOSE_TEXT: "We chose:",
+	PERSONAL_INFORMATION_AGREEMENT: "Do you agree to selling your soul to HumanLab for eternity? Therby becoming a slave in this and all future lives.",
+	AGREE_BUTTON: "Agree",
+	DISAGREE_BUTTON: "Disagree",
 }
 
 export default Constants;

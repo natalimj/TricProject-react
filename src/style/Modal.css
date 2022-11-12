@@ -59,6 +59,10 @@
     font-size: var(--font-size-medium);
 }
 
+.modal__text--selection {
+    color: var(--color-pink);
+}
+
 @media screen and (max-width: 300px) {
     .modal__button {
         font-size: var(--font-size-default);

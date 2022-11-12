@@ -107,13 +107,13 @@ const StartPage = () => {
                         </button>
                         <Modal onRequestClose={() => setIsOpen(false)} isOpen={isOpen} className='modal__content' overlayClassName='modal__overlay'>
                           <span className='modal__text'>
-                            Do you agree to selling your soul to HumanLab for eternity? Therby becoming a slave in this and all future lives.
+                            {Constants.PERSONAL_INFORMATION_AGREEMENT}
                           </span>
                           <button e2e-id="agree" className='modal__button' onClick={() => {
                             setIsOpen(false)
                             setSessionStarted(true)
-                          }}>Agree</button>
-                          <button className='modal__button modal__button--secondary' onClick={() => { setIsOpen(false) }}>Disagree</button>
+                          }}>{Constants.AGREE_BUTTON}</button>
+                          <button className='modal__button modal__button--secondary' onClick={() => { setIsOpen(false) }}>{Constants.DISAGREE_BUTTON}</button>
                         </Modal>
                       </>
                     </div>

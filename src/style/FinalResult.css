@@ -104,7 +104,7 @@
     background-color: var(--color-pink);
     color: var(--color-dark-grey);
     font-size: var(--font-size-larger);
-    margin-top: 20px;
+    margin: 20px 0;
     cursor: pointer;
 }
 
@@ -132,7 +132,7 @@
 }
 
 .final-result__info-icon {
-    margin: 18px 0 0 5px;
+    margin: 0 5px;
     cursor: pointer;
 }
 

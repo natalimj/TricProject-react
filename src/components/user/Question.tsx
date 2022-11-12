@@ -140,7 +140,7 @@ const Question = () => {
                   </button>
                   <Modal isOpen={isOpen} className='modal__content' overlayClassName='modal__overlay modal__overlay--invert'>
                     <div className='modal__text'>{PlayInfo?.finalResultText}</div>
-                    <div className='modal__text'>We chose: {predictedAnswer.answerText}</div>
+                    <div className='modal__text'>{Constants.WE_CHOSE_TEXT} <span className='modal__text--selection'>{predictedAnswer.answerText}</span></div>
                     <button className={'modal__button'} onClick={() => {
                       setIsOpen(false)
                       vote(predictedAnswer)
