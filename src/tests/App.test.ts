@@ -45,37 +45,37 @@ async function resetApp() {
   }
   const question1: IQuestionData = {
     questionNumber: 1,
-    questionText: 'Would you permanently  welcome the people in your own home?',
+    questionText: 'Would you welcome permanently people in mortal danger in your own home, sharing therefore with them your own food, water and salary?',
     answers: [answer1,answer2],
-    time: 30,
+    time: 10,
     theme: "Immigration"
   }
   const question2: IQuestionData = {
     questionNumber: 2,
-    questionText: 'Would you still travel by train?',
+    questionText: 'You work one hour by car far from home. If you travel by train you pollute less, but it takes two hours. Would you still travel by train?',
     answers: [answer1,answer2],
-    time: 30,
+    time: 10,
     theme: "Climate Change"
   }
   const question3: IQuestionData = {
     questionNumber: 3,
-    questionText: 'Would you stop eating fish risking your own health?',
+    questionText: 'In order to be healthy your doctor prescribed a fish-based diet. Your fish is mass-bred andsavagely slaughtered while it`s still alive. Would you stop eating fish risking your own health?',
     answers: [answer1,answer2],
-    time: 30,
+    time: 10,
     theme: "Mass Breeding"
   }
   const question4: IQuestionData = {
     questionNumber: 4,
-    questionText: 'Would you close the heating?',
+    questionText: 'In your country a retirement home with 20 old people needs a high amount of heating in order to keep them healthy. It`s proven that high heating consumption rises the CO2 level, which can end in floods that put at risk the life of an entire village in the other part of the world. Would you close the heating?',
     answers: [answer1,answer2],
-    time: 30,
+    time: 10,
     theme: "Energy Consumption"
   }
   const question5: IQuestionData = {
     questionNumber: 5,
-    questionText: 'Would you eat the whole piece of bread?',
+    questionText: 'You are in a hole with another person, and both of you are too weak to come out. There is just a piece of bread. If you both eat the bread you will endure a bit longer, but you both are eventually going to die. If you only eat the bread, you will save yourself, but the other person will die. Would you eat the whole piece of bread?',
     answers: [answer1,answer2],
-    time: 30,
+    time: 10,
     theme: "Global Population"
   }
   await AdminApi.addQuestion(question1,accessToken);
