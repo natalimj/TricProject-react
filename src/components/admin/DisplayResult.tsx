@@ -76,7 +76,7 @@ const DisplayResult = () => {
             <div className='admin-result'>
                 <div className="admin-result__inner-container">
                     <div className="result__box">
-                        <div className="result__question-text result__text--larger">{question.questionText.split(".").slice(-1)}</div>
+                        <div className="result__question-text result__text--larger">{question.questionText}</div>
                     </div>
                    {waitForVoting && <WaitingPage message={Constants.WAITING_PROMPT_RESULT} onAdmin={true}/>} 
                 </div> 
@@ -88,7 +88,7 @@ const DisplayResult = () => {
                 <div className="admin-result__inner-container">
                     <div className="result__box">
                         <div className="result__text">{Constants.VOTE_RESULT_FIELD} {result?.question.questionNumber}</div>
-                        <div className="result__question-text result__text--larger">{result?.question.questionText.split(".").slice(-1)}</div>
+                        <div className="result__question-text result__text--larger">{result?.question.questionText}</div>
                         <div className="result__title admin-result__title">
                             <span className="result__answer-text">{result.firstAnswer.answerText}</span>
                             <span className="result__answer-text result__answer-text--right">{result.secondAnswer.answerText}</span>
