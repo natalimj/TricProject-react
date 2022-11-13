@@ -62,7 +62,7 @@ const Result = ({ finalResult, result }: Props) => {
     return (
         <>
          <WebSocketComponent topics={['/topic/adminQuestion']} onMessage={(msg: IQuestionData) => onQuestionMessageReceived(msg)} />
-         {waitForVoting ?  (<div className="result"><WaitingPage message ={Constants.WAITING_PROMPT_VOTE} /></div>) : 
+         {waitForVoting ?  (<div className="result"><WaitingPage message ={Constants.WAITING_PROMPT_VOTE} onAdmin={false} /></div>) : 
             (!showFinalResult) ? (
                 <div className='result'>
                     <div className="result__inner-container">

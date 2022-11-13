@@ -5,6 +5,7 @@ import Constants from '../../util/Constants';
 import WebSocketComponent from '../WebSocketComponent';
 import IQuestionData from '../../models/Question';
 import Timer from './Timer';
+import WaitingPage from '../WaitingPage';
 
 const DisplayResult = () => {
 
@@ -37,18 +38,27 @@ const DisplayResult = () => {
     const [showResult, setShowResult] = useState<boolean>(false);
     const [timer, setTimer] = useState<number>(100);
     const [showTimer, setShowTimer] = useState<boolean>(false);
-
+    const [waitForVoting, setWaitForVoting] = useState<boolean>(false);
 
     const onResultMessageReceived = (msg: IResultData) => {
         setResult(msg);
         setShowResult(true);
         setShowQuestion(false);
+        setWaitForVoting(false)
     }
 
     const onQuestionMessageReceived = (msg: IQuestionData) => {
         setQuestion(msg);
         setShowQuestion(true);
         setShowResult(false);
+        setWaitForVoting(true)
+    }
+
+    const onAdminQuestionMessageReceived = (msg: IQuestionData) => {
+        setQuestion(msg);
+        setShowQuestion(true);
+        setShowResult(false);
+        setWaitForVoting(false)
     }
 
     const onTimerMessageReceived = (msg: number) => {
@@ -56,12 +66,10 @@ const DisplayResult = () => {
         setTimer(msg)
     }
 
-
-
     return (<>
         <WebSocketComponent topics={['/topic/result']} onMessage={(msg: IResultData) => onResultMessageReceived(msg)} />
         <WebSocketComponent topics={['/topic/question']} onMessage={(msg: IQuestionData) => onQuestionMessageReceived(msg)} />
-        <WebSocketComponent topics={['/topic/adminQuestion']} onMessage={(msg: IQuestionData) => onQuestionMessageReceived(msg)} />
+        <WebSocketComponent topics={['/topic/adminQuestion']} onMessage={(msg: IQuestionData) => onAdminQuestionMessageReceived(msg)} />
         <WebSocketComponent topics={['/topic/timer']} onMessage={(msg: number) => onTimerMessageReceived(msg)} />
         {showTimer && <Timer count={timer} setShowTimer={setShowTimer}/>} 
         {!showTimer && showQuestion &&
@@ -70,9 +78,11 @@ const DisplayResult = () => {
                     <div className="result__box">
                         <div className="result__question-text result__text--larger">{question.questionText}</div>
                     </div>
-                </div>
+                   {waitForVoting && <WaitingPage message={Constants.WAITING_PROMPT_RESULT} onAdmin={true}/>} 
+                </div> 
             </div>
         }
+
         {!showTimer && showResult &&
             <div className='admin-result'>
                 <div className="admin-result__inner-container">
