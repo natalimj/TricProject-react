@@ -236,13 +236,13 @@ const AdminConsole = () => {
                                             className="admin-console__input"
                                             maxLength={5} />
                                         <div>
-                                            <button className='admin-console__submit-button--secondary' onClick={() => startCountdown()}>
+                                            <button className='admin-console__submit-button--secondary' onClick={() => startCountdown()} e2e-id="startCountdown">
                                                 {Constants.COUNTDOWN}
                                             </button>
                                         </div>
                                     </div>
                                     {questionOnScreen &&
-                                        <button onClick={() => displayQuestionForAdmin()} className="admin-console__submit-button--secondary" e2e-id="showQuestion">
+                                        <button onClick={() => displayQuestionForAdmin()} className="admin-console__submit-button--secondary" e2e-id="showQuestionForAdmin">
                                             {Constants.DISPLAY_QUESTION}
                                         </button>
                                     }
