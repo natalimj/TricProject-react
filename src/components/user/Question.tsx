@@ -27,6 +27,7 @@ const Question = () => {
   const [timer, setTimer] = useState<number>(currentQuestion.time);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [PlayInfo, setPlayInfo] = useState<IPlayInfoData>();
+  const [shortText, setShortText] = useState(currentQuestion.questionText.split(".").slice(-1));
 
   const vote = (answer: IAnswerData) => {
     const voteData = {
@@ -102,11 +103,12 @@ const Question = () => {
       .catch((e: Error) => {
         NotificationManager.error(e.message, 'Error!', 5000);
       });
-  }, [currentQuestion.answers, currentQuestion.questionNumber, dispatch, numberOfQuestions, userId])
+      setShortText(currentQuestion.questionText.split(".").slice(-1));
+  }, [currentQuestion.answers, currentQuestion.questionNumber, dispatch, numberOfQuestions, userId,currentQuestion.questionText])
 
   return (
     <div className='question-container'>
-      {(voted === currentQuestion.questionId) ? ((<WaitingPage message={Constants.WAITING_PROMPT_RESULT} onAdmin={false}/>))
+      {(voted === currentQuestion.questionId) ? ((<WaitingPage message={Constants.WAITING_PROMPT_RESULT} onAdmin={false} />))
         : (
           <>
             <div className='question'>
@@ -118,7 +120,7 @@ const Question = () => {
                 {Constants.QUESTION_FIELD} {currentQuestion.questionNumber}
               </div>
               <div className='question__header question__header--text' e2e-id="questionText">
-                {currentQuestion.questionText}
+                {shortText}
               </div>
               <div className='question__answer-group'>
                 {currentQuestion.answers && currentQuestion.answers.map((answer, index) => (
