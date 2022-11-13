@@ -25,7 +25,7 @@ const Result = ({ finalResult, result }: Props) => {
     const [waitForVoting, setWaitForVoting] = useState<boolean>(false);
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [shortText, setShortText] = useState<string>("");
+    const [shortText, setShortText] = useState(result?.question.questionText.split(".").slice(-1));
 
     const cacheImages = async (srcArray) => {
         const promises = await srcArray.map((src) => {
@@ -38,14 +38,6 @@ const Result = ({ finalResult, result }: Props) => {
         await Promise.all(promises);
         setIsLoading(false);
     };
-
-    const splitText = (text: string) => {
-        const index = text.lastIndexOf('.'); 
-        if (index !== -1) {
-          text = text.slice(index + 1);
-        }
-        return text;
-      }
 
     useEffect(() => {
         const imgs = [
@@ -62,9 +54,7 @@ const Result = ({ finalResult, result }: Props) => {
         } else if (userAnswer.answerText === result.secondAnswer.answerText) {
             setVotedFirstResponse(false);
         }
-
-        setShortText(splitText(result?.question.questionText));
-
+        setShortText(result?.question.questionText.split(".").slice(-1));
     }, [userAnswer, result]);
 
     const onQuestionMessageReceived = (msg: IQuestionData) => {
