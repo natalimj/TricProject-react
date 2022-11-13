@@ -27,7 +27,7 @@ const Question = () => {
   const [timer, setTimer] = useState<number>(currentQuestion.time);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [PlayInfo, setPlayInfo] = useState<IPlayInfoData>();
-  const [shortText, setShortText] = useState<string>("");
+  const [shortText, setShortText] = useState(currentQuestion.questionText.split(".").slice(-1));
 
   const vote = (answer: IAnswerData) => {
     const voteData = {
@@ -103,17 +103,8 @@ const Question = () => {
       .catch((e: Error) => {
         NotificationManager.error(e.message, 'Error!', 5000);
       });
-      setShortText(splitText(currentQuestion.questionText));
+      setShortText(currentQuestion.questionText.split(".").slice(-1));
   }, [currentQuestion.answers, currentQuestion.questionNumber, dispatch, numberOfQuestions, userId,currentQuestion.questionText])
-
-
-  const splitText = (text: string) => {
-    const index = text.lastIndexOf('.'); 
-    if (index !== -1) {
-      text = text.slice(index + 1);
-    }
-    return text;
-  }
 
   return (
     <div className='question-container'>
