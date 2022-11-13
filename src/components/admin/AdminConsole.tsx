@@ -231,7 +231,7 @@ const AdminConsole = () => {
                                             pattern='[0-9]{2}'
                                             name="time"
                                             value={timer}
-                                            e2e-id="timerField"
+                                            e2e-id="playTimerField"
                                             onChange={(e) => handleTimerChange(e)}
                                             className="admin-console__input"
                                             maxLength={5} />

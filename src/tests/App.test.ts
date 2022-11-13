@@ -85,21 +85,21 @@ async function resetApp() {
   await AdminApi.addQuestion(question5,accessToken);
 }
 
-// async function checkQuestion(questionNr : number, text : string, answer1 : string, answer2 : string) {
-//   let selector = '[e2e-id="question' + questionNr + 'EditText"]';
-//   let selectorAns1 = '[e2e-id="question' + questionNr + 'EditAnswer1"]';
-//   let selectorAns2 = '[e2e-id="question' + questionNr + 'EditAnswer2"]';
-//   await adminPage.waitForSelector(selector);
-//   let element = await adminPage.$(selector);
-//   let value = await adminPage.evaluate(el => el.value, element);
-//   await expect(value).toBe(text);
-//   element = await adminPage.$(selectorAns1);
-//   value = await adminPage.evaluate(el => el.value, element);
-//   await expect(value).toBe(answer1);
-//   element = await adminPage.$(selectorAns2);
-//   value = await adminPage.evaluate(el => el.value, element);
-//   await expect(value).toBe(answer2);
-// }
+async function checkQuestion(questionNr : number, text : string, answer1 : string, answer2 : string) {
+  let selector = '[e2e-id="question' + questionNr + 'EditText"]';
+  let selectorAns1 = '[e2e-id="question' + questionNr + 'EditAnswer1"]';
+  let selectorAns2 = '[e2e-id="question' + questionNr + 'EditAnswer2"]';
+  await adminPage.waitForSelector(selector);
+  let element = await adminPage.$(selector);
+  let value = await adminPage.evaluate(el => el.value, element);
+  await expect(value).toBe(text);
+  element = await adminPage.$(selectorAns1);
+  value = await adminPage.evaluate(el => el.value, element);
+  await expect(value).toBe(answer1);
+  element = await adminPage.$(selectorAns2);
+  value = await adminPage.evaluate(el => el.value, element);
+  await expect(value).toBe(answer2);
+}
 
 // async function checkText(e2eID : string, value : string) {
 //   let element = await userPage.$('[e2e-id="'+e2eID+'"]')
@@ -136,12 +136,13 @@ describe("Feature 1 - Questions database and display", () => {
     await adminPage.waitForSelector('[e2e-id="questionNr1"]');
   });
 
-  // test("Check Questions", async () => {
-  //   await checkQuestion(1,"Which DJ is better?", "Boris Brejcha", "Ann Clue");
-  //   await checkQuestion(2,"Which genre is better?", "Techno", "Trance");
-  //   await checkQuestion(3,"Which festival is better?", "Electric Castle", "Untold");
-  //   await checkQuestion(4,"Where would you like to go?", "Berlin", "Ibiza");
-  // });
+  test("Check Questions", async () => {
+     await checkQuestion(1,"Would you permanently  welcome the people in your own home?", "Yes", "No");
+     await checkQuestion(2,"Would you still travel by train?", "Yes", "No");
+     await checkQuestion(3,"Would you stop eating fish risking your own health?", "Yes", "No");
+     await checkQuestion(4,"Would you close the heating?", "Yes", "No");
+     await checkQuestion(5,"Would you eat the whole piece of bread?", "Yes", "No");
+  });
 
   test("Edit Question", async () => {
     await adminPage.screenshot({
@@ -167,7 +168,7 @@ describe("Feature 1 - Questions database and display", () => {
     await adminPage.screenshot({
       path: 'screenshots/feature1/beforecheckedit.jpg'
     });
-    //await checkQuestion(1,"What is your favorite stage?", "Main Stage", "Booha");
+    await checkQuestion(1,"What is your favorite stage?", "Main Stage", "Booha");
     await adminPage.screenshot({
       path: 'screenshots/feature1/aftercheckedit.jpg'
     });
@@ -179,14 +180,17 @@ describe("Feature 1 - Questions database and display", () => {
     });
     await adminPage.waitForSelector('[e2e-id="question1EditDelete"]');
     await adminPage.click('[e2e-id="question1EditDelete"]');
-    await delay(1000);
     await adminPage.screenshot({
       path: 'screenshots/feature1/afterdeletequestion.jpg'
     });
-    //await checkQuestion(2,"Which genre is better?", "Techno", "Trance");
+    await adminPage.reload({ waitUntil: ["networkidle0", "domcontentloaded"] });
+    await adminPage.waitForSelector('[e2e-id="questionAccordion"]');
+    await adminPage.click('[e2e-id="questionAccordion"]');
     await adminPage.screenshot({
-      path: 'screenshots/feature1/aftercheckelete.jpg'
+      path: 'screenshots/feature1/afterreload.jpg'
     });
+    await adminPage.waitForSelector('[e2e-id="question1EditDelete"]');
+    await checkQuestion(1,"Would you still travel by train?", "Yes", "No");
   });
 
   test("Go back", async () => {
