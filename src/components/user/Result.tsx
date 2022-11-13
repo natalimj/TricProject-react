@@ -25,6 +25,7 @@ const Result = ({ finalResult, result }: Props) => {
     const [waitForVoting, setWaitForVoting] = useState<boolean>(false);
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [shortText, setShortText] = useState<string>("");
 
     const cacheImages = async (srcArray) => {
         const promises = await srcArray.map((src) => {
@@ -37,6 +38,14 @@ const Result = ({ finalResult, result }: Props) => {
         await Promise.all(promises);
         setIsLoading(false);
     };
+
+    const splitText = (text: string) => {
+        const index = text.lastIndexOf('.'); 
+        if (index !== -1) {
+          text = text.slice(index + 1);
+        }
+        return text;
+      }
 
     useEffect(() => {
         const imgs = [
@@ -53,6 +62,9 @@ const Result = ({ finalResult, result }: Props) => {
         } else if (userAnswer.answerText === result.secondAnswer.answerText) {
             setVotedFirstResponse(false);
         }
+
+        setShortText(splitText(result?.question.questionText));
+
     }, [userAnswer, result]);
 
     const onQuestionMessageReceived = (msg: IQuestionData) => {
@@ -72,7 +84,7 @@ const Result = ({ finalResult, result }: Props) => {
                         </div>
                         <div className="result__text result__text--username" e2e-id="resultUsername">{userName}</div>
                         <div className="result__text">{finalResult ? Constants.FINAL_VOTE_RESULT_FIELD : Constants.VOTE_RESULT_FIELD}</div>
-                        <div className="result__question-text" e2e-id="resultQuestionText">{result?.question.questionText}</div>
+                        <div className="result__question-text" e2e-id="resultQuestionText">{shortText}</div>
                         <div className="result__box">
                             <div className="result__title">
                                 <span className="result__answer-text" e2e-id="resultQuestionAnswer0">{result.firstAnswer.answerText}</span>
