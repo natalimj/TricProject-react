@@ -37,6 +37,15 @@ const AdminConsole = () => {
             .catch((e: any) => {
                 console.log(e)
                 NotificationManager.error(e.message + e.response.data, 'Error!', 5000);
+                AdminApi.getAllQuestions(accessToken)
+                    .then((response: any) => {
+                        const questions: IQuestionData[] = response.data;              
+                        dispatch(addQuestion(questions[questionNo-1]));
+                        dispatch(setShowQuestionButton(true));
+                    })
+                    .catch((e: any) => {
+
+                    })
             });
     };
 
