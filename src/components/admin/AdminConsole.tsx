@@ -34,8 +34,9 @@ const AdminConsole = () => {
                 dispatch(addQuestion(response.data));
                 dispatch(setShowQuestionButton(true));
             })
-            .catch((e: Error) => {
-                NotificationManager.error(e.message, 'Error!', 5000);
+            .catch((e: any) => {
+                console.log(e)
+                NotificationManager.error(e.message + e.response.data, 'Error!', 5000);
             });
     };
 
