@@ -34,8 +34,18 @@ const AdminConsole = () => {
                 dispatch(addQuestion(response.data));
                 dispatch(setShowQuestionButton(true));
             })
-            .catch((e: Error) => {
-                NotificationManager.error(e.message, 'Error!', 5000);
+            .catch((e: any) => {
+                console.log(e)
+                NotificationManager.error(e.message + e.response.data, 'Error!', 5000);
+                AdminApi.getAllQuestions(accessToken)
+                    .then((response: any) => {
+                        const questions: IQuestionData[] = response.data;              
+                        dispatch(addQuestion(questions[questionNo-1]));
+                        dispatch(setShowQuestionButton(true));
+                    })
+                    .catch((e: any) => {
+
+                    })
             });
     };
 
@@ -231,18 +241,18 @@ const AdminConsole = () => {
                                             pattern='[0-9]{2}'
                                             name="time"
                                             value={timer}
-                                            e2e-id="timerField"
+                                            e2e-id="playTimerField"
                                             onChange={(e) => handleTimerChange(e)}
                                             className="admin-console__input"
                                             maxLength={5} />
                                         <div>
-                                            <button className='admin-console__submit-button--secondary' onClick={() => startCountdown()}>
+                                            <button className='admin-console__submit-button--secondary' onClick={() => startCountdown()} e2e-id="startCountdown">
                                                 {Constants.COUNTDOWN}
                                             </button>
                                         </div>
                                     </div>
                                     {questionOnScreen &&
-                                        <button onClick={() => displayQuestionForAdmin()} className="admin-console__submit-button--secondary" e2e-id="showQuestion">
+                                        <button onClick={() => displayQuestionForAdmin()} className="admin-console__submit-button--secondary" e2e-id="showQuestionForAdmin">
                                             {Constants.DISPLAY_QUESTION}
                                         </button>
                                     }
