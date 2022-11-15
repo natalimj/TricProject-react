@@ -71,7 +71,7 @@ const EditContributor = ({ contributorToEdit, contributors, setContributors }: P
                         name="name" />
                 </div>
                 <div className="questions__icon"
-                    onClick={() => editContributor()} ><AiOutlineSave size={30} /><br></br><span className="questions__icon-hide">{Constants.EDIT_BUTTON.toUpperCase()}</span></div>
+                    onClick={() => editContributor()} ><AiOutlineSave size={30} /><br></br><span className="questions__icon-hide">{Constants.SAVE_BUTTON.toUpperCase()}</span></div>
             </div>
             <div className="questions__line">
                 <div className="questions__input">

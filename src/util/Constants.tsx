@@ -93,7 +93,6 @@ const Constants = {
 	CAST_LIST_TITLE: "Cast",
 	NEW_CAST_TITLE: "New Cast",
 	PLAY_INFO_TITLE: "Play Info",
-	EDIT_BUTTON: "Edit",
 	DELETE_BUTTON: "Delete",
 	NEXT_QUESTION_TEXT: "Next question is:",
 	SET_TIME_INFO: "*Time is expressed in SECONDS",
@@ -110,7 +109,8 @@ const Constants = {
 	PERSONAL_INFORMATION_AGREEMENT: "Do you agree to have your vote data stored after the play? We will not store any personal data such as the username.",
 	AGREE_BUTTON: "Agree",
 	DISAGREE_BUTTON: "Disagree",
-	COUNTDOWN : "Countdown"
+	COUNTDOWN : "Countdown",
+	SHORT_FORM_QUESTION_FIELD: "Short form of the question (will be shown to users):",
 }
 
 export default Constants;
