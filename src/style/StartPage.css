@@ -3,7 +3,7 @@
 .start-page {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
     width: 90%;
 }
 
@@ -17,7 +17,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    height: 100vh;
+    height: 100%;
 }
 
 .start-page-landing__title {
@@ -36,7 +36,7 @@
 
 .start-page-landing-icon {
     position: absolute;
-    bottom: 0;
+    bottom: -80px;
     left: 0;
     z-index: -1;
 }
