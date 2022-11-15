@@ -155,8 +155,11 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                     </div>
                 </div>
                 <div className="questions__line">
-                    <div className="questions__input">
-                        {splicedQuestion}
+                    <div className="questions__input question__short-form">
+                        <span>
+                            {Constants.SHORT_FORM_QUESTION_FIELD}
+                        </span>
+                        <span className="question__short-form--text">{splicedQuestion}</span>
                     </div>
                 </div>
                 <div className="questions__line questions__text-thin question__select-line">
@@ -202,7 +205,7 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                             name="secondAnswer"
                             maxLength={50} />
                     </div>
-                    <div className="questions__icon" e2e-id={"question" + question.questionNumber + "EditSave"} onClick={() => editQuestion()} ><AiOutlineSave size={30} /><br></br><span className="questions__icon-hide">{Constants.EDIT_BUTTON.toUpperCase()}</span></div>
+                    <div className="questions__icon" e2e-id={"question" + question.questionNumber + "EditSave"} onClick={() => editQuestion()} ><AiOutlineSave size={30} /><br></br><span className="questions__icon-hide">{Constants.SAVE_BUTTON.toUpperCase()}</span></div>
                     <div className="questions__icon" e2e-id={"question" + question.questionNumber + "EditDelete"} onClick={() => deleteQuestion(question.questionId)}><AiOutlineDelete size={30} /><br></br><span className="questions__icon-hide">{Constants.DELETE_BUTTON.toUpperCase()}</span></div>
                 </div>
             </div>

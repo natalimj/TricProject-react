@@ -93,7 +93,6 @@ const Constants = {
 	CAST_LIST_TITLE: "Cast",
 	NEW_CAST_TITLE: "New Cast",
 	PLAY_INFO_TITLE: "Play Info",
-	EDIT_BUTTON: "Edit",
 	DELETE_BUTTON: "Delete",
 	NEXT_QUESTION_TEXT: "Next question is:",
 	SET_TIME_INFO: "*Time is expressed in SECONDS",
@@ -110,7 +109,8 @@ const Constants = {
 	PERSONAL_INFORMATION_AGREEMENT: "Do you agree to selling your soul to HumanLab for eternity? Therby becoming a slave in this and all future lives.",
 	AGREE_BUTTON: "Agree",
 	DISAGREE_BUTTON: "Disagree",
-	COUNTDOWN : "Countdown"
+	COUNTDOWN : "Countdown",
+	SHORT_FORM_QUESTION_FIELD: "Short form of the question (will be shown to users):",
 }
 
 export default Constants;
