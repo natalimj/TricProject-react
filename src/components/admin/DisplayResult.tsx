@@ -76,7 +76,7 @@ const DisplayResult = () => {
             <div className='admin-result'>
                 <div className="admin-result__inner-container">
                     <div className="result__box">
-                        <div className="result__question-text result__text--larger">{question.questionText}</div>
+                        <div className="result__question-text result__text--header">{question.questionText}</div>
                     </div>
                    {waitForVoting && <WaitingPage message={Constants.WAITING_PROMPT_RESULT} onAdmin={true}/>} 
                 </div> 
