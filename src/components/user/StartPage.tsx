@@ -102,7 +102,7 @@ const StartPage = () => {
                         <img src={require('../../util/icons/imageMale1.png')} alt="Landing page icon" />
                       </div>
                       <>
-                        <button onClick={() => { setIsOpen(true) }} className='question__submit-button question__active-button' e2e-id="join">
+                        <button onClick={() => { setIsOpen(true) }} className='submit-button' e2e-id="join">
                           {Constants.JOIN_BUTTON}
                         </button>
                         <Modal onRequestClose={() => setIsOpen(false)} isOpen={isOpen} className='modal__content' overlayClassName='modal__overlay'>
