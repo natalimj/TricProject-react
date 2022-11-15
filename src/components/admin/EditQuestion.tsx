@@ -114,13 +114,14 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                 theme: event.target.value,
             };
         });
-    };
+    }
 
     const setSecondDropdown = (selectedCategory: string) => {
         setDropdownCategories(Constants.categories.filter(c => (c.value !== selectedCategory
             && c.value !== getOppositeCategory(selectedCategory))))
         setDisableDropdown(false)
     }
+
     const handleFirstCategorySelect = (event: any) => {
         setSecondDropdown(event.target.value)
         setFormValue((prevState) => {
@@ -130,7 +131,8 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
             };
         });
 
-    };
+    }
+
     const handleSecondCategorySelect = (event: any) => {
         setFormValue((prevState) => {
             return {
@@ -138,7 +140,7 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                 secondCategory: event.target.value
             };
         });
-    };
+    }
 
     return (
         <div key={question.questionId} e2e-id={"questionNr" + question.questionNumber}>
@@ -205,6 +207,14 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                             name="secondAnswer"
                             maxLength={50} />
                     </div>
+                </div>
+                <div className="questions__line question__select-line">
+                    <select className="questions__dropdown questions_w50 questions__text-thin" disabled={true}>
+                        <option value={getOppositeCategory(formValue.firstCategory)}>{getOppositeCategory(formValue.firstCategory)}</option>
+                    </select>
+                    <select className="questions__dropdown questions_w50 questions__text-thin" disabled={true}>
+                        <option value={getOppositeCategory(formValue.secondCategory)}>{getOppositeCategory(formValue.secondCategory)}</option>
+                    </select>
                     <div className="questions__icon" e2e-id={"question" + question.questionNumber + "EditSave"} onClick={() => editQuestion()} ><AiOutlineSave size={30} /><br></br><span className="questions__icon-hide">{Constants.SAVE_BUTTON.toUpperCase()}</span></div>
                     <div className="questions__icon" e2e-id={"question" + question.questionNumber + "EditDelete"} onClick={() => deleteQuestion(question.questionId)}><AiOutlineDelete size={30} /><br></br><span className="questions__icon-hide">{Constants.DELETE_BUTTON.toUpperCase()}</span></div>
                 </div>

@@ -49,10 +49,6 @@
     border-bottom: var(--color-black) solid 1px;
 }
 
-.question__select-line {
-    padding-right: 30px;
-}
-
 .questions__input {
     width: 100%;
     min-height: 70px;
