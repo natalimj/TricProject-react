@@ -26,6 +26,7 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
     const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
     const [dropdownCategories, setDropdownCategories] = useState(Constants.categories)
     const [disableDropdown, setDisableDropdown] = useState<boolean>(true)
+    const [splicedQuestion, setSplicedQuestion] = useState(question.questionText.split(".").slice(-1))
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -40,6 +41,7 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                 [name]: value,
             };
         });
+        setSplicedQuestion(value.split(".").slice(-1));
     };
 
     const getOppositeCategory = (category: string) => {
@@ -150,6 +152,11 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                             defaultValue={question.questionText}
                             name="questionText"
                             maxLength={500} />
+                    </div>
+                </div>
+                <div className="questions__line">
+                    <div className="questions__input">
+                        {splicedQuestion}
                     </div>
                 </div>
                 <div className="questions__line questions__text-thin question__select-line">
