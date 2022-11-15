@@ -144,6 +144,10 @@
     font-size: var(--font-size-larger);
 }
 
+.result__text--header {
+    font-size: var(--font-size-header);
+}
+
 @media (max-width: 800px) {
     .result__inner-container {
         width: 90%;
