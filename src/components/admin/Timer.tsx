@@ -4,8 +4,9 @@ import { ClockLoader } from "react-spinners";
 interface Props {
     count: number;
     setShowTimer: React.Dispatch<React.SetStateAction<boolean>>
+    isQuestion: boolean
 }
-const Timer = ({ count, setShowTimer }: Props) => {
+const Timer = ({ count, setShowTimer, isQuestion }: Props) => {
     const [counter, setCounter] = useState(count);
 
     useEffect(() => {
@@ -19,11 +20,20 @@ const Timer = ({ count, setShowTimer }: Props) => {
     }, [counter]);
 
     return (
+        <>
+            {!isQuestion ? (<div className='waiting-container'>
+                <ClockLoader color="#FFADCB" size={120} speedMultiplier={1} />
+                <div className='waiting-container__text' style={{ "color": "#FFADCB", "fontSize": "80px" }}>{counter}</div>
+            </div>) : (<div className='waiting-container-small'>
+                <ClockLoader color="#FFADCB" size={120} speedMultiplier={1} />
+                <div className='waiting-container__text' style={{ "color": "#FFADCB", "fontSize": "80px" }}>{counter}</div>
+            </div>)}
+        </>
 
-        <div className='waiting-container'>
-        <ClockLoader color="#FFADCB" size={120} speedMultiplier={1} />
-        <div className='waiting-container__text' style={{"color":"#FFADCB", "fontSize":"80px"}}>{counter}</div>
-      </div>
+
+
+
+
     )
 }
 
