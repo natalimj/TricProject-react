@@ -260,124 +260,16 @@ describe("Feature 2 - Voting System", () => {
 
   });
 
-  test("Vote and view results 1", async () => {
-    await userPage.screenshot({
-      path: 'screenshots/feature2/waitingtoloadvoting1.jpg'
-    });
-    await userPage.waitForSelector('[e2e-id="questionText"]');
-    await userPage.screenshot({
-      path: 'screenshots/feature2/sawquestion.jpg'
-    });
-    await checkText("questionHeader","Question 1");
-    await checkText("questionText","Would you welcome permanently people in mortal danger in your own home, sharing therefore with them your own food, water and salary?");
-    await checkText("questionAnswer0","Yes");
-    await checkText("questionAnswer1","No");
-    await userPage.click('[e2e-id="questionAnswer0"]');
-    await userPage.click('[e2e-id="questionConfirm"]');
-    await userPage.waitForSelector('[e2e-id="spinner"]');
-    await adminPage.waitForSelector('[e2e-id="showResults"]');
-    await adminPage.click('[e2e-id="showResults"]');
-    await adminPage.waitForTimeout(1000);
-    await adminPage.screenshot({
-      path: 'screenshots/feature2/resultsShown.jpg'
-    });
-
-    // await userPage.waitForTimeout(5000);
-    // await userPage.screenshot({
-    //   path: 'screenshots/feature2/checkingresult1.jpg'
-    // });
-    // await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
-    // await checkText("resultQuestionText","Would you welcome permanently people in mortal danger in your own home, sharing therefore with them your own food, water and salary?");
-    // await checkText("resultQuestionAnswer0","Yes");
-    // await checkText("resultQuestionAnswer1","No");
-    // await checkText("resultUsername","TrashPanda");
-    // await checkText("resultBar0","100%");
-
-    await adminPage.waitForSelector('[e2e-id="showQuestion"]');
-    await adminPage.click('[e2e-id="showQuestion"]'); 
-  }); 
-
-  test("Vote and view results 2", async () => {
-    await userPage.screenshot({
-      path: 'screenshots/feature2/waitingtoloadvoting2.jpg'
-    });
-    await userPage.waitForSelector('[e2e-id="questionText"]');
-    await checkText("questionHeader","Question 2");
-    await checkText("questionText"," Would you still travel by train?");
-    await checkText("questionAnswer0","Yes");
-    await checkText("questionAnswer1","No");
-    await userPage.click('[e2e-id="questionAnswer0"]');
-    await userPage.click('[e2e-id="questionConfirm"]');
-    await userPage.waitForSelector('[e2e-id="spinner"]');
-    await adminPage.waitForSelector('[e2e-id="showResults"]');
-    await adminPage.click('[e2e-id="showResults"]');
-    await adminPage.waitForTimeout(1000);
-    await adminPage.screenshot({
-      path: 'screenshots/feature2/resultsShown2.jpg'
-    });
-
-    // await userPage.waitForTimeout(5000);
-    // await userPage.screenshot({
-    //   path: 'screenshots/feature2/checkingresult2.jpg'
-    // });
-    // await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
-    // await checkText("resultQuestionText"," Would you still travel by train?");
-    // await checkText("resultQuestionAnswer0","Yes");
-    // await checkText("resultQuestionAnswer1","No");
-    // await checkText("resultUsername","TrashPanda");
-    // await checkText("resultBar0","100%");
-
-    await adminPage.waitForSelector('[e2e-id="showQuestion"]');
-    await adminPage.click('[e2e-id="showQuestion"]'); 
-  });
-
-  test("Vote and view results 3", async () => {
-    await userPage.screenshot({
-      path: 'screenshots/feature2/waitingtoloadvoting3.jpg'
-    });
-    await userPage.waitForSelector('[e2e-id="questionText"]');
-    await checkText("questionHeader","Question 3");
-    await checkText("questionText"," Would you stop eating fish risking your own health?");
-    await checkText("questionAnswer0","Yes");
-    await checkText("questionAnswer1","No");
-    await userPage.click('[e2e-id="questionAnswer0"]');
-    await userPage.click('[e2e-id="questionConfirm"]');
-    await userPage.waitForSelector('[e2e-id="spinner"]');
-    await adminPage.waitForSelector('[e2e-id="showResults"]');
-    await adminPage.click('[e2e-id="showResults"]');
-    await adminPage.waitForTimeout(1000);
-    await adminPage.screenshot({
-      path: 'screenshots/feature2/resultsShown3.jpg'
-    });
-
-    // await userPage.waitForTimeout(5000);
-    // await userPage.screenshot({
-    //   path: 'screenshots/feature2/checkingresult3.jpg'
-    // });
-    // await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
-    // await checkText("resultQuestionText"," Would you stop eating fish risking your own health?");
-    // await checkText("resultQuestionAnswer0","Yes");
-    // await checkText("resultQuestionAnswer1","No");
-    // await checkText("resultUsername","TrashPanda");
-    // await checkText("resultBar0","100%");
-
-    await adminPage.waitForSelector('[e2e-id="showQuestion"]');
-    await adminPage.click('[e2e-id="showQuestion"]'); 
-  });
-
-//   test("Vote and view results 4", async () => {
+//   test("Vote and view results 1", async () => {
 //     await userPage.screenshot({
-//       path: 'screenshots/feature2/waitingtoloadvoting4.jpg'
+//       path: 'screenshots/feature2/waitingtoloadvoting1.jpg'
 //     });
-// /*     await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
-//     await checkText("resultQuestionText","In order to be healthy your doctor prescribed a fish-based diet. Your fish is mass-bred andsavagely slaughtered while it`s still alive. Would you stop eating fish risking your own health?");
-//     await checkText("resultQuestionAnswer0","Yes");
-//     await checkText("resultQuestionAnswer1","No");
-//     await checkText("resultUsername","TrashPanda");
-//     await checkText("resultBar0","100%"); */
 //     await userPage.waitForSelector('[e2e-id="questionText"]');
-//     await checkText("questionHeader","Question 4");
-//     await checkText("questionText","In your country a retirement home with 20 old people needs a high amount of heating in order to keep them healthy. It`s proven that high heating consumption rises the CO2 level, which can end in floods that put at risk the life of an entire village in the other part of the world. Would you close the heating?");
+//     await userPage.screenshot({
+//       path: 'screenshots/feature2/sawquestion.jpg'
+//     });
+//     await checkText("questionHeader","Question 1");
+//     await checkText("questionText","Would you welcome permanently people in mortal danger in your own home, sharing therefore with them your own food, water and salary?");
 //     await checkText("questionAnswer0","Yes");
 //     await checkText("questionAnswer1","No");
 //     await userPage.click('[e2e-id="questionAnswer0"]');
@@ -385,36 +277,144 @@ describe("Feature 2 - Voting System", () => {
 //     await userPage.waitForSelector('[e2e-id="spinner"]');
 //     await adminPage.waitForSelector('[e2e-id="showResults"]');
 //     await adminPage.click('[e2e-id="showResults"]');
+//     await adminPage.waitForTimeout(1000);
+//     await adminPage.screenshot({
+//       path: 'screenshots/feature2/resultsShown.jpg'
+//     });
+
+//     // await userPage.waitForTimeout(5000);
+//     // await userPage.screenshot({
+//     //   path: 'screenshots/feature2/checkingresult1.jpg'
+//     // });
+//     // await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
+//     // await checkText("resultQuestionText","Would you welcome permanently people in mortal danger in your own home, sharing therefore with them your own food, water and salary?");
+//     // await checkText("resultQuestionAnswer0","Yes");
+//     // await checkText("resultQuestionAnswer1","No");
+//     // await checkText("resultUsername","TrashPanda");
+//     // await checkText("resultBar0","100%");
+
+//     await adminPage.waitForSelector('[e2e-id="showQuestion"]');
+//     await adminPage.click('[e2e-id="showQuestion"]'); 
+//   }); 
+
+//   test("Vote and view results 2", async () => {
+//     await userPage.screenshot({
+//       path: 'screenshots/feature2/waitingtoloadvoting2.jpg'
+//     });
+//     await userPage.waitForSelector('[e2e-id="questionText"]');
+//     await checkText("questionHeader","Question 2");
+//     await checkText("questionText"," Would you still travel by train?");
+//     await checkText("questionAnswer0","Yes");
+//     await checkText("questionAnswer1","No");
+//     await userPage.click('[e2e-id="questionAnswer0"]');
+//     await userPage.click('[e2e-id="questionConfirm"]');
+//     await userPage.waitForSelector('[e2e-id="spinner"]');
+//     await adminPage.waitForSelector('[e2e-id="showResults"]');
+//     await adminPage.click('[e2e-id="showResults"]');
+//     await adminPage.waitForTimeout(1000);
+//     await adminPage.screenshot({
+//       path: 'screenshots/feature2/resultsShown2.jpg'
+//     });
+
+//     // await userPage.waitForTimeout(5000);
+//     // await userPage.screenshot({
+//     //   path: 'screenshots/feature2/checkingresult2.jpg'
+//     // });
+//     // await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
+//     // await checkText("resultQuestionText"," Would you still travel by train?");
+//     // await checkText("resultQuestionAnswer0","Yes");
+//     // await checkText("resultQuestionAnswer1","No");
+//     // await checkText("resultUsername","TrashPanda");
+//     // await checkText("resultBar0","100%");
+
 //     await adminPage.waitForSelector('[e2e-id="showQuestion"]');
 //     await adminPage.click('[e2e-id="showQuestion"]'); 
 //   });
 
-  test("Vote and view final result", async () => {
-    await userPage.screenshot({
-      path: 'screenshots/feature2/waitingtoloadvoting5.jpg'
-    });
-    await userPage.waitForSelector('[e2e-id="questionText"]');
-    await checkText("questionHeader","Question 4");
-    await checkText("questionText"," Would you eat the whole piece of bread?");
-    await checkText("questionAnswer0","Yes");
-    await checkText("questionAnswer1","No");
-    await userPage.click('[e2e-id="questionAnswer0"]');
-    await userPage.click('[e2e-id="questionConfirm"]');
-/*     await userPage.waitForSelector('[e2e-id="spinner"]');
-    await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
-    await checkText("resultQuestionText","You are in a hole with another person, and both of you are too weak to come out. There is just a piece of bread. If you both eat the bread you will endure a bit longer, but you both are eventually going to die. If you only eat the bread, you will save yourself, but the other person will die. Would you eat the whole piece of bread?");
-    await checkText("resultQuestionAnswer0","Yes");
-    await checkText("resultQuestionAnswer1","No");
-    await checkText("resultUsername","TrashPanda");
-    await checkText("resultBar0","100%"); */
-    await adminPage.waitForSelector('[e2e-id="showFinalResult"]');
-    await adminPage.click('[e2e-id="showFinalResult"]');
-  });
+//   test("Vote and view results 3", async () => {
+//     await userPage.screenshot({
+//       path: 'screenshots/feature2/waitingtoloadvoting3.jpg'
+//     });
+//     await userPage.waitForSelector('[e2e-id="questionText"]');
+//     await checkText("questionHeader","Question 3");
+//     await checkText("questionText"," Would you stop eating fish risking your own health?");
+//     await checkText("questionAnswer0","Yes");
+//     await checkText("questionAnswer1","No");
+//     await userPage.click('[e2e-id="questionAnswer0"]');
+//     await userPage.click('[e2e-id="questionConfirm"]');
+//     await userPage.waitForSelector('[e2e-id="spinner"]');
+//     await adminPage.waitForSelector('[e2e-id="showResults"]');
+//     await adminPage.click('[e2e-id="showResults"]');
+//     await adminPage.waitForTimeout(1000);
+//     await adminPage.screenshot({
+//       path: 'screenshots/feature2/resultsShown3.jpg'
+//     });
 
-  test("End Play", async () => {
-    await adminPage.waitForSelector('[e2e-id="endSession"]');
-    await adminPage.click('[e2e-id="endSession"]');
-  });
+//     // await userPage.waitForTimeout(5000);
+//     // await userPage.screenshot({
+//     //   path: 'screenshots/feature2/checkingresult3.jpg'
+//     // });
+//     // await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
+//     // await checkText("resultQuestionText"," Would you stop eating fish risking your own health?");
+//     // await checkText("resultQuestionAnswer0","Yes");
+//     // await checkText("resultQuestionAnswer1","No");
+//     // await checkText("resultUsername","TrashPanda");
+//     // await checkText("resultBar0","100%");
+
+//     await adminPage.waitForSelector('[e2e-id="showQuestion"]');
+//     await adminPage.click('[e2e-id="showQuestion"]'); 
+//   });
+
+// //   test("Vote and view results 4", async () => {
+// //     await userPage.screenshot({
+// //       path: 'screenshots/feature2/waitingtoloadvoting4.jpg'
+// //     });
+// // /*     await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
+// //     await checkText("resultQuestionText","In order to be healthy your doctor prescribed a fish-based diet. Your fish is mass-bred andsavagely slaughtered while it`s still alive. Would you stop eating fish risking your own health?");
+// //     await checkText("resultQuestionAnswer0","Yes");
+// //     await checkText("resultQuestionAnswer1","No");
+// //     await checkText("resultUsername","TrashPanda");
+// //     await checkText("resultBar0","100%"); */
+// //     await userPage.waitForSelector('[e2e-id="questionText"]');
+// //     await checkText("questionHeader","Question 4");
+// //     await checkText("questionText","In your country a retirement home with 20 old people needs a high amount of heating in order to keep them healthy. It`s proven that high heating consumption rises the CO2 level, which can end in floods that put at risk the life of an entire village in the other part of the world. Would you close the heating?");
+// //     await checkText("questionAnswer0","Yes");
+// //     await checkText("questionAnswer1","No");
+// //     await userPage.click('[e2e-id="questionAnswer0"]');
+// //     await userPage.click('[e2e-id="questionConfirm"]');
+// //     await userPage.waitForSelector('[e2e-id="spinner"]');
+// //     await adminPage.waitForSelector('[e2e-id="showResults"]');
+// //     await adminPage.click('[e2e-id="showResults"]');
+// //     await adminPage.waitForSelector('[e2e-id="showQuestion"]');
+// //     await adminPage.click('[e2e-id="showQuestion"]'); 
+// //   });
+
+//   test("Vote and view final result", async () => {
+//     await userPage.screenshot({
+//       path: 'screenshots/feature2/waitingtoloadvoting5.jpg'
+//     });
+//     await userPage.waitForSelector('[e2e-id="questionText"]');
+//     await checkText("questionHeader","Question 4");
+//     await checkText("questionText"," Would you eat the whole piece of bread?");
+//     await checkText("questionAnswer0","Yes");
+//     await checkText("questionAnswer1","No");
+//     await userPage.click('[e2e-id="questionAnswer0"]');
+//     await userPage.click('[e2e-id="questionConfirm"]');
+// /*     await userPage.waitForSelector('[e2e-id="spinner"]');
+//     await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
+//     await checkText("resultQuestionText","You are in a hole with another person, and both of you are too weak to come out. There is just a piece of bread. If you both eat the bread you will endure a bit longer, but you both are eventually going to die. If you only eat the bread, you will save yourself, but the other person will die. Would you eat the whole piece of bread?");
+//     await checkText("resultQuestionAnswer0","Yes");
+//     await checkText("resultQuestionAnswer1","No");
+//     await checkText("resultUsername","TrashPanda");
+//     await checkText("resultBar0","100%"); */
+//     await adminPage.waitForSelector('[e2e-id="showFinalResult"]');
+//     await adminPage.click('[e2e-id="showFinalResult"]');
+//   });
+
+  // test("End Play", async () => {
+  //   await adminPage.waitForSelector('[e2e-id="endSession"]');
+  //   await adminPage.click('[e2e-id="endSession"]');
+  // });
 
   afterAll(async () => {
     await AdminApi.deactivateApp(accessToken);
