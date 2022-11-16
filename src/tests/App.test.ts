@@ -81,7 +81,7 @@ async function resetApp() {
   await AdminApi.addQuestion(question1,accessToken);
   await AdminApi.addQuestion(question2,accessToken);
   await AdminApi.addQuestion(question3,accessToken);
-  await AdminApi.addQuestion(question4,accessToken);
+  //await AdminApi.addQuestion(question4,accessToken);
   await AdminApi.addQuestion(question5,accessToken);
 }
 
@@ -140,7 +140,7 @@ describe("Feature 1 - Questions database and display", () => {
      await checkQuestion(1,"Would you welcome permanently people in mortal danger in your own home, sharing therefore with them your own food, water and salary?", "Yes", "No");
      await checkQuestion(2,"You work one hour by car far from home. If you travel by train you pollute less, but it takes two hours. Would you still travel by train?", "Yes", "No");
      await checkQuestion(3,"In order to be healthy your doctor prescribed a fish-based diet. Your fish is mass-bred and savagely slaughtered while it`s still alive. Would you stop eating fish risking your own health?", "Yes", "No");
-     await checkQuestion(4,"In your country a retirement home with 20 old people needs a high amount of heating in order to keep them healthy. It`s proven that high heating consumption rises the CO2 level, which can end in floods that put at risk the life of an entire village in the other part of the world. Would you close the heating?", "Yes", "No");
+     //await checkQuestion(4,"In your country a retirement home with 20 old people needs a high amount of heating in order to keep them healthy. It`s proven that high heating consumption rises the CO2 level, which can end in floods that put at risk the life of an entire village in the other part of the world. Would you close the heating?", "Yes", "No");
      await checkQuestion(5,"You are in a hole with another person, and both of you are too weak to come out. There is just a piece of bread. If you both eat the bread you will endure a bit longer, but you both are eventually going to die. If you only eat the bread, you will save yourself, but the other person will die. Would you eat the whole piece of bread?", "Yes", "No");
   });
 
