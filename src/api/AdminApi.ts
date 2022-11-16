@@ -127,6 +127,10 @@ const startCountdown = (timer: number, accessToken: string) => {
   })
 };
 
+const cleanPage = (accessToken: string) => {
+    return http.post("adminApi/cleanResultPage", "", { headers: authHeader(accessToken) });
+};
+
 const AdminApi = {
   getAllUsers,
   endSession,
@@ -147,6 +151,7 @@ const AdminApi = {
   deleteContributor,
   editPlayInfo,
   displayQuestionForAdmin,
-  startCountdown
+  startCountdown,
+  cleanPage
 };
 export default AdminApi;

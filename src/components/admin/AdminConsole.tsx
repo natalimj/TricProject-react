@@ -53,6 +53,16 @@ const AdminConsole = () => {
         dispatch(setNumberOfUsers(msg));
     }
 
+    const cleanPage = () => {
+        AdminApi.cleanPage(accessToken)
+            .then(() => {
+                NotificationManager.info('Screen has been cleaned','Info!', 2000);
+            })
+            .catch((e: any) => {
+                NotificationManager.error(e.message + e.response.data, 'Error!', 5000);
+            });
+    }
+
     const showQuestion = () => {
         AdminApi.addQuestionTime(question.questionId, question.time ?? 10, accessToken)
             .then((response: any) => {
@@ -250,6 +260,11 @@ const AdminConsole = () => {
                                                 {Constants.COUNTDOWN}
                                             </button>
                                         </div>
+                                        <div>
+                                            <button onClick={() => cleanPage()} className="admin-console__submit-button--secondary">
+                                                {Constants.CLEAR_SCREEN}
+                                            </button>
+                                        </div>
                                     </div>
                                     {questionOnScreen &&
                                         <button onClick={() => displayQuestionForAdmin()} className="admin-console__submit-button--secondary" e2e-id="showQuestionForAdmin">
@@ -281,6 +296,7 @@ const AdminConsole = () => {
                                 </div>
                             </>
                         ) : (
+                            <>
                             <div className='admin-console__buttons admin-console__buttons--result'>
                                 {(playData.questionTimer > 0 && !showedFinalResult) ? (
                                     <>
@@ -309,6 +325,12 @@ const AdminConsole = () => {
                                     </>
                                 )}
                             </div>
+                            <div>
+                                <button onClick={() => cleanPage()} className="admin-console__submit-button--secondary">
+                                    {Constants.CLEAR_SCREEN}
+                                </button>
+                            </div>
+                            </>
                         )
                     }
                 </div>
