@@ -4,7 +4,6 @@ const Constants = {
 	//BASE_URL: "http://localhost:8080/",
 	//SOCKET_URL: "http://localhost:8080/ws-message",
 
-
 	/* INITIAL STATES */
 	initialResultState: {
 		question: {
