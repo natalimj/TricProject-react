@@ -111,6 +111,7 @@ const Constants = {
 	DISAGREE_BUTTON: "Disagree",
 	COUNTDOWN : "Countdown",
 	SHORT_FORM_QUESTION_FIELD: "Short form of the question (will be shown to users):",
+	CLEAR_SCREEN : "Clear Screen",
 }
 
 export default Constants;
