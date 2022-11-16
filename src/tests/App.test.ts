@@ -260,74 +260,110 @@ describe("Feature 2 - Voting System", () => {
 
   });
 
-//   test("Vote and view results 1", async () => {
-//     await userPage.screenshot({
-//       path: 'screenshots/feature2/waitingtoloadvoting1.jpg'
-//     });
-//     await userPage.waitForSelector('[e2e-id="questionText"]');
-//     await userPage.screenshot({
-//       path: 'screenshots/feature2/sawquestion.jpg'
-//     });
-//     await checkText("questionHeader","Question 1");
-//     await checkText("questionText","Would you welcome permanently people in mortal danger in your own home, sharing therefore with them your own food, water and salary?");
-//     await checkText("questionAnswer0","Yes");
-//     await checkText("questionAnswer1","No");
-//     await userPage.click('[e2e-id="questionAnswer0"]');
-//     await userPage.click('[e2e-id="questionConfirm"]');
-//     await userPage.waitForSelector('[e2e-id="spinner"]');
-//     await adminPage.waitForSelector('[e2e-id="showResults"]');
-//     await adminPage.click('[e2e-id="showResults"]');
-//     await adminPage.waitForSelector('[e2e-id="showQuestion"]');
-//     await adminPage.click('[e2e-id="showQuestion"]'); 
-//   }); 
+  test("Vote and view results 1", async () => {
+    await userPage.screenshot({
+      path: 'screenshots/feature2/waitingtoloadvoting1.jpg'
+    });
+    await userPage.waitForSelector('[e2e-id="questionText"]');
+    await userPage.screenshot({
+      path: 'screenshots/feature2/sawquestion.jpg'
+    });
+    await checkText("questionHeader","Question 1");
+    await checkText("questionText","Would you welcome permanently people in mortal danger in your own home, sharing therefore with them your own food, water and salary?");
+    await checkText("questionAnswer0","Yes");
+    await checkText("questionAnswer1","No");
+    await userPage.click('[e2e-id="questionAnswer0"]');
+    await userPage.click('[e2e-id="questionConfirm"]');
+    await userPage.waitForSelector('[e2e-id="spinner"]');
+    await adminPage.waitForSelector('[e2e-id="showResults"]');
+    await adminPage.click('[e2e-id="showResults"]');
+    await adminPage.waitForTimeout(1000);
+    await adminPage.screenshot({
+      path: 'screenshots/feature2/resultsShown.jpg'
+    });
 
-//   test("Vote and view results 2", async () => {
-//     await userPage.screenshot({
-//       path: 'screenshots/feature2/waitingtoloadvoting2.jpg'
-//     });
-// /*     await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
-//     await checkText("resultQuestionText","Would you welcome permanently people in mortal danger in your own home, sharing therefore with them your own food, water and salary?");
-//     await checkText("resultQuestionAnswer0","Yes");
-//     await checkText("resultQuestionAnswer1","No");
-//     await checkText("resultUsername","TrashPanda");
-//     await checkText("resultBar0","100%"); */
-//     await userPage.waitForSelector('[e2e-id="questionText"]');
-//     await checkText("questionHeader","Question 2");
-//     await checkText("questionText","You work one hour by car far from home. If you travel by train you pollute less, but it takes two hours. Would you still travel by train?");
-//     await checkText("questionAnswer0","Yes");
-//     await checkText("questionAnswer1","No");
-//     await userPage.click('[e2e-id="questionAnswer0"]');
-//     await userPage.click('[e2e-id="questionConfirm"]');
-//     await userPage.waitForSelector('[e2e-id="spinner"]');
-//     await adminPage.waitForSelector('[e2e-id="showResults"]');
-//     await adminPage.click('[e2e-id="showResults"]');
-//     await adminPage.waitForSelector('[e2e-id="showQuestion"]');
-//     await adminPage.click('[e2e-id="showQuestion"]'); 
-//   });
+    // await userPage.waitForTimeout(5000);
+    // await userPage.screenshot({
+    //   path: 'screenshots/feature2/checkingresult1.jpg'
+    // });
+    // await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
+    // await checkText("resultQuestionText","Would you welcome permanently people in mortal danger in your own home, sharing therefore with them your own food, water and salary?");
+    // await checkText("resultQuestionAnswer0","Yes");
+    // await checkText("resultQuestionAnswer1","No");
+    // await checkText("resultUsername","TrashPanda");
+    // await checkText("resultBar0","100%");
 
-//   test("Vote and view results 3", async () => {
-//     await userPage.screenshot({
-//       path: 'screenshots/feature2/waitingtoloadvoting3.jpg'
-//     });
-// /*     await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
-//     await checkText("resultQuestionText","You work one hour by car far from home. If you travel by train you pollute less, but it takes two hours. Would you still travel by train?");
-//     await checkText("resultQuestionAnswer0","Yes");
-//     await checkText("resultQuestionAnswer1","No");
-//     await checkText("resultUsername","TrashPanda");
-//     await checkText("resultBar0","100%"); */
-//     await userPage.waitForSelector('[e2e-id="questionText"]');
-//     await checkText("questionHeader","Question 3");
-//     await checkText("questionText","In order to be healthy your doctor prescribed a fish-based diet. Your fish is mass-bred andsavagely slaughtered while it`s still alive. Would you stop eating fish risking your own health?");
-//     await checkText("questionAnswer0","Yes");
-//     await checkText("questionAnswer1","No");
-//     await userPage.click('[e2e-id="questionAnswer0"]');
-//     await userPage.click('[e2e-id="questionConfirm"]');
-//     await userPage.waitForSelector('[e2e-id="spinner"]');
-//     await adminPage.waitForSelector('[e2e-id="showResults"]');
-//     await adminPage.click('[e2e-id="showResults"]');
-//     await adminPage.waitForSelector('[e2e-id="showQuestion"]');
-//     await adminPage.click('[e2e-id="showQuestion"]'); 
-//   });
+    await adminPage.waitForSelector('[e2e-id="showQuestion"]');
+    await adminPage.click('[e2e-id="showQuestion"]'); 
+  }); 
+
+  test("Vote and view results 2", async () => {
+    await userPage.screenshot({
+      path: 'screenshots/feature2/waitingtoloadvoting2.jpg'
+    });
+    await userPage.waitForSelector('[e2e-id="questionText"]');
+    await checkText("questionHeader","Question 2");
+    await checkText("questionText"," Would you still travel by train?");
+    await checkText("questionAnswer0","Yes");
+    await checkText("questionAnswer1","No");
+    await userPage.click('[e2e-id="questionAnswer0"]');
+    await userPage.click('[e2e-id="questionConfirm"]');
+    await userPage.waitForSelector('[e2e-id="spinner"]');
+    await adminPage.waitForSelector('[e2e-id="showResults"]');
+    await adminPage.click('[e2e-id="showResults"]');
+    await adminPage.waitForTimeout(1000);
+    await adminPage.screenshot({
+      path: 'screenshots/feature2/resultsShown2.jpg'
+    });
+
+    // await userPage.waitForTimeout(5000);
+    // await userPage.screenshot({
+    //   path: 'screenshots/feature2/checkingresult2.jpg'
+    // });
+    // await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
+    // await checkText("resultQuestionText"," Would you still travel by train?");
+    // await checkText("resultQuestionAnswer0","Yes");
+    // await checkText("resultQuestionAnswer1","No");
+    // await checkText("resultUsername","TrashPanda");
+    // await checkText("resultBar0","100%");
+
+    await adminPage.waitForSelector('[e2e-id="showQuestion"]');
+    await adminPage.click('[e2e-id="showQuestion"]'); 
+  });
+
+  test("Vote and view results 3", async () => {
+    await userPage.screenshot({
+      path: 'screenshots/feature2/waitingtoloadvoting3.jpg'
+    });
+    await userPage.waitForSelector('[e2e-id="questionText"]');
+    await checkText("questionHeader","Question 3");
+    await checkText("questionText"," Would you stop eating fish risking your own health?");
+    await checkText("questionAnswer0","Yes");
+    await checkText("questionAnswer1","No");
+    await userPage.click('[e2e-id="questionAnswer0"]');
+    await userPage.click('[e2e-id="questionConfirm"]');
+    await userPage.waitForSelector('[e2e-id="spinner"]');
+    await adminPage.waitForSelector('[e2e-id="showResults"]');
+    await adminPage.click('[e2e-id="showResults"]');
+    await adminPage.waitForTimeout(1000);
+    await adminPage.screenshot({
+      path: 'screenshots/feature2/resultsShown3.jpg'
+    });
+
+    // await userPage.waitForTimeout(5000);
+    // await userPage.screenshot({
+    //   path: 'screenshots/feature2/checkingresult3.jpg'
+    // });
+    // await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
+    // await checkText("resultQuestionText"," Would you stop eating fish risking your own health?");
+    // await checkText("resultQuestionAnswer0","Yes");
+    // await checkText("resultQuestionAnswer1","No");
+    // await checkText("resultUsername","TrashPanda");
+    // await checkText("resultBar0","100%");
+
+    await adminPage.waitForSelector('[e2e-id="showQuestion"]');
+    await adminPage.click('[e2e-id="showQuestion"]'); 
+  });
 
 //   test("Vote and view results 4", async () => {
 //     await userPage.screenshot({
@@ -353,36 +389,32 @@ describe("Feature 2 - Voting System", () => {
 //     await adminPage.click('[e2e-id="showQuestion"]'); 
 //   });
 
-//   test("Vote and view results 5", async () => {
-//     await userPage.screenshot({
-//       path: 'screenshots/feature2/waitingtoloadvoting5.jpg'
-//     });
-// /*     await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
-//     await checkText("resultQuestionText","In your country a retirement home with 20 old people needs a high amount of heating in order to keep them healthy. It`s proven that high heating consumption rises the CO2 level, which can end in floods that put at risk the life of an entire village in the other part of the world. Would you close the heating?");
-//     await checkText("resultQuestionAnswer0","Yes");
-//     await checkText("resultQuestionAnswer1","No");
-//     await checkText("resultUsername","TrashPanda");
-//     await checkText("resultBar0","100%"); */
-//     await userPage.waitForSelector('[e2e-id="questionText"]');
-//     await checkText("questionHeader","Question 5");
-//     await checkText("questionText","You are in a hole with another person, and both of you are too weak to come out. There is just a piece of bread. If you both eat the bread you will endure a bit longer, but you both are eventually going to die. If you only eat the bread, you will save yourself, but the other person will die. Would you eat the whole piece of bread?");
-//     await checkText("questionAnswer0","Yes");
-//     await checkText("questionAnswer1","No");
-//     await userPage.click('[e2e-id="questionAnswer0"]');
-//     await userPage.click('[e2e-id="questionConfirm"]');
-// /*     await userPage.waitForSelector('[e2e-id="spinner"]');
-//     await adminPage.waitForSelector('[e2e-id="showResults"]');
-//     await adminPage.click('[e2e-id="showResults"]');
-//     await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
-//     await checkText("resultQuestionText","You are in a hole with another person, and both of you are too weak to come out. There is just a piece of bread. If you both eat the bread you will endure a bit longer, but you both are eventually going to die. If you only eat the bread, you will save yourself, but the other person will die. Would you eat the whole piece of bread?");
-//     await checkText("resultQuestionAnswer0","Yes");
-//     await checkText("resultQuestionAnswer1","No");
-//     await checkText("resultUsername","TrashPanda");
-//     await checkText("resultBar0","100%");
-//     await adminPage.waitForSelector('[e2e-id="timerField"]');
-//     await adminPage.waitForSelector('[e2e-id="showQuestion"]');
-//     await adminPage.click('[e2e-id="showQuestion"]'); */
-//   });
+  test("Vote and view final result", async () => {
+    await userPage.screenshot({
+      path: 'screenshots/feature2/waitingtoloadvoting5.jpg'
+    });
+    await userPage.waitForSelector('[e2e-id="questionText"]');
+    await checkText("questionHeader","Question 4");
+    await checkText("questionText"," Would you eat the whole piece of bread?");
+    await checkText("questionAnswer0","Yes");
+    await checkText("questionAnswer1","No");
+    await userPage.click('[e2e-id="questionAnswer0"]');
+    await userPage.click('[e2e-id="questionConfirm"]');
+/*     await userPage.waitForSelector('[e2e-id="spinner"]');
+    await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
+    await checkText("resultQuestionText","You are in a hole with another person, and both of you are too weak to come out. There is just a piece of bread. If you both eat the bread you will endure a bit longer, but you both are eventually going to die. If you only eat the bread, you will save yourself, but the other person will die. Would you eat the whole piece of bread?");
+    await checkText("resultQuestionAnswer0","Yes");
+    await checkText("resultQuestionAnswer1","No");
+    await checkText("resultUsername","TrashPanda");
+    await checkText("resultBar0","100%"); */
+    await adminPage.waitForSelector('[e2e-id="showFinalResult"]');
+    await adminPage.click('[e2e-id="showFinalResult"]');
+  });
+
+  test("End Play", async () => {
+    await adminPage.waitForSelector('[e2e-id="endSession"]');
+    await adminPage.click('[e2e-id="endSession"]');
+  });
 
   afterAll(async () => {
     await AdminApi.deactivateApp(accessToken);
@@ -390,124 +422,49 @@ describe("Feature 2 - Voting System", () => {
   });
 });
 
-// describe("Feature 3 - Voting Rounds", () => {
-//   beforeAll(async () => {
-//     await resetApp();
-//   });
+describe("Feature 4 - User Personalization", () => {
+  beforeAll(async () => {
+    await resetApp();
+  });
 
-//   test("App is inactive", async () => {
-//     await userPage.waitForSelector('[e2e-id="inactive"]');
-//   });
+  test("App is inactive", async () => {
+    await userPage.waitForSelector('[e2e-id="inactive"]');
+  });
 
-//   test("Activate app", async () => {
-//     await adminPage.waitForSelector('[e2e-id="start"]')
-//     await adminPage.click('[e2e-id="start"]')
-//   });
+  test("Activate app", async () => {
+    await adminPage.waitForSelector('[e2e-id="start"]')
+    await adminPage.click('[e2e-id="start"]')
+  });
 
-//   test("Join the app", async () => {
-//     await userPage.waitForSelector('[e2e-id="join"]');
-//     await userPage.click('[e2e-id="join"]');
-//     await userPage.waitForSelector('[e2e-id="agree"]');
-//     await userPage.click('[e2e-id="agree"]');
-//     await userPage.waitForSelector('[e2e-id="create"]');
-//   });
+  test("Join the app", async () => {
+    await userPage.waitForSelector('[e2e-id="join"]');
+    await userPage.click('[e2e-id="join"]');
+    await userPage.waitForSelector('[e2e-id="agree"]');
+    await userPage.click('[e2e-id="agree"]');
+    await userPage.waitForSelector('[e2e-id="create"]');
+  });
 
-//   test("Create user", async () => {
-//     await userPage.screenshot({
-//       path: 'screenshots/feature3/beforecreateuser.jpg'
-//     });
-//     await userPage.waitForSelector('[e2e-id="usernameUser"]');
-//     await userPage.type('[e2e-id="usernameUser"]',"TrashPanda");
-//     await userPage.screenshot({
-//       path: 'screenshots/feature3/afterinputuserdata.jpg'
-//     });
-//     await userPage.click('[e2e-id="create"]');
-//     await userPage.waitForSelector('[e2e-id="spinner"]');
-//     await userPage.screenshot({
-//       path: 'screenshots/feature3/spinneraftercreateuser.jpg'
-//     });
-//   });
+  test("Create user", async () => {
+    await userPage.screenshot({
+      path: 'screenshots/feature4/beforecreateuser.jpg'
+    });
+    await userPage.waitForSelector('[e2e-id="usernameUser"]');
+    await userPage.type('[e2e-id="usernameUser"]',"TrashPanda");
+    await userPage.screenshot({
+      path: 'screenshots/feature4/afterinputuserdata.jpg'
+    });
+    await userPage.click('[e2e-id="create"]');
+    await userPage.waitForSelector('[e2e-id="spinner"]');
+    await userPage.screenshot({
+      path: 'screenshots/feature4/spinneraftercreateuser.jpg'
+    });
+  });
 
-//   test("Start the play", async () => {
-//     await adminPage.waitForSelector('[e2e-id="timerField"]');
-//     await adminPage.waitForSelector('[e2e-id="showQuestion"]');
-//     await adminPage.click('[e2e-id="showQuestion"]');
-//     await adminPage.setViewport({ width: 1920, height: 1080 });
-//     await adminPage.screenshot({
-//       path: 'screenshots/feature3/adminSentQuestion.jpg'
-//     });
-//     await adminPage.waitForSelector('[e2e-id="showResults"]');
-//     await adminPage.screenshot({
-//       path: 'screenshots/feature3/adminWaiting.jpg'
-//     });
-//   });
-
-//   test("Vote and view results after timer expires", async () => {
-//     await userPage.waitForSelector('[e2e-id="questionText"]');
-//     await checkText("questionHeader","Question 1");
-//     await checkText("questionText","Would you welcome permanently people in mortal danger in your own home, sharing therefore with them your own food, water and salary?");
-//     await checkText("questionAnswer0","Yes");
-//     await checkText("questionAnswer1","No");
-//     await userPage.screenshot({
-//       path: 'screenshots/feature3/userQuestion.jpg'
-//     });
-//     delay(5000);
-//     await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
-//     await checkText("resultQuestionText","Would you welcome permanently people in mortal danger in your own home, sharing therefore with them your own food, water and salary?");
-//     await checkText("resultQuestionAnswer0","Yes");
-//     await checkText("resultQuestionAnswer1","No");
-//     await checkText("resultUsername","TrashPanda");
-//   });
-
-//   afterAll(async () => {
-//     await AdminApi.deactivateApp(accessToken);
-//     await browser.close();
-//   });
-// });
-
-// describe("Feature 4 - User Personalization", () => {
-//   beforeAll(async () => {
-//     await resetApp();
-//   });
-
-//   test("App is inactive", async () => {
-//     await userPage.waitForSelector('[e2e-id="inactive"]');
-//   });
-
-//   test("Activate app", async () => {
-//     await adminPage.waitForSelector('[e2e-id="start"]')
-//     await adminPage.click('[e2e-id="start"]')
-//   });
-
-//   test("Join the app", async () => {
-//     await userPage.waitForSelector('[e2e-id="join"]');
-//     await userPage.click('[e2e-id="join"]');
-//     await userPage.waitForSelector('[e2e-id="agree"]');
-//     await userPage.click('[e2e-id="agree"]');
-//     await userPage.waitForSelector('[e2e-id="create"]');
-//   });
-
-//   test("Create user", async () => {
-//     await userPage.screenshot({
-//       path: 'screenshots/feature4/beforecreateuser.jpg'
-//     });
-//     await userPage.waitForSelector('[e2e-id="usernameUser"]');
-//     await userPage.type('[e2e-id="usernameUser"]',"TrashPanda");
-//     await userPage.screenshot({
-//       path: 'screenshots/feature4/afterinputuserdata.jpg'
-//     });
-//     await userPage.click('[e2e-id="create"]');
-//     await userPage.waitForSelector('[e2e-id="spinner"]');
-//     await userPage.screenshot({
-//       path: 'screenshots/feature4/spinneraftercreateuser.jpg'
-//     });
-//   });
-
-//   afterAll(async () => {
-//     await AdminApi.deactivateApp(accessToken);
-//     await browser.close();
-//   });
-// });
+  afterAll(async () => {
+    await AdminApi.deactivateApp(accessToken);
+    await browser.close();
+  });
+});
 
 describe("Feature 5 - Contribututors Page", () => {
   beforeAll(async () => {
@@ -528,188 +485,3 @@ describe("Feature 5 - Contribututors Page", () => {
     await browser.close();
   });
 });
-
-// describe("Feature 6 - Answer Prediction", () => {
-
-// });
-
-// describe("Feature 7 - Personal Voting Results", () => {
-
-// });
-
-// describe("Feature 8 - Downtime management and ending the play", () => {
-//   beforeAll(async () => {
-//     await resetApp();
-//   });
-
-//   test("App is inactive", async () => {
-//     await userPage.waitForSelector('[e2e-id="inactive"]');
-//   });
-
-//   test("Activate app", async () => {
-//     await adminPage.screenshot({
-//       path: 'screenshots/feature8/activateappbefore.jpg'
-//     });
-//     await adminPage.waitForSelector('[e2e-id="start"]')
-//     await adminPage.click('[e2e-id="start"]')
-//   });
-
-//   test("Join the app", async () => {
-//     await userPage.waitForSelector('[e2e-id="join"]');
-//     await userPage.click('[e2e-id="join"]');
-//     await userPage.waitForSelector('[e2e-id="agree"]');
-//     await userPage.click('[e2e-id="agree"]');
-//     await userPage.waitForSelector('[e2e-id="create"]');
-//   });
-
-//   test("Create user", async () => {
-//     await userPage.waitForSelector('[e2e-id="usernameUser"]');
-//     await userPage.type('[e2e-id="usernameUser"]',"TrashPanda");
-//     await userPage.click('[e2e-id="create"]');
-//     await userPage.waitForSelector('[e2e-id="spinner"]');
-//   });
-
-//   test("Start the play", async () => {
-//     await adminPage.waitForSelector('[e2e-id="timerField"]');
-//     await adminPage.type('[e2e-id="timerField"]',"100");
-//     await adminPage.waitForSelector('[e2e-id="showQuestion"]');
-//     await adminPage.click('[e2e-id="showQuestion"]');
-//   });
-
-  // test("Vote and view results 1", async () => {
-  //   ////await userPage.waitForSelector('[e2e-id="questionText"]');
-  //   // await checkText("questionHeader","Question 1");
-  //   // await checkText("questionText","Which DJ is better?");
-  //   // await checkText("questionAnswer0","Boris Brejcha");
-  //   // await checkText("questionAnswer1","Ann Clue");
-  //   await userPage.click('[e2e-id="questionAnswer0"]');
-  //   await delay(2000);
-  //   await userPage.click('[e2e-id="questionConfirm"]');
-  //   await delay(1000);
-  //   ////await userPage.waitForSelector('[e2e-id="spinner"]');
-  //   ////await adminPage.waitForSelector('[e2e-id="showResults"]');
-  //   await adminPage.click('[e2e-id="showResults"]');
-  //   await delay(2000);
-  //   ////await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
-  //   await delay(2000);
-  //   // await checkText("resultQuestionText","Which DJ is better?");
-  //   // await checkText("resultQuestionAnswer0","Boris Brejcha");
-  //   // await checkText("resultQuestionAnswer1","Ann Clue");
-  //   // await checkText("resultUsername","TrashPanda");
-  //   // await checkText("resultBar0","100%");
-  //   ////await adminPage.waitForSelector('[e2e-id="timerField"]');
-  //   await adminPage.click('[e2e-id="timerField"]', {clickCount: 3})
-  //   await adminPage.type('[e2e-id="timerField"]',"100");
-  //   ////await adminPage.waitForSelector('[e2e-id="showQuestion"]');
-  //   await adminPage.click('[e2e-id="showQuestion"]');
-  // });
-
-  // test("Vote and view results 2", async () => {
-  //   ////await userPage.waitForSelector('[e2e-id="questionText"]');
-  //   // await checkText("questionHeader","Question 2");
-  //   // await checkText("questionText","Which genre is better?");
-  //   // await checkText("questionAnswer0","Techno");
-  //   // await checkText("questionAnswer1","Trance");
-  //   await userPage.click('[e2e-id="questionAnswer0"]');
-  //   await delay(2000);
-  //   await userPage.click('[e2e-id="questionConfirm"]');
-  //   await delay(1000);
-  //   ////await userPage.waitForSelector('[e2e-id="spinner"]');
-  //   ////await adminPage.waitForSelector('[e2e-id="showResults"]');
-  //   await adminPage.click('[e2e-id="showResults"]');
-  //   await delay(2000);
-  //   ////await userPage.waitForSelector('[e2e-id="resultQuestionText"]');
-  //   await delay(2000);
-  //   // await checkText("resultQuestionText","Which genre is better?");
-  //   // await checkText("resultQuestionAnswer0","Techno");
-  //   // await checkText("resultQuestionAnswer1","Trance");
-  //   // await checkText("resultUsername","TrashPanda");
-  //   // await checkText("resultBar0","100%");
-  //   ////await adminPage.waitForSelector('[e2e-id="timerField"]');
-  //   await adminPage.type('[e2e-id="timerField"]',"100");
-  //   ////await adminPage.waitForSelector('[e2e-id="showQuestion"]');
-  //   await adminPage.click('[e2e-id="showQuestion"]');
-  // });
-
-  // test("Vote and view final results", async () => {
-  //   ////await userPage.waitForSelector('[e2e-id="questionText"]');
-  //   await userPage.screenshot({
-  //     path: 'screenshots/feature8/finalvotebefore.jpg'
-  //   });
-  //   // await checkText("questionHeader","Question 3");
-  //   // await checkText("questionText","Which festival is better?");
-  //   // await checkText("questionAnswer0","Electric Castle");
-  //   // await checkText("questionAnswer1","Untold");
-  //   await userPage.screenshot({
-  //     path: 'screenshots/feature8/finalvoteaftercheck.jpg'
-  //   });
-  //   await userPage.click('[e2e-id="questionAnswer0"]');
-  //   await delay(2000);
-  //   await userPage.click('[e2e-id="questionConfirm"]');
-  //   await userPage.screenshot({
-  //     path: 'screenshots/feature8/afterclicking.jpg'
-  //   });
-  //   ////await userPage.waitForSelector('[e2e-id="spinner"]');
-  //   await userPage.screenshot({
-  //     path: 'screenshots/feature8/spinnermaybe.jpg'
-  //   });
-  //   ////await adminPage.waitForSelector('[e2e-id="showFinalResult"]');
-  //   await adminPage.screenshot({
-  //     path: 'screenshots/feature8/adminshowresult.jpg'
-  //   });
-  //   await adminPage.click('[e2e-id="showFinalResult"]');
-  //   await delay(2000);
-  //   await adminPage.screenshot({
-  //     path: 'screenshots/feature8/showfinalresult.jpg'
-  //   });
-  //   await userPage.screenshot({
-  //     path: 'screenshots/feature8/userfinalpage.jpg'
-  //   });
-  //   ////await userPage.waitForSelector('[e2e-id="finalUsername"]');
-  //   ////await userPage.waitForSelector('[e2e-id="download"]');
-  //   ////await userPage.waitForSelector('[e2e-id="infoButton"]');
-  //   await userPage.screenshot({
-  //     path: 'screenshots/feature8/userfinalpageaftercheck.jpg'
-  //   });
-  //   await adminPage.screenshot({
-  //     path: 'screenshots/feature8/beforeending.jpg'
-  //   });
-  //   ////await adminPage.waitForSelector('[e2e-id="endSession"]');
-  //   await adminPage.click('[e2e-id="endSession"]');
-  //   await adminPage.screenshot({
-  //     path: 'screenshots/feature8/endedSession.jpg'
-  //   });
-  //   ////await adminPage.waitForSelector('[e2e-id="usernameAdmin"]');
-  //   await userPage.screenshot({
-  //     path: 'screenshots/feature8/inactive1.jpg'
-  //   });
-  //   ////await userPage.waitForSelector('[e2e-id="inactive"]');
-  //   await userPage.screenshot({
-  //     path: 'screenshots/feature8/inactive2.jpg'
-  //   });
-  // });
-  
-  // test("End Session", async () => {
-  //   await adminPage.screenshot({
-  //     path: 'screenshots/feature8/beforeending.jpg'
-  //   });
-  //   await adminPage.waitForSelector('[e2e-id="endSession"]');
-  //   await adminPage.click('[e2e-id="endSession"]');
-  //   await adminPage.screenshot({
-  //     path: 'screenshots/feature8/endedSession.jpg'
-  //   });
-  //   await adminPage.waitForSelector('[e2e-id="usernameAdmin"]');
-  //   await userPage.screenshot({
-  //     path: 'screenshots/feature8/inactive1.jpg'
-  //   });
-  //   await userPage.waitForSelector('[e2e-id="inactive"]');
-  //   await userPage.screenshot({
-  //     path: 'screenshots/feature8/inactive2.jpg'
-  //   });
-  // });
-
-  // afterAll(async () => {
-  //   await AdminApi.deactivateApp(accessToken);
-  //   await browser.close();
-  // });
-// });
