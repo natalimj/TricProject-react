@@ -209,10 +209,10 @@ const EditQuestion = ({ question, questions, setQuestions }: Props) => {
                     </div>
                 </div>
                 <div className="questions__line question__select-line">
-                    <select className="questions__dropdown questions_w50 questions__text-thin" disabled={true}>
+                    <select className="questions__dropdown questions_w50 questions__text-thin select__no-arrow " disabled={true}>
                         <option value={getOppositeCategory(formValue.firstCategory)}>{getOppositeCategory(formValue.firstCategory)}</option>
                     </select>
-                    <select className="questions__dropdown questions_w50 questions__text-thin" disabled={true}>
+                    <select className="questions__dropdown questions_w50 questions__text-thin select__no-arrow " disabled={true}>
                         <option value={getOppositeCategory(formValue.secondCategory)}>{getOppositeCategory(formValue.secondCategory)}</option>
                     </select>
                     <div className="questions__icon" e2e-id={"question" + question.questionNumber + "EditSave"} onClick={() => editQuestion()} ><AiOutlineSave size={30} /><br></br><span className="questions__icon-hide">{Constants.SAVE_BUTTON.toUpperCase()}</span></div>
