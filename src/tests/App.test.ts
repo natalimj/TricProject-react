@@ -3,7 +3,7 @@ import AdminApi from "../api/AdminApi";
 import IQuestionData from "../models/Question";
 import IAnswerData from "../models/Answer";
 
-const accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtb2QiLCJpYXQiOjE2Njg1MjE3MDIsImV4cCI6MTY2ODc4MDkwMn0.8vUuOm8vPcokgPz2yNWHSRiBXdEaEIvXdKpUhyYEwcCE9RjJyRdCKXrM2r7UCM1ntI1wCB8-z78N2koy_vXSow";
+const accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtb2QiLCJpYXQiOjE2Njg3ODI2MjEsImV4cCI6MTY2OTA0MTgyMX0.gJW83BYSkgd5eNFLwgx7legXnxJtoa6TdlNwhoKVFylxtO2QCX8_uM2PrDil4ycP-nlPzBvafWqVRLFjPA8QcQ";
 let browser;
 let adminPage;
 let userPage;
@@ -32,49 +32,41 @@ async function resetApp() {
   await AdminApi.deactivateApp(accessToken);
 
   const answer1: IAnswerData = {
-    answerId: null,
     answerText: "Yes",
     firstCategory : "Progressive",
     secondCategory : "Idealist"
   }
   const answer3: IAnswerData = {
-    answerId: null,
     answerText: "Yes",
     firstCategory : "Progressive",
     secondCategory : "Pragmatic"
   }
   const answer5: IAnswerData = {
-    answerId: null,
     answerText: "Yes",
     firstCategory : "Idealist",
     secondCategory : "Progressive"
   }
   const answer7: IAnswerData = {
-    answerId: null,
     answerText: "Yes",
     firstCategory : "Pragmatic",
     secondCategory : "Conservative"
   }
   const answer2: IAnswerData = {
-    answerId: null,
     answerText: "No",
     firstCategory : "Conservative",
     secondCategory : "Pragmatic"
   }
   const answer4: IAnswerData = {
-    answerId: null,
     answerText: "No",
     firstCategory : "Conservative",
     secondCategory : "Idealist"
   }
   const answer6: IAnswerData = {
-    answerId: null,
     answerText: "No",
     firstCategory : "Pragmatic",
     secondCategory : "Conservative"
   }
   const answer8: IAnswerData = {
-    answerId: null,
     answerText: "No",
     firstCategory : "Idealist",
     secondCategory : "Progressive"
@@ -107,8 +99,8 @@ async function resetApp() {
     time: 10,
     theme: "Energy Consumption"
   } */
-  const question5: IQuestionData = {
-    questionNumber: 5,
+  const question4: IQuestionData = {
+    questionNumber: 4,
     questionText: 'You are in a hole with another person, and both of you are too weak to come out. There is just a piece of bread. If you both eat the bread you will endure a bit longer, but you both are eventually going to die. If you only eat the bread, you will save yourself, but the other person will die. Would you eat the whole piece of bread?',
     answers: [answer7,answer8],
     time: 10,
@@ -118,7 +110,7 @@ async function resetApp() {
   await AdminApi.addQuestion(question2,accessToken);
   await AdminApi.addQuestion(question3,accessToken);
   //await AdminApi.addQuestion(question4,accessToken);
-  await AdminApi.addQuestion(question5,accessToken);
+  await AdminApi.addQuestion(question4,accessToken);
 }
 
 async function checkQuestion(questionNr : number, text : string, answer1 : string, answer2 : string) {
@@ -186,7 +178,14 @@ describe("Feature 1 - Questions database and display", () => {
     });
     await adminPage.waitForSelector('[e2e-id="question1EditText"]');
     await adminPage.click('[e2e-id="question1EditText"]', {clickCount: 3});
+    await adminPage.screenshot({
+      path: 'screenshots/feature1/aftertripleclick.jpg'
+    });
     await adminPage.type('[e2e-id="question1EditText"]',"What is your favorite stage?");
+    await adminPage.setViewport({ width: 1920, height: 1080 });
+    await adminPage.screenshot({
+      path: 'screenshots/feature1/afteredittext.jpg'
+    });
     await adminPage.click('[e2e-id="question1EditAnswer1"]', {clickCount: 3});
     await adminPage.type('[e2e-id="question1EditAnswer1"]',"Main Stage");
     await adminPage.click('[e2e-id="question1EditAnswer2"]', {clickCount: 3});
