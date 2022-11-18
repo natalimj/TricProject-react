@@ -41,10 +41,11 @@ const AdminConsole = () => {
                     .then((response: any) => {
                         const questions: IQuestionData[] = response.data;
                         dispatch(addQuestion(questions[questionNo - 1]));
+                        NotificationManager.info('Got all questions as fallback! Please refresh the page.', 'Info!', 5000);
                         dispatch(setShowQuestionButton(true));
                     })
                     .catch((e: any) => {
-
+                        NotificationManager.error(e.message + ' Failed to get all questions!', 'Error!', 5000);
                     })
             });
     };
@@ -72,8 +73,9 @@ const AdminConsole = () => {
                 AdminApi.showQuestion(question.questionNumber, accessToken)
                     .then(() => {
                         dispatch(setQuestionTimer(question.time));
-                        dispatch(setShowQuestionButton(false));
+                    }).then(() => {
                         NotificationManager.info('Question ' + question.questionNumber + ' on screen', 'Info!', 2000);
+                        dispatch(setShowQuestionButton(false));
                     })
                     .catch((e: Error) => {
                         NotificationManager.error(e.message, 'Error!', 5000);
@@ -81,6 +83,17 @@ const AdminConsole = () => {
             })
             .catch((e: Error) => {
                 NotificationManager.error(e.message, 'Error!', 5000);
+                AdminApi.getAllQuestions(accessToken)
+                    .then((response: any) => {
+                        const questions: IQuestionData[] = response.data;
+                        dispatch(addQuestion(questions[question.questionNumber - 1]));
+                    })
+                    .then(() => {
+                        NotificationManager.info('Got all questions as fallback! Please refresh the page and try again.', 'Info!', 5000);
+                    })
+                    .catch((e: any) => {
+                        NotificationManager.error(e.message + ' Failed to get all questions!', 'Error!', 5000);
+                    })
             });
     }
 
@@ -166,8 +179,6 @@ const AdminConsole = () => {
             .catch((e: Error) => {
                 NotificationManager.error(e.message, 'Error!', 5000);
             });
-
-
     };
 
     const endSession = () => {
@@ -183,7 +194,7 @@ const AdminConsole = () => {
                 MailComposer.composeAsync({
                     subject: "Play Vote Data",
                     body: "Please attach the downloaded data called ResultData.json",
-                    recipients: ["lorem_ipsum@gmail.com"]
+                    recipients: ["info@humanlab.studio"]
                 })
                 NotificationManager.info('User data has been deleted', 'Info!', 2000);
             }).then(() => {
@@ -209,7 +220,7 @@ const AdminConsole = () => {
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [playData.questionTimer]);
+    }, [playData.questionTimer, showedFinalResult, playData.showQuestionButton]);
 
     useEffect(() => {
         if (playData.numberOfQuestions === 0) {
