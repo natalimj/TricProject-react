@@ -111,6 +111,7 @@ const Constants = {
 	COUNTDOWN : "Countdown",
 	SHORT_FORM_QUESTION_FIELD: "Short form of the question (will be shown to users):",
 	CLEAR_SCREEN : "Clear Screen",
+	WAITING_TEXT : "Waiting for next question. Please enjoy the play on stage meanwhile!"
 }
 
 export default Constants;
