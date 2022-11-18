@@ -34,10 +34,46 @@ async function resetApp() {
   const answer1: IAnswerData = {
     answerId: null,
     answerText: "Yes",
+    firstCategory : "Progressive",
+    secondCategory : "Idealist"
+  }
+  const answer3: IAnswerData = {
+    answerId: null,
+    answerText: "Yes",
+    firstCategory : "Progressive",
+    secondCategory : "Pragmatic"
+  }
+  const answer5: IAnswerData = {
+    answerId: null,
+    answerText: "Yes",
+    firstCategory : "Idealist",
+    secondCategory : "Progressive"
+  }
+  const answer7: IAnswerData = {
+    answerId: null,
+    answerText: "Yes",
     firstCategory : "Pragmatic",
     secondCategory : "Conservative"
   }
   const answer2: IAnswerData = {
+    answerId: null,
+    answerText: "No",
+    firstCategory : "Conservative",
+    secondCategory : "Pragmatic"
+  }
+  const answer4: IAnswerData = {
+    answerId: null,
+    answerText: "No",
+    firstCategory : "Conservative",
+    secondCategory : "Idealist"
+  }
+  const answer6: IAnswerData = {
+    answerId: null,
+    answerText: "No",
+    firstCategory : "Pragmatic",
+    secondCategory : "Conservative"
+  }
+  const answer8: IAnswerData = {
     answerId: null,
     answerText: "No",
     firstCategory : "Idealist",
@@ -53,28 +89,28 @@ async function resetApp() {
   const question2: IQuestionData = {
     questionNumber: 2,
     questionText: 'You work one hour by car far from home. If you travel by train you pollute less, but it takes two hours. Would you still travel by train?',
-    answers: [answer1,answer2],
+    answers: [answer3,answer4],
     time: 10,
     theme: "Climate Change"
   }
   const question3: IQuestionData = {
     questionNumber: 3,
     questionText: 'In order to be healthy your doctor prescribed a fish-based diet. Your fish is mass-bred and savagely slaughtered while it`s still alive. Would you stop eating fish risking your own health?',
-    answers: [answer1,answer2],
+    answers: [answer5,answer6],
     time: 10,
     theme: "Mass Breeding"
   }
-  const question4: IQuestionData = {
+  /* const question4: IQuestionData = {
     questionNumber: 4,
     questionText: 'In your country a retirement home with 20 old people needs a high amount of heating in order to keep them healthy. It`s proven that high heating consumption rises the CO2 level, which can end in floods that put at risk the life of an entire village in the other part of the world. Would you close the heating?',
-    answers: [answer1,answer2],
+    answers: [answer7,answer8],
     time: 10,
     theme: "Energy Consumption"
-  }
+  } */
   const question5: IQuestionData = {
     questionNumber: 5,
     questionText: 'You are in a hole with another person, and both of you are too weak to come out. There is just a piece of bread. If you both eat the bread you will endure a bit longer, but you both are eventually going to die. If you only eat the bread, you will save yourself, but the other person will die. Would you eat the whole piece of bread?',
-    answers: [answer1,answer2],
+    answers: [answer7,answer8],
     time: 10,
     theme: "Global Population"
   }

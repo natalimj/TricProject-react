@@ -173,7 +173,7 @@ const AdminConsole = () => {
                 MailComposer.composeAsync({
                     subject: "Play Vote Data",
                     body: "Please attach the downloaded data called ResultData.json",
-                    recipients: ["lorem_ipsum@gmail.com"]
+                    recipients: ["info@humanlab.studio"]
                 })
                 NotificationManager.info('User data has been deleted', 'Info!', 2000);
             }).then(() => {

@@ -25,7 +25,7 @@ const Result = ({ finalResult, result }: Props) => {
     const [waitForVoting, setWaitForVoting] = useState<boolean>(false);
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [shortText, setShortText] = useState(result?.question.questionText.split(".").slice(-1));
+    const [shortText, setShortText] = useState(result?.question.questionText.split(".").slice(-1)[0].trim());
 
     const cacheImages = async (srcArray) => {
         const promises = await srcArray.map((src) => {
@@ -54,7 +54,7 @@ const Result = ({ finalResult, result }: Props) => {
         } else if (userAnswer.answerText === result.secondAnswer.answerText) {
             setVotedFirstResponse(false);
         }
-        setShortText(result?.question.questionText.split(".").slice(-1));
+        setShortText(result?.question.questionText.split(".").slice(-1)[0].trim());
     }, [userAnswer, result]);
 
     const onQuestionMessageReceived = (msg: IQuestionData) => {
