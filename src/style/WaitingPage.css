@@ -19,3 +19,8 @@
 .waiting-container__text {
     margin-top: 2%;
 }
+
+.waiting-container__text-middle{
+    margin-top: 50vh;
+    color: var(--color-pink);
+}
