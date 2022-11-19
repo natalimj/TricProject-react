@@ -57,7 +57,7 @@ const AdminConsole = () => {
     const cleanPage = () => {
         AdminApi.cleanPage(accessToken)
             .then(() => {
-                NotificationManager.info('Screen has been cleaned','Info!', 2000);
+                NotificationManager.info('Screen has been cleaned', 'Info!', 2000);
             })
             .catch((e: any) => {
                 NotificationManager.error(e.message + e.response.data, 'Error!', 5000);
@@ -308,39 +308,46 @@ const AdminConsole = () => {
                             </>
                         ) : (
                             <>
-                            <div className='admin-console__buttons admin-console__buttons--result'>
-                                {(playData.questionTimer > 0 && !showedFinalResult) ? (
-                                    <>
-                                        <div className='admin-console__text'>{Constants.QUESTION_FIELD} {question.questionNumber} {Constants.ON_SCREEN_FIELD}</div>
-                                        <div className='admin-console__text'> {playData.questionTimer} {Constants.TIME_REMANING}</div>
-                                    </>
-                                ) : null}
-                                {question.questionNumber < playData.numberOfQuestions ? (
-                                    <button onClick={() => showResult()} className="admin-console__submit-button--secondary" e2e-id="showResults">
-                                        {Constants.RESULT_BUTTON} {question.questionNumber}
-                                    </button>
-                                ) : (
-                                    <>
-                                        {(playData.questionTimer > 0 && !showedFinalResult) ? (
-                                            <button onClick={showFinalResult} className="admin-console__submit-button--secondary" e2e-id="showFinalResult">
-                                                {Constants.FINAL_RESULT_BUTTON}
-                                            </button>
-                                        ) : (
-                                            <>
-                                                <div className='admin-console__text'>{Constants.FINAL_VOTE_RESULT_FIELD} {Constants.ON_SCREEN_FIELD}</div>
-                                                <button onClick={endSession} className="admin-console__submit-button" e2e-id="endSession">
-                                                    {Constants.END_BUTTON}
-                                                </button>
-                                            </>
-                                        )}
-                                    </>
-                                )}
-                            </div>
-                            <div>
-                                <button onClick={() => cleanPage()} className="admin-console__submit-button--secondary">
-                                    {Constants.CLEAR_SCREEN}
-                                </button>
-                            </div>
+                                <div className='admin-console__buttons admin-console__buttons--result'>
+                                    {(playData.questionTimer > 0 && !showedFinalResult) ? (
+                                        <>
+                                            <div className='admin-console__text'>{Constants.QUESTION_FIELD} {question.questionNumber} {Constants.ON_SCREEN_FIELD}</div>
+                                            <div className='admin-console__text'> {playData.questionTimer} {Constants.TIME_REMANING}</div>
+                                        </>
+                                    ) : null}
+                                    {question.questionNumber < playData.numberOfQuestions ? (
+                                        <button onClick={() => showResult()} className="admin-console__submit-button--secondary" e2e-id="showResults">
+                                            {Constants.RESULT_BUTTON} {question.questionNumber}
+                                        </button>
+                                    ) : (
+                                        <>
+                                            {(playData.questionTimer > 0 && !showedFinalResult) ? (
+                                                <>
+                                                    <button onClick={showFinalResult} className="admin-console__submit-button--secondary" e2e-id="showFinalResult">
+                                                        {Constants.FINAL_RESULT_BUTTON}
+                                                    </button>
+                                                    <div>
+                                                        <button onClick={() => cleanPage()} className="admin-console__submit-button--secondary">
+                                                            {Constants.CLEAR_SCREEN}
+                                                        </button>
+                                                    </div>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <div className='admin-console__text'>{Constants.FINAL_VOTE_RESULT_FIELD} {Constants.ON_SCREEN_FIELD}</div>
+                                                    <button onClick={endSession} className="admin-console__submit-button" e2e-id="endSession">
+                                                        {Constants.END_BUTTON}
+                                                    </button>
+                                                    <div>
+                                                        <button onClick={() => cleanPage()} className="admin-console__submit-button--secondary">
+                                                            {Constants.CLEAR_SCREEN}
+                                                        </button>
+                                                    </div>
+                                                </>
+                                            )}
+                                        </>
+                                    )}
+                                </div>
                             </>
                         )
                     }
