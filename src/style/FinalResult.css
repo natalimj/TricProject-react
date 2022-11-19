@@ -27,7 +27,18 @@
 
 .final-result__result-box {
     background-color: var(--color-dark-grey);
-    min-height: 60vh;
+    min-height: 45vh;
+    width: 95%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    color: var(--color-off-white);
+    position: relative;
+}
+
+.final-result__spacing {
+    background-color: var(--color-dark-grey);
+    min-height: 10px;
     width: 95%;
     margin: auto;
     display: flex;
@@ -60,6 +71,21 @@
     justify-content: space-evenly;
     overflow: hidden;
 }
+
+.final-result__text-container span{
+    font-size: var(--font-size-larger);
+}
+
+a:link { text-decoration: none; }
+
+
+a:visited { text-decoration: none; }
+
+
+a:hover { text-decoration: none; }
+
+
+a:active { text-decoration: none; }
 
 .final-result__result-box>div:nth-of-type(1) {
     margin-top: 2vh;

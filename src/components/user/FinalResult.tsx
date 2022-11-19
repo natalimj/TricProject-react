@@ -78,8 +78,8 @@ const FinalResult = () => {
                     <div className="final-result__slider">
                       <div className="final-result__first-rate" style={{ "width": `${categoryRate.rate}%` }}><span className='final-result__answer--text'>
                         {categoryRate.rate !== 0 && `${categoryRate.rate}%`}</span></div>
-                      <div className="final-result__second-rate" style={{ "width": `${100 - categoryRate.rate}%` }}><span className='final-result__answer--text'>
-                        {(100 - categoryRate.rate) !== 0 && `${100 - categoryRate.rate}%`}</span></div>
+                      <div className="final-result__second-rate" style={{ "width": `${Math.round(100 - categoryRate.rate)}%` }}><span className='final-result__answer--text'>
+                        {(100 - categoryRate.rate) !== 0 && `${Math.round(100 - categoryRate.rate)}%`}</span></div>
                     </div>
                   </div>
                 ))}
@@ -88,6 +88,10 @@ const FinalResult = () => {
                 ))}
               </div>
             </div>
+            <a href="https://forms.gle/nrpYtFY8C7QdDMqQ8" target="_blank" rel="noreferrer">
+            <div className='final-result__download'>{Constants.FEEDBACK}</div>
+            </a>
+            <div className='final-result__spacing'></div>
             <div className='final-result__buttons'>
               <div className="final-result__download" onClick={() => ExportAsImage(exportRef.current, `TRIC-${today}`)}>{Constants.DOWNLOAD}</div>
               <div className='final-result__info-icon'><BsInfoCircle size={30} onClick={() => setShowPlayInfo(true)} /></div>
