@@ -118,6 +118,7 @@ const Constants = {
 	STEP1_TEXT: "Scan the QR code or go to bit.ly/TRICPROJECT",
 	STEP2_TEXT: "Join the app by choosing a username and profile picture for the play",
 	STEP3_TEXT: "Wait for the questions to appear on the screen on stage. You will then have 10 seconds to answer on your phone before the vote results will be shown on stage.",
+	WAITING_TEXT : "Waiting for next question. Please enjoy the play on stage meanwhile!",
 }
 
 export default Constants;
