@@ -110,7 +110,8 @@ const Constants = {
 	PERSONAL_INFORMATION_AGREEMENT: "Do you agree to have your vote data stored after the play? We will not store any personal data such as the username.",
 	AGREE_BUTTON: "Agree",
 	DISAGREE_BUTTON: "Disagree",
-	COUNTDOWN : "Countdown"
+	COUNTDOWN : "Countdown",
+	FEEDBACK : "Please give us feedback!"
 }
 
 export default Constants;
