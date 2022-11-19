@@ -109,8 +109,9 @@ const Constants = {
 	AGREE_BUTTON: "Agree",
 	DISAGREE_BUTTON: "Disagree",
 	COUNTDOWN : "Countdown",
+	FEEDBACK : "Please give us feedback!",
 	SHORT_FORM_QUESTION_FIELD: "Short form of the question (will be shown to users):",
-	CLEAR_SCREEN : "Clear Screen",
+	CLEAR_SCREEN : "Clear Screen"
 }
 
 export default Constants;
