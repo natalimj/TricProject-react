@@ -4,7 +4,6 @@ const Constants = {
 	//BASE_URL: "http://localhost:8080/",
 	//SOCKET_URL: "http://localhost:8080/ws-message",
 
-
 	/* INITIAL STATES */
 	initialResultState: {
 		question: {
@@ -93,7 +92,6 @@ const Constants = {
 	CAST_LIST_TITLE: "Cast",
 	NEW_CAST_TITLE: "New Cast",
 	PLAY_INFO_TITLE: "Play Info",
-	EDIT_BUTTON: "Edit",
 	DELETE_BUTTON: "Delete",
 	NEXT_QUESTION_TEXT: "Next question is:",
 	SET_TIME_INFO: "*Time is expressed in SECONDS",
@@ -111,7 +109,9 @@ const Constants = {
 	AGREE_BUTTON: "Agree",
 	DISAGREE_BUTTON: "Disagree",
 	COUNTDOWN : "Countdown",
-	FEEDBACK : "Please give us feedback!"
+	FEEDBACK : "Please give us feedback!",
+	SHORT_FORM_QUESTION_FIELD: "Short form of the question (will be shown to users):",
+	CLEAR_SCREEN : "Clear Screen"
 }
 
 export default Constants;

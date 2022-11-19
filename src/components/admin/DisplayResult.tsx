@@ -5,7 +5,6 @@ import Constants from '../../util/Constants';
 import WebSocketComponent from '../WebSocketComponent';
 import IQuestionData from '../../models/Question';
 import Timer from './Timer';
-import WaitingPage from '../WaitingPage';
 
 const DisplayResult = () => {
 
@@ -51,7 +50,9 @@ const DisplayResult = () => {
         setQuestion(msg);
         setShowQuestion(true);
         setShowResult(false);
+        setTimer(10)
         setWaitForVoting(true)
+
     }
 
     const onAdminQuestionMessageReceived = (msg: IQuestionData) => {
@@ -66,20 +67,29 @@ const DisplayResult = () => {
         setTimer(msg)
     }
 
+    const onCleanPageMessageReceived = (msg :boolean) => {
+      setShowQuestion(false)
+      setShowResult(false)
+      setWaitForVoting(false)
+      setShowTimer(false)
+    }
+
     return (<>
         <WebSocketComponent topics={['/topic/result']} onMessage={(msg: IResultData) => onResultMessageReceived(msg)} />
         <WebSocketComponent topics={['/topic/question']} onMessage={(msg: IQuestionData) => onQuestionMessageReceived(msg)} />
         <WebSocketComponent topics={['/topic/adminQuestion']} onMessage={(msg: IQuestionData) => onAdminQuestionMessageReceived(msg)} />
         <WebSocketComponent topics={['/topic/timer']} onMessage={(msg: number) => onTimerMessageReceived(msg)} />
-        {showTimer && <Timer count={timer} setShowTimer={setShowTimer}/>} 
+        <WebSocketComponent topics={['/topic/cleanPage']} onMessage={(msg:boolean) => onCleanPageMessageReceived(msg)} />
+
+        {showTimer && <Timer count={timer} setShowTimer={setShowTimer} isQuestion={false} />}
         {!showTimer && showQuestion &&
             <div className='admin-result'>
                 <div className="admin-result__inner-container">
                     <div className="result__box">
                         <div className="result__question-text result__text--header">{question.questionText}</div>
                     </div>
-                   {waitForVoting && <WaitingPage message={Constants.WAITING_PROMPT_RESULT} onAdmin={true}/>} 
-                </div> 
+                    {waitForVoting && <Timer count={timer} setShowTimer={setShowTimer} isQuestion={true} />}
+                </div>
             </div>
         }
 

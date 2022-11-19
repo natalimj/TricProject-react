@@ -108,7 +108,6 @@ const UserLoginPage = () => {
                             <></>
                         )
                     }
-
                     {(currentListIndex < (imageList.length - 1)) ?
                         (<div className='user-form__avatar-selector-item'>
                             <div className='user-form--user-arrow' onClick={goRight}><FaArrowRight size={30} /></div></div>)

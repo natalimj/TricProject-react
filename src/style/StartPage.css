@@ -36,7 +36,7 @@
 
 .start-page-landing-icon {
     position: absolute;
-    bottom: 0;
+    bottom: -80px;
     left: 0;
     z-index: -1;
 }
