@@ -105,9 +105,9 @@ const DisplayResult = () => {
                         </div>
                         <div className="result__slider">
                             <div className="result__answer-bar result__answer-bar--left"
-                                style={{ "width": `${result.firstAnswerRate}%` }}> {result.firstAnswerRate !== 0 && `${result.firstAnswerRate}%`}</div>
+                                style={{ "width": `${Math.round(result.firstAnswerRate)}%` }}> {result.firstAnswerRate !== 0 && `${Math.round(result.firstAnswerRate)}%`}</div>
                             <div className="result__answer-bar result__answer-bar--right"
-                                style={{ "width": `${result.secondAnswerRate}%` }}>{result.secondAnswerRate !== 0 && `${result.secondAnswerRate}%`}</div>
+                                style={{ "width": `${Math.round(result.secondAnswerRate)}%` }}>{result.secondAnswerRate !== 0 && `${Math.round(result.secondAnswerRate)}%`}</div>
                         </div>
                     </div>
                 </div>
