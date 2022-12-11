@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { ClockLoader } from "react-spinners";
-import "../styles.css";
+import "../../styles.css";
 
 interface Props {
     count: number;
