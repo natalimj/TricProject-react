@@ -3,10 +3,10 @@ import '../../style/AdminLogin.css';
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Constants from "../../util/Constants";
-import axios from "axios";
 import { useAppDispatch } from '../../app/hooks';
 import { loginAdmin } from '../../reducers/adminSlice';
 import TricLogo from '../../util/icons/TRIC.svg';
+import AdminApi from "../../api/AdminApi";
 
 type State = {
   redirect: string | null,
@@ -18,7 +18,6 @@ type State = {
 };
 
 const Login = () => {
-  const API_URL = Constants.BASE_URL + 'api/auth/';
   const [state, setState] = useState<State>({
     redirect: null,
     username: "",
@@ -36,40 +35,33 @@ const Login = () => {
     });
   }
 
-  const login = (username: string, password: string) => {
-    return axios
-      .post(API_URL + "signin", {
-        username,
-        password
-      })
+  const handleLogin = (formValue: { username: string; password: string }) => {
+    const { username, password } = formValue;
+
+    setState({ ...state, message: "", loading: true });
+    AdminApi.login(username, password)
       .then(response => {
         if (response.data.accessToken) {
           dispatch(loginAdmin(response.data))
         }
         return response.data;
-      });
+      })
+      .then(
+        () => {
+          setState({ ...state, redirect: "/admin", overrider: true });
+        },
+        error => {
+          const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+          setState({ ...state, loading: false, message: resMessage });
+        }
+      );
   }
 
-  const handleLogin = (formValue: { username: string; password: string }) => {
-    const { username, password } = formValue;
-
-    setState({ ...state, message: "", loading: true });
-    login(username, password).then(
-      () => {
-        setState({ ...state, redirect: "/admin", overrider: true });
-      },
-      error => {
-        const resMessage =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-        setState({ ...state, loading: false, message: resMessage });
-      }
-    );
-  }
-  
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const cacheImages = async (srcArray) => {
@@ -108,11 +100,11 @@ const Login = () => {
   return (
     <div className="admin-login">
       <div className="admin-login__image">
-        {isLoading ? (<></> ) : 
-        (<img
-          src={TricLogo}
-          alt="Tric logo" />)
-          }
+        {isLoading ? (<></>) :
+          (<img
+            src={TricLogo}
+            alt="Tric logo" />)
+        }
       </div>
       <Formik
         initialValues={initialValues}

@@ -29,11 +29,6 @@ const Timer = ({ count, setShowTimer, isQuestion }: Props) => {
                 <div className='waiting-container__text' style={{ "color": "#FFADCB", "fontSize": "80px" }}>{counter}</div>
             </div>)}
         </>
-
-
-
-
-
     )
 }
 

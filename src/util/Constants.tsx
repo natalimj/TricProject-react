@@ -58,7 +58,7 @@ const Constants = {
 	FINAL_VOTE_RESULT_FIELD: "Final Vote Result",
 	CONFIRM_BUTTON: "Confirm",
 	WAITING_PROMPT_RESULT: "Gathering votes...",
-	WAITING_PROMPT_BEGIN: "Waiting for the first question...",
+	WAITING_PROMPT_BEGIN: "Waiting for question",
 	WAITING_DEFAULT : "Waiting...",
 	WAITING_PROMPT_VOTE :"Waiting for new voting period",
 	DOWNLOAD: "DOWNLOAD",
