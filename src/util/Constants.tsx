@@ -111,7 +111,14 @@ const Constants = {
 	COUNTDOWN : "Countdown",
 	FEEDBACK : "Please give us feedback!",
 	SHORT_FORM_QUESTION_FIELD: "Short form of the question (will be shown to users):",
-	CLEAR_SCREEN : "Clear Screen"
+	CLEAR_SCREEN : "Clear Screen",
+	START_SCREEN_TITLE: "Scan the QR code to ",
+	START_SCREEN_TITLE_ENDING: "start!",
+	START_SCREEN_STEP: "Step",
+	STEP1_TEXT: "Scan the QR code or go to bit.ly/TRICPROJECT",
+	STEP2_TEXT: "Join the app by choosing a username and profile picture for the play",
+	STEP3_TEXT: "Wait for the questions to appear on the screen on stage. You will then have 10 seconds to answer on your phone before the vote results will be shown on stage.",
+	WAITING_TEXT : "Waiting for next question. Please enjoy the play on stage meanwhile!",
 }
 
 export default Constants;

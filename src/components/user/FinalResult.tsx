@@ -76,8 +76,8 @@ const FinalResult = () => {
                       <span className="final-result__answer-text">{categoryRate.oppositeCategory}</span>
                     </div>
                     <div className="final-result__slider">
-                      <div className="final-result__first-rate" style={{ "width": `${categoryRate.rate}%` }}><span className='final-result__answer--text'>
-                        {categoryRate.rate !== 0 && `${categoryRate.rate}%`}</span></div>
+                      <div className="final-result__first-rate" style={{ "width": `${Math.round(categoryRate.rate)}%` }}><span className='final-result__answer--text'>
+                        {categoryRate.rate !== 0 && `${Math.round(categoryRate.rate)}%`}</span></div>
                       <div className="final-result__second-rate" style={{ "width": `${Math.round(100 - categoryRate.rate)}%` }}><span className='final-result__answer--text'>
                         {(100 - categoryRate.rate) !== 0 && `${Math.round(100 - categoryRate.rate)}%`}</span></div>
                     </div>

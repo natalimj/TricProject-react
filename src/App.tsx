@@ -16,7 +16,7 @@ import { NotificationContainer } from 'react-notifications';
 import PlayInfo from "./components/admin/ManagePlayInfo";
 import DisplayResult from "./components/admin/DisplayResult";
 import VideoPage from "./components/admin/VideoPage";
-
+import AdminStartScreen from "./components/admin/AdminStartScreen";
 
 function App() {
   return (
@@ -32,6 +32,7 @@ function App() {
                 <Route path="/admin/playInfo" element={<PlayInfo />} />
                 <Route path="/admin/result" element={<DisplayResult />} />
                 <Route path="/admin/video" element={<VideoPage />} />
+                <Route path="/admin/start" element={<AdminStartScreen />} />
               </Route>
               <Route path="/login" element={<Login />} />
               <Route path="*" element={<Page404 />} />

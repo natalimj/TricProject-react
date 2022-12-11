@@ -1,0 +1,52 @@
+@import url("../styles.css");
+
+.admin-start-screen {
+    font-size: var(--font-size-header);
+}
+
+.admin-start-screen__body {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.admin-start-screen__steps,
+.admin-start-screen__qr--image {
+    background-color: var(--color-dark-grey);
+}
+
+.admin-start-screen__qr {
+    width: 40%;
+}
+
+.admin-start-screen__steps {
+    width: 50%
+}
+
+.admin-start-screen__steps {
+    padding: 2%;
+}
+
+.admin-start-screen--title {
+    margin-bottom: 2%;
+}
+
+.admin-start-screen--header {
+    color: var(--color-pink);
+}
+
+.admin-start-screen--content {
+    color: var(--color-off-white);
+    font-size: var(--font-size-larger);
+    margin-inline-start: 3%;
+}
+
+.admin-start-screen__qr--image img {
+    width: 100%;
+    max-height: 550px;
+}
+
+a, a:hover {
+    color: var(--color-pink);
+    text-decoration: none;
+}
