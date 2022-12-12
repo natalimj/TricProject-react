@@ -19,6 +19,7 @@ const AdminConsole = () => {
     const dispatch = useAppDispatch();
     const playData: PlayData = useAppSelector((state: RootState) => state.playData);
     const question: IQuestionData = useAppSelector((state: RootState) => state.question);
+    const status: boolean = useAppSelector((state: RootState) => state.status.isActive);
     const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
 
     const [showedFinalResult, setShowedFinalResult] = useState<boolean>(false);
@@ -234,7 +235,7 @@ const AdminConsole = () => {
                 });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [playData.numberOfQuestions, accessToken])
+    }, [playData.numberOfQuestions, accessToken, status])
 
     return (
         <>
