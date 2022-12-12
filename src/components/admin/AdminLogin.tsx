@@ -44,7 +44,6 @@ const Login = () => {
         if (response.data.accessToken) {
           dispatch(loginAdmin(response.data))
         }
-        return response.data;
       })
       .then(
         () => {
