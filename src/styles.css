@@ -2,15 +2,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 html {
     /* COLORS */
-    --color-pink: #FFADCB;
-    --color-off-white: #E1E1DA;
-    --color-grey: #636363;
-    --color-dark-grey: #3D3D3D;
-    --color-black: #181818;
+    --color-pink: #FF01FF;
+    --color-off-white: #ECEAE1;
+    --color-grey: #262B38;
+    --color-dark-grey: #262B38;
+    --color-black: #262B38;
 
     /* COLOR VARIANTS */
-    --color-pink-darker: #b3798e;
-    --color-off-white-darker: #9e9e99;
+    --color-pink-darker: #f104f1;
+    --color-off-white-darker: #dfddd5;
 
     /* FONT FAMILIES */
     --default-font: 'Chakra Petch', sans-serif;
