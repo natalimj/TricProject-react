@@ -14,6 +14,13 @@ import { NotificationManager } from 'react-notifications';
 import IPlayInfoData from '../../models/PlayInfo';
 import Modal from 'react-modal';
 
+/**
+ * Component for displaying the question, two answers
+ * and a countdown timer to show voting time.
+ * The user can vote for one of the answers.
+ *
+ * @ author Daria-Maria Popa 
+ */
 const Question = () => {
   const dispatch = useAppDispatch();
   const voted: number = useAppSelector((state: RootState) => state.component.userVotedValue);

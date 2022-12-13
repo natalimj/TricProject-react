@@ -6,6 +6,14 @@ import IPlayInfoData from "../models/PlayInfo";
 import { StatusData } from "../reducers/statusSlice";
 import IUserData from "../models/User";
 
+
+/**
+ * Api for sending requests to the server - AdminApi.
+ * The access token is provided in the headers, 
+ * because AdminApi in the server requires JWT authentication
+ *
+ * @ author Natali Munk-Jakobsen / Daria-Maria Popa
+ */
 const getAllUsers = () => {
   return http.get<Array<IUserData>>("adminApi/users");
 };

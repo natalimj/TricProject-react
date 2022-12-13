@@ -3,6 +3,13 @@ import '../style/WaitingPage.css';
 import { BeatLoader, RingLoader } from "react-spinners";
 import Constants from '../util/Constants';
 
+
+/**
+ * Component for showing a loader.
+ * It is shown when user is waiting for the next questions or result etc.
+ *
+ * @ author Natali Munk-Jakobsen 
+ */
 interface Props {
   message: string;
   onAdmin: boolean

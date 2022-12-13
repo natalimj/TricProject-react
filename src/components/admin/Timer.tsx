@@ -2,6 +2,12 @@ import { useEffect, useState } from 'react'
 import { ClockLoader } from "react-spinners";
 import "../../styles.css";
 
+/**
+ * Component for displaying countdown on admin result screen
+ *
+ * @ author Natali Munk-Jakobsen
+ */
+
 interface Props {
     count: number;
     setShowTimer: React.Dispatch<React.SetStateAction<boolean>>

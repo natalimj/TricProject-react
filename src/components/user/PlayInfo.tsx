@@ -9,6 +9,11 @@ import '../../style/PlayInfo.css';
 import Constants from '../../util/Constants';
 import FinalResult from './FinalResult';
 
+/**
+ * Component for displaying information about play and contributors.
+ *
+ * @ author Natali Munk-Jakobsen
+ */
 const PlayInfo = () => {
 
   const [cast, setCast] = useState<IContributorData[]>([]);

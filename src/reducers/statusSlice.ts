@@ -1,5 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+
+/**
+ * Redux Toolkit slice contains StatusData interface, initial state of StatusData
+ * and reducers to change the current StatusData state and return its updated version
+ *
+ * @ Daria-Maria Popa
+ */
 export interface StatusData {
     isActive: boolean
 }

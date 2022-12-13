@@ -1,5 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+/**
+ * Redux Toolkit slice contains PlayData interface, initial state of PlayData
+ * and reducers to change the current PlayData state and return its updated version
+ *
+ * @ Daria-Maria Popa
+ */
 export interface PlayData {
     numberOfUsers: number;
     numberOfQuestions: number;

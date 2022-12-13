@@ -14,6 +14,14 @@ import UserApi from '../../api/UserApi';
 import { RootState } from '../../app/store';
 import * as MailComposer from 'expo-mail-composer';
 
+
+/**
+ * Component for displaying main functions that admin can perform during play
+ * Such as sending a question to the user, displaying question on the admin result screen, showing result
+ * starting countdown, changing question time, cleaning admin result screen, ending session
+ *
+ * @ author Daria-Maria Popa / Natali Munk-Jakobsen
+ */
 const AdminConsole = () => {
 
     const dispatch = useAppDispatch();

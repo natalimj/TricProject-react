@@ -10,6 +10,13 @@ import { BiDownArrow, BiLeftArrowAlt, BiUpArrow } from 'react-icons/bi';
 import { useAppSelector } from '../../app/hooks';
 import { RootState } from '../../app/store';
 
+/**
+ * Component for adding/editing play info and final result text.
+ * Displays a list of contributors.
+ * Contains <EditContributor> component.
+ *
+ * @ author Natali Munk-Jakobsen
+ */
 const PlayInfo = () => {
   const initialContributor = {
     name: "",

@@ -3,9 +3,14 @@ import '../../style/AdminStartScreen.css';
 import QRCode from '../../util/icons/QRCode.svg';
 import { Link } from "react-router-dom";
 
+/**
+ * Component for displaying Welcome Screen 
+ * includes information about the application
+ * and QR code for accessing the application
+ *
+ * @ author Daria-Maria Popa
+ */
 const AdminStartScreen = () => {
-
-
     return (
         <div className="admin-start-screen">
             <div className="admin-start-screen--header admin-start-screen--title">

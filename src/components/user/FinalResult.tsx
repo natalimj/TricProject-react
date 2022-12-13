@@ -11,6 +11,14 @@ import { RootState } from '../../app/store';
 import { BsInfoCircle } from 'react-icons/bs';
 import PlayInfo from './PlayInfo';
 
+/**
+ *  Component for displaying user's final result with question theme and answer categories.
+ *  The user can download the final result as an image, 
+ *  view the play info or give feedback.
+ *  Contains <PlayInfo> component.
+ *
+ * @ author Natali Munk-Jakobsen / Bogdan Mezei
+ */
 const FinalResult = () => {
   const currentUser: IUserData = useAppSelector((state: RootState) => state.user);
   const [finalResult, setFinalResult] = useState<IFinalResultData>();

@@ -2,6 +2,12 @@ import React from 'react';
 import SockJsClient from 'react-stomp';
 import Constants from "../util/Constants";
 
+/**
+ * Component for receving Websocket message from the server.
+ * Topic name and url are given as props.
+ *
+ * @ author Natali Munk-Jakobsen 
+ */
 type WebSocketProps = { topics: string[]; onMessage: any };
 const WebSocketComponent = ({ topics, onMessage }: WebSocketProps) => {
   return (

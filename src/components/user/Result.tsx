@@ -11,6 +11,13 @@ import WebSocketComponent from '../WebSocketComponent';
 import IQuestionData from '../../models/Question';
 import WaitingPage from '../WaitingPage';
 
+
+/**
+ * Component for displaying the voting result for the last question.
+ * Containg <FinalResult> component.
+ *
+ * @ author Natali Munk-Jakobsen / Daria-Maria Popa
+ */
 type Props = {
     finalResult: boolean;
     result: IResultData;

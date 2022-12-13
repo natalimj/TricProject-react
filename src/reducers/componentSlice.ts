@@ -1,5 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+/**
+ * Redux Toolkit slice contains ComponentState interface, initial state of ComponentState
+ * and reducers to change the current ComponentState state and return its updated version
+ *
+ * @ Daria-Maria Popa
+ */
 export interface ComponentState {
     questionComponentValue: boolean;
     userJoinedValue: boolean;
