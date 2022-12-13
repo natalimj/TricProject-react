@@ -1,6 +1,11 @@
 import React from 'react'
 import Constants from '../util/Constants'
 
+/**
+ * This component is the landing view for unavailable requests.
+ *
+ * @ author Natali Munk-Jakobsen 
+ */
 const Page404: React.FC = () => {
   return (
     <div>

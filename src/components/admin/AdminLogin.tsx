@@ -8,6 +8,13 @@ import { loginAdmin } from '../../reducers/adminSlice';
 import TricLogo from '../../util/icons/TRIC.svg';
 import AdminApi from "../../api/AdminApi";
 
+/**
+ * Component for logging in to the system as admin
+ * Admin can login using username and password
+ * JWT authentication is needed for login
+ *
+ * @ author Daria-Maria Popa / Bogdan Mezei
+ */
 type State = {
   redirect: string | null,
   username: string,

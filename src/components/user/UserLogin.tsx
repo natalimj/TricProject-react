@@ -9,6 +9,13 @@ import { RootState } from '../../app/store';
 import { loginUser } from '../../reducers/userSlice';
 import { setUserJoined } from '../../reducers/componentSlice';
 
+
+/**
+ * Login view for application users
+ * where they can select a username and profile image and join the voting 
+ *
+ * @ author Daria-Maria Popa 
+ */
 const UserLoginPage = () => {
     const dispatch = useAppDispatch();
     const currentUser: IUserData = useAppSelector((state: RootState) => state.user);

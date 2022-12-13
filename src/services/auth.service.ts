@@ -1,6 +1,11 @@
 import jwt_decode, { JwtPayload } from 'jwt-decode';
 import { AdminState, logoutAdmin } from '../reducers/adminSlice';
 
+/**
+ * helper for decoding and verifying the access token 
+ *
+ * @ author Bogdan Mezei
+ */
 export const isAuth = (dispatch, admin: AdminState) => {
   if (!admin.id) {
     return false;

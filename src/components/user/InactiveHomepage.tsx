@@ -7,6 +7,11 @@ import { clearAnswer } from "../../reducers/answerSlice";
 import { clearComponentState } from "../../reducers/componentSlice";
 import { clearQuestion } from "../../reducers/questionSlice";
 
+/**
+ * Inactive homepage component shows an information text when there is no active play.
+ *
+ * @ author Daria-Maria Popa 
+ */
 const InactiveHomepage = () => {
   const dispatch = useAppDispatch();
 

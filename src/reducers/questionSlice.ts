@@ -1,6 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import IQuestionData from '../models/Question';
 
+/**
+ * Redux Toolkit slice contains initial state of IQuestionData
+ * and reducers to change the current IQuestionData state and return its updated version
+ *
+ * @ Daria-Maria Popa
+ */
 const initialState: IQuestionData = {
     questionId: '',
     questionNumber: -1,

@@ -11,6 +11,12 @@ import AdminConsole from './AdminConsole';
 import UserApi from '../../api/UserApi';
 import TricLogo from '../../util/icons/TRIC.svg';
 
+/**
+ * This component is shown when admin logs in 
+ * for diplaying "Edit Play Info", "Edit Questions","Start" buttons 
+ *
+ * @ author Daria-Maria Popa 
+ */
 const Admin = () => {
   const dispatch = useAppDispatch();
   const isActive = useAppSelector((state: RootState) => state.status.isActive);

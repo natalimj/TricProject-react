@@ -1,6 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import IUserData from '../models/User';
 
+/**
+ * Redux Toolkit slice contains initial state of IUserData
+ * and reducers to change the current IUserData state and return its updated version
+ *
+ * @ Daria-Maria Popa
+ */
 const initialState: IUserData = {
     userId: '',
     username: '',
