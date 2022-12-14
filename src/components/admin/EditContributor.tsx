@@ -7,6 +7,14 @@ import { useAppSelector } from '../../app/hooks';
 import { RootState } from '../../app/store';
 import { AiOutlineDelete, AiOutlineSave } from 'react-icons/ai';
 
+
+/**
+ * Component for editing a contributor.
+ * Contributor name and description can be edited using this component.
+ *
+ * @ author Natali Munk-Jakobsen
+ */
+
 type Props = {
     contributorToEdit: IContributorData
     contributors: IContributorData[]

@@ -6,6 +6,13 @@ import WebSocketComponent from '../WebSocketComponent';
 import IQuestionData from '../../models/Question';
 import Timer from './Timer';
 
+
+/**
+ * Component for displaying voting result for a question 
+ * on admin result screen
+ *
+ * @ author Natali Munk-Jakobsen
+ */
 const DisplayResult = () => {
 
     const initialQuestionState = {

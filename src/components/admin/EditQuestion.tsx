@@ -7,6 +7,13 @@ import { useAppSelector } from '../../app/hooks';
 import { RootState } from '../../app/store';
 import Constants from '../../util/Constants';
 
+/**
+ * Component for editing a question.
+ * Question text, question theme, answer text, answer category can be edited using this component.
+ *
+ * @ author Natali Munk-Jakobsen
+ */
+
 type Props = {
     question: IQuestionData
     questions: IQuestionData[]

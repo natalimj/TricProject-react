@@ -6,7 +6,11 @@ import IResultData from "../models/Result";
 import IContributorData from "../models/Contributor";
 import IPlayInfoData from "../models/PlayInfo";
 
-
+/**
+ * Api for sending requests to the server - UserApi.
+ *
+ * @ author Natali Munk-Jakobsen
+ */
 const createUser = (data: IUserData) => {
     return http.post<IUserData>("userApi/user", data);
 };

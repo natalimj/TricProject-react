@@ -10,6 +10,13 @@ import { useAppSelector } from '../../app/hooks';
 import { RootState } from '../../app/store';
 import { AiOutlineSave } from 'react-icons/ai';
 
+/**
+ * Component for adding a new Question and displaying a list of questions.
+ * A new question with question text, question theme, answer text, answer category can be addd using this component.
+ * Contains <EditQuestion> component.
+ *
+ * @ author Natali Munk-Jakobsen
+ */
 const ManageQuestions = () => {
     const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
     const [questions, setQuestions] = useState<IQuestionData[]>([]);

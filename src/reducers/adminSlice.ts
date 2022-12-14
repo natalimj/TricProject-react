@@ -1,5 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+/**
+ * Redux Toolkit slice contains AdminState interface, initial state of AdminState
+ * and reducers to change the current AdminState state and return its updated version
+ *
+ * @ Daria-Maria Popa
+ */
 export interface AdminState {
     accessToken: string,
     email: string,

@@ -1,6 +1,11 @@
 import html2canvas from "html2canvas";
 
-
+/**
+ * Using html2canvas to take a screenshot of a specific element
+ * and then downloading the screenshot as a .png image locally to the filesystem.
+ *
+ * @ author Natali Munk-Jakobsen 
+ */
 const ExportAsImage = async (element: any, imageFileName: string) => {
     const canvas = await html2canvas(element);
     const image = canvas.toDataURL("image/png", 1.0);

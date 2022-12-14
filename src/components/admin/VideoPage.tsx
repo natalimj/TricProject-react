@@ -1,6 +1,11 @@
 import '../../style/VideoPage.css';
 import Constants from '../../util/Constants';
 
+/**
+ * Component for displaying a video 
+ *
+ * @ author Daria-Maria Popa
+ */
 const VideoPage = () => {
     return (
         <div className="video__container">

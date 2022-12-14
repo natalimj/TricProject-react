@@ -18,6 +18,13 @@ import adminReducer from '../reducers/adminSlice';
 import playDataReducer from '../reducers/playDataSlice';
 
 
+/**
+ * Creates a store object, 
+ * combines different reducer functions into a single reducer object
+ * and uses persisted Redux store to save the application state in the local storage
+ * 
+ * @ Daria-Maria Popa
+ */
 const persistConfig = {
   key: "primary",
   storage

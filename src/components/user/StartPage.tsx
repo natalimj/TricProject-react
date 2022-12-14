@@ -17,6 +17,14 @@ import { setStatus } from "../../reducers/statusSlice";
 import TricLogo from '../../util/icons/TRIC.svg';
 import Modal from 'react-modal';
 
+/**
+ * Landing view for application users
+ * where they can join the play and see the login view
+ * after accepting personal information agreement.
+ * Contains <UserLogin> component.
+ *
+ * @ author Daria-Maria Popa 
+ */
 const StartPage = () => {
   const dispatch = useAppDispatch();
   const isActive: boolean = useAppSelector((state: RootState) => state.status.isActive);

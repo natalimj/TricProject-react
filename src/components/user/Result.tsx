@@ -11,6 +11,13 @@ import WebSocketComponent from '../WebSocketComponent';
 import IQuestionData from '../../models/Question';
 import WaitingPage from '../WaitingPage';
 
+
+/**
+ * Component for displaying the voting result for the last question.
+ * Containg <FinalResult> component.
+ *
+ * @ author Natali Munk-Jakobsen / Daria-Maria Popa
+ */
 type Props = {
     finalResult: boolean;
     result: IResultData;
@@ -71,8 +78,8 @@ const Result = ({ finalResult, result }: Props) => {
         <>
             <WebSocketComponent topics={['/topic/adminQuestion']} onMessage={(msg: IQuestionData) => onQuestionMessageReceived(msg)} />
             <WebSocketComponent topics={['/topic/cleanPage']} onMessage={(msg: boolean) => onCleanPageMessageReceived(msg)} />
-            {waitForQuestion && !finalResult ? (<div className='waiting-container'>
-                <div className='waiting-container__text-middle'>{Constants.WAITING_TEXT}</div></div>) : (
+            {waitForQuestion && !finalResult ? (
+            <div className="result"><WaitingPage message={Constants.WAITING_TEXT} onAdmin={false}/></div>) : (
                 waitForVoting ? (<div className="result"><WaitingPage message={Constants.WAITING_PROMPT_VOTE} onAdmin={false} /></div>) :
                     (!showFinalResult) ? (
                         <div className='result'>
@@ -95,7 +102,7 @@ const Result = ({ finalResult, result }: Props) => {
                                         <div className="result__answer-bar result__answer-bar--right"
                                             style={{ "width": `${result.secondAnswerRate}%` }} e2e-id="resultBar1">{result.secondAnswer.answerText === userAnswer.answerText && `${result.secondAnswerRate}%`}</div>
                                     </div>
-                                    <div style={votedFirstResponse ? { color: "#FFADCB" } : { color: "#E1E1DA" }} className="result__user-answer">
+                                    <div style={votedFirstResponse ? { color: "var(--color-pink)" } : { color: "var(--color-off-white)" }} className="result__user-answer">
                                         <BsFillSquareFill />
                                         <div className='result__user-answer--text'>- {Constants.USER_RESPONSE}</div>
                                     </div>

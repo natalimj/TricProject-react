@@ -11,6 +11,12 @@ import UserApi from '../../api/UserApi';
 import IResultData from '../../models/Result';
 import Constants from '../../util/Constants';
 
+/**
+ * The main page component is shown when a user joins the play.
+ * <Question> or <Result> component is displayed depending on the WebSocket message received by the client.
+ *
+ * @ author Daria-Maria Popa 
+ */
 const MainPage = () => {
   const dispatch = useAppDispatch();
   const componentData: ComponentState = useAppSelector((state: RootState) => state.component);

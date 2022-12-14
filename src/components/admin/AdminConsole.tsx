@@ -14,11 +14,20 @@ import UserApi from '../../api/UserApi';
 import { RootState } from '../../app/store';
 import * as MailComposer from 'expo-mail-composer';
 
+
+/**
+ * Component for displaying main functions that admin can perform during play
+ * Such as sending a question to the user, displaying question on the admin result screen, showing result
+ * starting countdown, changing question time, cleaning admin result screen, ending session
+ *
+ * @ author Daria-Maria Popa / Natali Munk-Jakobsen
+ */
 const AdminConsole = () => {
 
     const dispatch = useAppDispatch();
     const playData: PlayData = useAppSelector((state: RootState) => state.playData);
     const question: IQuestionData = useAppSelector((state: RootState) => state.question);
+    const status: boolean = useAppSelector((state: RootState) => state.status.isActive);
     const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
 
     const [showedFinalResult, setShowedFinalResult] = useState<boolean>(false);
@@ -234,7 +243,7 @@ const AdminConsole = () => {
                 });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [playData.numberOfQuestions, accessToken])
+    }, [playData.numberOfQuestions, accessToken, status])
 
     return (
         <>
