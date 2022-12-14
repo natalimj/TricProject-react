@@ -15,7 +15,7 @@ import TricLogo from '../../util/icons/TRIC.svg';
  * This component is shown when admin logs in 
  * for diplaying "Edit Play Info", "Edit Questions","Start" buttons 
  *
- * @ author Daria-Maria Popa 
+ * @ author Daria-Maria Popa / Bogdan Mezei
  */
 const Admin = () => {
   const dispatch = useAppDispatch();

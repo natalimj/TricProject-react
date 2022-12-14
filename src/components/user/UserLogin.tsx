@@ -14,7 +14,7 @@ import { setUserJoined } from '../../reducers/componentSlice';
  * Login view for application users
  * where they can select a username and profile image and join the voting 
  *
- * @ author Daria-Maria Popa 
+ * @ author Daria-Maria Popa / Bogdan Mezei
  */
 const UserLoginPage = () => {
     const dispatch = useAppDispatch();

@@ -15,7 +15,7 @@ import { AiOutlineSave } from 'react-icons/ai';
  * A new question with question text, question theme, answer text, answer category can be addd using this component.
  * Contains <EditQuestion> component.
  *
- * @ author Natali Munk-Jakobsen
+ * @ author Natali Munk-Jakobsen / Bogdan Mezei
  */
 const ManageQuestions = () => {
     const accessToken = useAppSelector((state: RootState) => state.admin.accessToken);
