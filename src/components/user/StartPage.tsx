@@ -23,7 +23,7 @@ import Modal from 'react-modal';
  * after accepting personal information agreement.
  * Contains <UserLogin> component.
  *
- * @ author Daria-Maria Popa 
+ * @ author Daria-Maria Popa / Bogdan Mezei
  */
 const StartPage = () => {
   const dispatch = useAppDispatch();

@@ -12,7 +12,7 @@ import IUserData from "../models/User";
  * The access token is provided in the headers, 
  * because AdminApi in the server requires JWT authentication
  *
- * @ author Natali Munk-Jakobsen / Daria-Maria Popa
+ * @ author Natali Munk-Jakobsen / Daria-Maria Popa / Bogdan Mezei
  */
 const getAllUsers = () => {
   return http.get<Array<IUserData>>("adminApi/users");

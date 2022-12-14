@@ -16,7 +16,7 @@ import WaitingPage from '../WaitingPage';
  * Component for displaying the voting result for the last question.
  * Containg <FinalResult> component.
  *
- * @ author Natali Munk-Jakobsen / Daria-Maria Popa
+ * @ author Natali Munk-Jakobsen / Daria-Maria Popa / Bogdan Mezei
  */
 type Props = {
     finalResult: boolean;

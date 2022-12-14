@@ -3,7 +3,13 @@ import AdminApi from "../api/AdminApi";
 import IQuestionData from "../models/Question";
 import IAnswerData from "../models/Answer";
 
-const accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtb2QiLCJpYXQiOjE2NzA5NDIxMTIsImV4cCI6MTY3MTIwMTMxMn0.4Xe3ygUUxn8Yd-NKpA89o-AohuhwjWuRWwnGZtKcKe9ei8ghTeValS_hYGHZH44dM7aVCagE8F5paoSrfFJF-g";
+/**
+ * End-to-end tests
+ *
+ * @ author Bogdan Mezei
+ */
+
+const accessToken = "[add token here]";
 let browser;
 let adminPage;
 let userPage;
@@ -510,7 +516,7 @@ describe("Feature 5 - Contribututors Page", () => {
     await userPage.waitForSelector('[e2e-id="inactive"]');
   });
 
-  test("Go to manage questions", async () => {
+  test("Go to manage contributors", async () => {
     await adminPage.waitForSelector('[e2e-id="editContributors"]');
     await adminPage.click('[e2e-id="editContributors"]');
   });
