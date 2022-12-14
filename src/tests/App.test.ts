@@ -510,7 +510,7 @@ describe("Feature 5 - Contribututors Page", () => {
     await userPage.waitForSelector('[e2e-id="inactive"]');
   });
 
-  test("Go to manage questions", async () => {
+  test("Go to manage contributors", async () => {
     await adminPage.waitForSelector('[e2e-id="editContributors"]');
     await adminPage.click('[e2e-id="editContributors"]');
   });
