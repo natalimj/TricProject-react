@@ -59,7 +59,6 @@ const getDevTeam = () => {
     return http.get<Array<IContributorData>>("userApi/devTeam");
 };
 
-
 const getPlayInfo = () => {
     return http.get<IPlayInfoData>("userApi/getPlayInfo");
 };
