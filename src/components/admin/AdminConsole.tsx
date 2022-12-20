@@ -14,7 +14,6 @@ import UserApi from '../../api/UserApi';
 import { RootState } from '../../app/store';
 import * as MailComposer from 'expo-mail-composer';
 
-
 /**
  * Component for displaying main functions that admin can perform during play
  * Such as sending a question to the user, displaying question on the admin result screen, showing result
